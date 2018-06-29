@@ -20,8 +20,10 @@ namespace Game
             player.AddComponent(new Player());
             Transform transform = (Transform)player.GetComponent(typeof(Transform));
 
-            Console.Out.WriteLine("Player x:" + transform.position.x + " Player y:" + transform.position.y);
-            Console.Out.WriteLine("Player parent: " + transform.parent);
+            transform.Translate(-5, -5);
+
+            //Console.Out.WriteLine("Player x:" + player.transform.position.x + " Player y:" + player.transform.position.y);
+            //Console.Out.WriteLine("Player parent: " + transform.parent);
             return;
         }
 

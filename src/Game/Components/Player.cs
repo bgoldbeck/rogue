@@ -14,7 +14,7 @@ namespace Game.Components
 
         public override void Start()
         {
-            Console.Out.WriteLine("Player started " + name);
+            //Console.Out.WriteLine("Player started " + name);
             return;
         }
 
