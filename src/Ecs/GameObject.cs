@@ -15,8 +15,7 @@ namespace Ecs
         private String tag;
 
         public Transform transform;
-
-
+        
         public GameObject()
         {
             this.tag = "";

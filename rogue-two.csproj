@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\ConsoleUI\ConsoleUI.cs" />
+    <Compile Include="src\ConsoleUI\TextUI.cs" />
     <Compile Include="src\Ecs\Component.cs" />
     <Compile Include="src\Ecs\GameObject.cs" />
     <Compile Include="src\Ecs\Transform.cs" />

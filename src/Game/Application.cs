@@ -19,17 +19,22 @@ namespace Game
         {
             TextUI.Initialize(160, 40);
 
-            GameObject player = GameObject.Instantiate("Player");
-            player.AddComponent(new Player());
-            Transform transform = (Transform)player.GetComponent(typeof(Transform));
-
-            transform.Translate(-5, -5);
-
             GameObject map = GameObject.Instantiate("Map");
             map.AddComponent(new Map());
             map.AddComponent(new Model());
 
 
+            GameObject player = GameObject.Instantiate("Player");
+            player.AddComponent(new Player());
+            player.AddComponent(new Model());
+
+            Model playerModel = (Model)player.GetComponent(typeof(Model));
+            playerModel.model.Clear();
+            playerModel.model.Add("$");
+
+            
+            player.transform.Translate(5, 5);
+            
             //Console.Out.WriteLine("Player x:" + player.transform.position.x + " Player y:" + player.transform.position.y);
             //Console.Out.WriteLine("Player parent: " + transform.parent);
             return;
