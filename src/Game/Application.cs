@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Ecs;
 
 using Game.Components;
+using ConsoleUI;
 
 namespace Game
 {
@@ -16,12 +17,26 @@ namespace Game
 
         public void Initialize()
         {
+            TextUI.Initialize(160, 40);
+
+            GameObject map = GameObject.Instantiate("Map");
+            map.AddComponent(new Map());
+            map.AddComponent(new Model());
+
+
             GameObject player = GameObject.Instantiate("Player");
             player.AddComponent(new Player());
-            Transform transform = (Transform)player.GetComponent(typeof(Transform));
+            player.AddComponent(new Model());
 
-            Console.Out.WriteLine("Player x:" + transform.position.x + " Player y:" + transform.position.y);
-            Console.Out.WriteLine("Player parent: " + transform.parent);
+            Model playerModel = (Model)player.GetComponent(typeof(Model));
+            playerModel.model.Clear();
+            playerModel.model.Add("$");
+
+            
+            player.transform.Translate(5, 5);
+            
+            //Console.Out.WriteLine("Player x:" + player.transform.position.x + " Player y:" + player.transform.position.y);
+            //Console.Out.WriteLine("Player parent: " + transform.parent);
             return;
         }
 
@@ -63,6 +78,9 @@ namespace Game
                     entry.Value.Render();
                 }
             }
+            
+            TextUI.Render();
+            TextUI.ClearBuffer();
             return;
         }
     }

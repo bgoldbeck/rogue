@@ -7,10 +7,13 @@ using System.Threading.Tasks;
 using Game;
 using Game.Components;
 
+using ConsoleUI;
+
 class Program
 {
     static void Main(string[] args)
     {
+
         Application game = new Application();
         game.Initialize();
         game.Update();
