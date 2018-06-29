@@ -39,7 +39,7 @@ namespace ConsoleUI
             outputBuffer = new string[nRows];
             ClearBuffer();
 
-            Console.SetWindowSize(nCols, nRows);
+            Console.SetWindowSize(nCols, nRows + 50);
             return;
         }
 
@@ -70,9 +70,11 @@ namespace ConsoleUI
         /// <returns></returns>
         public static void Write(int x, int y, string output)
         {
-            StringBuilder newWrite = new StringBuilder(outputBuffer[x].Insert(y, output));
+            StringBuilder newWrite = new StringBuilder(outputBuffer[x]);
 
-            outputBuffer[x] = newWrite.ToString();
+            newWrite.Remove(y, output.Length);
+            
+            outputBuffer[x] = newWrite.Insert(y, output).ToString();
 
             return;
         }

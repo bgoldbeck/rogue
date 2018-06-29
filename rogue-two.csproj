@@ -47,6 +47,8 @@
     <Compile Include="src\Ecs\GameObject.cs" />
     <Compile Include="src\Ecs\Transform.cs" />
     <Compile Include="src\Ecs\Vec2i.cs" />
+    <Compile Include="src\Game\Components\Map.cs" />
+    <Compile Include="src\Game\Components\Model.cs" />
     <Compile Include="src\Game\Components\Player.cs" />
     <Compile Include="src\Game\Application.cs" />
     <Compile Include="src\Program.cs" />

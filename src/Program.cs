@@ -13,9 +13,6 @@ class Program
 {
     static void Main(string[] args)
     {
-        TextUI.Initialize(160, 60);
-        TextUI.Write(20, 0, "nrrrwwwwwwwwr");
-        TextUI.Render();
 
         Application game = new Application();
         game.Initialize();
