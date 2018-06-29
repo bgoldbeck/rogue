@@ -25,6 +25,7 @@ public class Game {
     }
 
     public void update() {
+
         HashMap<String, GameObject> map = GameObject.getGameObjects();
         for (String key : map.keySet()) {
             map.get(key).update();
