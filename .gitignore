@@ -23,5 +23,11 @@
 hs_err_pid*
 
 # Setup
-.idea/
-target/
+[Dd]ebug/
+[Rr]elease/
+[Bb]in/
+[Oo]bj/
+packages/
+/packages/
+.vs/
+/.vs
