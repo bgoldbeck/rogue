@@ -1,7 +1,7 @@
-package javecs;
-
-
+import ecs.*;
+import components.*;
 import java.util.HashMap;
+
 
 public class Game {
     private boolean isRunning;

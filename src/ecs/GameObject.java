@@ -1,7 +1,8 @@
-package javecs;
+package ecs;
 
 import java.util.HashMap;
 import java.util.ArrayList;
+import components.*;
 
 public class GameObject {
     private static HashMap<String, GameObject> gameObjects = new HashMap<>();
@@ -9,6 +10,7 @@ public class GameObject {
     private ArrayList<Component> components;
     private boolean isActive;
     private String tag;
+    public Position position;
 
     public GameObject() {
         this.tag = "";
@@ -18,10 +20,6 @@ public class GameObject {
 
     public String getTag() {
         return tag;
-    }
-
-    public void setTag(String tag) {
-        this.tag = tag;
     }
 
     public void start() {
@@ -54,7 +52,10 @@ public class GameObject {
 
     public void addComponent(Component component) {
         if (getComponent(component.getClass()) == null) {
+            // We point the component's game object to point to this game object.
+            component.gameObject = this;
             this.components.add(component);
+
         }
         return;
     }
@@ -85,8 +86,11 @@ public class GameObject {
 
         GameObject go = new GameObject();
         // Every game object will have a position component.
-        go.addComponent(new Position());
+        Position position = new Position();
+        go.addComponent(position);
+        go.position = position;
 
+        // Add the game object to the data structure.
         gameObjects.put(tag, go);
 
         return go;

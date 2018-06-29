@@ -1,4 +1,3 @@
-package javecs;
 
 public class Main {
 
