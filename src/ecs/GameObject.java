@@ -2,7 +2,6 @@ package ecs;
 
 import java.util.HashMap;
 import java.util.ArrayList;
-import components.*;
 
 public class GameObject {
     private static HashMap<String, GameObject> gameObjects = new HashMap<>();
@@ -10,7 +9,9 @@ public class GameObject {
     private ArrayList<Component> components;
     private boolean isActive;
     private String tag;
-    public Position position;
+
+    public Transform transform;
+
 
     public GameObject() {
         this.tag = "";
@@ -18,7 +19,7 @@ public class GameObject {
         this.components = new ArrayList<>();
     }
 
-    public String getTag() {
+    public String tag() {
         return tag;
     }
 
@@ -32,7 +33,7 @@ public class GameObject {
     }
 
     public void update() {
-
+        System.out.println("Update GameObject " + this.tag);
         for (Component component: components) {
             if (component.isActive()) {
                 component.update();
@@ -55,6 +56,7 @@ public class GameObject {
             // We point the component's game object to point to this game object.
             component.gameObject = this;
             this.components.add(component);
+            component.start();
 
         }
         return;
@@ -85,16 +87,18 @@ public class GameObject {
         }
 
         GameObject go = new GameObject();
-        // Every game object will have a position component.
-        Position position = new Position();
-        go.addComponent(position);
-        go.position = position;
+        // Every game object will have a transform component.
+        Transform transform = new Transform();
+        go.addComponent(transform);
+        go.transform = transform;
+        go.tag = tag;
 
         // Add the game object to the data structure.
         gameObjects.put(tag, go);
 
         return go;
     }
+
 
     public static void destroy(String tag) {
         gameObjects.remove(tag);

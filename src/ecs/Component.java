@@ -1,12 +1,12 @@
 package ecs;
 
 public class Component {
-    private boolean isActive;
-    public GameObject gameObject;
+    private boolean isActive = true;
+    public GameObject gameObject = null;
 
-    void start() { return; }
-    void update() { return; }
-    void render() { return; }
+    public void start() { return; }
+    public void update() { return; }
+    public void render() { return; }
 
     public boolean isActive() {
         return this.isActive;
@@ -17,8 +17,8 @@ public class Component {
         return;
     }
 
-    public String getTag() {
-        return this.gameObject.getTag();
+    public String tag() {
+        return this.gameObject.tag();
     }
 
 
