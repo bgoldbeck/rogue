@@ -17,11 +17,13 @@ namespace Game
 
         public void Initialize()
         {
-            TextUI.Initialize(160, 40);
+
+            TextUI.Initialize(140, 40);
 
             GameObject map = GameObject.Instantiate("Map");
             map.AddComponent(new Map());
-            
+            map.AddComponent(new Model());
+
             GameObject player = GameObject.Instantiate("Player");
             player.AddComponent(new Player());
             player.AddComponent(new Model());
@@ -45,7 +47,10 @@ namespace Game
             {
                 Update();
                 Render();
-                isRunning = false;
+                if (Input.ReadKey().Key == ConsoleKey.Escape)
+                {
+                    isRunning = false;
+                }
             }
 
             return 0;

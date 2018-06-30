@@ -43,9 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\ConsoleUI\Input.cs" />
     <Compile Include="src\ConsoleUI\TextUI.cs" />
     <Compile Include="src\Ecs\Component.cs" />
     <Compile Include="src\Ecs\GameObject.cs" />
+    <Compile Include="src\Ecs\Time.cs" />
     <Compile Include="src\Ecs\Transform.cs" />
     <Compile Include="src\Ecs\Vec2i.cs" />
     <Compile Include="src\Game\Components\Map.cs" />

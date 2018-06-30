@@ -76,7 +76,7 @@ namespace Ecs
             return;
         }
 
-        public void AddComponent(Component component)
+        public Component AddComponent(Component component)
         {
             if (GetComponent(component.GetType()) == null)
             {
@@ -88,7 +88,7 @@ namespace Ecs
                 component.Start();
 
             }
-            return;
+            return component;
         }
 
         public Component GetComponent(Type type)
@@ -123,6 +123,7 @@ namespace Ecs
             }
 
             GameObject go = new GameObject();
+
             // Every game object will have a transform component.
             Transform transform = new Transform();
             go.AddComponent(transform);

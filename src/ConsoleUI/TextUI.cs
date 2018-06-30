@@ -39,7 +39,11 @@ namespace ConsoleUI
             outputBuffer = new string[nRows];
             ClearBuffer();
 
-            Console.SetWindowSize(nCols, nRows + 50);
+            //Console.SetBufferSize(nCols - 10, nRows);
+            Console.SetWindowSize(nCols, nRows * 3);
+            //Console.BufferHeight = nRows;
+            //Console.BufferWidth = nCols;
+            
             return;
         }
 

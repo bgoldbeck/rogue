@@ -12,7 +12,38 @@ namespace Game.Components
     {
         public override void Start()
         {
-            this.gameObject.AddComponent(new Model());
+            Model mapModel = (Model)this.gameObject.AddComponent(new Model());
+
+            // Test model.
+            mapModel.model.Add("####################################################################################");
+            mapModel.model.Add("#                                                                                  #");
+            mapModel.model.Add("#                                                                                  #");
+            mapModel.model.Add("#                                                                                  #");
+            mapModel.model.Add("#                                                                                  #");
+            mapModel.model.Add("#                                                                                  #");
+            mapModel.model.Add("#                                                                                  #");
+            mapModel.model.Add("#                                                                                  #");
+            mapModel.model.Add("#                                                                                  #");
+            mapModel.model.Add("#                                                                                  #");
+            mapModel.model.Add("#                                                                                  #");
+            mapModel.model.Add("#                                                                                  #");
+            mapModel.model.Add("#                                                                                  #");
+            mapModel.model.Add("#                                                                                  #");
+            mapModel.model.Add("#                                                                                  #");
+            mapModel.model.Add("#                                                                                  #");
+            mapModel.model.Add("#                                                                                  #");
+            mapModel.model.Add("#                                                                                  #");
+            mapModel.model.Add("#                                                                                  #");
+            mapModel.model.Add("#                                                                                  #");
+            mapModel.model.Add("#                                                                                  #");
+            mapModel.model.Add("#                                                                                  #");
+            mapModel.model.Add("#                                                                                  #");
+            mapModel.model.Add("#                                                                                  #");
+            mapModel.model.Add("#                                                                                  #");
+            mapModel.model.Add("#                                                                                  #");
+            mapModel.model.Add("#                                                                                  #");
+            mapModel.model.Add("#                                                                                  #");
+            mapModel.model.Add("####################################################################################");
             return;
         }
 
