@@ -82,6 +82,8 @@ namespace Ecs
             {
                 // We point the component's game object to point to this game object.
                 component.gameObject = this;
+                component.transform = this.transform;
+
                 this.components.Add(component);
                 component.Start();
 
@@ -134,9 +136,18 @@ namespace Ecs
         }
 
 
-        public static void destroy(String tag)
+        public static void Destroy(String tag)
         {
-            gameObjects.Remove(tag);
+            GameObject go = GameObject.Find(tag);
+            if (go != null)
+            { 
+                // Remove all the children game objects along with this game object.
+                foreach (Transform trans in go.transform.children)
+                {
+                    gameObjects.Remove(trans.gameObject.tag);
+                }
+                gameObjects.Remove(tag);
+            }
             return;
         }
 

@@ -15,7 +15,6 @@ namespace ConsoleUI
 
         public static void Initialize(int nColumns, int nLines)
         {
-            
             Resize(nColumns, nLines);
             return;
         }

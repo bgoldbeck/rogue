@@ -12,6 +12,7 @@ namespace Game.Components
     {
         public override void Start()
         {
+            this.gameObject.AddComponent(new Model());
             return;
         }
 

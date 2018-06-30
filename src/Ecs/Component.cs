@@ -10,6 +10,7 @@ namespace Ecs
     {
         private bool isActive = true;
         public GameObject gameObject = null;
+        public Transform transform = null;
 
         public virtual void Start()
         {

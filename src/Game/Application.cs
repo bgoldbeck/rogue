@@ -21,9 +21,7 @@ namespace Game
 
             GameObject map = GameObject.Instantiate("Map");
             map.AddComponent(new Map());
-            map.AddComponent(new Model());
-
-
+            
             GameObject player = GameObject.Instantiate("Player");
             player.AddComponent(new Player());
             player.AddComponent(new Model());
