@@ -15,19 +15,7 @@ namespace Game.Components
 
         public override void Start()
         {
-            // Test model.
-            model.Add("####################################");
-            model.Add("#                                  #");
-            model.Add("#                                  #");
-            model.Add("#                                  #");
-            model.Add("#                                  #");
-            model.Add("#                                  #");
-            model.Add("#                                  #");
-            model.Add("#                                  #");
-            model.Add("#                                  #");
-            model.Add("#                                  #");
-            model.Add("#                                  #");
-            model.Add("####################################");
+ 
             return;
         }
 

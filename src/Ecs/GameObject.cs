@@ -76,17 +76,19 @@ namespace Ecs
             return;
         }
 
-        public void AddComponent(Component component)
+        public Component AddComponent(Component component)
         {
             if (GetComponent(component.GetType()) == null)
             {
                 // We point the component's game object to point to this game object.
                 component.gameObject = this;
+                component.transform = this.transform;
+
                 this.components.Add(component);
                 component.Start();
 
             }
-            return;
+            return component;
         }
 
         public Component GetComponent(Type type)
@@ -105,6 +107,12 @@ namespace Ecs
             return retrieved;
         }
 
+        public Component[] GetComponents(Type type)
+        {
+
+        }
+
+
         public void RemoveComponent(Type type)
         {
             // No idea if this works?
@@ -121,6 +129,7 @@ namespace Ecs
             }
 
             GameObject go = new GameObject();
+
             // Every game object will have a transform component.
             Transform transform = new Transform();
             go.AddComponent(transform);
@@ -134,9 +143,18 @@ namespace Ecs
         }
 
 
-        public static void destroy(String tag)
+        public static void Destroy(String tag)
         {
-            gameObjects.Remove(tag);
+            GameObject go = GameObject.Find(tag);
+            if (go != null)
+            { 
+                // Remove all the children game objects along with this game object.
+                foreach (Transform trans in go.transform.children)
+                {
+                    gameObjects.Remove(trans.gameObject.tag);
+                }
+                gameObjects.Remove(tag);
+            }
             return;
         }
 

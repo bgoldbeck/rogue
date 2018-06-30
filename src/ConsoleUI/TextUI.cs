@@ -15,7 +15,6 @@ namespace ConsoleUI
 
         public static void Initialize(int nColumns, int nLines)
         {
-            
             Resize(nColumns, nLines);
             return;
         }
@@ -36,11 +35,19 @@ namespace ConsoleUI
         public static void Resize(int nColumns, int nLines)
         {
             nCols = nColumns;
-            nRows = nLines;
+            nRows = Console.LargestWindowHeight - 10;
             outputBuffer = new string[nRows];
             ClearBuffer();
 
-            Console.SetWindowSize(nCols, nRows + 50);
+            //Console.SetBufferSize(nCols - 10, nRows);
+            Console.SetWindowSize(nCols, Console.LargestWindowHeight);
+            Console.TreatControlCAsInput = false;
+            Console.WindowLeft = 0;
+            Console.WindowTop = 0;
+            //Console.SetWindowPosition(0, 0);
+            //Console.BufferHeight = nRows;
+            //Console.BufferWidth = nCols;
+            
             return;
         }
 
@@ -80,12 +87,12 @@ namespace ConsoleUI
             return;
         }
 
-        public static int MaxWidth()
+        public static int MaxColumns()
         {
             return nCols;
         }
 
-        public static int MaxHeight()
+        public static int MaxRows()
         {
             return nRows;
         }

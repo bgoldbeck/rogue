@@ -17,8 +17,10 @@ class Program
         Application game = new Application();
         game.Initialize();
         game.Update();
+
         int error = game.Loop();
-        Console.ReadKey();
+        
+        
         return;
     }
 }
