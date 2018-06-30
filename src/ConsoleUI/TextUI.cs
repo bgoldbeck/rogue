@@ -35,7 +35,7 @@ namespace ConsoleUI
         public static void Resize(int nColumns, int nLines)
         {
             nCols = nColumns;
-            nRows = nLines;
+            nRows = Console.LargestWindowHeight - 10;
             outputBuffer = new string[nRows];
             ClearBuffer();
 
@@ -87,12 +87,12 @@ namespace ConsoleUI
             return;
         }
 
-        public static int MaxWidth()
+        public static int MaxColumns()
         {
             return nCols;
         }
 
-        public static int MaxHeight()
+        public static int MaxRows()
         {
             return nRows;
         }
