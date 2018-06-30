@@ -48,7 +48,7 @@ namespace Game
             {
                 Update();
                 Render();
-                if (Input.ReadKey().Key == ConsoleKey.Escape)
+                //if (Input.ReadKey().Key == ConsoleKey.Escape)
                 {
                     isRunning = false;
                 }

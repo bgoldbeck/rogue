@@ -107,6 +107,12 @@ namespace Ecs
             return retrieved;
         }
 
+        public Component[] GetComponents(Type type)
+        {
+
+        }
+
+
         public void RemoveComponent(Type type)
         {
             // No idea if this works?
