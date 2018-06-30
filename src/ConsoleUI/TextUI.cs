@@ -40,7 +40,11 @@ namespace ConsoleUI
             ClearBuffer();
 
             //Console.SetBufferSize(nCols - 10, nRows);
-            Console.SetWindowSize(nCols, nRows * 3);
+            Console.SetWindowSize(nCols, Console.LargestWindowHeight);
+            Console.TreatControlCAsInput = false;
+            Console.WindowLeft = 0;
+            Console.WindowTop = 0;
+            //Console.SetWindowPosition(0, 0);
             //Console.BufferHeight = nRows;
             //Console.BufferWidth = nCols;
             

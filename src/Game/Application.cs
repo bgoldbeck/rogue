@@ -18,7 +18,7 @@ namespace Game
         public void Initialize()
         {
 
-            TextUI.Initialize(140, 40);
+            TextUI.Initialize(140, 12);
 
             GameObject map = GameObject.Instantiate("Map");
             map.AddComponent(new Map());

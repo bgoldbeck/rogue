@@ -26,23 +26,6 @@ namespace Game.Components
             mapModel.model.Add("#                                                                                  #");
             mapModel.model.Add("#                                                                                  #");
             mapModel.model.Add("#                                                                                  #");
-            mapModel.model.Add("#                                                                                  #");
-            mapModel.model.Add("#                                                                                  #");
-            mapModel.model.Add("#                                                                                  #");
-            mapModel.model.Add("#                                                                                  #");
-            mapModel.model.Add("#                                                                                  #");
-            mapModel.model.Add("#                                                                                  #");
-            mapModel.model.Add("#                                                                                  #");
-            mapModel.model.Add("#                                                                                  #");
-            mapModel.model.Add("#                                                                                  #");
-            mapModel.model.Add("#                                                                                  #");
-            mapModel.model.Add("#                                                                                  #");
-            mapModel.model.Add("#                                                                                  #");
-            mapModel.model.Add("#                                                                                  #");
-            mapModel.model.Add("#                                                                                  #");
-            mapModel.model.Add("#                                                                                  #");
-            mapModel.model.Add("#                                                                                  #");
-            mapModel.model.Add("#                                                                                  #");
             mapModel.model.Add("####################################################################################");
             return;
         }
