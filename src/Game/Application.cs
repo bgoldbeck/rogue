@@ -18,7 +18,7 @@ namespace Game
         public void Initialize()
         {
 
-            TextUI.Initialize(140, 40);
+            TextUI.Initialize(140, 50);
             Time.Initialize();
 
             GameObject map = GameObject.Instantiate("Map");
@@ -44,14 +44,24 @@ namespace Game
 
         public int Loop()
         {
+            long dt = 0;
+
             while (isRunning)
             {
-                Update();
-                Render();
-                //if (Input.ReadKey().Key == ConsoleKey.Escape)
+
+                dt += Time.deltaTime;
+                if (dt >= 16)
+                {
+                    dt = 0;
+                    Update();
+                    Render();
+                }
+                if (Input.ReadKey().Key == ConsoleKey.Escape)
                 {
                     isRunning = false;
                 }
+                Time.Update();
+                Console.WriteLine(Time.deltaTime);
             }
 
             return 0;
@@ -70,7 +80,6 @@ namespace Game
 
             }
 
-            Time.Update();
             
             return;
         }

@@ -24,7 +24,7 @@ namespace Ecs
 
         public static void Update()
         {
-            deltaTime = stopwatch.ElapsedMilliseconds;
+            deltaTime = stopwatch.ElapsedTicks * 100 * 1000;
             stopwatch.Reset();
             stopwatch.Start();
             return;

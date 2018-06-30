@@ -35,19 +35,32 @@ namespace ConsoleUI
         public static void Resize(int nColumns, int nLines)
         {
             nCols = nColumns;
-            nRows = Console.LargestWindowHeight - 10;
+            nRows = nLines;
+
+            Console.TreatControlCAsInput = false;
+            
+            Console.SetWindowSize(
+                Console.LargestWindowWidth / 2, 
+                Console.LargestWindowHeight - 20);
+
+            Console.SetWindowPosition(0, 0);
+
+            if (nRows < Console.WindowHeight)
+            {
+                nRows = Console.WindowHeight;
+                Console.BufferHeight = nRows;
+            }
+
+            if (nCols < Console.WindowWidth)
+            {
+                nCols = Console.WindowWidth;
+                Console.BufferWidth = nCols;
+            }
+
             outputBuffer = new string[nRows];
+
             ClearBuffer();
 
-            //Console.SetBufferSize(nCols - 10, nRows);
-            Console.SetWindowSize(nCols, Console.LargestWindowHeight);
-            Console.TreatControlCAsInput = false;
-            Console.WindowLeft = 0;
-            Console.WindowTop = 0;
-            //Console.SetWindowPosition(0, 0);
-            //Console.BufferHeight = nRows;
-            //Console.BufferWidth = nCols;
-            
             return;
         }
 
@@ -62,6 +75,7 @@ namespace ConsoleUI
                 //Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine(outputBuffer[i]);
             }
+            //Console.SetWindowPosition(0, 0);
 
             // Clear the contents in the buffer.
             ClearBuffer();
