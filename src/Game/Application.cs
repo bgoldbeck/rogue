@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Ecs;
 
 using Game.Components;
-using ConsoleUI;
+using IO;
 
 namespace Game
 {
@@ -18,7 +18,7 @@ namespace Game
         public void Initialize()
         {
 
-            TextUI.Initialize(140, 40);
+            ConsoleUI.Initialize(140, 50);
             Time.Initialize();
 
             GameObject map = GameObject.Instantiate("Map");
@@ -44,14 +44,23 @@ namespace Game
 
         public int Loop()
         {
+            long dt = 0;
+
             while (isRunning)
             {
+
+                dt += Time.deltaTicks;
                 Update();
-                Render();
-                //if (Input.ReadKey().Key == ConsoleKey.Escape)
+                if (dt >= 1600000)
+                {
+                    dt = 0;
+                    Render();
+                }
+                if (Input.ReadKey().Key == ConsoleKey.Escape)
                 {
                     isRunning = false;
                 }
+                Time.Update();
             }
 
             return 0;
@@ -70,7 +79,6 @@ namespace Game
 
             }
 
-            Time.Update();
             
             return;
         }
@@ -85,9 +93,9 @@ namespace Game
                     entry.Value.Render();
                 }
             }
-            
-            TextUI.Render();
-            TextUI.ClearBuffer();
+
+            ConsoleUI.Render();
+            ConsoleUI.ClearBuffer();
             return;
         }
     }

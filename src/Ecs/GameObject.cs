@@ -107,9 +107,18 @@ namespace Ecs
             return retrieved;
         }
 
-        public Component[] GetComponents(Type type)
+        public List<Component> GetComponents(Type type)
         {
+            List<Component> retrieved = null;
 
+            foreach (Component component in components)
+            {
+                if (component.GetType() == type)
+                {
+                    retrieved.Add(component);
+                }
+            }
+            return retrieved;
         }
 
 

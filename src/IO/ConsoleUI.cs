@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleUI
+namespace IO
 {
-    public class TextUI
+    public class ConsoleUI
     {
         static private int nCols;
         static private int nRows;
@@ -35,19 +35,29 @@ namespace ConsoleUI
         public static void Resize(int nColumns, int nLines)
         {
             nCols = nColumns;
-            nRows = Console.LargestWindowHeight - 10;
+            nRows = nLines;
+
+            Console.TreatControlCAsInput = false;
+            
+
+            Console.SetWindowSize(1, 1);
+            Console.SetBufferSize(100, 100);
+            Console.SetWindowSize(80, 40);
+
+            if (nRows < Console.WindowHeight)
+            {
+                nRows = Console.BufferHeight;
+            }
+
+            if (nCols < Console.WindowWidth)
+            {
+                nCols = Console.BufferWidth;
+            }
+
             outputBuffer = new string[nRows];
+
             ClearBuffer();
 
-            //Console.SetBufferSize(nCols - 10, nRows);
-            Console.SetWindowSize(nCols, Console.LargestWindowHeight);
-            Console.TreatControlCAsInput = false;
-            Console.WindowLeft = 0;
-            Console.WindowTop = 0;
-            //Console.SetWindowPosition(0, 0);
-            //Console.BufferHeight = nRows;
-            //Console.BufferWidth = nCols;
-            
             return;
         }
 
@@ -62,7 +72,12 @@ namespace ConsoleUI
                 //Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine(outputBuffer[i]);
             }
-
+            Console.SetWindowPosition(0, 0);
+            Console.CursorTop = 0;
+            
+            Console.CursorVisible = true;
+            //Console.MoveBufferArea(0, 0, nCols, nRows, 0, 0);
+            Console.SetCursorPosition(0, 0);
             // Clear the contents in the buffer.
             ClearBuffer();
 

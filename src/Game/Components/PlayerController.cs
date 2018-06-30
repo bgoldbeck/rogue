@@ -9,13 +9,17 @@ using IO;
 
 namespace Game.Components
 {
-    class Model : Component
+    class PlayerController : Component
     {
-        public List<string> model = new List<string>();
+        Player player = null;
 
         public override void Start()
         {
- 
+            player = (Player)this.gameObject.GetComponent(typeof(Player));
+            if (player == null)
+            {
+                Debug.LogError("Could not find player component from the player controller");
+            }
             return;
         }
 
@@ -26,13 +30,6 @@ namespace Game.Components
 
         public override void Render()
         {
-            int x = this.gameObject.transform.position.x;
-            int y = this.gameObject.transform.position.y;
-
-            foreach (string str in model)
-            {
-                ConsoleUI.Write(x++, y, str);
-            }
             return;
         }
     }
