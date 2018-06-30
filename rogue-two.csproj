@@ -43,8 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\ConsoleUI\Input.cs" />
-    <Compile Include="src\ConsoleUI\TextUI.cs" />
+    <Compile Include="src\IO\Debug.cs" />
+    <Compile Include="src\IO\Input.cs" />
+    <Compile Include="src\IO\ConsoleUI.cs" />
     <Compile Include="src\Ecs\Component.cs" />
     <Compile Include="src\Ecs\GameObject.cs" />
     <Compile Include="src\Ecs\Time.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="src\Game\Components\Model.cs" />
     <Compile Include="src\Game\Components\Player.cs" />
     <Compile Include="src\Game\Application.cs" />
+    <Compile Include="src\Game\Components\PlayerController.cs" />
     <Compile Include="src\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

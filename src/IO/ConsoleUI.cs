@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleUI
+namespace IO
 {
-    public class TextUI
+    public class ConsoleUI
     {
         static private int nCols;
         static private int nRows;
@@ -39,22 +39,19 @@ namespace ConsoleUI
 
             Console.TreatControlCAsInput = false;
             
-            Console.SetWindowSize(
-                Console.LargestWindowWidth / 2, 
-                Console.LargestWindowHeight - 20);
 
-            Console.SetWindowPosition(0, 0);
+            Console.SetWindowSize(1, 1);
+            Console.SetBufferSize(100, 100);
+            Console.SetWindowSize(80, 40);
 
             if (nRows < Console.WindowHeight)
             {
-                nRows = Console.WindowHeight;
-                Console.BufferHeight = nRows;
+                nRows = Console.BufferHeight;
             }
 
             if (nCols < Console.WindowWidth)
             {
-                nCols = Console.WindowWidth;
-                Console.BufferWidth = nCols;
+                nCols = Console.BufferWidth;
             }
 
             outputBuffer = new string[nRows];
@@ -75,8 +72,12 @@ namespace ConsoleUI
                 //Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine(outputBuffer[i]);
             }
-            //Console.SetWindowPosition(0, 0);
-
+            Console.SetWindowPosition(0, 0);
+            Console.CursorTop = 0;
+            
+            Console.CursorVisible = true;
+            //Console.MoveBufferArea(0, 0, nCols, nRows, 0, 0);
+            Console.SetCursorPosition(0, 0);
             // Clear the contents in the buffer.
             ClearBuffer();
 
