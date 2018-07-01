@@ -43,10 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\Game\Components\DungeonMaker\Cell.cs" />
-    <Compile Include="src\Game\Components\DungeonMaker\Coord.cs" />
-    <Compile Include="src\Game\Components\DungeonMaker\DungeonMaker.cs" />
-    <Compile Include="src\Game\Components\DungeonMaker\Room.cs" />
+    <Compile Include="src\Game\DungeonMaker\Cell.cs" />
+    <Compile Include="src\Game\DungeonMaker\Coord.cs" />
+    <Compile Include="src\Game\DungeonMaker\DungeonMaker.cs" />
+    <Compile Include="src\Game\DungeonMaker\Room.cs" />
     <Compile Include="src\Game\Interfaces\IMovable.cs" />
     <Compile Include="src\IO\Debug.cs" />
     <Compile Include="src\IO\Input.cs" />

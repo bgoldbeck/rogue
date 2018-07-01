@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Game.Components
+namespace Game
 {
     public enum CellType { Wall, Room, Passage, Door }
 

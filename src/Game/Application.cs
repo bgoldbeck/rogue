@@ -17,13 +17,17 @@ namespace Game
 
         public void Initialize()
         {
+            SetupScreen();
 
-            ConsoleUI.Initialize(140, 50);
+            int width = Console.WindowWidth;
+            int height = Console.WindowHeight;
+            ConsoleUI.Initialize(width, height);
+
             Time.Initialize();
 
             GameObject map = GameObject.Instantiate("Map");
-            map.AddComponent(new Map());
-            map.AddComponent(new Model());
+            map.AddComponent(new Map(width, height));
+            //The map seems to add it's own model when starting. map.AddComponent(new Model());
 
             GameObject player = GameObject.Instantiate("Player");
             player.AddComponent(new Player());
@@ -42,6 +46,11 @@ namespace Game
             return;
         }
 
+        private void SetupScreen()
+        {
+            Console.WriteLine("Please adjust your window to the desired size, then press 'Enter' to begin the game.\n");
+            Console.ReadLine();
+        }
 
         public int Loop()
         {

@@ -39,10 +39,10 @@ namespace IO
 
             Console.TreatControlCAsInput = false;
             
-
-            Console.SetWindowSize(1, 1);
-            Console.SetBufferSize(100, 100);
-            Console.SetWindowSize(80, 40);
+            //Commented these out to possibly solve line-skipping problem.
+            //Console.SetWindowSize(1, 1);
+            //Console.SetBufferSize(100, 100);
+            //Console.SetWindowSize(80, 40);
 
             if (nRows < Console.WindowHeight)
             {
@@ -70,7 +70,9 @@ namespace IO
             for (int i = 0; i < nRows; ++i)
             {
                 //Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine(outputBuffer[i]);
+
+                //Changed WriteLine to Write to possibly solve line-skipping problem.
+                Console.Write(outputBuffer[i]);
             }
             Console.SetWindowPosition(0, 0);
             Console.CursorTop = 0;
