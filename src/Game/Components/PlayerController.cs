@@ -26,6 +26,25 @@ namespace Game.Components
 
         public override void Update()
         {
+
+            ConsoleKey press = Input.ReadKey().Key;
+            switch (press)
+            {
+                case ConsoleKey.UpArrow:
+                    transform.Translate(0, -1);
+                    break;
+                case ConsoleKey.RightArrow:
+                    transform.Translate(1, 0);
+                    break;
+                case ConsoleKey.DownArrow:
+                    transform.Translate(0, 1);
+                    break;
+                case ConsoleKey.LeftArrow:
+                    transform.Translate(-1, 0);
+                    break;
+                default:
+                    break;
+            }
             /*
             if (Console.ReadKey().Key == ConsoleKey.Enter)
             {

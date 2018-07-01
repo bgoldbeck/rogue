@@ -68,6 +68,8 @@ namespace IO
         public static void Render()
         {
             //Console.Clear();
+            Console.SetCursorPosition(0, 0);
+            //Console.SetWindowPosition(0, 0);
             for (int i = 0; i < nRows; ++i)
             {
                 //Console.ForegroundColor = ConsoleColor.Green;
@@ -75,10 +77,8 @@ namespace IO
                 //Changed WriteLine to Write to possibly solve line-skipping problem.
                 Console.Write(outputBuffer[i]);
             }
-            Console.SetWindowPosition(0, 0);
-            Console.CursorTop = 0;
             
-            //Console.CursorVisible = false;
+            Console.CursorVisible = false;
             //Console.MoveBufferArea(0, 0, nCols, nRows, 0, 0);
             //Console.SetCursorPosition(0, 0);
             // Clear the contents in the buffer.

@@ -78,41 +78,24 @@ namespace Game
                     dt = 0;
                     Render();
                 }*/
+                
 
-                //Try some input
-                bool needToUpdate = false;
+                
                 ConsoleKey press = Input.ReadKey().Key;
-                switch (press)
-                {
-                    case ConsoleKey.UpArrow:
-                        needToUpdate = true;
-                        GameObject.Find("Player").transform.Translate(0, -1);
-                        break;
-                    case ConsoleKey.RightArrow:
-                        needToUpdate = true;
-                        GameObject.Find("Player").transform.Translate(1, 0);
-                        break;
-                    case ConsoleKey.DownArrow:
-                        needToUpdate = true;
-                        GameObject.Find("Player").transform.Translate(0, 1);
-                        break;
-                    case ConsoleKey.LeftArrow:
-                        needToUpdate = true;
-                        GameObject.Find("Player").transform.Translate(-1, 0);
-                        break;
-                    case ConsoleKey.Escape:
-                        isRunning = false;
-                        break;
-                    default:
-                        break;
+                
+                if (press == ConsoleKey.Escape)
+                { 
+                    isRunning = false;
                 }
+                
 
-                if (needToUpdate)
+                if (Input.AnyKey())
                 {
                     Update();
                     Render();
                 }
                 Time.Update();
+                Input.Reset();
             }
 
             return 0;
