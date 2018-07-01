@@ -107,6 +107,11 @@ namespace Ecs
             return retrieved;
         }
 
+        public Component GetComponent<T>()
+        {
+            return GetComponent(typeof(T));
+        }
+
         public List<T> GetComponents<T>()
         {
             List<T> retrieved = new List<T>();
