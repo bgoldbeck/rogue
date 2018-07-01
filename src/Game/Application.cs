@@ -48,7 +48,19 @@ namespace Game
 
         private void SetupScreen()
         {
-            Console.WriteLine("Please adjust your window to the desired size, then press 'Enter' to begin the game.\n");
+            Console.WriteLine(@"
+    __________________________________________
+   / ___   __   __       ___   ___        __  \
+   │ │  │ │  │ │  │ │  │ │      │  │ │ │ │  │ │
+   │ │ /  │  │ │  │ │  │ │      │  │ │ │ │  │ │
+   │ │/   │  │ │ __ │  │ │__    │  │ │ │ │  │ │
+   │ │\   │  │ │  │ │  │ │      │   V V  │  │ │
+   │ │ \  │  │ │  │ │  │ │      │   │ │  │  │ │
+   │ │  \ │__│ │__│ │__│ │__    │   │ │  │__│ │
+   │                                          │
+   `─────────── A PERMADEATH STORY ──────────'
+                                          v 0.1");
+            Console.WriteLine("\n   Please adjust your window to the desired play size,\n   then press [Enter] to begin the game.\n");
             Console.ReadLine();
         }
 
