@@ -14,19 +14,9 @@ namespace Game.Components
         {
             Model mapModel = (Model)this.gameObject.AddComponent(new Model());
 
-            // Test model.
-            mapModel.model.Add("####################################################################################");
-            mapModel.model.Add("#                                                                                  #");
-            mapModel.model.Add("#                                                                                  #");
-            mapModel.model.Add("#                                                                                  #");
-            mapModel.model.Add("#                                                                                  #");
-            mapModel.model.Add("#                                                                                  #");
-            mapModel.model.Add("#                                                                                  #");
-            mapModel.model.Add("#                                                                                  #");
-            mapModel.model.Add("#                                                                                  #");
-            mapModel.model.Add("#                                                                                  #");
-            mapModel.model.Add("#                                                                                  #");
-            mapModel.model.Add("####################################################################################");
+            DungeonMaker dm = new DungeonMaker(80, 30, (int)DateTime.Now.Ticks);
+            dm.Generate();
+            mapModel.model = dm.Stringify();
             return;
         }
 
