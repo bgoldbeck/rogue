@@ -31,7 +31,7 @@ namespace Game.Components
 
             foreach (string str in model)
             {
-                ConsoleUI.Write(x++, y, str);
+                ConsoleUI.Write(x, y++, str);
             }
             return;
         }

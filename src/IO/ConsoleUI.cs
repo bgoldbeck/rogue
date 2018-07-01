@@ -102,11 +102,11 @@ namespace IO
                 return;
             }
 
-            StringBuilder newWrite = new StringBuilder(outputBuffer[x]);
+            StringBuilder newWrite = new StringBuilder(outputBuffer[y]);
 
-            newWrite.Remove(y, output.Length);
+            newWrite.Remove(x, output.Length);
             
-            outputBuffer[x] = newWrite.Insert(y, output).ToString();
+            outputBuffer[y] = newWrite.Insert(x, output).ToString();
 
             return;
         }
