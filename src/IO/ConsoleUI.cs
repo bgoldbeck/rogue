@@ -68,7 +68,7 @@ namespace IO
         public static void Render()
         {
             //Console.Clear();
-            Console.SetCursorPosition(0, 0);
+            //Console.SetCursorPosition(0, 0);
             //Console.SetWindowPosition(0, 0);
             for (int i = 0; i < nRows; ++i)
             {

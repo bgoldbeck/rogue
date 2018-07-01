@@ -21,7 +21,7 @@ namespace IO
             {
                 currentKey = new ConsoleKeyWrapper
                 {
-                    key = Console.ReadKey()
+                    key = Console.ReadKey(true)
                 };
             }
             return currentKey != null ? currentKey.key : new ConsoleKeyInfo();
