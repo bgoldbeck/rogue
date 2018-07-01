@@ -10,7 +10,7 @@ namespace IO
     {
         public static ConsoleKeyInfo ReadKey()
         {
-            return (Console.KeyAvailable == true) ? Console.ReadKey() : new ConsoleKeyInfo();
+            return (Console.KeyAvailable == true) ? Console.ReadKey(true) : new ConsoleKeyInfo();
         }
     }
 }

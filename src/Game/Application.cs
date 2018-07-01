@@ -71,16 +71,46 @@ namespace Game
             while (isRunning)
             {
 
-                dt += Time.deltaTicks;
+                /*dt += Time.deltaTicks;
                 Update();
                 if (dt >= 1600000)
                 {
                     dt = 0;
                     Render();
-                }
-                if (Input.ReadKey().Key == ConsoleKey.Escape)
+                }*/
+
+                //Try some input
+                bool needToUpdate = false;
+                ConsoleKey press = Input.ReadKey().Key;
+                switch (press)
                 {
-                    isRunning = false;
+                    case ConsoleKey.UpArrow:
+                        needToUpdate = true;
+                        GameObject.Find("Player").transform.Translate(0, -1);
+                        break;
+                    case ConsoleKey.RightArrow:
+                        needToUpdate = true;
+                        GameObject.Find("Player").transform.Translate(1, 0);
+                        break;
+                    case ConsoleKey.DownArrow:
+                        needToUpdate = true;
+                        GameObject.Find("Player").transform.Translate(0, 1);
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        needToUpdate = true;
+                        GameObject.Find("Player").transform.Translate(-1, 0);
+                        break;
+                    case ConsoleKey.Escape:
+                        isRunning = false;
+                        break;
+                    default:
+                        break;
+                }
+
+                if (needToUpdate)
+                {
+                    Update();
+                    Render();
                 }
                 Time.Update();
             }

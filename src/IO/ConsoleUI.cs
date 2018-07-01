@@ -15,6 +15,7 @@ namespace IO
 
         public static void Initialize(int nColumns, int nLines)
         {
+            Console.CursorVisible = false;
             Resize(nColumns, nLines);
             return;
         }
@@ -66,7 +67,7 @@ namespace IO
         /// </summary>
         public static void Render()
         {
-            Console.Clear();
+            //Console.Clear();
             for (int i = 0; i < nRows; ++i)
             {
                 //Console.ForegroundColor = ConsoleColor.Green;
@@ -77,9 +78,9 @@ namespace IO
             Console.SetWindowPosition(0, 0);
             Console.CursorTop = 0;
             
-            Console.CursorVisible = true;
+            //Console.CursorVisible = false;
             //Console.MoveBufferArea(0, 0, nCols, nRows, 0, 0);
-            Console.SetCursorPosition(0, 0);
+            //Console.SetCursorPosition(0, 0);
             // Clear the contents in the buffer.
             ClearBuffer();
 
@@ -95,6 +96,12 @@ namespace IO
         /// <returns></returns>
         public static void Write(int x, int y, string output)
         {
+            //don't do anything if we're off the screen
+            if (x < 0 || x >= nCols || y < 0 || y >= nRows)
+            {
+                return;
+            }
+
             StringBuilder newWrite = new StringBuilder(outputBuffer[x]);
 
             newWrite.Remove(y, output.Length);

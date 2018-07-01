@@ -17,7 +17,8 @@ class Program
         Application game = new Application();
         game.Initialize();
         game.Update();
-
+        game.Render();
+        game.Render(); //Need to for some reason?
         int error = game.Loop();
         
         
