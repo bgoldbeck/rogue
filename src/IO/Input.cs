@@ -17,14 +17,14 @@ namespace IO
 
         public static ConsoleKeyInfo ReadKey()
         {
-            if (currentKey == null)
+            if (currentKey == null && Console.KeyAvailable == true)
             {
                 currentKey = new ConsoleKeyWrapper
                 {
-                    key = (Console.KeyAvailable) == true ? Console.ReadKey(true) : new ConsoleKeyInfo()
+                    key = Console.ReadKey()
                 };
             }
-            return currentKey.key;
+            return currentKey != null ? currentKey.key : new ConsoleKeyInfo();
         }
 
         public static bool AnyKey()

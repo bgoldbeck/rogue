@@ -77,7 +77,8 @@ namespace IO
                 //Changed WriteLine to Write to possibly solve line-skipping problem.
                 Console.Write(outputBuffer[i]);
             }
-            
+
+            Console.SetCursorPosition(0, 0);
             Console.CursorVisible = false;
             //Console.MoveBufferArea(0, 0, nCols, nRows, 0, 0);
             //Console.SetCursorPosition(0, 0);

@@ -94,6 +94,7 @@ namespace Game
                     Update();
                     Render();
                 }
+
                 Time.Update();
                 Input.Reset();
             }
