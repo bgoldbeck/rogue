@@ -13,15 +13,26 @@ namespace Game
         public CellType type = CellType.Wall;
         public int group = 0;
 
+        /// <summary>
+        /// A representation of one square on the map, which can be one of several types.
+        /// </summary>
         public Cell()
         {
         }
 
+        /// <summary>
+        /// Checks whether a cell is solid wall or not.
+        /// </summary>
+        /// <returns>Returns true if the cell is a room passage or door.</returns>
         public bool IsOpen()
         {
             return this.type == CellType.Room || this.type == CellType.Passage || this.type == CellType.Door;
         }
 
+        /// <summary>
+        /// Gets a string representation of the cell, depending on its type.
+        /// </summary>
+        /// <returns>Returns a one-character representation.</returns>
         public String ToChar()
         {
             switch (this.type)

@@ -20,6 +20,13 @@ namespace Game
         private Random rand;
         private int groupCounter;
 
+        /// <summary>
+        /// Creates a new empty dungeon of width and height dimensions using the seed provided.
+        /// </summary>
+        /// <param name="width">Width of the dungeon</param>
+        /// <param name="height">Height of the dungeon</param>
+        /// <param name="seed">Unique seed used to generate and place rooms.
+        /// Generation is also dependent on height/width combination.</param>
         public DungeonMaker(int width, int height, int seed)
         {
             this.width = width;
@@ -39,6 +46,9 @@ namespace Game
             this.roomList = new List<Room>();
         }
 
+        /// <summary>
+        /// Try to add rooms to random locations until the attempt fails <c>roomAddAttempts</c> number of times.
+        /// </summary>
         private void AddRooms()
         {
             int attempts = 0;
@@ -49,6 +59,11 @@ namespace Game
             }
         }
 
+        /// <summary>
+        /// Randomly generate a room of dimensions between <c>minRoomDimension</c> and
+        /// <c>maxRoomDimension</c> and try to insert it in a random location.
+        /// </summary>
+        /// <returns>Returns true if room placement was successful.</returns>
         private bool TryAddingRoom()
         {
             int roomWidth = rand.Next(minRoomDimension, maxRoomDimension + 1);
@@ -65,6 +80,11 @@ namespace Game
             return false;
         }
 
+        /// <summary>
+        /// Check if a room can be placed in the current map.
+        /// </summary>
+        /// <param name="room">Room object to try placing</param>
+        /// <returns>True if placement is possible.</returns>
         private bool RoomCanBePlaced(Room room)
         {
             for (int x = room.x - 1; x <= room.x + room.width; ++x)
@@ -78,6 +98,10 @@ namespace Game
             return true;
         }
 
+        /// <summary>
+        /// Carves the room's cells out of the current map.
+        /// </summary>
+        /// <param name="room">The room to carve</param>
         private void Carve(Room room)
         {
             for (int x = room.x; x < room.x + room.width; ++x)
@@ -91,6 +115,10 @@ namespace Game
             ++this.groupCounter;
         }
 
+        /// <summary>
+        /// Finds all possible passage starting points and randomly adds passages beginning
+        /// from one of them until all locations are filled.
+        /// </summary>
         private void AddPassages()
         {
             bool adding = true;
@@ -104,6 +132,12 @@ namespace Game
             }
         }
 
+        /// <summary>
+        /// Begin a winding passage from the given starting coordinates using the
+        /// recursive backtracker maze-generation algorithm. The result can be very
+        /// windy, and could possibly use some tweakin to create straighter paths.
+        /// </summary>
+        /// <param name="start">Coordinates from which to begin the passage.</param>
         private void AddPassage(Coord start)
         {
             Stack<Coord> recursionStack = new Stack<Coord>();
@@ -145,6 +179,10 @@ namespace Game
             ++this.groupCounter;
         }
 
+        /// <summary>
+        /// Scan entire map for valid passage starting points.
+        /// </summary>
+        /// <returns>Returns a list of possible starting coordinates.</returns>
         private List<Coord> FindStartingPoints()
         {
             List<Coord> points = new List<Coord>();
@@ -162,6 +200,11 @@ namespace Game
             return points;
         }
 
+        /// <summary>
+        /// Checks if a cell could grow a passage to the left.
+        /// </summary>
+        /// <param name="c">Coordinates of the cell to grow from.</param>
+        /// <returns>Returns true if left is a viable direction.</returns>
         private bool CanGrowLeft(Coord c)
         {
             int x = c.x-1;
@@ -176,6 +219,11 @@ namespace Game
             return false;
         }
 
+        /// <summary>
+        /// Checks if a cell could grow a passage upwards.
+        /// </summary>
+        /// <param name="c">Coordinates of the cell to grow from.</param>
+        /// <returns>Returns true if up is a viable direction.</returns>
         private bool CanGrowUp(Coord c)
         {
             int x = c.x;
@@ -190,6 +238,11 @@ namespace Game
             return false;
         }
 
+        /// <summary>
+        /// Checks if a cell could grow a passage to the right.
+        /// </summary>
+        /// <param name="c">Coordinates of the cell to grow from.</param>
+        /// <returns>Returns true if right is a viable direction.</returns>
         private bool CanGrowRight(Coord c)
         {
             int x = c.x+1;
@@ -204,6 +257,11 @@ namespace Game
             return false;
         }
 
+        /// <summary>
+        /// Checks if a cell could grow a passage downward.
+        /// </summary>
+        /// <param name="c">Coordinates of the cell to grow from.</param>
+        /// <returns>Returns true if down is a viable direction.</returns>
         private bool CanGrowDown(Coord c)
         {
             int x = c.x;
@@ -218,6 +276,12 @@ namespace Game
             return false;
         }
 
+        /// <summary>
+        /// Checks if a given location is surrounded by solid wall.
+        /// </summary>
+        /// <param name="x">X coordinate to check.</param>
+        /// <param name="y">Y coordinate to check.</param>
+        /// <returns>Returns true if cell is surrounded.</returns>
         private bool CellSurroundedBySolid(int x, int y)
         {
             for (int i = x - 1; i <= x + 1; ++i)
@@ -231,17 +295,31 @@ namespace Game
             return true;
         }
          
+        /// <summary>
+        /// Creates a door at the given location.
+        /// </summary>
+        /// <param name="x">X coordinate of cell to carve.</param>
+        /// <param name="y">Y coordinate of cell to carve.</param>
         private void CarveDoor(int x, int y)
         {
             cells[x][y].type = CellType.Door;
         }
 
+        /// <summary>
+        /// Carves a passage at the given location.
+        /// </summary>
+        /// <param name="x">X coordinate of cell to carve.</param>
+        /// <param name="y">Y coordinate of cell to carve.</param>
         private void CarvePassage(int x, int y)
         {
             cells[x][y].type = CellType.Passage;
             cells[x][y].group = this.groupCounter;
         }
 
+        /// <summary>
+        /// This joins disconnected sections of the map with doors using
+        /// Dijkstra's algorithm (not really).
+        /// </summary>
         private void ConnectAreas()
         {
             bool searching = true;
@@ -265,6 +343,13 @@ namespace Game
             }
         }
 
+        /// <summary>
+        /// Scans entire map for 1-cell-thick walls separating regions of cells with different
+        /// group numbers, meaning they are not yet connected. These are basically valid door
+        /// locations. The giant if statement could probably be rewritten for readability.
+        /// </summary>
+        /// <returns>Returns a list of possible door locations that would connect 
+        /// presently disconnected regions of the map.</returns>
         private List<Coord> FindConnectingWalls()
         {
             List<Coord> results = new List<Coord>();
@@ -298,6 +383,13 @@ namespace Game
             return results;
         }
 
+        /// <summary>
+        /// Changes the group value of cells currently in the second group so
+        /// that they join the first group. Used to "connect" regions of the map
+        /// when generating doors, etc.
+        /// </summary>
+        /// <param name="first">Group no. to change to.</param>
+        /// <param name="second">Group no. of cells to change.</param>
         private void JoinGroups(Coord first, Coord second)
         {
             int firstGroup = cells[first.x][first.y].group;
@@ -312,6 +404,10 @@ namespace Game
             }
         }
 
+        /// <summary>
+        /// This fills in dead-end paths until only <c>deadEndsToLeave</c> number remain.
+        /// The lower the number, the easier the maze should be.
+        /// </summary>
         private void FillInDeadEnds()
         {
             List<Coord> deadEnds = FindDeadEnds();
@@ -328,6 +424,10 @@ namespace Game
             }
         }
 
+        /// <summary>
+        /// Scans the map for all dead ends (passage cells with only one other passage leading away).
+        /// </summary>
+        /// <returns>Returns a list of coordinates of all dead end cells.</returns>
         private List<Coord> FindDeadEnds()
         {
             List<Coord> results = new List<Coord>();
@@ -342,6 +442,13 @@ namespace Game
             return results;
         }
 
+        /// <summary>
+        /// Checks if the cell at the given coordinates is a dead end. A passage
+        /// ending in a door does not count as a dead end.
+        /// </summary>
+        /// <param name="x">X coordinate of cell to check.</param>
+        /// <param name="y">Y coordinate of cell to check.</param>
+        /// <returns>Returns true if the cell is a dead end.</returns>
         private bool IsDeadEnd(int x, int y)
         {
             if (cells[x][y].type != CellType.Passage)
@@ -363,6 +470,9 @@ namespace Game
             return passageCount == 1;
         }
 
+        /// <summary>
+        /// Generates a typical dungeon with default settings.
+        /// </summary>
         public void Generate()
         {
             AddRooms();
@@ -371,6 +481,10 @@ namespace Game
             FillInDeadEnds();
         }
 
+        /// <summary>
+        /// Debug function to draw the dungeon to the screen.
+        /// Note that the output may not fit on the screen.
+        /// </summary>
         public void Draw()
         {
             StringBuilder sb = new StringBuilder();
@@ -386,6 +500,10 @@ namespace Game
             Console.Write(sb.ToString());
         }
 
+        /// <summary>
+        /// Converts the dungeon into a list of string rows for use in the <c>Model</c> class.
+        /// </summary>
+        /// <returns></returns>
         public List<String> Stringify()
         {
             List<String> result = new List<string>();
