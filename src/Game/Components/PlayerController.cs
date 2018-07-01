@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 using Ecs;
 using IO;
+using Game.Interfaces;
 
 namespace Game.Components
 {
-    class PlayerController : Component
+    class PlayerController : Component, IMovable
     {
         Player player = null;
 
@@ -25,11 +26,30 @@ namespace Game.Components
 
         public override void Update()
         {
+            /*
+            if (Console.ReadKey().Key == ConsoleKey.Enter)
+            {
+                
+                List<IMovable> movables = gameObject.GetComponents<IMovable>();
+                Console.WriteLine("Enter Key " + movables.Count);
+                foreach (IMovable movable in movables)
+                {
+                    movable.Move(-5, -5);
+                }
+            }
+            Console.ReadKey();
+            */
             return;
         }
 
         public override void Render()
         {
+            return;
+        }
+
+        public void Move(int dx, int dy)
+        {
+            Console.WriteLine("Player Controller move " + dx + " " + dy);
             return;
         }
     }

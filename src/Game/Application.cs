@@ -27,6 +27,7 @@ namespace Game
 
             GameObject player = GameObject.Instantiate("Player");
             player.AddComponent(new Player());
+            player.AddComponent(new PlayerController());
             player.AddComponent(new Model());
 
             Model playerModel = (Model)player.GetComponent(typeof(Model));

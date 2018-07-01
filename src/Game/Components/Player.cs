@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Ecs;
+using Game.Interfaces;
 
 namespace Game.Components
 {
-    class Player : Component
+    class Player : Component, IMovable
     {
         public String name = "";
 
@@ -27,6 +28,12 @@ namespace Game.Components
         public override void Render()
         {
             //System.out.println("Player rendered");
+            return;
+        }
+
+        public void Move(int dx, int dy)
+        {
+            Console.WriteLine("Player move " + dx + " " + dy);
             return;
         }
     }
