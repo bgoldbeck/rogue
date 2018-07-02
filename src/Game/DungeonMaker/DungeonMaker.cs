@@ -13,6 +13,7 @@ namespace Game
         const int maxRoomDimension = 12;
         const int deadEndsToLeave = 8;
         const int chanceToCarveStraightPassage = 95; // Percentage
+        const float monstersPerBlock = .02f;
 
         private List<List<Cell>> cells;
         private List<Room> roomList;
@@ -45,6 +46,18 @@ namespace Game
                 this.cells.Add(row);
             }
             this.roomList = new List<Room>();
+        }
+
+        /// <summary>
+        /// Generates a typical dungeon with default settings.
+        /// </summary>
+        public void Generate()
+        {
+            AddRooms();
+            AddPassages();
+            ConnectAreas();
+            FillInDeadEnds();
+            AddMonsters();
         }
 
         /// <summary>
@@ -513,15 +526,23 @@ namespace Game
             return passageCount == 1;
         }
 
-        /// <summary>
-        /// Generates a typical dungeon with default settings.
-        /// </summary>
-        public void Generate()
+        private void AddMonsters()
         {
-            AddRooms();
-            AddPassages();
-            ConnectAreas();
-            FillInDeadEnds();
+            int blockCount = 0;
+            foreach (Room room in roomList)
+            {
+                for (int x = 0; x < room.width; ++x)
+                {
+                    for (int y = 0; y < room.height; ++y)
+                    {
+                        if (1 / (float)blockCount++ < monstersPerBlock)
+                        {
+                            cells[room.x + x][room.y + y].type = CellType.Monster;
+                            blockCount = 0;
+                        }
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -535,7 +556,6 @@ namespace Game
             {
                 for(int x = 0; x < this.width; ++x)
                 {
-
                     sb.Append(cells[x][y].ToChar());
                 }
                 sb.Append("\n");

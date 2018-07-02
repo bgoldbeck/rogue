@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    public enum CellType { Wall, Room, Passage, Door }
+    public enum CellType { Wall, Room, Passage, Door, Monster }
 
     public class Cell
     {
@@ -45,6 +45,8 @@ namespace Game
                     return "d";
                 case CellType.Wall:
                     return "█";
+                case CellType.Monster:
+                    return "m";
             }
             return " ";
         }
