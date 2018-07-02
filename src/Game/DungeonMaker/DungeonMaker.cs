@@ -12,6 +12,7 @@ namespace Game
         const int minRoomDimension = 2;
         const int maxRoomDimension = 8;
         const int deadEndsToLeave = 8;
+        const int chanceToCarveStraightPassage = 95; // Percentage
 
         private List<List<Cell>> cells;
         private List<Room> roomList;
@@ -133,6 +134,11 @@ namespace Game
         }
 
         /// <summary>
+        /// For use in tracking the direction as paths grow to try and straighten things out.
+        /// </summary>
+        private enum Direction { None, Up, Right, Down, Left }
+
+        /// <summary>
         /// Begin a winding passage from the given starting coordinates using the
         /// recursive backtracker maze-generation algorithm. The result can be very
         /// windy, and could possibly use some tweakin to create straighter paths.
@@ -144,6 +150,7 @@ namespace Game
             recursionStack.Push(start);
             CarvePassage(start.x, start.y);
             bool done = false;
+            Direction lastDirection = Direction.None;
             do
             {
                 // Growing the path forward until a dead end
@@ -154,21 +161,57 @@ namespace Game
                         break;
                     Coord current = recursionStack.Peek();
                     //Console.WriteLine("Current position: {0}, {1}", current.x, current.y);
-                    List<Coord> possibleCells = new List<Coord>();
+
+                    //Get possible directions, noting if going straight is a possibility
+                    Coord straight = null;
+                    List<Tuple<Direction, Coord>> possibleCells = new List<Tuple<Direction, Coord>>();
                     if (current.x > 1 && CanGrowLeft(current))
-                        possibleCells.Add(new Coord(current.x - 1, current.y));
+                    {
+                        Coord possibleNext = new Coord(current.x - 1, current.y);
+                        if (lastDirection == Direction.Left)
+                            straight = possibleNext;
+                        possibleCells.Add(Tuple.Create<Direction, Coord>(Direction.Left, possibleNext));
+                    }
                     if (current.y > 1 && CanGrowUp(current))
-                        possibleCells.Add(new Coord(current.x, current.y - 1));
-                    if (current.x < this.width-2  && CanGrowRight(current))
-                        possibleCells.Add(new Coord(current.x + 1, current.y));
-                    if (current.y < this.height-2 && CanGrowDown(current))
-                        possibleCells.Add(new Coord(current.x, current.y + 1));
+                    {
+                        Coord possibleNext = new Coord(current.x, current.y - 1);
+                        if (lastDirection == Direction.Up)
+                            straight = possibleNext;
+                        possibleCells.Add(Tuple.Create<Direction, Coord>(Direction.Up, possibleNext));
+                    }
+                    if (current.x < this.width - 2 && CanGrowRight(current))
+                    {
+                        Coord possibleNext = new Coord(current.x + 1, current.y);
+                        if (lastDirection == Direction.Right)
+                            straight = possibleNext;
+                        possibleCells.Add(Tuple.Create<Direction, Coord>(Direction.Right, possibleNext));
+                    }
+                    if (current.y < this.height - 2 && CanGrowDown(current))
+                    {
+                        Coord possibleNext = new Coord(current.x, current.y + 1);
+                        if (lastDirection == Direction.Down)
+                            straight = possibleNext;
+                        possibleCells.Add(Tuple.Create<Direction, Coord>(Direction.Down, possibleNext));
+                    }
+
+                    // If no directions are possible, end the path
                     if (possibleCells.Count() == 0)
                         break;
-                    Coord choice = possibleCells[this.rand.Next(0, possibleCells.Count())];
-                    //Console.WriteLine("Growing path to {0}, {1}.", choice.x, choice.y);
-                    recursionStack.Push(choice);
-                    CarvePassage(choice.x, choice.y);
+
+                    // If going straight is possible, and rng is within the % chance, continue straight
+                    if (straight != null && this.rand.Next(0, 100) < chanceToCarveStraightPassage)
+                    {
+                        recursionStack.Push(straight);
+                        CarvePassage(straight.x, straight.y);
+                    }
+                    else // Otherwise choose a random direction
+                    {
+                        Tuple<Direction, Coord> choice = possibleCells[this.rand.Next(0, possibleCells.Count())];
+                        lastDirection = choice.Item1;
+                        Coord location = choice.Item2;
+                        recursionStack.Push(location);
+                        CarvePassage(location.x, location.y);
+                    }
                 }
 
                 // Backing up a step
