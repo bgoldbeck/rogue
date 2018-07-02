@@ -8,9 +8,9 @@ namespace Game
 {
     public class DungeonMaker
     {
-        const int roomAddAttempts = 100;
-        const int minRoomDimension = 2;
-        const int maxRoomDimension = 8;
+        const int roomAddAttempts = 200;
+        const int minRoomDimension = 3;
+        const int maxRoomDimension = 12;
         const int deadEndsToLeave = 8;
         const int chanceToCarveStraightPassage = 95; // Percentage
 
