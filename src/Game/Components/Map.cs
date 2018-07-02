@@ -23,16 +23,13 @@ namespace Game.Components
         {
             this.width = width;
             this.height = height;
-            Start();
+            SetupMap();
         }
 
         public override void Start()
         {
             Model mapModel = (Model)this.gameObject.AddComponent(new Model());
-
-            DungeonMaker dm = new DungeonMaker(this.width, this.height, (int)DateTime.Now.Ticks);
-            dm.Generate();
-            mapModel.model = dm.Stringify();
+            SetupMap();
             return;
         }
 
@@ -44,6 +41,16 @@ namespace Game.Components
         public override void Render()
         {
             return;
+        }
+
+        private void SetupMap()
+        {
+            Model mapModel = (Model)gameObject.GetComponent<Model>();
+
+            DungeonMaker dm = new DungeonMaker(this.width, this.height, (int)DateTime.Now.Ticks);
+            dm.Generate();
+            mapModel.model = dm.Stringify();
+
         }
     }
 }

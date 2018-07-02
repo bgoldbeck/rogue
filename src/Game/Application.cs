@@ -18,31 +18,17 @@ namespace Game
         public void Initialize()
         {
             SetupScreen();
+            Time.Initialize();
 
             int width = Console.WindowWidth;
             int height = Console.WindowHeight;
+
+
             ConsoleUI.Initialize(width, height);
 
-            Time.Initialize();
+            GameObject gameManager = GameObject.Instantiate("GameManager");
+            gameManager.AddComponent(new GameManager(width, height));
 
-            GameObject map = GameObject.Instantiate("Map");
-            map.AddComponent(new Map(width, height));
-            //The map seems to add it's own model when starting. map.AddComponent(new Model());
-
-            GameObject player = GameObject.Instantiate("Player");
-            player.AddComponent(new Player());
-            player.AddComponent(new PlayerController());
-            player.AddComponent(new Model());
-
-            Model playerModel = (Model)player.GetComponent(typeof(Model));
-            playerModel.model.Clear();
-            playerModel.model.Add("$");
-
-            
-            player.transform.Translate(5, 5);
-            
-            //Console.Out.WriteLine("Player x:" + player.transform.position.x + " Player y:" + player.transform.position.y);
-            //Console.Out.WriteLine("Player parent: " + transform.parent);
             return;
         }
 

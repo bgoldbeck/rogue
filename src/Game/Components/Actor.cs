@@ -9,32 +9,20 @@ using Game.Interfaces;
 
 namespace Game.Components
 {
-    class Player : Actor, IMovable
+    class Actor : Component
     {
-        public String name = "";
-
         public override void Start()
         {
-            //Console.Out.WriteLine("Player started " + name);
-            //Console.ReadKey();
             return;
         }
 
         public override void Update()
         {
-            //System.out.println("Player updated");
             return;
         }
 
         public override void Render()
         {
-            //System.out.println("Player rendered");
-            return;
-        }
-
-        public void Move(int dx, int dy)
-        {
-            Console.WriteLine("Player move " + dx + " " + dy);
             return;
         }
     }
