@@ -8,12 +8,12 @@ namespace Game
 {
     public class DungeonMaker
     {
-        const int roomAddAttempts = 200;
+        const int roomAddAttempts = 200; // The higher this number the more packed rooms will be
         const int minRoomDimension = 3;
         const int maxRoomDimension = 12;
-        const int deadEndsToLeave = 8;
-        const int chanceToCarveStraightPassage = 95; // Percentage
-        const float monstersPerBlock = .02f;
+        const int deadEndsToLeave = 8; // Any dead end paths will be filled in until there are this many
+        const int chanceToCarveStraightPassage = 95; // Percentage chance for passage to go straight
+        const float monstersPerBlock = .02f; // Determines how many monsters show up in room areas
 
         private List<List<Cell>> cells;
         private List<Room> roomList;
@@ -70,6 +70,8 @@ namespace Game
             {
                 if (!TryAddingRoom())
                     attempts += 1;
+                else
+                    attempts = 0;
             }
         }
 
