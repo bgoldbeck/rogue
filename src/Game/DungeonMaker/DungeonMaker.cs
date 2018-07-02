@@ -49,7 +49,9 @@ namespace Game
         }
 
         /// <summary>
-        /// Generates a typical dungeon with default settings.
+        /// Generates a dungeon based some ideas described by Bob Nystrom in his
+        /// wonderful article "Rooms and Mazes".
+        /// http://journal.stuffwithstuff.com/2014/12/21/rooms-and-mazes/with
         /// </summary>
         public void Generate()
         {
@@ -68,10 +70,10 @@ namespace Game
             int attempts = 0;
             while(attempts < roomAddAttempts)
             {
-                if (!TryAddingRoom())
-                    attempts += 1;
-                else
+                if (TryAddingRoom())
                     attempts = 0;
+                else
+                    attempts += 1;
             }
         }
 
@@ -155,8 +157,10 @@ namespace Game
 
         /// <summary>
         /// Begin a winding passage from the given starting coordinates using the
-        /// recursive backtracker maze-generation algorithm. The result can be very
-        /// windy, and could possibly use some tweakin to create straighter paths.
+        /// recursive backtracker maze-generation algorithm with some custom code
+        /// to straighten paths based on the constant chanceToCarveStraightPassage.
+        /// Recursive backtracker algorithm is based on the one described in the
+        /// book "Mazes for Programmers", by Jamis Buck.
         /// </summary>
         /// <param name="start">Coordinates from which to begin the passage.</param>
         private void AddPassage(Coord start)
@@ -171,12 +175,10 @@ namespace Game
                 // Growing the path forward until a dead end
                 while (true)
                 {
-                    //Console.WriteLine("Stack size = {0}.", recursionStack.Count());
                     if (recursionStack.Count() == 0)
                         break;
                     Coord current = recursionStack.Peek();
-                    //Console.WriteLine("Current position: {0}, {1}", current.x, current.y);
-
+                    
                     //Get possible directions, noting if going straight is a possibility
                     Coord straight = null;
                     List<Tuple<Direction, Coord>> possibleCells = new List<Tuple<Direction, Coord>>();
@@ -219,7 +221,7 @@ namespace Game
                         recursionStack.Push(straight);
                         CarvePassage(straight.x, straight.y);
                     }
-                    else // Otherwise choose a random direction
+                    else // Otherwise choose a random direction to carve
                     {
                         Tuple<Direction, Coord> choice = possibleCells[this.rand.Next(0, possibleCells.Count())];
                         lastDirection = choice.Item1;
@@ -375,8 +377,8 @@ namespace Game
         }
 
         /// <summary>
-        /// This joins disconnected sections of the map with doors using
-        /// Dijkstra's algorithm (not really).
+        /// This joins disconnected sections of the map with the minimum 
+        /// number of doors required.
         /// </summary>
         private void ConnectAreas()
         {
