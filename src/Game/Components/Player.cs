@@ -9,7 +9,7 @@ using Game.Interfaces;
 
 namespace Game.Components
 {
-    class Player : Actor, IMovable
+    class Player : Actor, IMovable, IDamageable
     {
 
         public override void Start()
@@ -34,6 +34,16 @@ namespace Game.Components
         public void Move(int dx, int dy)
         {
             Console.WriteLine("Player move " + dx + " " + dy);
+            return;
+        }
+
+        public void ApplyDamage(int damage)
+        {
+            return;
+        }
+
+        public void OnDeath()
+        {
             return;
         }
     }

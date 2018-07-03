@@ -9,7 +9,7 @@ using Game.Interfaces;
 
 namespace Game.Components
 {
-    class Enemy : Actor
+    class Enemy : Actor, IDamageable, IMovable
     {
         public override void Start()
         {
@@ -22,6 +22,21 @@ namespace Game.Components
         }
 
         public override void Render()
+        {
+            return;
+        }
+
+        public void ApplyDamage(int damage)
+        {
+            return;
+        }
+
+        public void OnDeath()
+        {
+            return;
+        }
+
+        public void Move(int dx, int dy)
         {
             return;
         }
