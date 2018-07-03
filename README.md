@@ -2,7 +2,7 @@
 
 Copyright (c) 2018 Daniel Bramblett, Daniel Dupriest, Brandon Goldbeck
 
-![Rogue Two](http://wiki.hypersweet.com/_media/public/rogue-two.png)
+![Rogue Two](http://wiki.hypersweet.com/_media/public/title-safe.png)
 
 # License
 
