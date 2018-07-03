@@ -9,9 +9,8 @@ using Game.Interfaces;
 
 namespace Game.Components
 {
-    class Actor : Component
+    class Collider : Component
     {
-        
         public override void Start()
         {
             return;
@@ -19,6 +18,11 @@ namespace Game.Components
 
         public override void Update()
         {
+            if (gameObject.GetComponent<Player>() != null)
+            {
+
+            }
+
             return;
         }
 

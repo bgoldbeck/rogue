@@ -27,6 +27,22 @@ namespace Ecs
             return;
         }
 
+        public Component GetComponent(Type type)
+        {
+            return gameObject.GetComponent(type);
+        }
+
+        public Component GetComponent<T>()
+        {
+            return gameObject.GetComponent(typeof(T));
+        }
+
+        public Component GetComponentInChildren<T>()
+        {
+
+            return null;
+        }
+
         public bool IsActive()
         {
             return this.isActive;

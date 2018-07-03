@@ -9,9 +9,8 @@ using Game.Interfaces;
 
 namespace Game.Components
 {
-    class Actor : Component
+    public class Sound : Component, IMovable
     {
-        
         public override void Start()
         {
             return;
@@ -24,6 +23,12 @@ namespace Game.Components
 
         public override void Render()
         {
+            return;
+        }
+
+        public void Move(int dx, int dy)
+        {
+            //Console.Beep(400, 90);
             return;
         }
     }
