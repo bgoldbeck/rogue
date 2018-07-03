@@ -11,7 +11,6 @@ namespace Game.Components
 {
     class Player : Actor, IMovable
     {
-        public String name = "";
 
         public override void Start()
         {

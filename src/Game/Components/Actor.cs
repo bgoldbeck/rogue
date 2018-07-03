@@ -9,9 +9,14 @@ using Game.Interfaces;
 
 namespace Game.Components
 {
-    class Actor : Component
+    class Actor : Component, IDamageable
     {
-        
+        public String name = "";
+        public String description = "";
+        protected int hp = 0;
+        protected int armor = 0;
+        protected int attack = 0;
+
         public override void Start()
         {
             return;
@@ -23,6 +28,16 @@ namespace Game.Components
         }
 
         public override void Render()
+        {
+            return;
+        }
+
+        public void ApplyDamage(int damage)
+        {
+            return;
+        }
+
+        public void OnDeath()
         {
             return;
         }
