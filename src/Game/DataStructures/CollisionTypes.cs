@@ -1,8 +1,3 @@
 ﻿using System;
 
-public class Class1
-{
-	public Class1()
-	{
-	}
-}
+enum CollisionTypes {None, Wall, ActiveObject};
