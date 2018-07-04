@@ -45,6 +45,23 @@ namespace Ecs
             return null;
         }
 
+        public Component AddComponent(Component component)
+        {
+            return gameObject.AddComponent(component);
+        }
+
+        public Component AddComponent<T>()
+        {
+            if (typeof(Component).IsAssignableFrom(typeof(T)))
+            {
+            
+                var obj = (T)Activator.CreateInstance(typeof(T));
+                return AddComponent(obj as Component);
+            }
+            
+            return null;    
+        }
+
         public bool IsActive()
         {
             return this.isActive;
