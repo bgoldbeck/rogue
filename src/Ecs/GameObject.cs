@@ -114,6 +114,7 @@ namespace Ecs
 
                 this.components.Add(component);
                 component.Start();
+                component.SetActive(true);
 
             }
             return component;

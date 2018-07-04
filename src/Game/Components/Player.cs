@@ -31,6 +31,18 @@ namespace Game.Components
             return;
         }
 
+        public override void OnEnable()
+        {
+            //Console.WriteLine("Player Enabled");
+            return;
+        }
+
+        public override void OnDisable()
+        {
+            //Console.WriteLine("Player Disabled");
+            return;
+        }
+
         public void Move(int dx, int dy)
         {
             Console.WriteLine("Player move " + dx + " " + dy);

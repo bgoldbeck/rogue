@@ -8,7 +8,7 @@ namespace Ecs
 {
     public class Component
     {
-        private bool isActive = true;
+        private bool isActive = false;
         public GameObject gameObject = null;
         public Transform transform = null;
 
@@ -23,6 +23,16 @@ namespace Ecs
         }
 
         public virtual void Render()
+        {
+            return;
+        }
+
+        public virtual void OnEnable()
+        {
+            return;
+        }
+
+        public virtual void OnDisable()
         {
             return;
         }
@@ -60,6 +70,20 @@ namespace Ecs
 
         public void SetActive(bool active)
         {
+            if (this.isActive == active)
+            {
+                return;
+            }
+
+            if (!this.isActive)
+            {
+                OnEnable();
+            }
+            else
+            {
+                OnDisable();
+            }
+
             this.isActive = active;
             return;
         }
