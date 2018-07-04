@@ -45,5 +45,17 @@ namespace Game.Components
 
             return go;
         }
+
+        public GameObject CreateDoor()
+        {
+            GameObject go = GameObject.Instantiate("Door-");
+            go.AddComponent(new Door());
+
+            Model m = (Model)go.AddComponent(new Model());
+            m.model.Add("d");
+
+            return go;
+        }
+
     }
 }

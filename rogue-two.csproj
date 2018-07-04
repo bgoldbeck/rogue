@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\Game\Components\Door.cs" />
     <Compile Include="src\Game\Components\Actor.cs" />
     <Compile Include="src\Game\Components\Enemy.cs" />
     <Compile Include="src\Game\Components\SpawnManager.cs" />

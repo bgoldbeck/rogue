@@ -108,6 +108,9 @@ namespace Game.Components
                 {
                     switch (blueprint[x][y])
                     {
+                        case "d":
+                            objectGrid[x][y] = sm.CreateDoor();
+                            break;
                         case "m":
                             objectGrid[x][y] = sm.CreateEnemy(level);
                             break;
