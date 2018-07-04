@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\Game\DataStructures\CollisionTypes.cs" />
+    <Compile Include="src\Game\DataStructures\CellState.cs" />
     <Compile Include="src\Game\Components\Door.cs" />
     <Compile Include="src\Game\Components\Actor.cs" />
     <Compile Include="src\Game\Components\Enemy.cs" />
@@ -67,6 +69,7 @@
     <Compile Include="src\Game\Components\Player.cs" />
     <Compile Include="src\Game\Application.cs" />
     <Compile Include="src\Game\Components\PlayerController.cs" />
+    <Compile Include="src\Game\Components\Collider.cs" />
     <Compile Include="src\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
