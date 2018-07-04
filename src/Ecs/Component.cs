@@ -8,7 +8,7 @@ namespace Ecs
 {
     public class Component
     {
-        private bool isActive = true;
+        private bool isActive = false;
         public GameObject gameObject = null;
         public Transform transform = null;
 
@@ -25,6 +25,16 @@ namespace Ecs
         }
 
         public virtual void Render()
+        {
+            return;
+        }
+
+        public virtual void OnEnable()
+        {
+            return;
+        }
+
+        public virtual void OnDisable()
         {
             return;
         }
@@ -52,14 +62,7 @@ namespace Ecs
 
         public Component AddComponent<T>()
         {
-            if (typeof(Component).IsAssignableFrom(typeof(T)))
-            {
-            
-                var obj = (T)Activator.CreateInstance(typeof(T));
-                return AddComponent(obj as Component);
-            }
-            
-            return null;    
+            return gameObject.AddComponent<T>();  
         }
 
         public bool IsActive()
@@ -69,6 +72,20 @@ namespace Ecs
 
         public void SetActive(bool active)
         {
+            if (this.isActive == active)
+            {
+                return;
+            }
+
+            if (!this.isActive)
+            {
+                OnEnable();
+            }
+            else
+            {
+                OnDisable();
+            }
+
             this.isActive = active;
             return;
         }

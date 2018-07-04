@@ -32,8 +32,9 @@ namespace Game.Components
             player.AddComponent(new Model());
 
             Model playerModel = (Model)player.GetComponent(typeof(Model));
-            playerModel.model.Clear();
             playerModel.model.Add("$");
+
+
             return;
         }
 

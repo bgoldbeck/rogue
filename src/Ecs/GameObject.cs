@@ -8,20 +8,19 @@ namespace Ecs
 {    
     public class GameObject
     {
-        private static Dictionary<String, GameObject> gameObjects = new Dictionary<String, GameObject>();
+        private static Dictionary<String, List<GameObject>> gameObjectsTagMap= new Dictionary<String, List<GameObject>>();
+        private static Dictionary<int, GameObject> gameObjectsIdMap = new Dictionary<int, GameObject>();
+        private static int IDCounter = 0;
 
-        private List<Component> components;
+        private List<Component> components = new List<Component>();
         private bool isActive = true;
-        private String tag;
-        private static int idCounter = 1;
+        private String tag = "";
+        private int id = -1;
 
         public Transform transform;
         
-        public GameObject()
+        private GameObject()
         {
-            this.tag = "";
-            this.isActive = true;
-            this.components = new List<Component>();
         }
 
         public bool IsActive()
@@ -32,6 +31,24 @@ namespace Ecs
         public void SetActive(bool active)
         {
             this.isActive = active;
+            return;
+        }
+
+        public void SetTag(string newTag)
+        {
+            // If the game object has a tag value, we need to remove it from the tag map.
+            if (tag != "")
+            { 
+                if (gameObjectsTagMap.TryGetValue(tag, out List<GameObject> oldList))
+                {
+                    oldList.Remove(this);
+                }
+            }
+            if (gameObjectsTagMap.TryGetValue(newTag, out List<GameObject> newList))
+            {
+                newList.Add(this);
+                tag = newTag;
+            }
             return;
         }
 
@@ -77,6 +94,34 @@ namespace Ecs
             return;
         }
 
+        public Component GetComponentInChildren<T>()
+        {
+            return GetComponentInChildren<T>(transform);
+        }
+
+        /// <summary>
+        /// Helper function to find a component in the children of a gameobject
+        /// </summary>
+        /// <param name="transform"></param>
+        /// <returns></returns>
+        private Component GetComponentInChildren<T>(Transform transform)
+        {
+            if (transform != null)
+            {
+                if (transform.gameObject.GetComponent<T>() != null)
+                {
+                    return transform.gameObject.GetComponent<T>();
+                }
+
+                foreach (Transform child in transform.children)
+                {
+                    return GetComponentInChildren<T>(child);
+                }
+
+            }
+            return null;
+        }
+
         public Component AddComponent(Component component)
         {
             if (GetComponent(component.GetType()) == null)
@@ -87,9 +132,21 @@ namespace Ecs
 
                 this.components.Add(component);
                 component.Start();
+                component.SetActive(true);
 
             }
             return component;
+        }
+
+        public Component AddComponent<T>()
+        {
+            if (typeof(Component).IsAssignableFrom(typeof(T)))
+            {
+                var obj = (T)Activator.CreateInstance(typeof(T));
+                return AddComponent(obj as Component);
+            }
+
+            return null;
         }
 
         public Component GetComponent(Type type)
@@ -135,16 +192,23 @@ namespace Ecs
             return;
         }
 
+        public static GameObject Instantiate()
+        {
+            GameObject go = new GameObject();
+
+            // Every game object will have a transform component.
+            Transform transform = new Transform();
+            go.AddComponent(transform);
+            go.transform = transform;
+            go.id = IDCounter++;
+
+            gameObjectsIdMap.Add(go.id, go);
+
+            return go;
+        }
+
         public static GameObject Instantiate(String tag)
         {
-            // Game object tags must be unique.
-            if (gameObjects.ContainsKey(tag))
-            {
-                StringBuilder sb = new StringBuilder(tag);
-                sb.Append(GameObject.idCounter++);
-                tag = sb.ToString();
-            }
-
             GameObject go = new GameObject();
 
             // Every game object will have a transform component.
@@ -152,38 +216,69 @@ namespace Ecs
             go.AddComponent(transform);
             go.transform = transform;
             go.tag = tag;
+            go.id = IDCounter++;
 
-            // Add the game object to the data structure.
-            gameObjects.Add(tag, go);
+            // Add the game object to the data structures.
+            if (gameObjectsTagMap.TryGetValue(tag, out List<GameObject> goList))
+            {
+                goList.Add(go);
+            }
+            gameObjectsIdMap.Add(go.id, go);
 
             return go;
         }
 
 
-        public static void Destroy(String tag)
-        {
-            GameObject go = GameObject.Find(tag);
+        public static void Destroy(GameObject go)
+        {      
             if (go != null)
             { 
                 // Remove all the children game objects along with this game object.
                 foreach (Transform trans in go.transform.children)
                 {
-                    gameObjects.Remove(trans.gameObject.tag);
+                    Destroy(go);
                 }
-                gameObjects.Remove(tag);
+                if (go.tag != "")
+                {
+                    // If the game object has a tag value, we need to remove it from the tag map.
+                    if (gameObjectsTagMap.TryGetValue(go.tag, out List<GameObject> goList))
+                    {
+                        goList.Remove(go);
+                    }
+                }
+                // Remove the game object from the game objects id map.
+                gameObjectsIdMap.Remove(go.id);
             }
             return;
         }
 
-        public static GameObject Find(String tag)
+
+
+        public static GameObject FindWithTag(String tag)
         {
-            gameObjects.TryGetValue(tag, out GameObject go);
+            GameObject go = null;
+            if (gameObjectsTagMap.TryGetValue(tag, out List<GameObject> goList))
+            {
+                if (goList.Count > 0)
+                {
+                    go = goList.ElementAt<GameObject>(0);
+                }
+            }
             return go;
         }
 
-        public static Dictionary<String, GameObject> GetGameObjects()
+        public static List<GameObject> FindGameObjectsWithTag(String tag)
         {
-            return gameObjects;
+            if (gameObjectsTagMap.TryGetValue(tag, out List<GameObject> goList))
+            {
+                return goList;
+            }
+            return null;
+        }
+
+        public static Dictionary<int, GameObject> GetGameObjects()
+        {
+            return gameObjectsIdMap;
         }
     }
 

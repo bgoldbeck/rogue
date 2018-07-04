@@ -16,7 +16,7 @@ namespace Ecs
         public void SetParent(Transform transform)
         {
             this.parent = transform;
-            this.parent.children.Add(transform);
+            this.parent.children.Add(this);
             return;
         }
 
