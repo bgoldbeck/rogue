@@ -33,19 +33,20 @@ namespace Game.Components
             return;
         }
 
-        public CollisionTypes handleCollision(int dx, int dy, GameObject found)
+        public CollisionTypes handleCollision(int dx, int dy, GameObject found, Actor actor)
         {
-            Map area = gameObject.GetComponent("Map");
-            if(area.cellGrid[this.position.y + dy][this.position.x + dx] == Blocked)
+            Map area = (Map)this.gameObject.GetComponent(typeof(Map));
+
+            if (area.GetCellState(actor.transform.position.y + dy,actor.transform.position.x + dx) == CellState.Blocked)
             {
-                return Wall;
+                return CollisionTypes.Wall;
             }
-            if(area.objectGrid[this.position.y + dy][this.position.x + dx] != null)
+            found = area.PeekObject(this.transform.position.y + dy,this.transform.position.x + dx);
+            if(found != null)
             {
-                found = area.objectGrid[this.position.y + dy][this.position.x + dx];
-                return Object;
+                return CollisionTypes.ActiveObject;
             }
-            return None;
+            return CollisionTypes.None;
         }
     }
 }
