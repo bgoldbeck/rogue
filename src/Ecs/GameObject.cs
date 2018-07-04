@@ -192,14 +192,23 @@ namespace Ecs
             return;
         }
 
+        public static GameObject Instantiate()
+        {
+            GameObject go = new GameObject();
+
+            // Every game object will have a transform component.
+            Transform transform = new Transform();
+            go.AddComponent(transform);
+            go.transform = transform;
+            go.id = IDCounter++;
+
+            gameObjectsIdMap.Add(go.id, go);
+
+            return go;
+        }
+
         public static GameObject Instantiate(String tag)
         {
-            // Game object tags must be unique.
-            if (gameObjectsTagMap.ContainsKey(tag))
-            {
-                return null;
-            }
-
             GameObject go = new GameObject();
 
             // Every game object will have a transform component.
@@ -208,8 +217,8 @@ namespace Ecs
             go.transform = transform;
             go.tag = tag;
             go.id = IDCounter++;
-            // Add the game object to the data structure.
-            //gameObjects.Add(tag, go);
+
+            // Add the game object to the data structures.
             if (gameObjectsTagMap.TryGetValue(tag, out List<GameObject> goList))
             {
                 goList.Add(go);

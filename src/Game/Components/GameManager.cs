@@ -32,25 +32,9 @@ namespace Game.Components
             player.AddComponent(new Model());
 
             Model playerModel = (Model)player.GetComponent(typeof(Model));
-            playerModel.model.Clear();
             playerModel.model.Add("$");
 
-            // Test for find component in children
-            map.transform.SetParent(this.transform);
 
-            Map mapReferenceCopy = (Map)gameObject.GetComponentInChildren<Map>();
-            if (mapReferenceCopy != null)
-            {
-                Console.WriteLine("IT WORKED");
-                Console.ReadKey();
-            }
-            else
-            {
-                Console.WriteLine("AWWW");
-                Console.ReadKey();
-            }
-
-            // end test
             return;
         }
 
