@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 using Ecs;
 using Game.Interfaces;
+using Game.Components;
+using Game.DataStructures;
 
 namespace Game.Components
 {
@@ -29,6 +31,21 @@ namespace Game.Components
         public override void Render()
         {
             return;
+        }
+
+        public CollisionTypes handleCollision(int dx, int dy, GameObject found)
+        {
+            Map area = gameObject.GetComponent("Map");
+            if(area.cellGrid[this.position.y + dy][this.position.x + dx] == Blocked)
+            {
+                return Wall;
+            }
+            if(area.objectGrid[this.position.y + dy][this.position.x + dx] != null)
+            {
+                found = area.objectGrid[this.position.y + dy][this.position.x + dx];
+                return Object;
+            }
+            return None;
         }
     }
 }

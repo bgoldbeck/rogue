@@ -12,6 +12,8 @@ namespace Ecs
         public GameObject gameObject = null;
         public Transform transform = null;
 
+        
+
         public virtual void Start()
         {
             return;

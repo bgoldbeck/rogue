@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Game
+
+namespace Game.DungeonMaker
 {
-    public class DungeonMaker
+    public class BasicDungeon
     {
         const int roomAddAttempts = 200; // The higher this number the more packed rooms will be
         const int minRoomDimension = 3;
@@ -29,7 +30,7 @@ namespace Game
         /// <param name="height">Height of the dungeon</param>
         /// <param name="seed">Unique seed used to generate and place rooms.
         /// Generation is also dependent on height/width combination.</param>
-        public DungeonMaker(int width, int height, int seed)
+        public BasicDungeon(int width, int height, int seed)
         {
             this.width = width;
             this.height = height;
@@ -583,6 +584,22 @@ namespace Game
                     sb.Append(cells[x][y].ToChar());
                 }
                 result.Add(sb.ToString());
+            }
+
+            return result;
+        }
+
+        public List<List<String>> Package()
+        {
+            List<List<String>> result = new List<List<String>>();
+            for (int x = 0; x < width; ++x)
+            {
+                List<String> row = new List<String>();
+                for (int y = 0; y < height; ++y)
+                {
+                    row.Add(cells[x][y].ToChar());
+                }
+                result.Add(row);
             }
 
             return result;

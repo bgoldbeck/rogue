@@ -1,4 +1,5 @@
-﻿using System;
+﻿//This file is disabled for not being a feasible answer for storing the data on the monsters.
+/*using System;
 using Game.Components;
 
 namespace Game.Data
@@ -37,14 +38,14 @@ namespace Game.Data
 
         /// <summary>
         /// Takes in an instance of a random variable and a level and fills in a target
-        /// actor with the information on the monster.
+        /// enemy with the information on the monster.
         /// </summary>
         /// <param name="rand"></param>
         /// <param name="level"></param>
         /// <param name="target"></param>
-        static void Fill(Random rand, int level, Actor target)
+        static void Fill(Random rand, int level, Enemy target)
         {
-            int value = rand.Next % (this.data.Length - 1);
+            int value = rand.Next % this.data.Length;
 
             target.name = this.data[value].name;
             target.description = this.data[value].description;
@@ -54,4 +55,4 @@ namespace Game.Data
             target.attack = this.data[value].attacklevel[level-1];
         }
     };
-}
+}*/

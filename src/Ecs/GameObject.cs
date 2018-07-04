@@ -14,8 +14,13 @@ namespace Ecs
 
         private List<Component> components = new List<Component>();
         private bool isActive = true;
+<<<<<<< HEAD
         private String tag = "";
         private int id = -1;
+=======
+        private String tag;
+        private static int idCounter = 1;
+>>>>>>> 59b7011690be4fea96cdf21b2db81ca5091c37f1
 
         public Transform transform;
         
@@ -194,6 +199,7 @@ namespace Ecs
 
         public static GameObject Instantiate()
         {
+<<<<<<< HEAD
             GameObject go = new GameObject();
 
             // Every game object will have a transform component.
@@ -201,6 +207,15 @@ namespace Ecs
             go.AddComponent(transform);
             go.transform = transform;
             go.id = IDCounter++;
+=======
+            // Game object tags must be unique.
+            if (gameObjects.ContainsKey(tag))
+            {
+                StringBuilder sb = new StringBuilder(tag);
+                sb.Append(GameObject.idCounter++);
+                tag = sb.ToString();
+            }
+>>>>>>> 59b7011690be4fea96cdf21b2db81ca5091c37f1
 
             gameObjectsIdMap.Add(go.id, go);
 

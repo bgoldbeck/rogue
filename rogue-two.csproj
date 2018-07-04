@@ -43,12 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\Game\Components\Door.cs" />
     <Compile Include="src\Game\Components\Actor.cs" />
     <Compile Include="src\Game\Components\Enemy.cs" />
+    <Compile Include="src\Game\Components\SpawnManager.cs" />
     <Compile Include="src\Game\Components\GameManager.cs" />
     <Compile Include="src\Game\DungeonMaker\Cell.cs" />
     <Compile Include="src\Game\DungeonMaker\Coord.cs" />
-    <Compile Include="src\Game\DungeonMaker\DungeonMaker.cs" />
+    <Compile Include="src\Game\DungeonMaker\BasicDungeon.cs" />
     <Compile Include="src\Game\DungeonMaker\Room.cs" />
     <Compile Include="src\Game\Interfaces\IDamageable.cs" />
     <Compile Include="src\Game\Interfaces\IMovable.cs" />
