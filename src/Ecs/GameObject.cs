@@ -76,6 +76,34 @@ namespace Ecs
             return;
         }
 
+        public Component GetComponentInChildren<T>()
+        {
+            return GetComponentInChildren<T>(transform);
+        }
+
+        /// <summary>
+        /// Helper function to find a component in the children of a gameobject
+        /// </summary>
+        /// <param name="transform"></param>
+        /// <returns></returns>
+        private Component GetComponentInChildren<T>(Transform transform)
+        {
+            if (transform != null)
+            {
+                if (transform.gameObject.GetComponent<T>() != null)
+                {
+                    return transform.gameObject.GetComponent<T>();
+                }
+
+                foreach (Transform child in transform.children)
+                {
+                    return GetComponentInChildren<T>(child);
+                }
+
+            }
+            return null;
+        }
+
         public Component AddComponent(Component component)
         {
             if (GetComponent(component.GetType()) == null)
@@ -89,6 +117,17 @@ namespace Ecs
 
             }
             return component;
+        }
+
+        public Component AddComponent<T>()
+        {
+            if (typeof(Component).IsAssignableFrom(typeof(T)))
+            {
+                var obj = (T)Activator.CreateInstance(typeof(T));
+                return AddComponent(obj as Component);
+            }
+
+            return null;
         }
 
         public Component GetComponent(Type type)

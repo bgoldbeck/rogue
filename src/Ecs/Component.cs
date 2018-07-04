@@ -50,14 +50,7 @@ namespace Ecs
 
         public Component AddComponent<T>()
         {
-            if (typeof(Component).IsAssignableFrom(typeof(T)))
-            {
-            
-                var obj = (T)Activator.CreateInstance(typeof(T));
-                return AddComponent(obj as Component);
-            }
-            
-            return null;    
+            return gameObject.AddComponent<T>();  
         }
 
         public bool IsActive()
