@@ -1,4 +1,5 @@
-﻿using System;
+﻿//This file is disabled for not being a feasible answer for storing the data on the monsters.
+/*using System;
 using Game.Components;
 
 namespace Game.Data
@@ -54,4 +55,4 @@ namespace Game.Data
             target.attack = this.data[value].attacklevel[level-1];
         }
     };
-}
+}*/
