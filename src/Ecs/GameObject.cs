@@ -13,6 +13,7 @@ namespace Ecs
         private List<Component> components;
         private bool isActive = true;
         private String tag;
+        private static int idCounter = 1;
 
         public Transform transform;
         
@@ -139,7 +140,9 @@ namespace Ecs
             // Game object tags must be unique.
             if (gameObjects.ContainsKey(tag))
             {
-                return null;
+                StringBuilder sb = new StringBuilder(tag);
+                sb.Append(GameObject.idCounter++);
+                tag = sb.ToString();
             }
 
             GameObject go = new GameObject();

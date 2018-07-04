@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Game
+namespace Game.DungeonMaker
 {
     public enum CellType { Wall, Room, Passage, Door, Monster }
 
@@ -38,13 +38,13 @@ namespace Game
             switch (this.type)
             {
                 case CellType.Room:
-                    return " ";
+                    return "r";
                 case CellType.Passage:
-                    return "░";
+                    return "p";
                 case CellType.Door:
                     return "d";
                 case CellType.Wall:
-                    return "█";
+                    return "w";
                 case CellType.Monster:
                     return "m";
             }
