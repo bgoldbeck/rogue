@@ -1,3 +1,6 @@
 ﻿using System;
 
-enum CollisionTypes {None, Wall, ActiveObject};
+namespace Game.DataStructures
+{
+    public enum CollisionTypes { None, Wall, ActiveObject };
+}

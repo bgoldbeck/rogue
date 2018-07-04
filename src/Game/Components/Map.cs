@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 using Ecs;
 using Game.DungeonMaker; 
+using Game.DataStructures;
 
 namespace Game.Components
 {
     class Map : Component
     {
-        public enum CellState { Open, Blocked }
 
         private int width;
         private int height;
