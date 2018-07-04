@@ -91,8 +91,8 @@ namespace Game
         public void Update()
         {
 
-            Dictionary<String, GameObject> map = GameObject.GetGameObjects();
-            foreach (KeyValuePair<string, GameObject> entry in map)
+            Dictionary<int, GameObject> map = GameObject.GetGameObjects();
+            foreach (KeyValuePair<int, GameObject> entry in map)
             {
                 if (entry.Value.IsActive())
                 {
@@ -107,8 +107,8 @@ namespace Game
 
         public void Render()
         {
-            Dictionary<String, GameObject> map = GameObject.GetGameObjects();
-            foreach (KeyValuePair<string, GameObject> entry in map)
+            Dictionary<int, GameObject> map = GameObject.GetGameObjects();
+            foreach (KeyValuePair<int, GameObject> entry in map)
             {
                 if (entry.Value.IsActive())
                 {
