@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Ecs;
 using Game.DungeonMaker; 
 using Game.DataStructures;
+using IO;
 
 namespace Game.Components
 {
@@ -126,16 +127,19 @@ namespace Game.Components
 
         public CellState GetCellState(int x, int y)
         {
+            Debug.Log("GetCellState called with x = " + x + ", y = " + y + ".");
             return cellGrid[x][y];
         }
 
         public GameObject PeekObject(int x, int y)
         {
+            Debug.Log("PeekObject called with x = " + x + ", y = " + y + ".");
             return objectGrid[x][y];
         }
 
         public GameObject PopObject(int x, int y)
         {
+            Debug.Log("PopObject called with x = " + x + ", y = " + y + ".");
             GameObject result = objectGrid[x][y];
             objectGrid[x][y] = null;
             return result;
