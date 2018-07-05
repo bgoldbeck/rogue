@@ -4,6 +4,11 @@ Copyright (c) 2018 Daniel Bramblett, Daniel Dupriest, Brandon Goldbeck
 
 ![Rogue Two](http://wiki.hypersweet.com/_media/public/title-safe.png)
 
+## What is this repository for? ##
+
+* This repository contains the term project for CS461P Open Source Software development with professor Bart Massey.
+
+
 ## How do I get set up? ##
 
 ### Windows ###
