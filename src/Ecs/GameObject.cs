@@ -221,6 +221,11 @@ namespace Ecs
             go.id = IDCounter++;
 
             // Add the game object to the data structures.
+            if (!gameObjectsTagMap.ContainsKey(tag))
+            {
+                gameObjectsTagMap.Add(tag, new List<GameObject>());
+            }
+
             if (gameObjectsTagMap.TryGetValue(tag, out List<GameObject> goList))
             {
                 goList.Add(go);
