@@ -11,6 +11,15 @@ namespace Game.Components
 {
     class Enemy : Actor, IDamageable, IMovable
     {
+        public Enemy()
+        {
+        }
+
+        public Enemy(string name, string description, int level, int hp, int arm, int attack)
+            :base(name, description, level, hp, arm, attack)
+        {
+        }
+
         public override void Start()
         {
             return;

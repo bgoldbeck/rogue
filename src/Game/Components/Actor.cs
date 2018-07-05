@@ -18,6 +18,18 @@ namespace Game.Components
         protected int attack = 0;
         protected int level = 0;
 
+        public Actor() { }
+
+        public Actor(string name, string description, int level, int hp, int arm, int attack)
+        {
+            this.name = name;
+            this.description = description;
+            this.level = level;
+            this.hp = hp;
+            this.armor = arm;
+            this.attack = attack;
+        }
+
         public override void Start()
         {
             return;

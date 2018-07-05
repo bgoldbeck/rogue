@@ -70,6 +70,7 @@
     <Compile Include="src\Game\Application.cs" />
     <Compile Include="src\Game\Components\PlayerController.cs" />
     <Compile Include="src\Game\Components\Collider.cs" />
+    <Compile Include="src\Game\Data\MonsterGenerator.cs" />
     <Compile Include="src\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
