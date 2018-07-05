@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Copyright(c) 2018 Daniel Bramblett, Daniel Dupriest, Brandon Goldbeck
+
+using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
