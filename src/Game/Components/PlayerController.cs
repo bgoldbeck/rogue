@@ -12,16 +12,23 @@ namespace Game.Components
 {
     class PlayerController : Component, IMovable
     {
-        Player player = null;
+        private Player player = null;
+
+        private int dx = 0;
+        private int dy = 0;
 
         public override void Start()
+        {       
+            return;
+        }
+
+        public override void OnEnable()
         {
             player = (Player)this.gameObject.GetComponent(typeof(Player));
             if (player == null)
             {
                 Debug.LogError("Could not find player component from the player controller");
             }
-            return;
         }
 
         public override void Update()
@@ -31,33 +38,32 @@ namespace Game.Components
             switch (press)
             {
                 case ConsoleKey.UpArrow:
-                    transform.Translate(0, -1);
+                    dy = -1;
                     break;
                 case ConsoleKey.RightArrow:
-                    transform.Translate(1, 0);
+                    dx = 1;
                     break;
                 case ConsoleKey.DownArrow:
-                    transform.Translate(0, 1);
+                    dy = 1;
                     break;
                 case ConsoleKey.LeftArrow:
-                    transform.Translate(-1, 0);
+                    dx = -1;
                     break;
                 default:
                     break;
             }
-            /*
-            if (Console.ReadKey().Key == ConsoleKey.Enter)
+           
+            if (dx != 0 || dy != 0)
             {
-                
                 List<IMovable> movables = gameObject.GetComponents<IMovable>();
-                Console.WriteLine("Enter Key " + movables.Count);
                 foreach (IMovable movable in movables)
                 {
-                    movable.Move(-5, -5);
+                    movable.Move(dx, dy);
                 }
+                dx = dy = 0;
             }
-            Console.ReadKey();
-            */
+           
+           
             return;
         }
 
@@ -68,7 +74,6 @@ namespace Game.Components
 
         public void Move(int dx, int dy)
         {
-            Console.WriteLine("Player Controller move " + dx + " " + dy);
             return;
         }
     }

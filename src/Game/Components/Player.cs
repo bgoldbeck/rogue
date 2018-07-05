@@ -45,7 +45,7 @@ namespace Game.Components
 
         public void Move(int dx, int dy)
         {
-            Console.WriteLine("Player move " + dx + " " + dy);
+            transform.Translate(dx, dy);
             return;
         }
 

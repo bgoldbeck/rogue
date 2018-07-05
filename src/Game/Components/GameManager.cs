@@ -26,7 +26,7 @@ namespace Game.Components
         {
             GameObject map = GameObject.Instantiate("Map");
             map.AddComponent(new Map(gameWidth, gameHeight));
-
+            
             GameObject player = GameObject.Instantiate("Player");
             player.AddComponent(new Player());
             player.AddComponent(new PlayerController());
