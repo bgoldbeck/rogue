@@ -46,7 +46,7 @@ namespace Game.Components
         public void Move(int dx, int dy)
         {
             Collider collisionDetect = (Collider)this.GetComponent(typeof(Collider));
-            if(collisionDetect.handleCollision(dx,dy, out GameObject found) == DataStructures.CollisionTypes.None)
+            if(collisionDetect.HandleCollision(dx,dy, out GameObject found) == DataStructures.CollisionTypes.None)
             {
                 
                 transform.Translate(dx, dy);
