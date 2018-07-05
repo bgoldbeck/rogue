@@ -31,6 +31,7 @@ namespace Game.Components
             player.AddComponent(new Player());
             player.AddComponent(new PlayerController());
             player.AddComponent(new Model());
+            player.AddComponent(new Collider());
 
             Model playerModel = (Model)player.GetComponent(typeof(Model));
             playerModel.model.Add("$");
