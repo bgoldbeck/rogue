@@ -18,6 +18,38 @@ namespace Game.Components
         protected int attack = 0;
         protected int level = 0;
 
+        public int HitPoints
+        {
+            get
+            {
+                return hp;
+            }
+        }
+
+        public int Armor
+        {
+            get
+            {
+                return armor;
+            }
+        }
+
+        public int Attack
+        {
+            get
+            {
+                return attack;
+            }
+        }
+
+        public int Level
+        {
+            get
+            {
+                return level;
+            }
+        }
+
         public Actor() { }
 
         public Actor(string name, string description, int level, int hp, int arm, int attack)
