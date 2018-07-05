@@ -30,25 +30,23 @@ namespace Ecs
 
         public void SetActive(bool active)
         {
-            this.isActive = active;
-            return;
-        }
-
-        public void SetTag(string newTag)
-        {
-            // If the game object has a tag value, we need to remove it from the tag map.
-            if (tag != "")
+            if (this.isActive == active)
+            {
+                return;
+            }
+            foreach (Component component in components)
             { 
-                if (gameObjectsTagMap.TryGetValue(tag, out List<GameObject> oldList))
+                if (!this.isActive && component.IsActive())
                 {
-                    oldList.Remove(this);
+                    component.OnEnable();
+                }
+                else
+                {
+                    component.OnDisable();
                 }
             }
-            if (gameObjectsTagMap.TryGetValue(newTag, out List<GameObject> newList))
-            {
-                newList.Add(this);
-                tag = newTag;
-            }
+
+            this.isActive = active;
             return;
         }
 
@@ -184,6 +182,10 @@ namespace Ecs
             return retrieved;
         }
 
+        public int InstanceID()
+        {
+            return this.id;
+        }
 
         public void RemoveComponent(Type type)
         {
