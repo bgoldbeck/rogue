@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Ecs;
 using Game.Interfaces;
+using IO;
 
 namespace Game.Components
 {
@@ -34,7 +35,7 @@ namespace Game.Components
             Model playerModel = (Model)player.GetComponent(typeof(Model));
             playerModel.model.Add("$");
 
-
+            Debug.Log("GameManager added all components on start.");
             return;
         }
 

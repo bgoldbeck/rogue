@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Ecs
 {
-    
     public class Transform : Component
     {
         public Transform parent = null;
@@ -26,6 +25,7 @@ namespace Ecs
             this.position.y += dy;
             return;
         }
+
 
     }
     
