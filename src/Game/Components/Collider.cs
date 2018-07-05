@@ -34,8 +34,9 @@ namespace Game.Components
             return;
         }
 
-        public CollisionTypes handleCollision(int dx, int dy, GameObject found)
+        public CollisionTypes HandleCollision(int dx, int dy, out GameObject found)
         {
+            found = null;
             GameObject test = GameObject.FindWithTag("Map");
             if (test == null)
             {
