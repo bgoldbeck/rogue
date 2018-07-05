@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Ecs;
+using IO;
 using Game.Interfaces;
 using Game.Components;
 using Game.DataStructures;
@@ -33,11 +34,16 @@ namespace Game.Components
             return;
         }
 
-        public CollisionTypes handleCollision(int dx, int dy, GameObject found, Actor actor)
+        public CollisionTypes handleCollision(int dx, int dy, GameObject found)
         {
             Map area = (Map)this.gameObject.GetComponent(typeof(Map));
+            if(area == null)
+            {
+                Debug.LogError("Map wasn't found.");
+                return CollisionTypes.None;
+            }
 
-            if (area.GetCellState(actor.transform.position.y + dy,actor.transform.position.x + dx) == CellState.Blocked)
+            if (area.GetCellState(this.transform.position.y + dy,this.transform.position.x + dx) == CellState.Blocked)
             {
                 return CollisionTypes.Wall;
             }
