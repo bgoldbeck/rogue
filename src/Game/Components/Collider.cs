@@ -34,8 +34,9 @@ namespace Game.Components
             return;
         }
 
-        public CollisionTypes handleCollision(int dx, int dy, GameObject found)
+        public CollisionTypes HandleCollision(int dx, int dy, out GameObject found)
         {
+            found = null;
             GameObject test = GameObject.FindWithTag("Map");
             if (test == null)
             {
@@ -55,11 +56,11 @@ namespace Game.Components
                 return CollisionTypes.Wall;
             }
 
-            if (area.GetCellState(this.transform.position.y + dy,this.transform.position.x + dx) == CellState.Blocked)
+            if (area.GetCellState(this.transform.position.x + dx,this.transform.position.y + dy) == CellState.Blocked)
             {
                 return CollisionTypes.Wall;
             }
-            found = area.PeekObject(this.transform.position.y + dy,this.transform.position.x + dx);
+            found = area.PeekObject(this.transform.position.x + dx,this.transform.position.y + dy);
             if(found != null)
             {
                 return CollisionTypes.ActiveObject;

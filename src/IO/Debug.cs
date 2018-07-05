@@ -18,13 +18,13 @@ namespace IO
         }
         public static void LogWarning(string warning)
         {
-            WriteToLog(string.Format("{0} {1} {2}", System.DateTime.Now.ToFileTime(), "Warning:", warning));
+            WriteToLog(string.Format("{0} {1} {2}", System.DateTime.Now.ToString(), "Warning:", warning));
             return;
         }
 
         public static void LogError(string error)
         {
-            WriteToLog(string.Format("{0} {1} {2}", System.DateTime.Now.ToFileTime(), "ERROR:", error));
+            WriteToLog(string.Format("{0} {1} {2}", System.DateTime.Now.ToString(), "ERROR:", error));
             return;
         }
 
