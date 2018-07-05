@@ -4,13 +4,12 @@ using Ecs;
 
 namespace Game.Data
 {
-
     class MonsterGenerator
     {
-        static private Enemy SnakeGenerator(int level, string model)
+        static private Enemy SnakeGenerator(int level, string[] model)
         {
-            model = "s";                             //Monster's model
-            return new Enemy("Snake",                //Monster's name
+            model[0] = "s";                         //Monster's model
+            return new Enemy("Snake",               //Monster's name
                              "Snake? SNAKE!!!!",    //Monster's description
                              level,                 //Level of the monster
                              2 + (3 * level),       //Equation for the monster's health.
@@ -18,9 +17,9 @@ namespace Game.Data
                              level                  //Equation for the monster's attack.
                              );
         }
-        static private Enemy GoblinGenerator(int level, string model)
+        static private Enemy GoblinGenerator(int level, string[] model)
         {
-            model = "g";                                //Monster's model
+            model[0] = "g";                             //Monster's model
             return new Enemy("Goblin",                  //Monster name
                              "Just a normal Goblin",    //Monster description
                              level,                     //Level of the monster
@@ -33,10 +32,11 @@ namespace Game.Data
         //This function was inspired by this discussion on Stack Overflow:
         //https://stackoverflow.com/questions/3767942/storing-a-list-of-methods-in-c-sharp
 
-        delegate Enemy spawnGenerator(int l, string s);
+        delegate Enemy spawnGenerator(int l, string[] s);
         static public void Fill(Random rand, int level, GameObject slot)
         {
-            string model = "";
+            string[] model = new string[1];
+            model[0] = "!";
             Model mod = (Model)slot.AddComponent(new Model());
 
             spawnGenerator[] generatorArr = new spawnGenerator[]
@@ -48,7 +48,8 @@ namespace Game.Data
             int value = rand.Next() % generatorArr.Length;
 
             slot.AddComponent(generatorArr[value](level, model));
-            mod.model.Add(model);
+            //System.Console.WriteLine("--> " +model[0] + "\n");
+            mod.model.Add(model[0]);
         }
     }
 }

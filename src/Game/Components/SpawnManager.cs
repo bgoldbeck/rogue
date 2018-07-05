@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Ecs;
 using Game.Interfaces;
+using Game.Data;
 
 namespace Game.Components
 {
@@ -37,11 +38,12 @@ namespace Game.Components
         public GameObject CreateEnemy(int level)
         {
             GameObject go = GameObject.Instantiate("Monster-" + level + "-");
-            go.AddComponent(new Enemy());
-            
-            Model m = (Model)go.AddComponent(new Model());
+            //go.AddComponent(new Enemy());
+
+            /*Model m = (Model)go.AddComponent(new Model());
             string representation = enemyData[rand.Next(0, enemyData.Length)].Item1;
-            m.model.Add(representation);
+            m.model.Add(representation);*/
+            MonsterGenerator.Fill(rand, level, go);
 
             return go;
         }
