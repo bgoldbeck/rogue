@@ -36,11 +36,23 @@ namespace Game.Components
 
         public CollisionTypes handleCollision(int dx, int dy, GameObject found)
         {
-            Map area = (Map)this.gameObject.GetComponent(typeof(Map));
+            GameObject test = GameObject.FindWithTag("Map");
+            if (test == null)
+            {
+                Debug.LogError("Could not find 'Map' GameObject from the Collider.");
+                return CollisionTypes.None;
+            }
+
+            Map area = (Map)test.GetComponent(typeof(Map));
             if(area == null)
             {
                 Debug.LogError("Map wasn't found.");
                 return CollisionTypes.None;
+            }
+            if(this.transform.position.y + dy < 0|| this.transform.position.x + dx < 0)
+            {
+                Debug.LogError("Player attempting to go outside the map.");
+                return CollisionTypes.Wall;
             }
 
             if (area.GetCellState(this.transform.position.y + dy,this.transform.position.x + dx) == CellState.Blocked)
