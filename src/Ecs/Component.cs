@@ -90,12 +90,6 @@ namespace Ecs
             return;
         }
 
-        public String Tag()
-        {
-            return this.gameObject.Tag();
-        }
-
-
     }
 
 }
