@@ -14,7 +14,7 @@ namespace Game.Components
 {
     class GameManager : Component
     {
-        private const float hudWidth = .333f;
+        private const int hudWidth = 33;
         public int gameWidth;
         public int gameHeight;
 
@@ -28,7 +28,7 @@ namespace Game.Components
         public override void Start()
         {
             GameObject mapObject = GameObject.Instantiate("Map");
-            Map map = new Map((int)(gameWidth * (1 - hudWidth)), gameHeight);
+            Map map = new Map(gameWidth - hudWidth, gameHeight);
             mapObject.AddComponent(map);
             mapObject.transform.position.y = gameHeight - 1;
 
@@ -39,15 +39,15 @@ namespace Game.Components
             player.AddComponent(new Collider());
             player.transform.position.x = map.startingX;
             player.transform.position.y = map.startingY;
-
             Model playerModel = (Model)player.GetComponent(typeof(Model));
             playerModel.model.Add("$");
+            player.AddComponent(new Actor("Sneaky McDevious", "Thiefy rogue", 1, 10, 1, 1));
 
             // Setup HUD for stats and info
             GameObject hud = GameObject.Instantiate("HUD");
-            hud.AddComponent(new HUD((int)(gameWidth * hudWidth), gameHeight));
+            hud.AddComponent(new HUD(hudWidth, gameHeight));
             hud.AddComponent(new Model());
-            hud.transform.position.x = gameWidth - (int)(gameWidth * hudWidth);
+            hud.transform.position.x = gameWidth - hudWidth;
             hud.transform.position.y = gameHeight - 1;
 
             Debug.Log("GameManager added all components on start.");

@@ -36,6 +36,14 @@ namespace Game.Components
             }
         }
 
+        public String Name
+        {
+            get
+            {
+                return name;
+            }
+        }
+
         public int Attack
         {
             get

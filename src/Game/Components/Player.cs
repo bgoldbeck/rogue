@@ -47,11 +47,16 @@ namespace Game.Components
 
         public void Move(int dx, int dy)
         {
+            HUD hud = (HUD)GameObject.FindWithTag("HUD").GetComponent(typeof(HUD));
             Collider collisionDetect = (Collider)this.GetComponent(typeof(Collider));
-            if(collisionDetect.HandleCollision(dx,dy, out GameObject found) == DataStructures.CollisionTypes.None)
+            if (collisionDetect.HandleCollision(dx,dy, out GameObject found) == DataStructures.CollisionTypes.None)
             {
-                
                 transform.Translate(dx, dy);
+                hud.Log("You walked successfully.");
+            }
+            else
+            {
+                hud.Log("You walked right into something!");
             }
             return;
         }
