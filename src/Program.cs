@@ -13,14 +13,15 @@ using IO;
 
 class Program
 {
+    
+
+    
+
     static void Main(string[] args)
     {
-
+        
         Application game = new Application();
         game.Initialize();
-        game.Update();
-        game.Render();
-        game.Render(); //Need to for some reason?
         int error = game.Loop();
         
         

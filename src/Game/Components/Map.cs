@@ -63,21 +63,29 @@ namespace Game.Components
         public override void Update()
         {
             Model mapModel = (Model)gameObject.GetComponent<Model>();
+            List<List<String>> colorModel = new List<List<String>>();
             List<String> updated = new List<String>();
-
+            
             for (int y = height - 1; y >= 0; --y)
             {
                 StringBuilder sb = new StringBuilder();
+                List<String> colorBufferRow = new List<String>();
+
                 for (int x = 0; x < width; ++x)
                 {
                     if (cellGrid[x][y] == CellState.Blocked)
-                        sb.Append("░");
+                        sb.Append("█");
                     else
                         sb.Append(" ");
+                    // In the future, we can color walls and doors n stuff differently.
+                    colorBufferRow.Add("\u001b[36m");
                 }
+                colorModel.Add(colorBufferRow);
                 updated.Add(sb.ToString());
             }
             mapModel.model = updated;
+            mapModel.colorModel = colorModel;
+
             return;
         }
 

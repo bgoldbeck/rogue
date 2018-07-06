@@ -61,6 +61,8 @@ namespace Game.Components
             Model m = (Model)go.AddComponent(new Model());
             m.model.Add("d");
 
+            m.colorModel.Add(new List<String>());
+            m.colorModel[0].Add("\u001b[33m");
             return go;
         }
 

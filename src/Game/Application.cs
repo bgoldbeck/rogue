@@ -16,10 +16,12 @@ namespace Game
     public class Application
     {
         private bool isRunning = true;
+        private ConsoleKey press = Input.ReadKey().Key;
 
         public void Initialize()
         {
             SetupScreen();
+
             Time.Initialize();
             int width = Console.WindowWidth;
             int height = Console.WindowHeight;
@@ -28,6 +30,8 @@ namespace Game
             GameObject gameManager = GameObject.Instantiate("GameManager");
             gameManager.AddComponent(new GameManager(width, height));
 
+            Update();
+            Render();
             return;
         }
 
@@ -47,6 +51,8 @@ namespace Game
                                           v 0.1");
             Console.WriteLine("\n   Please adjust your window to the desired play size,\n   then press [Enter] to begin the game.\n");
             Console.ReadLine();
+            Console.Clear();
+            return;
         }
 
         public int Loop()
@@ -66,7 +72,7 @@ namespace Game
                 
 
                 
-                ConsoleKey press = Input.ReadKey().Key;
+                press = Input.ReadKey().Key;
                 
                 if (press == ConsoleKey.Escape)
                 { 
