@@ -40,11 +40,6 @@ namespace Game.Components
         public GameObject CreateEnemy(int x, int y, int level)
         {
             GameObject go = GameObject.Instantiate("Monster-" + level + "-");
-            //go.AddComponent(new Enemy());
-
-            /*Model m = (Model)go.AddComponent(new Model());
-            string representation = enemyData[rand.Next(0, enemyData.Length)].Item1;
-            m.model.Add(representation);*/
             MonsterGenerator.Fill(rand, level, go);
             go.transform.position.x = x;
             go.transform.position.y = y;
@@ -60,11 +55,24 @@ namespace Game.Components
             go.transform.position.y = y;
             Model m = (Model)go.AddComponent(new Model());
             m.model.Add("d");
+            m.color.Set(210, 105, 30);
 
-            m.colorModel.Add(new List<String>());
-            m.colorModel[0].Add("\u001b[33m");
             return go;
         }
 
+        public GameObject CreateWall(int x, int y)
+        {
+            GameObject go = GameObject.Instantiate("Wall-");
+            go.AddComponent(new Wall());
+            go.transform.position.x = x;
+            go.transform.position.y = y;
+            Model m = (Model)go.AddComponent(new Model());
+            m.model.Add("█");
+            //m.color.Set(128, 128, 128);
+            int value = rand.Next(80, 180);
+            m.color.Set(value, value, value);
+
+            return go;
+        }
     }
 }

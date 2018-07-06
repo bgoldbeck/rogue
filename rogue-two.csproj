@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\Game\Components\Wall.cs" />
     <Compile Include="src\Game\Components\HUD.cs" />
     <Compile Include="src\Game\DataStructures\CollisionTypes.cs" />
     <Compile Include="src\Game\DataStructures\CellState.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="src\Game\DungeonMaker\Room.cs" />
     <Compile Include="src\Game\Interfaces\IDamageable.cs" />
     <Compile Include="src\Game\Interfaces\IMovable.cs" />
+    <Compile Include="src\IO\Color.cs" />
     <Compile Include="src\IO\Debug.cs" />
     <Compile Include="src\IO\Input.cs" />
     <Compile Include="src\IO\ConsoleUI.cs" />

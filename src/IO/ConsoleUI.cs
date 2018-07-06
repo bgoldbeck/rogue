@@ -12,7 +12,7 @@ namespace IO
 {
     public class ConsoleUI
     {
-        private const string defaultColor = "\u001b[37m";
+        private const String defaultColor = "\u001b[37m";
         static private int width;
         static private int height;
         static private List<List<char>> buffer;
@@ -101,23 +101,20 @@ namespace IO
         /// </summary>
         public static void Render()
         {
-            
             for (int y = height - 1; y >= 0; --y)
             {
                 StringBuilder sb = new StringBuilder();
                 for (int x = 0; x < width; ++x)
                 {
-                    sb.Append(string.Format("{0}{1}{2}", colorBuffer[x][y], buffer[x][y].ToString(), "\u001b[0m"));   
+                    sb.Append(colorBuffer[x][y]);
+                    sb.Append(buffer[x][y]);   
                 }
-
                 Console.Write(sb.ToString());
             }
             Console.SetCursorPosition(0, 0);
-
-            return;
         }
 
-        public static void Write(int x, int y, char output, String color = defaultColor)
+        public static void Write(int x, int y, char output, Color color)
         {
             //don't do anything if we're off the screen
             if (x < 0 || x >= width || y < 0 || y >= height)
@@ -126,32 +123,23 @@ namespace IO
             }
     
             buffer[x][y] = output;
-            colorBuffer[x][y] = color;
+            colorBuffer[x][y] = color.ToCode();
             return;
         }
 
-        public static void Write(int x, int y, String output, List<String> colors = null)
+        public static void Write(int x, int y, String output, Color color)
         {
             for (int i = 0; i < output.Length; ++i)
             {
-                String color = colors != null && colors.Count == output.Length ? colors[i] : defaultColor;
                 Write(x + i, y, output[i], color);
             }
         }
         
-        public static void Write(int x, int y, List<String> lines, List<List<String>> colors = null)
+        public static void Write(int x, int y, List<String> lines, Color color)
         {
             for (int i = 0; i < lines.Count; ++i)
             {
-                if (colors == null || colors.Count != lines.Count)
-                { 
-                    Write(x, y - i, lines[i]);
-                }
-                else
-                {
-                    Write(x, y - i, lines[i], colors[i]);
-                }
-
+                    Write(x, y - i, lines[i], color);
             }
         }
         

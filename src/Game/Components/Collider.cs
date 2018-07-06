@@ -63,21 +63,16 @@ namespace Game.Components
                 return CollisionTypes.None;
             }
 
-            //Checks if the map cell is a wall or not.
-            if (area.GetCellState(this.transform.position.x + dx,this.transform.position.y + dy) == CellState.Blocked)
+            //Checks if the map cell is open.
+            GameObject go = area.PeekObject(this.transform.position.x + dx, this.transform.position.y + dy);
+            if (go == null)
             {
-                return CollisionTypes.Wall;
+                return CollisionTypes.None;
             }
-
-            //If not a wall, it peeks to see if the square has an object on it.
-            found = area.PeekObject(this.transform.position.x + dx,this.transform.position.y + dy);
-            if(found != null)
+            else  //If not, an object is present.
             {
                 return CollisionTypes.ActiveObject;
             }
-            
-            //If the square doesn't have a wall nor an object, the square is open.
-            return CollisionTypes.None;
         }
     }
 }

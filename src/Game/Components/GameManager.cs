@@ -42,13 +42,12 @@ namespace Game.Components
             Model playerModel = (Model)player.GetComponent(typeof(Model));
             playerModel.model.Add("$");
             player.AddComponent(new Actor("Sneaky McDevious", "Thiefy rogue", 1, 10, 1, 1));
-            playerModel.colorModel.Add(new List<String>());
-            playerModel.colorModel[0].Add("\u001b[37;1m");
-
+          
             // Setup HUD for stats and info
             GameObject hud = GameObject.Instantiate("HUD");
             hud.AddComponent(new HUD(hudWidth, gameHeight));
-            hud.AddComponent(new Model());
+            Model hudModel = (Model)hud.AddComponent(new Model());
+            hudModel.color.Set(180, 180, 180);
             hud.transform.position.x = gameWidth - hudWidth;
             hud.transform.position.y = gameHeight - 1;
 

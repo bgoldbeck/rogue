@@ -51,18 +51,6 @@ namespace Game.Components
             AddLog(model);
             AddBottom(model);
 
-            List<List<String>> colorModel = new List<List<String>>();
-
-            for (int i = 0; i < model.model.Count; ++i)
-            {
-                List<String> colorModelRow = new List<String>();
-                for (int j = 0; j < model.model[i].Count(); ++j)
-                {
-                    colorModelRow.Add("\u001b[37m");
-                }
-                colorModel.Add(colorModelRow);
-            }
-            model.colorModel = colorModel;
             return;
         }
 
