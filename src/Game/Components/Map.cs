@@ -77,13 +77,7 @@ namespace Game.Components
                 StringBuilder sb = new StringBuilder();
                 for (int x = 0; x < width; ++x)
                 {
-                    GameObject go = PeekObject(x, y);
-                    if (go != null)
-                    {
-                        Model m = (Model)go.GetComponent(typeof(Model));
-                        sb.Append(m.model[0]);
-                    }
-                    else if (cellGrid[x][y] == CellState.Blocked)
+                    if (cellGrid[x][y] == CellState.Blocked)
                         sb.Append("█");
                     else
                         sb.Append(" ");
@@ -114,10 +108,10 @@ namespace Game.Components
                     switch (blueprint[x][y])
                     {
                         case "d":
-                            objectGrid[x][y] = sm.CreateDoor();
+                            objectGrid[x][y] = sm.CreateDoor(x, y);
                             break;
                         case "m":
-                            objectGrid[x][y] = sm.CreateEnemy(level);
+                            objectGrid[x][y] = sm.CreateEnemy(x, y, level);
                             break;
                         case "w":
                             cellGrid[x][y] = CellState.Blocked;

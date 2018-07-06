@@ -37,7 +37,7 @@ namespace Game.Components
             return;
         }
 
-        public GameObject CreateEnemy(int level)
+        public GameObject CreateEnemy(int x, int y, int level)
         {
             GameObject go = GameObject.Instantiate("Monster-" + level + "-");
             //go.AddComponent(new Enemy());
@@ -46,15 +46,18 @@ namespace Game.Components
             string representation = enemyData[rand.Next(0, enemyData.Length)].Item1;
             m.model.Add(representation);*/
             MonsterGenerator.Fill(rand, level, go);
+            go.transform.position.x = x;
+            go.transform.position.y = y;
 
             return go;
         }
 
-        public GameObject CreateDoor()
+        public GameObject CreateDoor(int x, int y)
         {
             GameObject go = GameObject.Instantiate("Door-");
             go.AddComponent(new Door());
-
+            go.transform.position.x = x;
+            go.transform.position.y = y;
             Model m = (Model)go.AddComponent(new Model());
             m.model.Add("d");
 
