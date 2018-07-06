@@ -13,6 +13,7 @@ Copyright (c) 2018 Daniel Bramblett, Daniel Dupriest, Brandon Goldbeck
 
 ### Windows ###
 * The software is a setup as a Visual Studio 2017 project. Clone the project, open the solution in Visual Studio and build it.
+* To build the project, .NET Framework developer pack 4.6.1 must be installed on the system.
 
 # License
 
