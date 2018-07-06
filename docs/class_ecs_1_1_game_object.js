@@ -12,7 +12,6 @@ var class_ecs_1_1_game_object =
     [ "RemoveComponent", "class_ecs_1_1_game_object.html#a79994c0a1e6d1b03f9ef48eeb1803385", null ],
     [ "Render", "class_ecs_1_1_game_object.html#aebb472921ec1b79b8dce1a5481861746", null ],
     [ "SetActive", "class_ecs_1_1_game_object.html#af4211e4cb1df45aa6692a5c2de79ef53", null ],
-    [ "Start", "class_ecs_1_1_game_object.html#a075b833b0ea4e8b58cab5d2a27d9a111", null ],
     [ "Tag", "class_ecs_1_1_game_object.html#a57d652307d98be5d8f4eb4c16822eed1", null ],
     [ "Update", "class_ecs_1_1_game_object.html#aafeda353872b30727e1394075481beff", null ],
     [ "transform", "class_ecs_1_1_game_object.html#a0e1caafb0f43cf8d35d10e7e3b82cbb7", null ]
