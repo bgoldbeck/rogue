@@ -13,11 +13,11 @@ namespace Game.Components
 {
     class Model : Component
     {
-        public List<string> model = new List<string>();
+        public List<String> model = new List<String>();
+        public List<List<String>> colorModel = new List<List<String>>();
 
         public override void Start()
         {
- 
             return;
         }
 
@@ -31,8 +31,17 @@ namespace Game.Components
             int x = this.gameObject.transform.position.x;
             int y = this.gameObject.transform.position.y;
 
-            ConsoleUI.Write(x, y, model);
-           
+            /*
+            for (int i = 0; i < model.Count; ++i)
+            { 
+                for (int j = 0; j < model[i].Length; ++j)
+                { 
+                    ConsoleUI.Write(x++, y, model[i][j], colorModel[i][j]);
+                }
+                --y;
+            }
+            */
+            ConsoleUI.Write(x, y, model, colorModel);
             return;
         }
     }

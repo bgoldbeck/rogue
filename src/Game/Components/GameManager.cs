@@ -42,6 +42,8 @@ namespace Game.Components
 
             Model playerModel = (Model)player.GetComponent(typeof(Model));
             playerModel.model.Add("$");
+            playerModel.colorModel.Add(new List<String>());
+            playerModel.colorModel[0].Add("\u001b[31m");
 
             // Setup HUD for stats and info
             GameObject hud = GameObject.Instantiate("HUD");

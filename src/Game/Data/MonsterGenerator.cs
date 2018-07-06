@@ -1,6 +1,7 @@
 ﻿//Copyright(c) 2018 Daniel Bramblett, Daniel Dupriest, Brandon Goldbeck
 
 using System;
+using System.Collections.Generic;
 using Game.Components;
 using Ecs;
 
@@ -77,6 +78,9 @@ namespace Game.Data
             int value = rand.Next() % generatorArr.Length;
             slot.AddComponent(generatorArr[value](level, model));
             mod.model.Add(model[0]);
+
+            mod.colorModel.Add(new List<String>());
+            mod.colorModel[0].Add("\u001b[33m");
         }
     }
 }

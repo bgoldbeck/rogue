@@ -21,15 +21,29 @@ namespace Ecs
 
         public Transform transform;
         
-        private GameObject()
-        {
-        }
+        /// <summary>
+        /// GameObject private contructor meant to be private/hidden from outside eyes.
+        /// </summary>
+        private GameObject() { }
 
+        /// <summary>
+        /// Determines if this <code>GameObject</code> is active in the game.
+        /// </summary>
+        /// <returns></returns>
         public bool IsActive()
         {
             return this.isActive;
         }
 
+        /// <summary>
+        /// Changes this <code>GameObject's</code> active state.
+        /// </summary>
+        /// <example>
+        /// <code>
+        /// GameObject go = GameObject.Instantiate();
+        /// go.SetActive(false)
+        /// </code>
+        /// </example>
         public void SetActive(bool active)
         {
             if (this.isActive == active)
