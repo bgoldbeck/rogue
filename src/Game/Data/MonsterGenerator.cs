@@ -23,7 +23,8 @@ namespace Game.Data
                              level,                 //Level of the monster
                              2 + (3 * level),       //Equation for the monster's health.
                              level,                 //Equation for the monster's armor.
-                             level                  //Equation for the monster's attack.
+                             level,                 //Equation for the monster's attack.
+                             3                      //Time between each move.
                              );
         }
 
@@ -42,8 +43,9 @@ namespace Game.Data
                              level,                     //Level of the monster
                              5 * level,                 //Equation for the monster's health.
                              (level > 1)? level - 1 : 0,//Equation for the monster's armor.
-                             2 + level                  //Equation for the monster's attack.
-                            );
+                             2 + level,                 //Equation for the monster's attack.
+                             3                          //Time between each move.                          
+                             );
         }
 
         //This function and delegate were inspired by this discussion on Stack Overflow:

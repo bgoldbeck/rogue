@@ -13,13 +13,16 @@ namespace Game.Components
 {
     class Enemy : Actor, IDamageable, IMovable
     {
+        private int movementRate = 0;
+        private int lastMoved = 0;
         public Enemy()
         {
         }
 
-        public Enemy(string name, string description, int level, int hp, int arm, int attack)
+        public Enemy(string name, string description, int level, int hp, int arm, int attack, int rate)
             :base(name, description, level, hp, arm, attack)
         {
+            movementRate = rate;
         }
 
         public override void Start()
