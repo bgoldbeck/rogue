@@ -16,6 +16,8 @@ namespace Game.Components
         public char character = '?';
         public Color color = new Color(255, 255, 255);
         public float lightLevel = 0.0f;
+        private static float lightLevelAfterDiscovery = .3f;
+        private static float amountToDimEachStep = .1f;
 
         public MapTile()
         {
@@ -35,6 +37,10 @@ namespace Game.Components
 
         public override void Update()
         {
+            if (lightLevel > lightLevelAfterDiscovery)
+            {
+                lightLevel -= amountToDimEachStep;
+            }
             return;
         }
 
