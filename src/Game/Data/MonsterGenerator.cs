@@ -16,10 +16,10 @@ namespace Game.Data
         /// <param name="level"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        static private Enemy SnakeGenerator(int level, Model mod)
+        static private Enemy SnakeGenerator(int level, MapTile mapTile)
         {
-            mod.model.Add("s");                     //Monster's model
-            mod.color.Set(255, 100, 100);           //Color
+            mapTile.character = 's';                //Monster's model
+            mapTile.color.Set(255, 100, 100);       //Color
             return new Enemy("Snake",               //Monster's name
                              "Snake? SNAKE!!!!",    //Monster's description
                              level,                 //Level of the monster
@@ -37,10 +37,10 @@ namespace Game.Data
         /// <param name="level"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        static private Enemy GoblinGenerator(int level, Model mod)
+        static private Enemy GoblinGenerator(int level, MapTile mapTile)
         {
-            mod.model.Add("g");                         //Monster's model
-            mod.color.Set(0, 200, 0);                   //Color
+            mapTile.character = 'g';                    //Monster's model
+            mapTile.color.Set(0, 200, 0);               //Color
             return new Enemy("Goblin",                  //Monster name
                              "Just a normal Goblin",    //Monster description
                              level,                     //Level of the monster
@@ -53,7 +53,7 @@ namespace Game.Data
 
         //This function and delegate were inspired by this discussion on Stack Overflow:
         //https://stackoverflow.com/questions/3767942/storing-a-list-of-methods-in-c-sharp
-        delegate Enemy spawnGenerator(int level, Model m);
+        delegate Enemy spawnGenerator(int level, MapTile m);
         /// <summary>
         /// This function takes in a reference to the Random class, a level, and a GameObject
         /// and randomly selects a monster and generates the enemy.
@@ -64,19 +64,19 @@ namespace Game.Data
         static public void Fill(Random rand, int level, GameObject slot)
         {
             //Adds a Model component to the game object passed in.
-            Model mod = (Model)slot.AddComponent(new Model());
+            MapTile mapTile = (MapTile)slot.AddComponent(new MapTile());
 
             //Generates an array of methods for each monster type.
             spawnGenerator[] generatorArr = new spawnGenerator[]
             {
-                (lvl, mdl) => SnakeGenerator(lvl, mdl),
-                (lvl, mdl) => GoblinGenerator(lvl, mdl),
+                (lvl, mt) => SnakeGenerator(lvl, mt),
+                (lvl, mt) => GoblinGenerator(lvl, mt),
             };
          
             //Using the passed in Random instance, a random monster is picked and the
             //information on the enemy is filled in.
             int value = rand.Next() % generatorArr.Length;
-            slot.AddComponent(generatorArr[value](level, mod));
+            slot.AddComponent(generatorArr[value](level, mapTile));
         }
     }
 }

@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\Game\Components\Camera.cs" />
+    <Compile Include="src\Game\Components\MapTile.cs" />
     <Compile Include="src\Game\Components\Wall.cs" />
     <Compile Include="src\Game\Components\HUD.cs" />
     <Compile Include="src\Game\DataStructures\CollisionTypes.cs" />

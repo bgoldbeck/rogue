@@ -39,10 +39,10 @@ namespace Game.Components
             player.AddComponent(new Collider());
             player.transform.position.x = map.startingX;
             player.transform.position.y = map.startingY;
-            Model playerModel = (Model)player.GetComponent(typeof(Model));
-            playerModel.model.Add("$");
             player.AddComponent(new Actor("Sneaky McDevious", "Thiefy rogue", 1, 10, 1, 1));
-          
+            player.AddComponent(new Camera(gameWidth - hudWidth, gameHeight));
+            player.AddComponent(new MapTile('$', new Color(255, 255, 255), 1));
+
             // Setup HUD for stats and info
             GameObject hud = GameObject.Instantiate("HUD");
             hud.AddComponent(new HUD(hudWidth, gameHeight));

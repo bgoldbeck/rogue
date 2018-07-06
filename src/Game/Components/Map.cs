@@ -93,12 +93,16 @@ namespace Game.Components
         public GameObject PeekObject(int x, int y)
         {
             Debug.Log("PeekObject called with x = " + x + ", y = " + y + ".");
+            if (x < 0 || x >= width || y < 0 || y >= height)
+                return null;
             return objects[x][y];
         }
 
         public GameObject PopObject(int x, int y)
         {
             Debug.Log("PopObject called with x = " + x + ", y = " + y + ".");
+            if (x < 0 || x >= width || y < 0 || y >= height)
+                return null;
             GameObject result = objects[x][y];
             objects[x][y] = null;
             return result;

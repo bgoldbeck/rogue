@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Ecs;
 using Game.Interfaces;
 using Game.Data;
+using IO;
 
 namespace Game.Components
 {
@@ -53,10 +54,8 @@ namespace Game.Components
             go.AddComponent(new Door());
             go.transform.position.x = x;
             go.transform.position.y = y;
-            Model m = (Model)go.AddComponent(new Model());
-            m.model.Add("d");
-            m.color.Set(210, 105, 30);
-
+            go.AddComponent(new MapTile('d', new Color(210, 105, 30)));
+            
             return go;
         }
 
@@ -66,11 +65,8 @@ namespace Game.Components
             go.AddComponent(new Wall());
             go.transform.position.x = x;
             go.transform.position.y = y;
-            Model m = (Model)go.AddComponent(new Model());
-            m.model.Add("█");
-            //m.color.Set(128, 128, 128);
             int value = rand.Next(80, 180);
-            m.color.Set(value, value, value);
+            go.AddComponent(new MapTile('█', new Color(value, value, value)));
 
             return go;
         }

@@ -19,6 +19,11 @@ namespace IO
             this.b = b;
         }
 
+        public Color Apply(float lightLevel)
+        {
+            return new Color((int)(r * lightLevel), (int)(g * lightLevel), (int)(b * lightLevel));
+        }
+
         public String ToCode()
         {
             StringBuilder sb = new StringBuilder();
