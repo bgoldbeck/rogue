@@ -19,7 +19,7 @@ namespace Game.Data
         static private Enemy SnakeGenerator(int level, MapTile mapTile)
         {
             mapTile.character = 's';                //Monster's model
-            mapTile.color.Set(255, 100, 100);       //Color
+            mapTile.color.Set(255, 80, 80);       //Color
             return new Enemy("Snake",               //Monster's name
                              "Snake? SNAKE!!!!",    //Monster's description
                              level,                 //Level of the monster
@@ -40,7 +40,7 @@ namespace Game.Data
         static private Enemy GoblinGenerator(int level, MapTile mapTile)
         {
             mapTile.character = 'g';                    //Monster's model
-            mapTile.color.Set(0, 200, 0);               //Color
+            mapTile.color.Set(0, 180, 0);               //Color
             return new Enemy("Goblin",                  //Monster name
                              "Just a normal Goblin",    //Monster description
                              level,                     //Level of the monster

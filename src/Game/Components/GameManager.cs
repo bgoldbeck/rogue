@@ -43,7 +43,7 @@ namespace Game.Components
             map.AddObject(map.startingX, map.startingY, player);
             player.AddComponent(new Actor("Sneaky McDevious", "Thiefy rogue", 1, 10, 1, 1));
             player.AddComponent(new Camera(gameWidth - hudWidth, gameHeight));
-            player.AddComponent(new MapTile('$', new Color(255, 255, 255), 1));
+            player.AddComponent(new MapTile('$', new Color(255, 255, 255), true));
             
             // Setup HUD for stats and info
             GameObject hud = GameObject.Instantiate("HUD");

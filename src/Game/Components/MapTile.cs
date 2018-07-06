@@ -18,16 +18,17 @@ namespace Game.Components
         public float lightLevel = 0.0f;
         private static float lightLevelAfterDiscovery = .3f;
         private static float amountToDimEachStep = .1f;
+        public bool disableLighting = false;
 
         public MapTile()
         {
         }
 
-        public MapTile(char character, Color color, float lightLevel = 0.0f)
+        public MapTile(char character, Color color, bool disableLighting = false)
         {
             this.character = character;
             this.color = color;
-            this.lightLevel = lightLevel;
+            this.disableLighting = disableLighting;
         }
 
         public override void Start()

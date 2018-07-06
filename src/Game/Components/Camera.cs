@@ -55,8 +55,13 @@ namespace Game.Components
                     if (go != null)
                     {
                         MapTile tile = (MapTile)go.GetComponent(typeof(MapTile));
-                        Color illuminated = tile.color.Apply(tile.lightLevel);
-                        ConsoleUI.Write(x, y, tile.character, illuminated);
+                        if (tile.disableLighting)
+                            ConsoleUI.Write(x, y, tile.character, tile.color);
+                        else
+                        {
+                            Color illuminated = tile.color.Apply(tile.lightLevel);
+                            ConsoleUI.Write(x, y, tile.character, illuminated);
+                        }
                     }
                 }
             }
