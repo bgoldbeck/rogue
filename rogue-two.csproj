@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\Game\Components\HUD.cs" />
     <Compile Include="src\Game\DataStructures\CollisionTypes.cs" />
     <Compile Include="src\Game\DataStructures\CellState.cs" />
     <Compile Include="src\Game\Components\Door.cs" />

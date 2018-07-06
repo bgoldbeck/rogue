@@ -65,13 +65,13 @@ namespace Game.Components
             Model mapModel = (Model)gameObject.GetComponent<Model>();
             List<String> updated = new List<String>();
 
-            for (int y = 0; y < height; ++y)
+            for (int y = height - 1; y >= 0; --y)
             {
                 StringBuilder sb = new StringBuilder();
                 for (int x = 0; x < width; ++x)
                 {
                     if (cellGrid[x][y] == CellState.Blocked)
-                        sb.Append("█");
+                        sb.Append("░");
                     else
                         sb.Append(" ");
                 }

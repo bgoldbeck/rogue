@@ -94,7 +94,7 @@ namespace IO
         {
             for (int i = 0; i < lines.Count; ++i)
             {
-                Write(x, y + i, lines[i]);
+                Write(x, y - i, lines[i]);
             }
         }
 
