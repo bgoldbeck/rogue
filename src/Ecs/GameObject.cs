@@ -27,17 +27,17 @@ namespace Ecs
         private GameObject() { }
 
         /// <summary>
-        /// Determines if this <code>GameObject</code> is active in the game.
+        /// Determines if this GameObject is active in the game.
         /// </summary>
-        /// <returns></returns>
         public bool IsActive()
         {
             return this.isActive;
         }
 
         /// <summary>
-        /// Changes this <code>GameObject's</code> active state.
+        /// Changes this GameObject's active state.
         /// </summary>
+        /// <param name="active">The true/false state to modify this GameObject as.</param>
         /// <example>
         /// <code>
         /// GameObject go = GameObject.Instantiate();
@@ -66,23 +66,20 @@ namespace Ecs
             return;
         }
 
+        /// <summary>
+        /// Accessor method for retrieving the tag on this GameObject.
+        /// </summary>
+        /// <returns>The string representing the tag on this GameObject</returns>
         public String Tag()
         {
             return this.tag;
         }
 
-        public void Start()
-        {
-            foreach (Component component in components)
-            {
-                if (component.IsActive())
-                {
-                    component.Start();
-                }
-            }
-            return;
-        }
-
+        /// <summary>
+        /// This function is called by the Application on every updated frame. 
+        /// It calls the Update() method on every Component attached to this
+        /// GameObject.
+        /// </summary>
         public void Update()
         {
             foreach (Component component in components)
@@ -95,6 +92,11 @@ namespace Ecs
             return;
         }
 
+        /// <summary>
+        /// This function is called by the Application on every updated frame, but only
+        /// after Update() has been invoked on each GameObject. It will call LateUpdate()
+        /// on every Component attached to this GameObject.
+        /// </summary>
         public void LateUpdate()
         {
             foreach (Component component in components)
@@ -107,6 +109,10 @@ namespace Ecs
             return;
         }
 
+        /// <summary>
+        /// Called by the Application on every updated frame during the
+        /// rendering phase. It will call Render() on every Component attached to this GameObject.
+        /// </summary>
         public void Render()
         {
             foreach (Component component in components)
@@ -119,15 +125,19 @@ namespace Ecs
             return;
         }
 
+        /// <summary>
+        /// Returns a single component of type T on this GameObject or any of its children.
+        /// </summary>
+        /// <returns>Component The component found, if any.</returns>
         public Component GetComponentInChildren<T>()
         {
             return GetComponentInChildren<T>(transform);
         }
 
         /// <summary>
-        /// Helper function to find a component in the children of a gameobject
+        /// Helper function to find a component in the children of a GameObject.
         /// </summary>
-        /// <param name="transform"></param>
+        /// <param name="transform">The transform node to start from.</param>
         /// <returns></returns>
         private Component GetComponentInChildren<T>(Transform transform)
         {
