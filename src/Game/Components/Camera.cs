@@ -71,7 +71,7 @@ namespace Game.Components
             {
                 float xSpeed = lightSpeed * (float)Math.Cos(i * angleDiff);
                 float ySpeed = lightSpeed * (float)Math.Sin(i * angleDiff);
-                Ray ray = new Ray(x, y, xSpeed, ySpeed, singleRayIntensity);
+                Ray ray = new Ray(x + .5f, y + .5f, xSpeed, ySpeed, singleRayIntensity);
                 while (ray.IsWithinRadius())
                 {
                     ray.Advance();

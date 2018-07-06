@@ -107,5 +107,11 @@ namespace Game.Components
             objects[x][y] = null;
             return result;
         }
+
+        public void AddObject(int x, int y, GameObject go)
+        {
+            Debug.Log("AddObject called with x = " + x + ", y = " + y + ".");
+            objects[x][y] = go;
+        }
     }
 }

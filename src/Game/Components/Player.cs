@@ -16,6 +16,12 @@ namespace Game.Components
 
         public override void Start()
         {
+            //Add player to map
+            int newX = transform.position.x;
+            int newY = transform.position.y;
+            Map map = (Map)GameObject.FindWithTag("Map").GetComponent(typeof(Map));
+            map.AddObject(newX, newY, gameObject);
+
             //Console.Out.WriteLine("Player started " + name);
             //Console.ReadKey();
             return;
@@ -51,7 +57,14 @@ namespace Game.Components
             Collider collisionDetect = (Collider)this.GetComponent(typeof(Collider));
             if (collisionDetect.HandleCollision(dx,dy, out GameObject found) == DataStructures.CollisionTypes.None)
             {
+                int oldX = transform.position.x;
+                int oldY = transform.position.y;
                 transform.Translate(dx, dy);
+                int newX = transform.position.x;
+                int newY = transform.position.y;
+                Map map = (Map)GameObject.FindWithTag("Map").GetComponent(typeof(Map));
+                map.PopObject(oldX, oldY);
+                map.AddObject(newX, newY, gameObject);
                 hud.Log("You walked successfully.");
             }
             else
