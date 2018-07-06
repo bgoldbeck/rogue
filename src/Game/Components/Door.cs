@@ -11,7 +11,7 @@ using Game.Interfaces;
 
 namespace Game.Components
 {
-    class Door : Component
+    class Door : Component, IInteractable
     {
 
         public override void Start()
@@ -27,6 +27,14 @@ namespace Game.Components
         public override void Render()
         {
             return;
+        }
+
+        public void Interact(GameObject objectInteracting)
+        {
+            GameObject go = GameObject.FindWithTag("Map");
+            Map map = (Map)go.GetComponent(typeof(Map));
+            map.PopObject(transform.position.x, transform.position.y);
+            // Doesn't seem to work //GameObject.Destroy(gameObject);
         }
     }
 }

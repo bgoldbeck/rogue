@@ -48,22 +48,28 @@ namespace Game.Components
         public void Move(int dx, int dy)
         {
             HUD hud = (HUD)GameObject.FindWithTag("HUD").GetComponent(typeof(HUD));
+            Map map = (Map)GameObject.FindWithTag("Map").GetComponent(typeof(Map));
+            int newX = transform.position.x + dx;
+            int newY = transform.position.y + dy;
             Collider collisionDetect = (Collider)this.GetComponent(typeof(Collider));
-            if (collisionDetect.HandleCollision(dx,dy, out GameObject found) == DataStructures.CollisionTypes.None)
+            if (collisionDetect.HandleCollision(dx, dy, out GameObject found) == DataStructures.CollisionTypes.None)
             {
                 int oldX = transform.position.x;
                 int oldY = transform.position.y;
                 transform.Translate(dx, dy);
-                int newX = transform.position.x;
-                int newY = transform.position.y;
-                Map map = (Map)GameObject.FindWithTag("Map").GetComponent(typeof(Map));
                 map.PopObject(oldX, oldY);
                 map.AddObject(newX, newY, gameObject);
                 hud.Log("You walked successfully.");
             }
             else
             {
-                hud.Log("You walked right into something!");
+                GameObject go = map.PeekObject(newX, newY);
+                List<IInteractable> inter = go.GetComponents<IInteractable>();
+                if (inter.Count > 0)
+                {
+                    hud.Log("Interacted with a " + go.Tag() + ".");
+                    inter[0].Interact(gameObject);
+                }
             }
             return;
         }

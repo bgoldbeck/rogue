@@ -190,7 +190,7 @@ namespace Ecs
 
             foreach (Component component in components)
             {
-                if (component.GetType() == type)
+                if (component.GetType().IsAssignableFrom(type))
                 {
                     retrieved = component;
                     break;
