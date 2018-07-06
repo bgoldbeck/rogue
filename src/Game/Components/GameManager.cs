@@ -32,6 +32,7 @@ namespace Game.Components
             mapObject.AddComponent(map);
             mapObject.transform.position.y = gameHeight - 1;
 
+
             GameObject player = GameObject.Instantiate("Player");
             player.AddComponent(new Player());
             player.AddComponent(new PlayerController());
@@ -39,6 +40,7 @@ namespace Game.Components
             player.AddComponent(new Collider());
             player.transform.position.x = map.startingX;
             player.transform.position.y = map.startingY;
+            map.AddObject(map.startingX, map.startingY, player);
             player.AddComponent(new Actor("Sneaky McDevious", "Thiefy rogue", 1, 10, 1, 1));
             player.AddComponent(new Camera(gameWidth - hudWidth, gameHeight));
             player.AddComponent(new MapTile('$', new Color(255, 255, 255), 1));

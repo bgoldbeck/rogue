@@ -16,9 +16,9 @@ namespace Game.Components
         private int width;
         private int height;
         private const float lightRadius = 10.0f;
-        private const float totalLightIntensity = 5.0f;
-        private const int lightRays = 20;
-        private const float lightSpeed = .1f;
+        private const float totalLightIntensity = 10.0f;
+        private const int lightRays = 1000;
+        private const float lightSpeed = .5f;
 
         public Camera(int width, int height)
         {

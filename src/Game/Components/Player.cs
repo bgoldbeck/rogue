@@ -16,12 +16,6 @@ namespace Game.Components
 
         public override void Start()
         {
-            //Add player to map
-            int newX = transform.position.x;
-            int newY = transform.position.y;
-            Map map = (Map)GameObject.FindWithTag("Map").GetComponent(typeof(Map));
-            map.AddObject(newX, newY, gameObject);
-
             //Console.Out.WriteLine("Player started " + name);
             //Console.ReadKey();
             return;
