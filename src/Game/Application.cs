@@ -103,7 +103,6 @@ namespace Game
                 {
                     entry.Value.Update();
                 }
-
             }
 
             foreach (KeyValuePair<int, GameObject> entry in map)
@@ -112,7 +111,6 @@ namespace Game
                 {
                     entry.Value.LateUpdate();
                 }
-
             }
 
             return;
@@ -131,6 +129,8 @@ namespace Game
 
             ConsoleUI.Render();
             ConsoleUI.ClearBuffer();
+
+            GameObject.ClearDeadGameObjects();
             return;
         }
     }

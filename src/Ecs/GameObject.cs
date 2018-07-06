@@ -13,11 +13,14 @@ namespace Ecs
         private static Dictionary<String, List<GameObject>> gameObjectsTagMap= new Dictionary<String, List<GameObject>>();
         private static Dictionary<int, GameObject> gameObjectsIdMap = new Dictionary<int, GameObject>();
         private static int IDCounter = 0;
+        private static List<int> deadList = new List<int>();
+
 
         private List<Component> components = new List<Component>();
         private bool isActive = true;
         private String tag = "";
         private int id = -1;
+
 
         public Transform transform;
         
@@ -190,7 +193,7 @@ namespace Ecs
 
             foreach (Component component in components)
             {
-                if (component.GetType().IsAssignableFrom(type))
+                if (type.IsAssignableFrom(component.GetType()))
                 {
                     retrieved = component;
                     break;
@@ -290,13 +293,24 @@ namespace Ecs
                         goList.Remove(go);
                     }
                 }
-                // Remove the game object from the game objects id map.
-                gameObjectsIdMap.Remove(go.id);
+                // Add the game object from the game objects to the dead list.
+                deadList.Add(go.id);
             }
             return;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        public static void ClearDeadGameObjects()
+        {
+            foreach (int id in deadList)
+            {
+                gameObjectsIdMap.Remove(id);
+            }
+            deadList.Clear();
+            return;
+        }
 
         public static GameObject FindWithTag(String tag)
         {
