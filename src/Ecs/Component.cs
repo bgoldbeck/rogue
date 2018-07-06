@@ -25,6 +25,10 @@ namespace Ecs
         {
             return;
         }
+        public virtual void LateUpdate()
+        {
+            return;
+        }
 
         public virtual void Render()
         {

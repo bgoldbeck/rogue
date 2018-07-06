@@ -71,12 +71,23 @@ namespace Ecs
 
         public void Update()
         {
-            //System.out.println("Update GameObject " + this.tag);
             foreach (Component component in components)
             {
                 if (component.IsActive())
                 {
                     component.Update();
+                }
+            }
+            return;
+        }
+
+        public void LateUpdate()
+        {
+            foreach (Component component in components)
+            {
+                if (component.IsActive())
+                {
+                    component.LateUpdate();
                 }
             }
             return;

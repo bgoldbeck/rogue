@@ -50,6 +50,11 @@ namespace Game.Components
             return;
         }
 
+        public override void LateUpdate()
+        {
+            return;
+        }
+
         public override void Render()
         {
             return;

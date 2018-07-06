@@ -103,7 +103,15 @@ namespace Game
 
             }
 
-            
+            foreach (KeyValuePair<int, GameObject> entry in map)
+            {
+                if (entry.Value.IsActive())
+                {
+                    entry.Value.LateUpdate();
+                }
+
+            }
+
             return;
         }
 
