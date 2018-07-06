@@ -53,13 +53,6 @@ namespace Game.Components
             }
         }
 
-        public void Regen(int width, int height)
-        {
-            this.width = width;
-            this.height = height;
-            CreateLevel(1);
-        }
-
         public override void Start()
         {
             Model mapModel = (Model)this.gameObject.AddComponent(new Model());
