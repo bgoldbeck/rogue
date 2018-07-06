@@ -10,8 +10,8 @@ namespace IO
 {
     public class ConsoleUI
     {
-        static private int nCols;
-        static private int nRows;
+        static private int width;
+        static private int height;
         static private string[] outputBuffer;
 
 
@@ -28,17 +28,17 @@ namespace IO
         /// </summary>
         public static void ClearBuffer()
         {
-            for (int i = 0; i < nRows; ++i)
+            for (int i = 0; i < height; ++i)
             {
-                outputBuffer[i] = "".PadRight(nCols, ' ');
+                outputBuffer[i] = "".PadRight(width, ' ');
             }
             return;
         }
 
         public static void Resize(int nColumns, int nLines)
         {
-            nCols = nColumns;
-            nRows = nLines;
+            width = nColumns;
+            height = nLines;
 
             Console.TreatControlCAsInput = false;
             
@@ -47,17 +47,17 @@ namespace IO
             //Console.SetBufferSize(100, 100);
             //Console.SetWindowSize(80, 40);
 
-            if (nRows < Console.WindowHeight)
+            if (height < Console.WindowHeight)
             {
-                nRows = Console.BufferHeight;
+                height = Console.BufferHeight;
             }
 
-            if (nCols < Console.WindowWidth)
+            if (width < Console.WindowWidth)
             {
-                nCols = Console.BufferWidth;
+                width = Console.BufferWidth;
             }
 
-            outputBuffer = new string[nRows];
+            outputBuffer = new string[height];
 
             ClearBuffer();
 
@@ -72,7 +72,7 @@ namespace IO
             //Console.Clear();
             //Console.SetCursorPosition(0, 0);
             //Console.SetWindowPosition(0, 0);
-            for (int i = 0; i < nRows; ++i)
+            for (int i = height - 1; i >= 0; --i)
             {
                 //Console.ForegroundColor = ConsoleColor.Green;
 
@@ -100,7 +100,7 @@ namespace IO
         public static void Write(int x, int y, string output)
         {
             //don't do anything if we're off the screen
-            if (x < 0 || x >= nCols || y < 0 || y >= nRows)
+            if (x < 0 || x >= width || y < 0 || y >= height)
             {
                 return;
             }
@@ -116,12 +116,12 @@ namespace IO
 
         public static int MaxColumns()
         {
-            return nCols;
+            return width;
         }
 
         public static int MaxRows()
         {
-            return nRows;
+            return height;
         }
     }
 }

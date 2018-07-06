@@ -40,13 +40,13 @@ namespace Game.Components
             switch (press)
             {
                 case ConsoleKey.UpArrow:
-                    dy = -1;
+                    dy = 1;
                     break;
                 case ConsoleKey.RightArrow:
                     dx = 1;
                     break;
                 case ConsoleKey.DownArrow:
-                    dy = 1;
+                    dy = -1;
                     break;
                 case ConsoleKey.LeftArrow:
                     dx = -1;
