@@ -14,7 +14,7 @@ namespace Game.DungeonMaker
         const int roomAddAttempts = 200; // The higher this number the more packed rooms will be
         const int minRoomDimension = 3;
         const int maxRoomDimension = 12;
-        const int deadEndsToLeave = 8; // Any dead end paths will be filled in until there are this many
+        const int deadEndsToLeave = 8; // Should be at least '1', since the player starts in a dead end.
         const int chanceToCarveStraightPassage = 95; // Percentage chance for passage to go straight
         const float monstersPerBlock = .02f; // Determines how many monsters show up in room areas
 
@@ -63,6 +63,7 @@ namespace Game.DungeonMaker
             ConnectAreas();
             FillInDeadEnds();
             AddMonsters();
+            AddStartingPoint();
         }
 
         /// <summary>
@@ -550,6 +551,13 @@ namespace Game.DungeonMaker
                     }
                 }
             }
+        }
+
+        private void AddStartingPoint()
+        {
+            List<Coord> deadEnds = FindDeadEnds();
+            Coord choice = deadEnds[rand.Next(0, deadEnds.Count)];
+            cells[choice.x][choice.y].type = CellType.Start;
         }
 
         /// <summary>

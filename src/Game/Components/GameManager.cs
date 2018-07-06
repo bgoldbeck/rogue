@@ -26,16 +26,17 @@ namespace Game.Components
 
         public override void Start()
         {
-            GameObject map = GameObject.Instantiate("Map");
-            map.AddComponent(new Map(gameWidth, gameHeight));
+            GameObject mapObject = GameObject.Instantiate("Map");
+            Map map = new Map(gameWidth, gameHeight);
+            mapObject.AddComponent(map);
             
             GameObject player = GameObject.Instantiate("Player");
             player.AddComponent(new Player());
             player.AddComponent(new PlayerController());
             player.AddComponent(new Model());
             player.AddComponent(new Collider());
-            player.transform.position.x = 5;
-            player.transform.position.y = 5;
+            player.transform.position.x = map.startingX;
+            player.transform.position.y = map.startingY;
 
             Model playerModel = (Model)player.GetComponent(typeof(Model));
             playerModel.model.Add("$");
