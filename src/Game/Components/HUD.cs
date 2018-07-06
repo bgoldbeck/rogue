@@ -58,7 +58,7 @@ namespace Game.Components
                 List<String> colorModelRow = new List<String>();
                 for (int j = 0; j < model.model[i].Count(); ++j)
                 {
-                    colorModelRow.Add("\u001b[36m");
+                    colorModelRow.Add("\u001b[37m");
                 }
                 colorModel.Add(colorModelRow);
             }

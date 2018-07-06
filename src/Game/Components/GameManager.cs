@@ -43,7 +43,7 @@ namespace Game.Components
             playerModel.model.Add("$");
             player.AddComponent(new Actor("Sneaky McDevious", "Thiefy rogue", 1, 10, 1, 1));
             playerModel.colorModel.Add(new List<String>());
-            playerModel.colorModel[0].Add("\u001b[31m");
+            playerModel.colorModel[0].Add("\u001b[37;1m");
 
             // Setup HUD for stats and info
             GameObject hud = GameObject.Instantiate("HUD");

@@ -78,7 +78,7 @@ namespace Game.Components
                     else
                         sb.Append(" ");
                     // In the future, we can color walls and doors n stuff differently.
-                    colorBufferRow.Add("\u001b[36m");
+                    colorBufferRow.Add("\u001b[30;1m");
                 }
                 colorModel.Add(colorBufferRow);
                 updated.Add(sb.ToString());
