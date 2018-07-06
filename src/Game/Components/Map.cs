@@ -20,6 +20,8 @@ namespace Game.Components
         private int height;
         private List<List<CellState>> cellGrid;
         private List<List<GameObject>> objectGrid;
+        public int startingX = 0;
+        public int startingY = 0;
 
         public Map(int width, int height)
         {
@@ -119,6 +121,10 @@ namespace Game.Components
                             break;
                         case "w":
                             cellGrid[x][y] = CellState.Blocked;
+                            break;
+                        case "s":
+                            this.startingX = x;
+                            this.startingY = y;
                             break;
                         default:
                             break;
