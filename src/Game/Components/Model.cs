@@ -31,10 +31,8 @@ namespace Game.Components
             int x = this.gameObject.transform.position.x;
             int y = this.gameObject.transform.position.y;
 
-            foreach (string str in model)
-            {
-                ConsoleUI.Write(x, y++, str);
-            }
+            ConsoleUI.Write(x, y, model);
+           
             return;
         }
     }

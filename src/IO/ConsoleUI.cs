@@ -12,13 +12,25 @@ namespace IO
     {
         static private int width;
         static private int height;
-        static private string[] outputBuffer;
-
-
-        public static void Initialize(int nColumns, int nLines)
+        static private List<List<char>> buffer;
+        
+        public static void Initialize(int newWidth, int newHeight)
         {
+            width = newWidth;
+            height = newHeight;
             Console.CursorVisible = false;
-            Resize(nColumns, nLines);
+
+            buffer = new List<List<char>>();
+            for (int x = 0; x < width; ++x)
+            {
+                List<char> bufferRow = new List<char>();
+                for (int y = 0; y < height; ++y)
+                {
+                    bufferRow.Add(' ');
+                }
+                buffer.Add(bufferRow);
+            }
+            
             return;
         }
         
@@ -28,98 +40,70 @@ namespace IO
         /// </summary>
         public static void ClearBuffer()
         {
-            for (int i = 0; i < height; ++i)
+            for (int x = 0; x < width; ++x)
             {
-                outputBuffer[i] = "".PadRight(width, ' ');
+                for (int y = 0; y < height; ++y)
+                {
+                    buffer[x][y] = ' ';
+                }
             }
             return;
         }
-
-        public static void Resize(int nColumns, int nLines)
-        {
-            width = nColumns;
-            height = nLines;
-
-            Console.TreatControlCAsInput = false;
-            
-            //Commented these out to possibly solve line-skipping problem.
-            //Console.SetWindowSize(1, 1);
-            //Console.SetBufferSize(100, 100);
-            //Console.SetWindowSize(80, 40);
-
-            if (height < Console.WindowHeight)
-            {
-                height = Console.BufferHeight;
-            }
-
-            if (width < Console.WindowWidth)
-            {
-                width = Console.BufferWidth;
-            }
-
-            outputBuffer = new string[height];
-
-            ClearBuffer();
-
-            return;
-        }
-
+        
         /// <summary>
         /// Draw everything from the buffer to the console.
         /// </summary>
         public static void Render()
         {
-            //Console.Clear();
-            //Console.SetCursorPosition(0, 0);
-            //Console.SetWindowPosition(0, 0);
-            for (int i = height - 1; i >= 0; --i)
+            
+            for (int y = height - 1; y >= 0; --y)
             {
-                //Console.ForegroundColor = ConsoleColor.Green;
-
-                //Changed WriteLine to Write to possibly solve line-skipping problem.
-                Console.Write(outputBuffer[i]);
+                StringBuilder sb = new StringBuilder();
+                for (int x = 0; x < width; ++x)
+                {
+                    sb.Append(buffer[x][y]);
+                }
+                Console.Write(sb.ToString());
             }
-
             Console.SetCursorPosition(0, 0);
-            Console.CursorVisible = false;
-            //Console.MoveBufferArea(0, 0, nCols, nRows, 0, 0);
-            //Console.SetCursorPosition(0, 0);
-            // Clear the contents in the buffer.
-            ClearBuffer();
 
             return;
         }
 
-        /// <summary>
-        /// Write output text to the current cursor index position in the buffer.
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="output"></param>
-        /// <returns></returns>
-        public static void Write(int x, int y, string output)
+        public static void Write(int x, int y, char output)
         {
             //don't do anything if we're off the screen
             if (x < 0 || x >= width || y < 0 || y >= height)
             {
                 return;
             }
-
-            StringBuilder newWrite = new StringBuilder(outputBuffer[y]);
-
-            newWrite.Remove(x, output.Length);
-            
-            outputBuffer[y] = newWrite.Insert(x, output).ToString();
-
+    
+            buffer[x][y] = output;
             return;
         }
 
-        public static int MaxColumns()
+        public static void Write(int x, int y, String output)
+        {
+            for (int i = 0; i < output.Length; ++i)
+            {
+                Write(x + i, y, output[i]);
+            }
+        }
+
+        public static void Write(int x, int y, List<String> lines)
+        {
+            for (int i = 0; i < lines.Count; ++i)
+            {
+                Write(x, y + i, lines[i]);
+            }
+        }
+
+        public static int MaxWidth()
         {
             return width;
         }
 
-        public static int MaxRows()
+        public static int MaxHeight()
         {
             return height;
         }

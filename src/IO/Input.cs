@@ -25,6 +25,10 @@ namespace IO
                 {
                     key = Console.ReadKey(true)
                 };
+                while (Console.KeyAvailable)
+                {
+                    Console.ReadKey(true);
+                }
             }
             return currentKey != null ? currentKey.key : new ConsoleKeyInfo();
         }

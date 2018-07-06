@@ -21,11 +21,8 @@ namespace Game
         {
             SetupScreen();
             Time.Initialize();
-
             int width = Console.WindowWidth;
             int height = Console.WindowHeight;
-
-
             ConsoleUI.Initialize(width, height);
 
             GameObject gameManager = GameObject.Instantiate("GameManager");
