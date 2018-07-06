@@ -65,7 +65,6 @@ namespace Game.Components
                 dx = dy = 0;
             }
            
-           
             return;
         }
 

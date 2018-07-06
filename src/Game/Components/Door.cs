@@ -34,7 +34,7 @@ namespace Game.Components
             GameObject go = GameObject.FindWithTag("Map");
             Map map = (Map)go.GetComponent(typeof(Map));
             map.PopObject(transform.position.x, transform.position.y);
-            // Doesn't seem to work //GameObject.Destroy(gameObject);
+            GameObject.Destroy(gameObject);
         }
     }
 }
