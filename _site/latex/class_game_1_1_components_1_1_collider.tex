@@ -1,0 +1,53 @@
+\hypertarget{class_game_1_1_components_1_1_collider}{}\section{Game.\+Components.\+Collider Class Reference}
+\label{class_game_1_1_components_1_1_collider}\index{Game.\+Components.\+Collider@{Game.\+Components.\+Collider}}
+Inheritance diagram for Game.\+Components.\+Collider\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_game_1_1_components_1_1_collider}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_game_1_1_components_1_1_collider_a95f93ad13110b536fa365faed0fe4593}\label{class_game_1_1_components_1_1_collider_a95f93ad13110b536fa365faed0fe4593}} 
+override void {\bfseries Start} ()
+\item 
+\mbox{\Hypertarget{class_game_1_1_components_1_1_collider_aa60b9a14541bc5beff644c9fe44ce313}\label{class_game_1_1_components_1_1_collider_aa60b9a14541bc5beff644c9fe44ce313}} 
+override void {\bfseries Update} ()
+\item 
+\mbox{\Hypertarget{class_game_1_1_components_1_1_collider_a58566e658035ac726fa8d5587ece5ded}\label{class_game_1_1_components_1_1_collider_a58566e658035ac726fa8d5587ece5ded}} 
+override void {\bfseries Render} ()
+\item 
+\mbox{\hyperlink{namespace_game_1_1_data_structures_ada1f9e4784b55145987867a5daf71d4d}{Collision\+Types}} \mbox{\hyperlink{class_game_1_1_components_1_1_collider_a4b9f921f8563cdccd1b0dbf9664cc08f}{Handle\+Collision}} (int dx, int dy, out \mbox{\hyperlink{class_ecs_1_1_game_object}{Game\+Object}} found)
+\begin{DoxyCompactList}\small\item\em Uses an inputted movement and uses the current position and the movement to check if there location being moved into is empty or not. If there is already a game object at that spot, it will also return a reference to that game object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_game_1_1_components_1_1_collider_a4b9f921f8563cdccd1b0dbf9664cc08f}\label{class_game_1_1_components_1_1_collider_a4b9f921f8563cdccd1b0dbf9664cc08f}} 
+\index{Game\+::\+Components\+::\+Collider@{Game\+::\+Components\+::\+Collider}!Handle\+Collision@{Handle\+Collision}}
+\index{Handle\+Collision@{Handle\+Collision}!Game\+::\+Components\+::\+Collider@{Game\+::\+Components\+::\+Collider}}
+\subsubsection{\texorpdfstring{Handle\+Collision()}{HandleCollision()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespace_game_1_1_data_structures_ada1f9e4784b55145987867a5daf71d4d}{Collision\+Types}} Game.\+Components.\+Collider.\+Handle\+Collision (\begin{DoxyParamCaption}\item[{int}]{dx,  }\item[{int}]{dy,  }\item[{out \mbox{\hyperlink{class_ecs_1_1_game_object}{Game\+Object}}}]{found }\end{DoxyParamCaption})}
+
+
+
+Uses an inputted movement and uses the current position and the movement to check if there location being moved into is empty or not. If there is already a game object at that spot, it will also return a reference to that game object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dx} & \\
+\hline
+{\em dy} & \\
+\hline
+{\em found} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Game/\+Components/Collider.\+cs\end{DoxyCompactItemize}

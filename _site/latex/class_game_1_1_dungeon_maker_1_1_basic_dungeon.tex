@@ -1,0 +1,79 @@
+\hypertarget{class_game_1_1_dungeon_maker_1_1_basic_dungeon}{}\section{Game.\+Dungeon\+Maker.\+Basic\+Dungeon Class Reference}
+\label{class_game_1_1_dungeon_maker_1_1_basic_dungeon}\index{Game.\+Dungeon\+Maker.\+Basic\+Dungeon@{Game.\+Dungeon\+Maker.\+Basic\+Dungeon}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_game_1_1_dungeon_maker_1_1_basic_dungeon_ae506d27631fab15f71cac7b3f20936c7}{Basic\+Dungeon}} (int width, int height, int seed)
+\begin{DoxyCompactList}\small\item\em Creates a new empty dungeon of width and height dimensions using the seed provided. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_1_1_dungeon_maker_1_1_basic_dungeon_ad9b7fb9bf2e0cdf3abfe49140168685e}{Generate}} ()
+\begin{DoxyCompactList}\small\item\em Generates a dungeon based some ideas described by Bob Nystrom in his wonderful article \char`\"{}\+Rooms and Mazes\char`\"{}. \href{http://journal.stuffwithstuff.com/2014/12/21/rooms-and-mazes/with}{\tt http\+://journal.\+stuffwithstuff.\+com/2014/12/21/rooms-\/and-\/mazes/with} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_1_1_dungeon_maker_1_1_basic_dungeon_a2cf2d36643ff09242016a187bf29dcdf}{Draw}} ()
+\begin{DoxyCompactList}\small\item\em Debug function to draw the dungeon to the screen. Note that the output may not fit on the screen. \end{DoxyCompactList}\item 
+List$<$ String $>$ \mbox{\hyperlink{class_game_1_1_dungeon_maker_1_1_basic_dungeon_a5ea4d65fbdf434976300b6e655d8b8d0}{Stringify}} ()
+\begin{DoxyCompactList}\small\item\em Converts the dungeon into a list of string rows for use in the {\ttfamily Model} class. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_game_1_1_dungeon_maker_1_1_basic_dungeon_a4c460b2fbd9124ebad23ea425e0f94d0}\label{class_game_1_1_dungeon_maker_1_1_basic_dungeon_a4c460b2fbd9124ebad23ea425e0f94d0}} 
+List$<$ List$<$ String $>$ $>$ {\bfseries Package} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_game_1_1_dungeon_maker_1_1_basic_dungeon_ae506d27631fab15f71cac7b3f20936c7}\label{class_game_1_1_dungeon_maker_1_1_basic_dungeon_ae506d27631fab15f71cac7b3f20936c7}} 
+\index{Game\+::\+Dungeon\+Maker\+::\+Basic\+Dungeon@{Game\+::\+Dungeon\+Maker\+::\+Basic\+Dungeon}!Basic\+Dungeon@{Basic\+Dungeon}}
+\index{Basic\+Dungeon@{Basic\+Dungeon}!Game\+::\+Dungeon\+Maker\+::\+Basic\+Dungeon@{Game\+::\+Dungeon\+Maker\+::\+Basic\+Dungeon}}
+\subsubsection{\texorpdfstring{Basic\+Dungeon()}{BasicDungeon()}}
+{\footnotesize\ttfamily Game.\+Dungeon\+Maker.\+Basic\+Dungeon.\+Basic\+Dungeon (\begin{DoxyParamCaption}\item[{int}]{width,  }\item[{int}]{height,  }\item[{int}]{seed }\end{DoxyParamCaption})}
+
+
+
+Creates a new empty dungeon of width and height dimensions using the seed provided. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em width} & Width of the dungeon\\
+\hline
+{\em height} & Height of the dungeon\\
+\hline
+{\em seed} & Unique seed used to generate and place rooms. Generation is also dependent on height/width combination.\\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_game_1_1_dungeon_maker_1_1_basic_dungeon_a2cf2d36643ff09242016a187bf29dcdf}\label{class_game_1_1_dungeon_maker_1_1_basic_dungeon_a2cf2d36643ff09242016a187bf29dcdf}} 
+\index{Game\+::\+Dungeon\+Maker\+::\+Basic\+Dungeon@{Game\+::\+Dungeon\+Maker\+::\+Basic\+Dungeon}!Draw@{Draw}}
+\index{Draw@{Draw}!Game\+::\+Dungeon\+Maker\+::\+Basic\+Dungeon@{Game\+::\+Dungeon\+Maker\+::\+Basic\+Dungeon}}
+\subsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily void Game.\+Dungeon\+Maker.\+Basic\+Dungeon.\+Draw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Debug function to draw the dungeon to the screen. Note that the output may not fit on the screen. 
+
+\mbox{\Hypertarget{class_game_1_1_dungeon_maker_1_1_basic_dungeon_ad9b7fb9bf2e0cdf3abfe49140168685e}\label{class_game_1_1_dungeon_maker_1_1_basic_dungeon_ad9b7fb9bf2e0cdf3abfe49140168685e}} 
+\index{Game\+::\+Dungeon\+Maker\+::\+Basic\+Dungeon@{Game\+::\+Dungeon\+Maker\+::\+Basic\+Dungeon}!Generate@{Generate}}
+\index{Generate@{Generate}!Game\+::\+Dungeon\+Maker\+::\+Basic\+Dungeon@{Game\+::\+Dungeon\+Maker\+::\+Basic\+Dungeon}}
+\subsubsection{\texorpdfstring{Generate()}{Generate()}}
+{\footnotesize\ttfamily void Game.\+Dungeon\+Maker.\+Basic\+Dungeon.\+Generate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Generates a dungeon based some ideas described by Bob Nystrom in his wonderful article \char`\"{}\+Rooms and Mazes\char`\"{}. \href{http://journal.stuffwithstuff.com/2014/12/21/rooms-and-mazes/with}{\tt http\+://journal.\+stuffwithstuff.\+com/2014/12/21/rooms-\/and-\/mazes/with} 
+
+\mbox{\Hypertarget{class_game_1_1_dungeon_maker_1_1_basic_dungeon_a5ea4d65fbdf434976300b6e655d8b8d0}\label{class_game_1_1_dungeon_maker_1_1_basic_dungeon_a5ea4d65fbdf434976300b6e655d8b8d0}} 
+\index{Game\+::\+Dungeon\+Maker\+::\+Basic\+Dungeon@{Game\+::\+Dungeon\+Maker\+::\+Basic\+Dungeon}!Stringify@{Stringify}}
+\index{Stringify@{Stringify}!Game\+::\+Dungeon\+Maker\+::\+Basic\+Dungeon@{Game\+::\+Dungeon\+Maker\+::\+Basic\+Dungeon}}
+\subsubsection{\texorpdfstring{Stringify()}{Stringify()}}
+{\footnotesize\ttfamily List$<$String$>$ Game.\+Dungeon\+Maker.\+Basic\+Dungeon.\+Stringify (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Converts the dungeon into a list of string rows for use in the {\ttfamily Model} class. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Game/\+Dungeon\+Maker/Basic\+Dungeon.\+cs\end{DoxyCompactItemize}
