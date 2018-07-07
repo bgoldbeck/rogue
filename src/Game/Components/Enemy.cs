@@ -19,8 +19,8 @@ namespace Game.Components
         {
         }
 
-        public Enemy(string name, string description, int level, int hp, int arm, int attack, int rate)
-            :base(name, description, level, hp, arm, attack)
+        public Enemy(string name, string description, int level, int hp, int armor, int attack, int rate)
+            :base(name, description, level, hp, armor, attack)
         {
             movementRate = rate;
         }

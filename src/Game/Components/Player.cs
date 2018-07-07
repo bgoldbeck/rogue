@@ -8,51 +8,41 @@ using System.Threading.Tasks;
 
 using Ecs;
 using Game.Interfaces;
+using IO;
 
 namespace Game.Components
 {
     class Player : Actor, IMovable, IDamageable
     {
+        public Player(string name, string description, int level, int hp, int armor, int attack)
+            : base(name, description, level, hp, armor, attack)
+        {
+        }
 
         public override void Start()
         {
-            //Console.Out.WriteLine("Player started " + name);
-            //Console.ReadKey();
+            base.Start();
             return;
         }
 
         public override void Update()
         {
-            //System.out.println("Player updated");
-            return;
-        }
-
-        public override void Render()
-        {
-            //System.out.println("Player rendered");
-            return;
-        }
-
-        public override void OnEnable()
-        {
-            //Console.WriteLine("Player Enabled");
-            return;
-        }
-
-        public override void OnDisable()
-        {
-            //Console.WriteLine("Player Disabled");
+            base.Update();
             return;
         }
 
         public void Move(int dx, int dy)
         {
+            if (collider == null)
+            {
+                Debug.LogError("Could not find collider component on Player!");
+            }
+
             HUD hud = (HUD)GameObject.FindWithTag("HUD").GetComponent(typeof(HUD));
             Map map = (Map)GameObject.FindWithTag("Map").GetComponent(typeof(Map));
             int newX = transform.position.x + dx;
             int newY = transform.position.y + dy;
-            Collider collisionDetect = (Collider)this.GetComponent(typeof(Collider));
-            if (collisionDetect.HandleCollision(dx, dy, out GameObject found) == DataStructures.CollisionTypes.None)
+            if (collider.HandleCollision(dx, dy, out GameObject found) == DataStructures.CollisionTypes.None)
             {
                 int oldX = transform.position.x;
                 int oldY = transform.position.y;

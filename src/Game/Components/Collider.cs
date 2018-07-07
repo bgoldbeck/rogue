@@ -22,11 +22,6 @@ namespace Game.Components
 
         public override void Update()
         {
-            if (gameObject.GetComponent<Player>() != null)
-            {
-
-            }
-
             return;
         }
 

@@ -20,6 +20,8 @@ namespace Game.Components
         protected int attack = 0;
         protected int level = 0;
 
+        protected Collider collider = null;
+
         public int HitPoints
         {
             get
@@ -62,27 +64,23 @@ namespace Game.Components
 
         public Actor() { }
 
-        public Actor(string name, string description, int level, int hp, int arm, int attack)
+        public Actor(string name, string description, int level, int hp, int armor, int attack)
         {
             this.name = name;
             this.description = description;
             this.level = level;
             this.hp = hp;
-            this.armor = arm;
+            this.armor = armor;
             this.attack = attack;
         }
 
         public override void Start()
         {
+            collider = (Collider)AddComponent(new Collider());
             return;
         }
 
         public override void Update()
-        {
-            return;
-        }
-
-        public override void Render()
         {
             return;
         }
