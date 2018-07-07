@@ -19,6 +19,7 @@ namespace Game.Components
         private const float totalLightIntensity = 10.0f;
         private const int lightRays = 1000;
         private const float lightSpeed = .5f;
+        private Map map = null;
 
         public Camera(int width, int height)
         {
@@ -31,6 +32,21 @@ namespace Game.Components
             return;
         }
 
+        public override void OnEnable()
+        {
+            GameObject go = GameObject.FindWithTag("Map");
+
+            if (go != null)
+            { 
+                map = (Map)go.GetComponent<Map>();
+                if (map == null)
+                {
+                    Debug.LogError("Camera could not find a map to render from!");
+                }
+            }
+            return;
+        }
+
         public override void Update()
         {
             return;
@@ -38,7 +54,8 @@ namespace Game.Components
 
         public override void Render()
         {
-            Map map = (Map)GameObject.FindWithTag("Map").GetComponent(typeof(Map));
+            if (map == null) return;
+
             int playerX = gameObject.transform.position.x;
             int playerY = gameObject.transform.position.y;
             SpreadLight(map, playerX, playerY);
