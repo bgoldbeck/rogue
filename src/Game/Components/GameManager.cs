@@ -28,7 +28,8 @@ namespace Game.Components
         public override void Start()
         {
             GameObject mapObject = GameObject.Instantiate("Map");
-            Map map = new Map(gameWidth - hudWidth, gameHeight);
+            //Map map = new Map(gameWidth - hudWidth, gameHeight);
+            Map map = new Map(60, 30);
             mapObject.AddComponent(map);
             mapObject.transform.position.y = gameHeight - 1;
 
