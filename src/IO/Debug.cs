@@ -46,6 +46,7 @@ namespace IO
 
         private static void CreateLogFile()
         {
+            File.WriteAllText("Log.txt", String.Empty);
             writer = new StreamWriter(File.Open("Log.txt", System.IO.FileMode.Create));
             if (writer != null)
             {
