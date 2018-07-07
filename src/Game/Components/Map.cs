@@ -92,7 +92,7 @@ namespace Game.Components
 
         public GameObject PeekObject(int x, int y)
         {
-            Debug.Log("PeekObject called with x = " + x + ", y = " + y + ".");
+            //Debug.Log("PeekObject called with x = " + x + ", y = " + y + ".");
             if (x < 0 || x >= width || y < 0 || y >= height)
                 return null;
             return objects[x][y];
@@ -100,7 +100,7 @@ namespace Game.Components
 
         public GameObject PopObject(int x, int y)
         {
-            Debug.Log("PopObject called with x = " + x + ", y = " + y + ".");
+            //Debug.Log("PopObject called with x = " + x + ", y = " + y + ".");
             if (x < 0 || x >= width || y < 0 || y >= height)
                 return null;
             GameObject result = objects[x][y];
@@ -110,7 +110,7 @@ namespace Game.Components
 
         public void AddObject(int x, int y, GameObject go)
         {
-            Debug.Log("AddObject called with x = " + x + ", y = " + y + ".");
+            //Debug.Log("AddObject called with x = " + x + ", y = " + y + ".");
             objects[x][y] = go;
         }
     }
