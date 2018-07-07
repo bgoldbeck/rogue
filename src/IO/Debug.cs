@@ -30,6 +30,7 @@ namespace IO
             return;
         }
 
+        [System.Diagnostics.Conditional("DEBUG")]
         private static void WriteToLog(string message)
         {
             if (writer == null)
