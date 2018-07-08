@@ -13,7 +13,7 @@ using Game.DataStructures;
 
 namespace Game.Components
 {
-    class Collider : Component
+    public class Collider : Component
     {
         public override void Start()
         {
@@ -42,32 +42,28 @@ namespace Game.Components
         public CollisionTypes HandleCollision(int dx, int dy, out GameObject found)
         {
             found = null;
-            //Grabs the map that is stored in the global GameObject.
-            GameObject test = GameObject.FindWithTag("Map");
-            if (test == null)
+            // Finds the map that is stored in the global GameObject.
+            if (GameObject.FindWithTag("Map") != null)
             {
-                Debug.LogError("Could not find 'Map' GameObject from the Collider.");
-                return CollisionTypes.None;
+                // Grabs the map component in the game object.
+                Map map = (Map)GameObject.FindWithTag("Map").GetComponent(typeof(Map));
+                if (map != null)
+                {
+                
+                    // Checks if the map cell is open.
+                    found = map.PeekObject(this.transform.position.x + dx, this.transform.position.y + dy);
+                }
+                else
+                {
+                    Debug.LogError("Map component wasn't found.");
+                }
             }
-
-            //Grabs the map component in the game object.
-            Map area = (Map)test.GetComponent(typeof(Map));
-            if(area == null)
+            else
             {
-                Debug.LogError("Map wasn't found.");
-                return CollisionTypes.None;
+                Debug.LogError("Map game object wasn't found.");
             }
-
-            //Checks if the map cell is open.
-            GameObject go = area.PeekObject(this.transform.position.x + dx, this.transform.position.y + dy);
-            if (go == null)
-            {
-                return CollisionTypes.None;
-            }
-            else  //If not, an object is present.
-            {
-                return CollisionTypes.ActiveObject;
-            }
+            // Return either no collision or some active object.
+            return found == null ? CollisionTypes.None : CollisionTypes.ActiveObject;
         }
     }
 }

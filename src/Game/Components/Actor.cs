@@ -11,7 +11,7 @@ using Game.Interfaces;
 
 namespace Game.Components
 {
-    class Actor : Component
+    public class Actor : Component
     {
         public String name = "";
         public String description = "";

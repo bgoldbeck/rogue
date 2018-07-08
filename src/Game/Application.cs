@@ -57,7 +57,6 @@ namespace Game
 
         public int Loop()
         {
-            long dt = 0;
 
             while (isRunning)
             {

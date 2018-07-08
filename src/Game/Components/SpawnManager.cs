@@ -40,7 +40,7 @@ namespace Game.Components
 
         public GameObject CreateEnemy(int x, int y, int level)
         {
-            GameObject go = GameObject.Instantiate("Monster-" + level + "-");
+            GameObject go = GameObject.Instantiate("Monster");
             MonsterGenerator.Fill(rand, level, go);
             go.transform.position.x = x;
             go.transform.position.y = y;
@@ -50,7 +50,7 @@ namespace Game.Components
 
         public GameObject CreateDoor(int x, int y)
         {
-            GameObject go = GameObject.Instantiate("Door-");
+            GameObject go = GameObject.Instantiate("Door");
             go.AddComponent(new Door());
             go.transform.position.x = x;
             go.transform.position.y = y;
@@ -61,7 +61,7 @@ namespace Game.Components
 
         public GameObject CreateWall(int x, int y)
         {
-            GameObject go = GameObject.Instantiate("Wall-");
+            GameObject go = GameObject.Instantiate("Wall");
             go.AddComponent(new Wall());
             go.transform.position.x = x;
             go.transform.position.y = y;

@@ -42,11 +42,38 @@ namespace Game.Components
 
         public void ApplyDamage(int damage)
         {
+            this.hp -= damage;
+            // Made it a little easier to add stuff to the log from anywhere in
+            // the game.
+            HUD.Append("Attacked a " + name + " for " + damage + " damage.");
+            if (hp <= 0)
+            {
+                // Notify other components on this game object of my death.
+                // Why? maybe in the future we will play a sound on death, who knows?
+                List<IDamageable> damageables = gameObject.GetComponents<IDamageable>();
+                foreach (IDamageable damageable in damageables)
+                {
+                    damageable.OnDeath();
+                }
+            }
             return;
         }
 
         public void OnDeath()
         {
+            // Players gains exp n stuff for killing, right?
+            GameObject go = GameObject.FindWithTag("Player");
+            if (go != null)
+            {
+                Player player = (Player)go.GetComponent<Player>();
+                if (player != null)
+                {
+                    // player.IncreaseExperience(over 9000);
+                }
+            }
+            HUD.Append("Killed a " + name);
+            // We need to remove this enemy for the map too, right?
+            //GameObject.Destroy(this.gameObject);
             return;
         }
 
@@ -54,5 +81,6 @@ namespace Game.Components
         {
             return;
         }
+
     }
 }

@@ -12,7 +12,7 @@ using IO;
 
 namespace Game.Components
 {
-    class Player : Actor, IMovable, IDamageable
+    public class Player : Actor, IMovable, IDamageable
     {
         public Player(string name, string description, int level, int hp, int armor, int attack)
             : base(name, description, level, hp, armor, attack)
@@ -53,12 +53,24 @@ namespace Game.Components
             }
             else
             {
-                GameObject go = map.PeekObject(newX, newY);
-                List<IInteractable> inter = go.GetComponents<IInteractable>();
-                if (inter.Count > 0)
-                {
-                    hud.Log("Interacted with a " + go.Tag() + ".");
-                    inter[0].Interact(gameObject);
+                //GameObject go = map.PeekObject(newX, newY);
+
+                if (found != null)
+                {   
+                    // It's possible that we collided with something interactable.
+                    List<IInteractable> interactables = found.GetComponents<IInteractable>();
+                    foreach (IInteractable interactable in interactables)
+                    {
+                        hud.Log("Interacted with a " + found.Tag() + ".");
+                        interactable.Interact(gameObject);
+                    }
+
+                    // It's also possible that we collided with something damageable.
+                    List<IDamageable> damageables = found.GetComponents<IDamageable>();
+                    foreach (IDamageable damageable in damageables)
+                    {
+                        damageable.ApplyDamage(CalculateDamage());
+                    }
                 }
             }
             return;
@@ -72,6 +84,14 @@ namespace Game.Components
         public void OnDeath()
         {
             return;
+        }
+
+        private int CalculateDamage()
+        {
+            int damage = 1 * this.attack;
+            // TODO: Get our damage, based on level of player,
+            // The player's attack power, any equipment bonuses, Etc..
+            return damage;
         }
     }
 }

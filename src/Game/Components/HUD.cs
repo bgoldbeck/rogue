@@ -28,6 +28,20 @@ namespace Game.Components
             log.Add(line);
         }
 
+        public static void Append(String line)
+        {
+            GameObject go = GameObject.FindWithTag("HUD");
+            if (go != null)
+            {
+                HUD hud = (HUD)go.GetComponent<HUD>();
+                if (hud != null)
+                {
+                    hud.Log(line);
+                }
+            }
+            return;            
+        }
+
         public override void Start()
         {
             return;
