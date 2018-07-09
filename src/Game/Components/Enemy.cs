@@ -13,7 +13,7 @@ namespace Game.Components
 {
     class Enemy : Actor, IDamageable, IMovable
     {
-        private int movementRate = 0;
+        private int movementRate = 3;
         private int lastMoved = 0;
         private Transform target = null;
         //private int seenPlayerX = 0;
@@ -121,7 +121,7 @@ namespace Game.Components
             }
 
             //It randomly decides whether to try to move on the X-axis or Y-axis.
-            bool moveOnX = rand.Next() % 2 == 0;
+            bool moveOnX = rand.Next() % 2 == 0 && deltaMove.x != 0;
             deltaMove.x = moveOnX ? deltaMove.x : 0;
             deltaMove.y = moveOnX ? 0 : deltaMove.y;
             
