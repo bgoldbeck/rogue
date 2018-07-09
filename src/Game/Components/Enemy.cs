@@ -15,6 +15,11 @@ namespace Game.Components
     {
         private int movementRate = 0;
         private int lastMoved = 0;
+        private int seenPlayerX = 0;
+        private int seenPlayerY = 0;
+        private bool seenPlayer = false;
+        private int lineOfSite = 8;
+
         public Enemy():base()
         {
             
@@ -38,26 +43,15 @@ namespace Game.Components
 
             if (lastMoved >= movementRate)
             {
-                Random rand = new Random();
-                int dx = 0, dy = 0;
-                switch(rand.Next() % 5)
+                PlayerSearch();
+                if (seenPlayer)
                 {
-                    case 0:
-                        dx = 1;
-                        break;
-                    case 1:
-                        dx = -1;
-                        break;
-                    case 2:
-                        dy = 1;
-                        break;
-                    case 3:
-                        dy = -1;
-                        break;
-                    default:
-                        break;
+                    SeekMove();
                 }
-                Move(dx, dy);
+                else
+                {
+                    RandomMove();
+                }
                 lastMoved = 0;
             }
             else
@@ -65,6 +59,88 @@ namespace Game.Components
                 ++lastMoved;
             }
             return;
+        }
+
+        private void PlayerSearch()
+        {
+            Player target = (Player)GameObject.FindWithTag("Player").GetComponent(typeof(Player));
+            if((Math.Abs(target.transform.position.x - transform.position.x) +
+                Math.Abs(target.transform.position.y - transform.position.y)) < lineOfSite)
+            {
+                seenPlayer = true;
+                seenPlayerX = target.transform.position.x;
+                seenPlayerY = target.transform.position.y;
+            }
+                
+        }
+
+        private void SeekMove()
+        {
+            int dx = 0, dy = 0;
+            Random rand = new Random();
+
+            if(seenPlayerX > transform.position.x)
+            {
+                dx = 1;
+            }
+            else if (seenPlayerX < transform.position.x)
+            {
+                dx = -1;
+            }
+            if (seenPlayerY > transform.position.y)
+            {
+                dy = 1;
+            }
+            else if (seenPlayerY < transform.position.y)
+            {
+                dy = -1;
+            }
+
+            if (rand.Next() % 2 == 0)
+            {
+                if (dx != 0)
+                {
+                    Move(dx, 0);
+                }
+                else
+                {
+                    Move(0, dy);
+                }
+            }
+            else
+            {
+                if (dy != 0)
+                {
+                    Move(0, dy);
+                }
+                else
+                {
+                    Move(dx, 0);
+                }
+            }
+        }
+        private void RandomMove()
+        {
+            Random rand = new Random();
+            int dx = 0, dy = 0;
+            switch (rand.Next() % 5)
+            {
+                case 0:
+                    dx = 1;
+                    break;
+                case 1:
+                    dx = -1;
+                    break;
+                case 2:
+                    dy = 1;
+                    break;
+                case 3:
+                    dy = -1;
+                    break;
+                default:
+                    break;
+            }
+            Move(dx, dy);
         }
 
         public override void Render()
@@ -136,5 +212,6 @@ namespace Game.Components
             // The player's attack power, any equipment bonuses, Etc..
             return damage;
         }
+
     }
 }
