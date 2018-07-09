@@ -202,6 +202,17 @@ namespace Game.Components
                 map.PopObject(oldX, oldY);
                 map.AddObject(newX, newY, gameObject);
             }
+            else
+            {
+                if(found != null)
+                {
+                    Player target = (Player)found.GetComponent(typeof(Player));
+                    if(target != null)
+                    {
+                        target.ApplyDamage(CalculateDamage());
+                    }
+                }
+            }
 
             return;
         }
