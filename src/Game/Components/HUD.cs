@@ -80,6 +80,7 @@ namespace Game.Components
             AddTop(model);
             AddText(model, player.Name);
             AddText(model, "Level: " + player.Level);
+            AddText(model, "Health: " + player.HitPoints);
             AddText(model, "Attack: " + player.Attack);
             AddText(model, "Armor: " + player.Armor);
             AddDivider(model);
