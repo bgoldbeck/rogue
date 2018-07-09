@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using IO;
+
 namespace Ecs
 {    
     public class GameObject
@@ -172,6 +174,10 @@ namespace Ecs
                 component.Start();
                 component.SetActive(true);
 
+            }
+            else
+            {
+                Debug.LogWarning("Game object already has component of type: " + component.GetType());
             }
             return component;
         }
