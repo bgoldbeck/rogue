@@ -43,6 +43,15 @@ namespace Ecs
             return vec;
         }
 
+        /// <summary>
+        /// </summary>
+        /// <param name="a">The first vector</param>
+        /// <param name="b">The second vector</param>
+        /// <returns>The absolute distance between to vectors</returns>
+        public static int Distance(Vec2i a, Vec2i b)
+        {
+            return Math.Abs(a.x - b.x) + Math.Abs(a.y - b.y);
+        }
 
     }
 

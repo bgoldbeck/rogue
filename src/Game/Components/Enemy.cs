@@ -15,10 +15,11 @@ namespace Game.Components
     {
         private int movementRate = 0;
         private int lastMoved = 0;
-        private int seenPlayerX = 0;
-        private int seenPlayerY = 0;
-        private bool seenPlayer = false;
-        private int lineOfSite = 10;
+        private Transform target = null;
+        //private int seenPlayerX = 0;
+        //private int seenPlayerY = 0;
+        //private bool seenPlayer = false;
+        private int aggroRange = 10;
         private int lastSeenPlayer = 0;
         private int determination = 3;
 
@@ -52,7 +53,7 @@ namespace Game.Components
             if (lastMoved >= movementRate)
             {
                 PlayerSearch();
-                if (seenPlayer)
+                if (target != null)
                 {
                     SeekMove();
                 }
@@ -76,22 +77,24 @@ namespace Game.Components
         {
             //If the enemy is close enough to the player, it saves the location it has seen the
             //player at and set the boolean that is has seen the player.
-            Player target = (Player)GameObject.FindWithTag("Player").GetComponent(typeof(Player));
-            if((Math.Abs(target.transform.position.x - transform.position.x) +
-                Math.Abs(target.transform.position.y - transform.position.y)) < lineOfSite)
+            Player player = (Player)GameObject.FindWithTag("Player").GetComponent(typeof(Player));
+            //if ((Math.Abs(target.transform.position.x - transform.position.x) +
+            //    Math.Abs(target.transform.position.y - transform.position.y)) < lineOfSite)
+
+            if (Vec2i.Distance(player.transform.position, transform.position) < aggroRange)
             {
-                seenPlayer = true;
-                seenPlayerX = target.transform.position.x;
-                seenPlayerY = target.transform.position.y;
+                target = player.transform;
+                //seenPlayerX = target.transform.position.x;
+                //seenPlayerY = target.transform.position.y;
             }
             //If the enemy can't see the player but has seen the player before. It checks how long
             //since the last time it has seen the player. If it has been too long, it sets the boolean
             //to false.
-            else if(seenPlayer)
+            else if(target != null)
             {
                 if(++lastSeenPlayer > determination)
                 {
-                    seenPlayer = false;
+                    target = null;
                 }
             }
                 
@@ -102,11 +105,30 @@ namespace Game.Components
         /// </summary>
         private void SeekMove()
         {
-            int dx = 0, dy = 0;
+            if (target == null) return;
+
             Random rand = new Random();
 
-            //Figures out which direction on the X-axis it has to move to head towards the player.
-            if(seenPlayerX > transform.position.x)
+            //Figures out which direction on the it has to move to head towards the player.
+            Vec2i deltaMove = target.position - transform.position;
+            if (deltaMove.x != 0)
+            { 
+                deltaMove.x = deltaMove.x / Math.Abs(deltaMove.x);
+            }
+            if (deltaMove.y != 0)
+            { 
+                deltaMove.y = deltaMove.y / Math.Abs(deltaMove.y);
+            }
+
+            //It randomly decides whether to try to move on the X-axis or Y-axis.
+            bool moveOnX = rand.Next() % 2 == 0;
+            deltaMove.x = moveOnX ? deltaMove.x : 0;
+            deltaMove.y = moveOnX ? 0 : deltaMove.y;
+            
+            Move(deltaMove.x, deltaMove.y);
+
+            /*
+            if (seenPlayerX > transform.position.x)
             {
                 dx = 1;
             }
@@ -124,36 +146,39 @@ namespace Game.Components
             {
                 dy = -1;
             }
+            */
 
-            //It randomly decides whether to try to move on the X-axis or Y-axis.
-            if (rand.Next() % 2 == 0)
-            {
-                //If the X-axis is chosen and there is a difference on the X-axis from the
-                //player and enemy, it moves toward the player on the X-axis. If the enemy
-                //and player are on the same X-axis already, it moves on the Y-axis.
-                if (dx != 0)
+
+                /*
+                if (rand.Next() % 2 == 0)
                 {
-                    Move(dx, 0);
+                    //If the X-axis is chosen and there is a difference on the X-axis from the
+                    //player and enemy, it moves toward the player on the X-axis. If the enemy
+                    //and player are on the same X-axis already, it moves on the Y-axis.
+                    if (dx != 0)
+                    {
+                        Move(dx, 0);
+                    }
+                    else
+                    {
+                        Move(0, dy);
+                    }
                 }
                 else
                 {
-                    Move(0, dy);
+                    //If the Y-axis is chosen and there is a difference on the Y-axis from the
+                    //player and enemy, it moves toward the player on the Y-axis. If the enemy
+                    //and player are on the same Y-axis already, it moves on the X-axis.
+                    if (dy != 0)
+                    {
+                        Move(0, dy);
+                    }
+                    else
+                    {
+                        Move(dx, 0);
+                    }
                 }
-            }
-            else
-            {
-                //If the Y-axis is chosen and there is a difference on the Y-axis from the
-                //player and enemy, it moves toward the player on the Y-axis. If the enemy
-                //and player are on the same Y-axis already, it moves on the X-axis.
-                if (dy != 0)
-                {
-                    Move(0, dy);
-                }
-                else
-                {
-                    Move(dx, 0);
-                }
-            }
+                */
         }
 
         /// <summary>
