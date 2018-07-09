@@ -78,6 +78,7 @@ namespace Game.Components
 
         public void ApplyDamage(int damage)
         {
+            HUD.Append(name + " took " + damage + " damage.");
             return;
         }
 

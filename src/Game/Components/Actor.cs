@@ -62,9 +62,11 @@ namespace Game.Components
             }
         }
 
-        public Actor() { }
+        public Actor() :base()
+        {
+        }
 
-        public Actor(string name, string description, int level, int hp, int armor, int attack)
+        public Actor(string name, string description, int level, int hp, int armor, int attack) :base()
         {
             this.name = name;
             this.description = description;
@@ -76,7 +78,7 @@ namespace Game.Components
 
         public override void Start()
         {
-            collider = (Collider)AddComponent(new Collider());
+            collider = (Collider)this.AddComponent(new Collider());
             return;
         }
 

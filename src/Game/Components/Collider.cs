@@ -51,9 +51,16 @@ namespace Game.Components
             // Finds the map that is stored in the global GameObject.
             Map map = Map.CacheInstance();
             if (map != null)
-            {            
-                // Checks if the map cell is open.
-                found = map.PeekObject(this.transform.position.x + dx, this.transform.position.y + dy);
+            {
+                if (this.transform != null)
+                {
+                    // Checks if the map cell is open.
+                    found = map.PeekObject(this.transform.position.x + dx, this.transform.position.y + dy);
+                }
+                else
+                {
+                    Debug.LogError("Game object is null.");
+                }
             }
             else
             {

@@ -14,9 +14,10 @@ namespace Game.Components
     class Enemy : Actor, IDamageable, IMovable
     {
         private int movementRate = 0;
-        //private int lastMoved = 0;
-        public Enemy()
+        private int lastMoved = 0;
+        public Enemy():base()
         {
+            
         }
 
         public Enemy(string name, string description, int level, int hp, int armor, int attack, int rate)
@@ -27,11 +28,44 @@ namespace Game.Components
 
         public override void Start()
         {
+            base.Start();
             return;
         }
 
         public override void Update()
         {
+            if(this == null)
+            {
+                return;
+            }
+            if (lastMoved >= movementRate)
+            {
+                Random rand = new Random();
+                int dx = 0, dy = 0;
+                switch(rand.Next() % 5)
+                {
+                    case 0:
+                        dx = 1;
+                        break;
+                    case 1:
+                        dx = -1;
+                        break;
+                    case 2:
+                        dy = 1;
+                        break;
+                    case 3:
+                        dy = -1;
+                        break;
+                    default:
+                        break;
+                }
+                Move(dx, dy);
+                lastMoved = 0;
+            }
+            else
+            {
+                ++lastMoved;
+            }
             return;
         }
 
@@ -81,8 +115,49 @@ namespace Game.Components
 
         public void Move(int dx, int dy)
         {
+            int newX = transform.position.x + dx;
+            int newY = transform.position.y + dy;
+            Map map = (Map)GameObject.FindWithTag("Map").GetComponent(typeof(Map));
+
+            if(collider.transform == null)
+            {
+                collider.transform = this.transform;
+            }
+
+            if (collider.HandleCollision(dx, dy, out GameObject found) == Collider.CollisionTypes.None)
+            {
+                int oldX = transform.position.x;
+                int oldY = transform.position.y;
+                transform.Translate(dx, dy);
+                map.PopObject(oldX, oldY);
+                try
+                {
+                    map.AddObject(newX, newY, gameObject);
+                }
+                catch(Exception)
+                {
+                    map.AddObject(oldX, oldY, gameObject);
+                }
+            }
+            /*else
+            {
+                if (found != null)
+                {
+                    List<IDamageable> damageables = found.GetComponents<IDamageable>();
+                    foreach (IDamageable damageable in damageables)
+                    {
+                        damageable.ApplyDamage(CalculateDamage());
+                    }
+                }
+            }*/
             return;
         }
-
+        private int CalculateDamage()
+        {
+            int damage = 1 * this.attack;
+            // TODO: Get our damage, based on level of player,
+            // The player's attack power, any equipment bonuses, Etc..
+            return damage;
+        }
     }
 }
