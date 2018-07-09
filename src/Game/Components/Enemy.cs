@@ -34,7 +34,9 @@ namespace Game.Components
 
         public override void Update()
         {
-            if(this == null)
+            base.Update();
+
+            if (this == null)
             {
                 return;
             }
@@ -119,10 +121,6 @@ namespace Game.Components
             int newY = transform.position.y + dy;
             Map map = (Map)GameObject.FindWithTag("Map").GetComponent(typeof(Map));
 
-            if(collider.transform == null)
-            {
-                collider.transform = this.transform;
-            }
 
             if (collider.HandleCollision(dx, dy, out GameObject found) == Collider.CollisionTypes.None)
             {
@@ -130,26 +128,9 @@ namespace Game.Components
                 int oldY = transform.position.y;
                 transform.Translate(dx, dy);
                 map.PopObject(oldX, oldY);
-                try
-                {
-                    map.AddObject(newX, newY, gameObject);
-                }
-                catch(Exception)
-                {
-                    map.AddObject(oldX, oldY, gameObject);
-                }
+                map.AddObject(newX, newY, gameObject);
             }
-            /*else
-            {
-                if (found != null)
-                {
-                    List<IDamageable> damageables = found.GetComponents<IDamageable>();
-                    foreach (IDamageable damageable in damageables)
-                    {
-                        damageable.ApplyDamage(CalculateDamage());
-                    }
-                }
-            }*/
+
             return;
         }
         private int CalculateDamage()
