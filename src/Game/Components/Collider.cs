@@ -14,7 +14,13 @@ using Game.DataStructures;
 namespace Game.Components
 {
     public class Collider : Component
-    {
+    {    
+        /// <summary>
+         /// Used by the Collider component to return whether an object collided with a
+         /// wall, object, or nothing at all.
+         /// </summary>
+        public enum CollisionTypes { None, Wall, ActiveObject };
+
         public override void Start()
         {
             return;

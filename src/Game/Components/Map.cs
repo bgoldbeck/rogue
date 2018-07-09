@@ -12,9 +12,15 @@ using Game.DataStructures;
 using IO;
 
 namespace Game.Components
-{
-    class Map : Component
+{    
+
+
+    public class Map : Component
     {
+        /// <summary>
+        /// An enumeration used by the Map class to mark grid spaces as walls or not.
+        /// </summary>
+        public enum CellState { Open, Blocked };
 
         private int width;
         private int height;

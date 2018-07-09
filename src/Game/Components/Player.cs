@@ -42,7 +42,7 @@ namespace Game.Components
             Map map = (Map)GameObject.FindWithTag("Map").GetComponent(typeof(Map));
             int newX = transform.position.x + dx;
             int newY = transform.position.y + dy;
-            if (collider.HandleCollision(dx, dy, out GameObject found) == DataStructures.CollisionTypes.None)
+            if (collider.HandleCollision(dx, dy, out GameObject found) == Collider.CollisionTypes.None)
             {
                 int oldX = transform.position.x;
                 int oldY = transform.position.y;

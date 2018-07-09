@@ -14,7 +14,7 @@ namespace Game.Components
     class Enemy : Actor, IDamageable, IMovable
     {
         private int movementRate = 0;
-        private int lastMoved = 0;
+        //private int lastMoved = 0;
         public Enemy()
         {
         }
