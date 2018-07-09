@@ -36,10 +36,6 @@ namespace Game.Components
         {
             base.Update();
 
-            if (this == null)
-            {
-                return;
-            }
             if (lastMoved >= movementRate)
             {
                 Random rand = new Random();
