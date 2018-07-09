@@ -17,7 +17,7 @@ namespace IO
         static private int height;
         static private List<List<char>> buffer;
         private static List<List<String>> colorBuffer;
-
+        private static bool isANSISupported = true;
         
         private const int STD_OUTPUT_HANDLE = -11;
         private const uint ENABLE_VIRTUAL_TERMINAL_PROCESSING = 0x0004;
@@ -68,7 +68,8 @@ namespace IO
                 var iStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
                 if (!GetConsoleMode(iStdOut, out uint outConsoleMode))
                 {
-                    Console.WriteLine("failed to get output console mode");
+                    Console.WriteLine("WARNING: Failed to get output console mode");
+                    isANSISupported = false;
                     Console.ReadKey();
                     return;
                 }
@@ -76,7 +77,8 @@ namespace IO
                 outConsoleMode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING | DISABLE_NEWLINE_AUTO_RETURN;
                 if (!SetConsoleMode(iStdOut, outConsoleMode))
                 {
-                    Console.WriteLine($"failed to set output console mode, error code: {GetLastError()}");
+                    Console.WriteLine($"WARNING: Failed to set output console mode, error code: {GetLastError()}");
+                    isANSISupported = false;
                     Console.ReadKey();
                     return;
                 }
@@ -112,8 +114,10 @@ namespace IO
                 StringBuilder sb = new StringBuilder();
                 for (int x = 0; x < width; ++x)
                 {
-                    sb.Append(colorBuffer[x][y]);
-                    sb.Append(buffer[x][y]);   
+                    if (isANSISupported) { 
+                        sb.Append(colorBuffer[x][y]);
+                    }
+                    sb.Append(buffer[x][y]);
                 }
                 Console.Write(sb.ToString());
             }
