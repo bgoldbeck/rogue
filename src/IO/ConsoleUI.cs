@@ -18,6 +18,7 @@ namespace IO
         static private List<List<char>> buffer;
         private static List<List<String>> colorBuffer;
 
+        
         private const int STD_OUTPUT_HANDLE = -11;
         private const uint ENABLE_VIRTUAL_TERMINAL_PROCESSING = 0x0004;
         private const uint DISABLE_NEWLINE_AUTO_RETURN = 0x0008;
@@ -61,7 +62,9 @@ namespace IO
             bool isWindows = System.Runtime.InteropServices.RuntimeInformation
                                                .IsOSPlatform(OSPlatform.Windows);
             if (isWindows)
-            { 
+            {
+                // This is code to enable ANSI Character support on windows taken from
+                // https://gist.github.com/tomzorz/6142d69852f831fb5393654c90a1f22e
                 var iStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
                 if (!GetConsoleMode(iStdOut, out uint outConsoleMode))
                 {

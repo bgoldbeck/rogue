@@ -76,12 +76,16 @@ namespace Game.Components
             return;
         }
 
-        private void CreateLevel(int level)
+        /// <summary>
+        /// Create a new generated map and fill it with enemies and other good stuff.
+        /// </summary>
+        /// <param name="level">The difficulty level of the enemies created.</param>
+        public void CreateLevel(int level)
         {
+            Clear();
             BasicDungeon dm = new BasicDungeon(this.width, this.height, (int)DateTime.Now.Ticks);
             dm.Generate();
 
-            SpawnManager sm = new SpawnManager();
 
             List<List<String>> blueprint = dm.Package();
             for (int x = 0; x < width; ++x)
@@ -91,13 +95,13 @@ namespace Game.Components
                     switch (blueprint[x][y])
                     {
                         case "d":
-                            objects[x][y] = sm.CreateDoor(x, y);
+                            objects[x][y] = SpawnManager.CreateDoor(x, y);
                             break;
                         case "m":
-                            objects[x][y] = sm.CreateEnemy(x, y, level);
+                            objects[x][y] = SpawnManager.CreateEnemy(x, y, level);
                             break;
                         case "w":
-                            objects[x][y] = sm.CreateWall(x, y);
+                            objects[x][y] = SpawnManager.CreateWall(x, y);
                             break;
                         case "s":
                             this.startingX = x;
@@ -108,6 +112,14 @@ namespace Game.Components
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Destroy the grid of game objects, so we can reload a new map later.
+        /// </summary>
+        public void Clear()
+        {
+
         }
 
         public GameObject PeekObject(int x, int y)

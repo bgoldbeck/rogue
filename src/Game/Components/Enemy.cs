@@ -73,7 +73,9 @@ namespace Game.Components
             }
             HUD.Append("Killed a " + name);
             // We need to remove this enemy for the map too, right?
-            //GameObject.Destroy(this.gameObject);
+            Map.CacheInstance().PopObject(transform.position.x, transform.position.y);
+            GameObject.Destroy(this.gameObject);
+            // Spawn items on death?, or maybe a blood splat?
             return;
         }
 

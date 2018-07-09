@@ -8,7 +8,11 @@ using Ecs;
 namespace Game.Data
 {
     class MonsterGenerator
-    {
+    {    
+        //This variable delegate were inspired by this discussion on Stack Overflow:
+        //https://stackoverflow.com/questions/3767942/storing-a-list-of-methods-in-c-sharp
+        delegate Enemy spawnGenerator(int level, MapTile m);
+
         /// <summary>
         /// This function generates an instance of Enemy using the level and fills it in for an enemy type snake. 
         /// It also returns the model of the enemy using a reference of an array of strings.
@@ -51,9 +55,7 @@ namespace Game.Data
                              );
         }
 
-        //This function and delegate were inspired by this discussion on Stack Overflow:
-        //https://stackoverflow.com/questions/3767942/storing-a-list-of-methods-in-c-sharp
-        delegate Enemy spawnGenerator(int level, MapTile m);
+    
         /// <summary>
         /// This function takes in a reference to the Random class, a level, and a GameObject
         /// and randomly selects a monster and generates the enemy.
