@@ -57,24 +57,27 @@ namespace IO
                 buffer.Add(bufferRow);
                 colorBuffer.Add(colorBufferRow);
             }
-   
 
-            var iStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
-            if (!GetConsoleMode(iStdOut, out uint outConsoleMode))
-            {
-                Console.WriteLine("failed to get output console mode");
-                Console.ReadKey();
-                return;
+            bool isWindows = System.Runtime.InteropServices.RuntimeInformation
+                                               .IsOSPlatform(OSPlatform.Windows);
+            if (isWindows)
+            { 
+                var iStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+                if (!GetConsoleMode(iStdOut, out uint outConsoleMode))
+                {
+                    Console.WriteLine("failed to get output console mode");
+                    Console.ReadKey();
+                    return;
+                }
+
+                outConsoleMode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING | DISABLE_NEWLINE_AUTO_RETURN;
+                if (!SetConsoleMode(iStdOut, outConsoleMode))
+                {
+                    Console.WriteLine($"failed to set output console mode, error code: {GetLastError()}");
+                    Console.ReadKey();
+                    return;
+                }
             }
-
-            outConsoleMode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING | DISABLE_NEWLINE_AUTO_RETURN;
-            if (!SetConsoleMode(iStdOut, outConsoleMode))
-            {
-                Console.WriteLine($"failed to set output console mode, error code: {GetLastError()}");
-                Console.ReadKey();
-                return;
-            }
-
 
             return;
         }
