@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using Ecs;
 using IO;
 using Game.Interfaces;
-using Game.DataStructures;
 
 namespace Game.Components
 {

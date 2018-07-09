@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 using Ecs;
 using Game.DungeonMaker; 
-using Game.DataStructures;
 using IO;
 
 namespace Game.Components
