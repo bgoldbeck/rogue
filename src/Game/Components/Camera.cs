@@ -34,16 +34,13 @@ namespace Game.Components
 
         public override void OnEnable()
         {
-            GameObject go = GameObject.FindWithTag("Map");
-
-            if (go != null)
-            { 
-                map = (Map)go.GetComponent<Map>();
-                if (map == null)
-                {
-                    Debug.LogError("Camera could not find a map to render from!");
-                }
+            
+            map = Map.CacheInstance();
+            if (map == null)
+            {
+                Debug.LogError("Camera could not find a map to render from!");
             }
+            
             return;
         }
 

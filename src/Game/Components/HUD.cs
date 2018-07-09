@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Ecs;
+using IO;
 
 namespace Game.Components
 {
@@ -15,6 +16,7 @@ namespace Game.Components
         private int width;
         private int height;
         private List<String> log;
+        private static HUD hud = null;
 
         public HUD(int width, int height)
         {
@@ -23,27 +25,48 @@ namespace Game.Components
             log = new List<String>();
         }
 
+        public static HUD CacheInstance()
+        {
+            return hud;
+        }
+
+        public static HUD Append(String line)
+        {
+            hud = CacheInstance();
+            if (hud != null)
+            {
+                hud.Log(line);
+            }
+            return hud;
+        }
+
+        public static HUD Clear(String line)
+        {
+            hud = CacheInstance();
+            if (hud != null)
+            {
+                // TODO: Clear the contents of the HUD.
+                // Might be good for when we do map changes.
+                throw new NotImplementedException();
+            }
+            return hud;
+        }
+
         public void Log(String line)
         {
             log.Add(line);
         }
 
-        public static void Append(String line)
-        {
-            GameObject go = GameObject.FindWithTag("HUD");
-            if (go != null)
-            {
-                HUD hud = (HUD)go.GetComponent<HUD>();
-                if (hud != null)
-                {
-                    hud.Log(line);
-                }
-            }
-            return;            
-        }
-
         public override void Start()
         {
+            if (hud != null && hud != this)
+            {
+                GameObject.Destroy(this.gameObject);
+            }
+            else
+            {
+                hud = this;
+            }
             return;
         }
 

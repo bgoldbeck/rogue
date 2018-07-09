@@ -21,6 +21,7 @@ namespace Game.Components
         private List<List<GameObject>> objects;
         public int startingX = 0;
         public int startingY = 0;
+        private static Map map = null;
 
         public Map(int width, int height)
         {
@@ -38,10 +39,24 @@ namespace Game.Components
                 }
                 objects.Add(row);
             }
+
+        }
+
+        public static Map CacheInstance()
+        {
+            return map;
         }
 
         public override void Start()
         {
+            if (map != null && map != this)
+            {
+                GameObject.Destroy(this.gameObject);
+            }
+            else
+            {
+                map = this;
+            }
             CreateLevel(1);
             return;
         }

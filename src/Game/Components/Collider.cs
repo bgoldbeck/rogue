@@ -42,21 +42,13 @@ namespace Game.Components
         public CollisionTypes HandleCollision(int dx, int dy, out GameObject found)
         {
             found = null;
+
             // Finds the map that is stored in the global GameObject.
-            if (GameObject.FindWithTag("Map") != null)
-            {
-                // Grabs the map component in the game object.
-                Map map = (Map)GameObject.FindWithTag("Map").GetComponent(typeof(Map));
-                if (map != null)
-                {
-                
-                    // Checks if the map cell is open.
-                    found = map.PeekObject(this.transform.position.x + dx, this.transform.position.y + dy);
-                }
-                else
-                {
-                    Debug.LogError("Map component wasn't found.");
-                }
+            Map map = Map.CacheInstance();
+            if (map != null)
+            {            
+                // Checks if the map cell is open.
+                found = map.PeekObject(this.transform.position.x + dx, this.transform.position.y + dy);
             }
             else
             {
