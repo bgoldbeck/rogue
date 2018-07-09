@@ -254,7 +254,9 @@ namespace Game.Components
                     Player target = (Player)found.GetComponent(typeof(Player));
                     if(target != null)
                     {
-                        target.ApplyDamage(CalculateDamage());
+                        int damage = CalculateDamage();
+                        HUD.Append(name + " attacked for " + damage + " damage.");
+                        target.ApplyDamage(damage);
                     }
                 }
             }

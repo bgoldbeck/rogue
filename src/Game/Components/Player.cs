@@ -78,12 +78,17 @@ namespace Game.Components
 
         public void ApplyDamage(int damage)
         {
-            HUD.Append(name + " took " + damage + " damage.");
+            hp -= damage;
+            if(hp <= 0)
+            {
+                OnDeath();
+            }
             return;
         }
 
         public void OnDeath()
         {
+            HUD.Append(name + " has died.");
             return;
         }
 
