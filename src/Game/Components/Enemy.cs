@@ -18,7 +18,9 @@ namespace Game.Components
         private int seenPlayerX = 0;
         private int seenPlayerY = 0;
         private bool seenPlayer = false;
-        private int lineOfSite = 8;
+        private int lineOfSite = 10;
+        private int lastSeenPlayer = 0;
+        private int determination = 3;
 
         public Enemy():base()
         {
@@ -70,6 +72,13 @@ namespace Game.Components
                 seenPlayer = true;
                 seenPlayerX = target.transform.position.x;
                 seenPlayerY = target.transform.position.y;
+            }
+            else if(seenPlayer)
+            {
+                if(++lastSeenPlayer > determination)
+                {
+                    seenPlayer = false;
+                }
             }
                 
         }
