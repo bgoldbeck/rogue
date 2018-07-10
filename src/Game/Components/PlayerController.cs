@@ -51,6 +51,9 @@ namespace Game.Components
                 case ConsoleKey.LeftArrow:
                     dx = -1;
                     break;
+                case ConsoleKey.C:
+                    ConsoleUI.ToggleColor();
+                    break;
                 default:
                     break;
             }

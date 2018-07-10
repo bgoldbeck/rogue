@@ -18,7 +18,8 @@ namespace IO
         static private List<List<char>> buffer;
         private static List<List<String>> colorBuffer;
         private static bool isANSISupported = true;
-        
+        static private bool colorEnabled = true;
+
         private const int STD_OUTPUT_HANDLE = -11;
         private const uint ENABLE_VIRTUAL_TERMINAL_PROCESSING = 0x0004;
         private const uint DISABLE_NEWLINE_AUTO_RETURN = 0x0008;
@@ -114,7 +115,7 @@ namespace IO
                 StringBuilder sb = new StringBuilder();
                 for (int x = 0; x < width; ++x)
                 {
-                    if (false) { 
+                    if (colorEnabled) { 
                         sb.Append(colorBuffer[x][y]);
                     }
                     sb.Append(buffer[x][y]);
@@ -122,6 +123,14 @@ namespace IO
                 Console.Write(sb.ToString());
             }
             Console.SetCursorPosition(0, 0);
+        }
+
+        public static void ToggleColor()
+        {
+            if (colorEnabled)
+                colorEnabled = false;
+            else
+                colorEnabled = true;
         }
 
         public static void Write(int x, int y, char output, Color color)
