@@ -158,7 +158,7 @@ namespace Game.Components
         public void ApplyDamage(GameObject source, int damage)
         {
             // We don't want enemies attacking other enemies.
-            if (source == null || source.GetComponent<Enemy>() == null) { return; }
+            if (source == null || source.GetComponent<Enemy>() != null) { return; }
 
             this.hp -= damage;
             // Made it a little easier to add stuff to the log from anywhere in
