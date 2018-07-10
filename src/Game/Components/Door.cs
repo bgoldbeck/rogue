@@ -31,6 +31,9 @@ namespace Game.Components
 
         public void Interact(GameObject objectInteracting)
         {
+            // This line makes only the player allowed to open doors.
+            if (objectInteracting != null && objectInteracting.GetComponent<Player>() == null) { return; }
+
             GameObject go = GameObject.FindWithTag("Map");
             Map map = (Map)go.GetComponent(typeof(Map));
             map.PopObject(transform.position.x, transform.position.y);

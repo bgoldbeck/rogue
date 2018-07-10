@@ -40,7 +40,7 @@ namespace Game.Components
             return;
         }
 
-        public void ApplyDamage(int damage)
+        public void ApplyDamage(GameObject source, int damage)
         {
             hp -= damage;
             if(hp <= 0)

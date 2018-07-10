@@ -114,20 +114,20 @@ namespace Game.Components
             {
                 // If there is a collision, the actor doesn't move. If this collision is with a damageable, a
                 // damage calculation is performed to calculate the amount of damage done to the player.
-                if (found != null && !(typeof(Enemy) == this.GetType() && found.GetComponent<Enemy>() != null))
+                if (found != null)
                 {
                     // It's possible that we collided with something interactable.
                     List<IInteractable> interactables = found.GetComponents<IInteractable>();
                     foreach (IInteractable interactable in interactables)
                     {
-                        interactable.Interact(gameObject);
+                        interactable.Interact(this.gameObject);
                     }
 
                     // It's also possible that we collided with something damageable.
                     List<IDamageable> damageables = found.GetComponents<IDamageable>();
                     foreach (IDamageable damageable in damageables)
                     {
-                        damageable.ApplyDamage(CalculateDamage());
+                        damageable.ApplyDamage(this.gameObject, CalculateDamage());
                     }
                 }
             }
