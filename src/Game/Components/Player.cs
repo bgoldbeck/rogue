@@ -42,6 +42,12 @@ namespace Game.Components
 
         public void ApplyDamage(GameObject source, int damage)
         {
+            Enemy boop = (Enemy)source.GetComponent<Enemy>();
+            if(boop != null)
+            {
+                HUD.Append(boop.name + " attacked for " + damage + " damage.");
+            }
+
             hp -= damage;
             if(hp <= 0)
             {
