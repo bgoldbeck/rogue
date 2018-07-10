@@ -9,7 +9,7 @@ using Game.Interfaces;
 
 namespace Game.Components
 {
-    public class Sound : Component, IMovable
+    public class Sound : Component
     {
         public override void Start()
         {
@@ -26,10 +26,5 @@ namespace Game.Components
             return;
         }
 
-        public void Move(int dx, int dy)
-        {
-            //Console.Beep(400, 90);
-            return;
-        }
     }
 }

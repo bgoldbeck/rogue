@@ -12,7 +12,7 @@ using Game.Interfaces;
 
 namespace Game.Components
 {
-    class PlayerController : Component, IMovable
+    class PlayerController : Component
     {
         private Player player = null;
 
@@ -73,9 +73,5 @@ namespace Game.Components
             return;
         }
 
-        public void Move(int dx, int dy)
-        {
-            return;
-        }
     }
 }

@@ -10,6 +10,6 @@ namespace Game.Interfaces
 {
     public interface IMovable
     {
-        void Move(int dx, int dy);
+        bool Move(int dx, int dy);
     }
 }
