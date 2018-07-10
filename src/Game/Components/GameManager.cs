@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Copyright(c) 2018 Daniel Bramblett, Daniel Dupriest, Brandon Goldbeck
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +14,7 @@ namespace Game.Components
 {
     class GameManager : Component
     {
+        private const int hudWidth = 33;
         public int gameWidth;
         public int gameHeight;
 
@@ -24,25 +27,41 @@ namespace Game.Components
 
         public override void Start()
         {
-            GameObject map = GameObject.Instantiate("Map");
-            map.AddComponent(new Map(gameWidth, gameHeight));
-            
+            GameObject mapObject = GameObject.Instantiate("Map");
+            //Map map = new Map(gameWidth - hudWidth, gameHeight);
+            Map map = new Map(60, 30);
+            mapObject.AddComponent(map);
+            mapObject.transform.position.y = gameHeight - 1;
+
+
             GameObject player = GameObject.Instantiate("Player");
-            player.AddComponent(new Player());
+            player.AddComponent(new Player("Sneaky McDevious", "Thiefy rogue", 1, 10, 1, 1));
             player.AddComponent(new PlayerController());
             player.AddComponent(new Model());
-            player.AddComponent(new Collider());
-            player.transform.position.x = 5;
-            player.transform.position.y = 5;
-
-            Model playerModel = (Model)player.GetComponent(typeof(Model));
-            playerModel.model.Add("$");
+            player.transform.position.x = map.startingX;
+            player.transform.position.y = map.startingY;
+            map.AddObject(map.startingX, map.startingY, player);
+            player.AddComponent(new Camera(gameWidth - hudWidth, gameHeight));
+            player.AddComponent(new MapTile('$', new Color(255, 255, 255), true));
+            
+            // Setup HUD for stats and info
+            GameObject hud = GameObject.Instantiate("HUD");
+            hud.AddComponent(new HUD(hudWidth, gameHeight));
+            Model hudModel = (Model)hud.AddComponent(new Model());
+            hudModel.color.Set(180, 180, 180);
+            hud.transform.position.x = gameWidth - hudWidth;
+            hud.transform.position.y = gameHeight - 1;
 
             Debug.Log("GameManager added all components on start.");
             return;
         }
 
         public override void Update()
+        {
+            return;
+        }
+
+        public override void LateUpdate()
         {
             return;
         }

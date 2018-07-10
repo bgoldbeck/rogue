@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Copyright(c) 2018 Daniel Bramblett, Daniel Dupriest, Brandon Goldbeck
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +10,6 @@ namespace Game.Interfaces
 {
     public interface IMovable
     {
-        void Move(int dx, int dy);
+        bool Move(int dx, int dy);
     }
 }

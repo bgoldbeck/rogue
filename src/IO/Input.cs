@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Copyright(c) 2018 Daniel Bramblett, Daniel Dupriest, Brandon Goldbeck
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,10 @@ namespace IO
                 {
                     key = Console.ReadKey(true)
                 };
+                while (Console.KeyAvailable)
+                {
+                    Console.ReadKey(true);
+                }
             }
             return currentKey != null ? currentKey.key : new ConsoleKeyInfo();
         }

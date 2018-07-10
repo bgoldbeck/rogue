@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Copyright(c) 2018 Daniel Bramblett, Daniel Dupriest, Brandon Goldbeck
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,37 +8,33 @@ using System.Threading.Tasks;
 
 using Ecs;
 using Game.DungeonMaker; 
-using Game.DataStructures;
+using IO;
 
 namespace Game.Components
-{
-    class Map : Component
+{    
+
+
+    public class Map : Component
     {
+        /// <summary>
+        /// An enumeration used by the Map class to mark grid spaces as walls or not.
+        /// </summary>
+        public enum CellState { Open, Blocked };
 
         private int width;
         private int height;
-        private List<List<CellState>> cellGrid;
-        private List<List<GameObject>> objectGrid;
+        private List<List<GameObject>> objects;
+        public int startingX = 0;
+        public int startingY = 0;
+        private static Map map = null;
 
         public Map(int width, int height)
         {
             this.width = width;
             this.height = height;
 
-            // Initialize cell grid
-            cellGrid = new List<List<CellState>>();
-            for (int x = 0; x < width; ++x)
-            {
-                List<CellState> row = new List<CellState>();
-                for (int y = 0; y < height; ++y)
-                {
-                    row.Add(CellState.Open);
-                }
-                this.cellGrid.Add(row);
-            }
-
-            // Initialize object grid
-            objectGrid = new List<List<GameObject>>();
+            // Initialize object storage
+            objects = new List<List<GameObject>>();
             for (int x = 0; x < width; ++x)
             {
                 List<GameObject> row = new List<GameObject>();
@@ -44,48 +42,32 @@ namespace Game.Components
                 {
                     row.Add(null);
                 }
-                this.objectGrid.Add(row);
+                objects.Add(row);
             }
+
         }
 
-        public void Regen(int width, int height)
+        public static Map CacheInstance()
         {
-            this.width = width;
-            this.height = height;
-            CreateLevel(1);
+            return map;
         }
 
         public override void Start()
         {
-            Model mapModel = (Model)this.gameObject.AddComponent(new Model());
+            if (map != null && map != this)
+            {
+                GameObject.Destroy(this.gameObject);
+            }
+            else
+            {
+                map = this;
+            }
             CreateLevel(1);
             return;
         }
 
         public override void Update()
         {
-            Model mapModel = (Model)gameObject.GetComponent<Model>();
-            List<String> updated = new List<String>();
-
-            for (int y = 0; y < height; ++y)
-            {
-                StringBuilder sb = new StringBuilder();
-                for (int x = 0; x < width; ++x)
-                {
-                    GameObject go = PeekObject(x, y);
-                    if (go != null)
-                    {
-                        Model m = (Model)go.GetComponent(typeof(Model));
-                        sb.Append(m.model[0]);
-                    }
-                    else if (cellGrid[x][y] == CellState.Blocked)
-                        sb.Append("█");
-                    else
-                        sb.Append(" ");
-                }
-                updated.Add(sb.ToString());
-            }
-            mapModel.model = updated;
             return;
         }
 
@@ -94,12 +76,16 @@ namespace Game.Components
             return;
         }
 
-        private void CreateLevel(int level)
+        /// <summary>
+        /// Create a new generated map and fill it with enemies and other good stuff.
+        /// </summary>
+        /// <param name="level">The difficulty level of the enemies created.</param>
+        public void CreateLevel(int level)
         {
+            Clear();
             BasicDungeon dm = new BasicDungeon(this.width, this.height, (int)DateTime.Now.Ticks);
             dm.Generate();
 
-            SpawnManager sm = new SpawnManager();
 
             List<List<String>> blueprint = dm.Package();
             for (int x = 0; x < width; ++x)
@@ -109,13 +95,17 @@ namespace Game.Components
                     switch (blueprint[x][y])
                     {
                         case "d":
-                            objectGrid[x][y] = sm.CreateDoor();
+                            objects[x][y] = SpawnManager.CreateDoor(x, y);
                             break;
                         case "m":
-                            objectGrid[x][y] = sm.CreateEnemy(level);
+                            objects[x][y] = SpawnManager.CreateEnemy(x, y, level);
                             break;
                         case "w":
-                            cellGrid[x][y] = CellState.Blocked;
+                            objects[x][y] = SpawnManager.CreateWall(x, y);
+                            break;
+                        case "s":
+                            this.startingX = x;
+                            this.startingY = y;
                             break;
                         default:
                             break;
@@ -124,21 +114,36 @@ namespace Game.Components
             }
         }
 
-        public CellState GetCellState(int x, int y)
+        /// <summary>
+        /// Destroy the grid of game objects, so we can reload a new map later.
+        /// </summary>
+        public void Clear()
         {
-            return cellGrid[x][y];
+
         }
 
         public GameObject PeekObject(int x, int y)
         {
-            return objectGrid[x][y];
+            //Debug.Log("PeekObject called with x = " + x + ", y = " + y + ".");
+            if (x < 0 || x >= width || y < 0 || y >= height)
+                return null;
+            return objects[x][y];
         }
 
         public GameObject PopObject(int x, int y)
         {
-            GameObject result = objectGrid[x][y];
-            objectGrid[x][y] = null;
+            //Debug.Log("PopObject called with x = " + x + ", y = " + y + ".");
+            if (x < 0 || x >= width || y < 0 || y >= height)
+                return null;
+            GameObject result = objects[x][y];
+            objects[x][y] = null;
             return result;
+        }
+
+        public void AddObject(int x, int y, GameObject go)
+        {
+            //Debug.Log("AddObject called with x = " + x + ", y = " + y + ".");
+            objects[x][y] = go;
         }
     }
 }

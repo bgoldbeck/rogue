@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Copyright(c) 2018 Daniel Bramblett, Daniel Dupriest, Brandon Goldbeck
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,62 +8,60 @@ using System.Threading.Tasks;
 
 using Ecs;
 using Game.Interfaces;
+using IO;
 
 namespace Game.Components
 {
-    class Player : Actor, IMovable, IDamageable
+    public class Player : Actor, IMovable, IDamageable
     {
+        public Player(string name, string description, int level, int hp, int armor, int attack)
+            : base(name, description, level, hp, armor, attack)
+        {
+        }
 
         public override void Start()
         {
-            //Console.Out.WriteLine("Player started " + name);
-            //Console.ReadKey();
+            base.Start();
             return;
         }
 
         public override void Update()
         {
-            //System.out.println("Player updated");
+            base.Update();
             return;
         }
 
-        public override void Render()
+        public new void Move(int dx, int dy)
         {
-            //System.out.println("Player rendered");
-            return;
-        }
-
-        public override void OnEnable()
-        {
-            //Console.WriteLine("Player Enabled");
-            return;
-        }
-
-        public override void OnDisable()
-        {
-            //Console.WriteLine("Player Disabled");
-            return;
-        }
-
-        public void Move(int dx, int dy)
-        {
-            Collider collisionDetect = (Collider)this.GetComponent(typeof(Collider));
-            if(collisionDetect.HandleCollision(dx,dy, out GameObject found) == DataStructures.CollisionTypes.None)
+            if (base.Move(dx, dy))
             {
-                
-                transform.Translate(dx, dy);
+                //HUD.Append("You walked successfully.");
             }
             return;
         }
 
-        public void ApplyDamage(int damage)
+        public void ApplyDamage(GameObject source, int damage)
         {
+            hp -= damage;
+            if(hp <= 0)
+            {
+                OnDeath();
+            }
             return;
         }
 
         public void OnDeath()
         {
+            HUD.Append(name + " has died.");
             return;
+        }
+
+        protected override int CalculateDamage()
+        {
+            int damage = 1 * this.attack;
+            // TODO: Get our damage, based on level of player,
+            // The player's attack power, any equipment bonuses, Etc..
+            return damage;
         }
     }
 }

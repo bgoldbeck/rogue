@@ -1,8 +1,12 @@
-﻿using System;
+﻿//Copyright(c) 2018 Daniel Bramblett, Daniel Dupriest, Brandon Goldbeck
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using IO;
 
 namespace Ecs
 {    
@@ -11,23 +15,40 @@ namespace Ecs
         private static Dictionary<String, List<GameObject>> gameObjectsTagMap= new Dictionary<String, List<GameObject>>();
         private static Dictionary<int, GameObject> gameObjectsIdMap = new Dictionary<int, GameObject>();
         private static int IDCounter = 0;
+        private static List<int> deadList = new List<int>();
+
 
         private List<Component> components = new List<Component>();
         private bool isActive = true;
         private String tag = "";
         private int id = -1;
 
+
         public Transform transform;
         
-        private GameObject()
-        {
-        }
+        /// <summary>
+        /// GameObject private contructor meant to be private/hidden from outside eyes.
+        /// </summary>
+        private GameObject() { }
 
+        /// <summary>
+        /// Determines if this GameObject is active in the game.
+        /// </summary>
         public bool IsActive()
         {
             return this.isActive;
         }
 
+        /// <summary>
+        /// Changes this GameObject's active state.
+        /// </summary>
+        /// <param name="active">The true/false state to modify this GameObject as.</param>
+        /// <example>
+        /// <code>
+        /// GameObject go = GameObject.Instantiate();
+        /// go.SetActive(false)
+        /// </code>
+        /// </example>
         public void SetActive(bool active)
         {
             if (this.isActive == active)
@@ -50,26 +71,22 @@ namespace Ecs
             return;
         }
 
+        /// <summary>
+        /// Accessor method for retrieving the tag on this GameObject.
+        /// </summary>
+        /// <returns>The string representing the tag on this GameObject</returns>
         public String Tag()
         {
             return this.tag;
         }
 
-        public void Start()
-        {
-            foreach (Component component in components)
-            {
-                if (component.IsActive())
-                {
-                    component.Start();
-                }
-            }
-            return;
-        }
-
+        /// <summary>
+        /// This function is called by the Application on every updated frame. 
+        /// It calls the Update() method on every Component attached to this
+        /// GameObject.
+        /// </summary>
         public void Update()
         {
-            //System.out.println("Update GameObject " + this.tag);
             foreach (Component component in components)
             {
                 if (component.IsActive())
@@ -80,6 +97,27 @@ namespace Ecs
             return;
         }
 
+        /// <summary>
+        /// This function is called by the Application on every updated frame, but only
+        /// after Update() has been invoked on each GameObject. It will call LateUpdate()
+        /// on every Component attached to this GameObject.
+        /// </summary>
+        public void LateUpdate()
+        {
+            foreach (Component component in components)
+            {
+                if (component.IsActive())
+                {
+                    component.LateUpdate();
+                }
+            }
+            return;
+        }
+
+        /// <summary>
+        /// Called by the Application on every updated frame during the
+        /// rendering phase. It will call Render() on every Component attached to this GameObject.
+        /// </summary>
         public void Render()
         {
             foreach (Component component in components)
@@ -92,15 +130,19 @@ namespace Ecs
             return;
         }
 
+        /// <summary>
+        /// Returns a single component of type T on this GameObject or any of its children.
+        /// </summary>
+        /// <returns>Component The component found, if any.</returns>
         public Component GetComponentInChildren<T>()
         {
             return GetComponentInChildren<T>(transform);
         }
 
         /// <summary>
-        /// Helper function to find a component in the children of a gameobject
+        /// Helper function to find a component in the children of a GameObject.
         /// </summary>
-        /// <param name="transform"></param>
+        /// <param name="transform">The transform node to start from.</param>
         /// <returns></returns>
         private Component GetComponentInChildren<T>(Transform transform)
         {
@@ -133,6 +175,10 @@ namespace Ecs
                 component.SetActive(true);
 
             }
+            else
+            {
+                Debug.LogWarning("Game object already has component of type: " + component.GetType());
+            }
             return component;
         }
 
@@ -153,7 +199,7 @@ namespace Ecs
 
             foreach (Component component in components)
             {
-                if (component.GetType() == type)
+                if (type.IsAssignableFrom(component.GetType()))
                 {
                     retrieved = component;
                     break;
@@ -253,13 +299,24 @@ namespace Ecs
                         goList.Remove(go);
                     }
                 }
-                // Remove the game object from the game objects id map.
-                gameObjectsIdMap.Remove(go.id);
+                // Add the game object from the game objects to the dead list.
+                deadList.Add(go.id);
             }
             return;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        public static void ClearDeadGameObjects()
+        {
+            foreach (int id in deadList)
+            {
+                gameObjectsIdMap.Remove(id);
+            }
+            deadList.Clear();
+            return;
+        }
 
         public static GameObject FindWithTag(String tag)
         {

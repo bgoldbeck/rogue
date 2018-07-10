@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Copyright(c) 2018 Daniel Bramblett, Daniel Dupriest, Brandon Goldbeck
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,13 +9,17 @@ using System.Threading.Tasks;
 using Ecs;
 using IO;
 using Game.Interfaces;
-using Game.Components;
-using Game.DataStructures;
 
 namespace Game.Components
 {
-    class Collider : Component
-    {
+    public class Collider : Component
+    {    
+        /// <summary>
+         /// Used by the Collider component to return whether an object collided with a
+         /// wall, object, or nothing at all.
+         /// </summary>
+        public enum CollisionTypes { None, Wall, ActiveObject };
+
         public override void Start()
         {
             return;
@@ -21,11 +27,6 @@ namespace Game.Components
 
         public override void Update()
         {
-            if (gameObject.GetComponent<Player>() != null)
-            {
-
-            }
-
             return;
         }
 
@@ -34,38 +35,39 @@ namespace Game.Components
             return;
         }
 
+        /// <summary>
+        /// Uses an inputted movement and uses the current position and the movement to check
+        /// if there location being moved into is empty or not. If there is already a game object
+        /// at that spot, it will also return a reference to that game object.
+        /// </summary>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <param name="found"></param>
+        /// <returns></returns>
         public CollisionTypes HandleCollision(int dx, int dy, out GameObject found)
         {
             found = null;
-            GameObject test = GameObject.FindWithTag("Map");
-            if (test == null)
-            {
-                Debug.LogError("Could not find 'Map' GameObject from the Collider.");
-                return CollisionTypes.None;
-            }
 
-            Map area = (Map)test.GetComponent(typeof(Map));
-            if(area == null)
+            // Finds the map that is stored in the global GameObject.
+            Map map = Map.CacheInstance();
+            if (map != null)
             {
-                Debug.LogError("Map wasn't found.");
-                return CollisionTypes.None;
+                if (this.transform != null)
+                {
+                    // Checks if the map cell is open.
+                    found = map.PeekObject(this.transform.position.x + dx, this.transform.position.y + dy);
+                }
+                else
+                {
+                    Debug.LogError("Game object is null.");
+                }
             }
-            if(this.transform.position.y + dy < 0|| this.transform.position.x + dx < 0)
+            else
             {
-                Debug.LogError("Player attempting to go outside the map.");
-                return CollisionTypes.Wall;
+                Debug.LogError("Map game object wasn't found.");
             }
-
-            if (area.GetCellState(this.transform.position.x + dx,this.transform.position.y + dy) == CellState.Blocked)
-            {
-                return CollisionTypes.Wall;
-            }
-            found = area.PeekObject(this.transform.position.x + dx,this.transform.position.y + dy);
-            if(found != null)
-            {
-                return CollisionTypes.ActiveObject;
-            }
-            return CollisionTypes.None;
+            // Return either no collision or some active object.
+            return found == null ? CollisionTypes.None : CollisionTypes.ActiveObject;
         }
     }
 }

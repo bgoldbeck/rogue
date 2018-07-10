@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Copyright(c) 2018 Daniel Bramblett, Daniel Dupriest, Brandon Goldbeck
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,21 +16,22 @@ namespace Game
     public class Application
     {
         private bool isRunning = true;
+        private ConsoleKey press = Input.ReadKey().Key;
 
         public void Initialize()
         {
             SetupScreen();
-            Time.Initialize();
 
+            Time.Initialize();
             int width = Console.WindowWidth;
             int height = Console.WindowHeight;
-
-
             ConsoleUI.Initialize(width, height);
 
             GameObject gameManager = GameObject.Instantiate("GameManager");
             gameManager.AddComponent(new GameManager(width, height));
 
+            Update();
+            Render();
             return;
         }
 
@@ -48,11 +51,12 @@ namespace Game
                                           v 0.1");
             Console.WriteLine("\n   Please adjust your window to the desired play size,\n   then press [Enter] to begin the game.\n");
             Console.ReadLine();
+            Console.Clear();
+            return;
         }
 
         public int Loop()
         {
-            long dt = 0;
 
             while (isRunning)
             {
@@ -67,7 +71,7 @@ namespace Game
                 
 
                 
-                ConsoleKey press = Input.ReadKey().Key;
+                press = Input.ReadKey().Key;
                 
                 if (press == ConsoleKey.Escape)
                 { 
@@ -98,10 +102,16 @@ namespace Game
                 {
                     entry.Value.Update();
                 }
-
             }
 
-            
+            foreach (KeyValuePair<int, GameObject> entry in map)
+            {
+                if (entry.Value.IsActive())
+                {
+                    entry.Value.LateUpdate();
+                }
+            }
+
             return;
         }
 
@@ -118,6 +128,8 @@ namespace Game
 
             ConsoleUI.Render();
             ConsoleUI.ClearBuffer();
+
+            GameObject.ClearDeadGameObjects();
             return;
         }
     }

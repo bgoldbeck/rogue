@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Copyright(c) 2018 Daniel Bramblett, Daniel Dupriest, Brandon Goldbeck
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +12,7 @@ using Game.Interfaces;
 
 namespace Game.Components
 {
-    class PlayerController : Component, IMovable
+    class PlayerController : Component
     {
         private Player player = null;
 
@@ -38,13 +40,13 @@ namespace Game.Components
             switch (press)
             {
                 case ConsoleKey.UpArrow:
-                    dy = -1;
+                    dy = 1;
                     break;
                 case ConsoleKey.RightArrow:
                     dx = 1;
                     break;
                 case ConsoleKey.DownArrow:
-                    dy = 1;
+                    dy = -1;
                     break;
                 case ConsoleKey.LeftArrow:
                     dx = -1;
@@ -63,7 +65,6 @@ namespace Game.Components
                 dx = dy = 0;
             }
            
-           
             return;
         }
 
@@ -72,9 +73,5 @@ namespace Game.Components
             return;
         }
 
-        public void Move(int dx, int dy)
-        {
-            return;
-        }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Copyright(c) 2018 Daniel Bramblett, Daniel Dupriest, Brandon Goldbeck
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,11 +13,12 @@ namespace Game.Components
 {
     class Model : Component
     {
-        public List<string> model = new List<string>();
+        public List<String> model = new List<String>();
+        public Color color = new Color(255, 255, 255);
 
         public override void Start()
         {
- 
+            model = new List<string>();
             return;
         }
 
@@ -29,10 +32,7 @@ namespace Game.Components
             int x = this.gameObject.transform.position.x;
             int y = this.gameObject.transform.position.y;
 
-            foreach (string str in model)
-            {
-                ConsoleUI.Write(x, y++, str);
-            }
+            ConsoleUI.Write(x, y, model, color);
             return;
         }
     }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Copyright(c) 2018 Daniel Bramblett, Daniel Dupriest, Brandon Goldbeck
+
+using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +30,7 @@ namespace IO
             return;
         }
 
+        [System.Diagnostics.Conditional("DEBUG")]
         private static void WriteToLog(string message)
         {
             if (writer == null)
@@ -44,6 +47,7 @@ namespace IO
 
         private static void CreateLogFile()
         {
+            File.WriteAllText("Log.txt", String.Empty);
             writer = new StreamWriter(File.Open("Log.txt", System.IO.FileMode.Create));
             if (writer != null)
             {

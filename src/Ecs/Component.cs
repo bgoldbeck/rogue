@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Copyright(c) 2018 Daniel Bramblett, Daniel Dupriest, Brandon Goldbeck
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +22,10 @@ namespace Ecs
         }
 
         public virtual void Update()
+        {
+            return;
+        }
+        public virtual void LateUpdate()
         {
             return;
         }
