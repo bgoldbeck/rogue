@@ -194,41 +194,13 @@ namespace Game.Components
             return;
         }
 
-        public void Move(int dx, int dy)
+        public new void Move(int dx, int dy)
         {
-            int newX = transform.position.x + dx;
-            int newY = transform.position.y + dy;
-            Map map = (Map)GameObject.FindWithTag("Map").GetComponent(typeof(Map));
-
-            //It checks the map to see if there is any collisions if the enemy moves to that square.
-            if (collider.HandleCollision(dx, dy, out GameObject found) == Collider.CollisionTypes.None)
-            {
-                //If there is none, it moves the enemy into the new square and updates the map.
-                int oldX = transform.position.x;
-                int oldY = transform.position.y;
-                transform.Translate(dx, dy);
-                map.PopObject(oldX, oldY);
-                map.AddObject(newX, newY, gameObject);
-            }
-            else
-            {
-                //If there is a collision, the enemy doesn't move. If this collision is with the player, a
-                //damage calculation is performed to calculate the amount of damage done to the player.
-                if(found != null)
-                {
-                    Player target = (Player)found.GetComponent(typeof(Player));
-                    if(target != null)
-                    {
-                        int damage = CalculateDamage();
-                        HUD.Append(name + " attacked for " + damage + " damage.");
-                        target.ApplyDamage(damage);
-                    }
-                }
-            }
-
+            base.Move(dx, dy);
             return;
         }
-        private int CalculateDamage()
+
+        protected override int CalculateDamage()
         {
             int damage = 1 * this.attack;
             // TODO: Get our damage, based on level of player,

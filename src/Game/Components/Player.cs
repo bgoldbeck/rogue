@@ -31,47 +31,11 @@ namespace Game.Components
             return;
         }
 
-        public void Move(int dx, int dy)
+        public new void Move(int dx, int dy)
         {
-            if (collider == null)
+            if (base.Move(dx, dy))
             {
-                Debug.LogError("Could not find collider component on Player!");
-            }
-
-            HUD hud = (HUD)GameObject.FindWithTag("HUD").GetComponent(typeof(HUD));
-            Map map = (Map)GameObject.FindWithTag("Map").GetComponent(typeof(Map));
-            int newX = transform.position.x + dx;
-            int newY = transform.position.y + dy;
-            if (collider.HandleCollision(dx, dy, out GameObject found) == Collider.CollisionTypes.None)
-            {
-                int oldX = transform.position.x;
-                int oldY = transform.position.y;
-                transform.Translate(dx, dy);
-                map.PopObject(oldX, oldY);
-                map.AddObject(newX, newY, gameObject);
-                hud.Log("You walked successfully.");
-            }
-            else
-            {
-                //GameObject go = map.PeekObject(newX, newY);
-
-                if (found != null)
-                {   
-                    // It's possible that we collided with something interactable.
-                    List<IInteractable> interactables = found.GetComponents<IInteractable>();
-                    foreach (IInteractable interactable in interactables)
-                    {
-                        hud.Log("Interacted with a " + found.Tag() + ".");
-                        interactable.Interact(gameObject);
-                    }
-
-                    // It's also possible that we collided with something damageable.
-                    List<IDamageable> damageables = found.GetComponents<IDamageable>();
-                    foreach (IDamageable damageable in damageables)
-                    {
-                        damageable.ApplyDamage(CalculateDamage());
-                    }
-                }
+                //HUD.Append("You walked successfully.");
             }
             return;
         }
@@ -92,7 +56,7 @@ namespace Game.Components
             return;
         }
 
-        private int CalculateDamage()
+        protected override int CalculateDamage()
         {
             int damage = 1 * this.attack;
             // TODO: Get our damage, based on level of player,
