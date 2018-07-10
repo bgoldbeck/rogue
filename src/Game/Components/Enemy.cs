@@ -16,9 +16,6 @@ namespace Game.Components
         private int movementRate = 3;
         private int lastMoved = 0;
         private Transform target = null;
-        //private int seenPlayerX = 0;
-        //private int seenPlayerY = 0;
-        //private bool seenPlayer = false;
         private int aggroRange = 10;
         private int lastSeenPlayer = 0;
         private int determination = 3;
@@ -78,14 +75,10 @@ namespace Game.Components
             //If the enemy is close enough to the player, it saves the location it has seen the
             //player at and set the boolean that is has seen the player.
             Player player = (Player)GameObject.FindWithTag("Player").GetComponent(typeof(Player));
-            //if ((Math.Abs(target.transform.position.x - transform.position.x) +
-            //    Math.Abs(target.transform.position.y - transform.position.y)) < lineOfSite)
 
             if (Vec2i.Distance(player.transform.position, transform.position) < aggroRange)
             {
                 target = player.transform;
-                //seenPlayerX = target.transform.position.x;
-                //seenPlayerY = target.transform.position.y;
             }
             //If the enemy can't see the player but has seen the player before. It checks how long
             //since the last time it has seen the player. If it has been too long, it sets the boolean
@@ -126,59 +119,6 @@ namespace Game.Components
             deltaMove.y = moveOnX ? 0 : deltaMove.y;
             
             Move(deltaMove.x, deltaMove.y);
-
-            /*
-            if (seenPlayerX > transform.position.x)
-            {
-                dx = 1;
-            }
-            else if (seenPlayerX < transform.position.x)
-            {
-                dx = -1;
-            }
-
-            //Figures out which direction on the Y-axis it has to move to head towards the player.
-            if (seenPlayerY > transform.position.y)
-            {
-                dy = 1;
-            }
-            else if (seenPlayerY < transform.position.y)
-            {
-                dy = -1;
-            }
-            */
-
-
-                /*
-                if (rand.Next() % 2 == 0)
-                {
-                    //If the X-axis is chosen and there is a difference on the X-axis from the
-                    //player and enemy, it moves toward the player on the X-axis. If the enemy
-                    //and player are on the same X-axis already, it moves on the Y-axis.
-                    if (dx != 0)
-                    {
-                        Move(dx, 0);
-                    }
-                    else
-                    {
-                        Move(0, dy);
-                    }
-                }
-                else
-                {
-                    //If the Y-axis is chosen and there is a difference on the Y-axis from the
-                    //player and enemy, it moves toward the player on the Y-axis. If the enemy
-                    //and player are on the same Y-axis already, it moves on the X-axis.
-                    if (dy != 0)
-                    {
-                        Move(0, dy);
-                    }
-                    else
-                    {
-                        Move(dx, 0);
-                    }
-                }
-                */
         }
 
         /// <summary>
