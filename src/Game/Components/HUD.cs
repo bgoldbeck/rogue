@@ -105,7 +105,7 @@ namespace Game.Components
             }
 
             int count = 0;
-            for (int i = 0; i < logLines.Count; ++i)
+            for (int i = logLines.Count - 1; i >= 0; --i)
             {
                 for (int j = 0; j < logLines[i].Count; ++j)
                 {
@@ -159,7 +159,7 @@ namespace Game.Components
         {
             int linesToPad = height - model.model.Count - 1;
             for (int i = 0; i < linesToPad; ++i)
-                AddText(model, "-- automatic padding --");
+                AddText(model, "");
             StringBuilder sb = new StringBuilder();
             sb.Append("╚");
             for (int i = 0; i < width - 2; ++i)
