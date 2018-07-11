@@ -67,7 +67,7 @@ namespace Game.Data
         {
             //Adds a Model component to the game object passed in.
             MapTile mapTile = (MapTile)slot.AddComponent(new MapTile());
-            mapTile.SetLightLevelAfterDiscovery(0.0f);
+            mapTile.SetLightLevelAfterDiscovery(0.1f);
 
             //Generates an array of methods for each monster type.
             spawnGenerator[] generatorArr = new spawnGenerator[]
