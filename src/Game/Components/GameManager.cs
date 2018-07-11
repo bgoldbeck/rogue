@@ -56,6 +56,26 @@ namespace Game.Components
             return;
         }
 
+        public void Resize(int width, int height)
+        {
+            gameWidth = width;
+            gameHeight = height;
+
+            GameObject mapObject = GameObject.FindWithTag("Map");
+            mapObject.transform.position.y = gameHeight - 1;
+
+            Camera camera = (Camera)GameObject.FindWithTag("Player").GetComponent(typeof(Camera));
+            camera.Resize(gameWidth - hudWidth, gameHeight);
+
+            GameObject hudObject = GameObject.FindWithTag("HUD");
+            hudObject.transform.position.x = gameWidth - hudWidth;
+            hudObject.transform.position.y = gameHeight - 1;
+            HUD hud = (HUD)hudObject.GetComponent(typeof(HUD));
+            hud.Resize(hudWidth, gameHeight);
+
+            Debug.Log("Resized game to " + gameWidth + " x " + gameHeight + ".");
+        }
+
         public override void Update()
         {
             return;

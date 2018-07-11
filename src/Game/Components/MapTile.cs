@@ -31,6 +31,16 @@ namespace Game.Components
             this.disableLighting = disableLighting;
         }
 
+        public void SetLightLevelAfterDiscovery(float value)
+        {
+            if (value < 0f)
+                lightLevelAfterDiscovery = 0f;
+            else if (value > 1.0f)
+                lightLevelAfterDiscovery = 1.0f;
+            else
+                lightLevelAfterDiscovery = value;
+        }
+
         public override void Start()
         {
             return;

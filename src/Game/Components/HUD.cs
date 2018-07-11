@@ -57,6 +57,12 @@ namespace Game.Components
             log.Add(line);
         }
 
+        public void Resize(int width, int height)
+        {
+            this.width = width;
+            this.height = height;
+        }
+
         public override void Start()
         {
             if (hud != null && hud != this)

@@ -82,6 +82,12 @@ namespace Game.Components
             return;
         }
 
+        public void Resize(int width, int height)
+        {
+            this.width = width;
+            this.height = height;
+        }
+
         private void SpreadLight(Map map, int x, int y)
         {
             float angleDiff = 2 * (float)Math.PI / lightRays;

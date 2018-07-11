@@ -17,14 +17,16 @@ namespace Game
     {
         private bool isRunning = true;
         private ConsoleKey press = Input.ReadKey().Key;
+        private int width;
+        private int height;
 
         public void Initialize()
         {
             SetupScreen();
 
             Time.Initialize();
-            int width = Console.WindowWidth;
-            int height = Console.WindowHeight;
+            width = Console.WindowWidth;
+            height = Console.WindowHeight;
             ConsoleUI.Initialize(width, height);
 
             GameObject gameManager = GameObject.Instantiate("GameManager");
@@ -68,8 +70,8 @@ namespace Game
                     dt = 0;
                     Render();
                 }*/
-                
 
+                CheckForResize();
                 
                 press = Input.ReadKey().Key;
                 
@@ -77,7 +79,6 @@ namespace Game
                 { 
                     isRunning = false;
                 }
-                
 
                 if (Input.AnyKey())
                 {
@@ -90,6 +91,16 @@ namespace Game
             }
 
             return 0;
+        }
+
+        private void CheckForResize()
+        {
+            if (Console.WindowWidth != width || Console.WindowHeight != height)
+            {
+                GameManager gm = (GameManager)GameObject.FindWithTag("GameManager").GetComponent(typeof(GameManager));
+                gm.Resize(Console.WindowWidth, Console.WindowHeight);
+                Render();
+            }
         }
 
         public void Update()

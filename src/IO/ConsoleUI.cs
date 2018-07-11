@@ -125,6 +125,30 @@ namespace IO
             Console.SetCursorPosition(0, 0);
         }
 
+        public static void Resize()
+        {
+            width = Console.WindowWidth;
+            height = Console.WindowHeight;
+
+            buffer = new List<List<char>>();
+            colorBuffer = new List<List<String>>();
+
+            for (int x = 0; x < width; ++x)
+            {
+                List<char> bufferRow = new List<char>();
+                List<String> colorBufferRow = new List<String>();
+
+                for (int y = 0; y < height; ++y)
+                {
+                    bufferRow.Add(' ');
+                    // Add some default color
+                    colorBufferRow.Add(defaultColor);
+                }
+                buffer.Add(bufferRow);
+                colorBuffer.Add(colorBufferRow);
+            }
+        }
+
         public static void ToggleColor()
         {
             if (colorEnabled)
