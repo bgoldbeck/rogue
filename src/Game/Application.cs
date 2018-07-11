@@ -95,10 +95,13 @@ namespace Game
 
         private void CheckForResize()
         {
-            if (Console.WindowWidth != width || Console.WindowHeight != height)
+            int newWidth = Console.WindowWidth;
+            int newHeight = Console.WindowHeight;
+            if (newWidth != width || newHeight != height)
             {
                 GameManager gm = (GameManager)GameObject.FindWithTag("GameManager").GetComponent(typeof(GameManager));
-                gm.Resize(Console.WindowWidth, Console.WindowHeight);
+                gm.Resize(newWidth, newHeight);
+                ConsoleUI.Resize(newWidth, newHeight);
                 Render();
             }
         }

@@ -102,6 +102,7 @@ namespace IO
                     colorBuffer[x][y] = defaultColor;
                 }
             }
+
             return;
         }
         
@@ -110,6 +111,8 @@ namespace IO
         /// </summary>
         public static void Render()
         {
+            Console.CursorVisible = false;
+
             for (int y = height - 1; y >= 0; --y)
             {
                 StringBuilder sb = new StringBuilder();
@@ -125,10 +128,10 @@ namespace IO
             Console.SetCursorPosition(0, 0);
         }
 
-        public static void Resize()
+        public static void Resize(int newWidth, int newHeight)
         {
-            width = Console.WindowWidth;
-            height = Console.WindowHeight;
+            width = newWidth;
+            height = newHeight;
 
             buffer = new List<List<char>>();
             colorBuffer = new List<List<String>>();

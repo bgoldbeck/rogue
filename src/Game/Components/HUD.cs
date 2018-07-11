@@ -61,6 +61,7 @@ namespace Game.Components
         {
             this.width = width;
             this.height = height;
+            Update();
         }
 
         public override void Start()
