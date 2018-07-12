@@ -20,6 +20,7 @@ namespace Game.Components
         private const int lightRays = 1000;
         private const float lightSpeed = .5f;
         private Map map = null;
+        
 
         public Camera(int width, int height)
         {

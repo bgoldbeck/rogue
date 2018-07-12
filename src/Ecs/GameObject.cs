@@ -115,6 +115,21 @@ namespace Ecs
         }
 
         /// <summary>
+        /// This function is called by the Application if the window was resized.
+        /// </summary>
+        public void OnResize()
+        {
+            foreach (Component component in components)
+            {
+                if (component.IsActive())
+                {
+                    component.OnResize();
+                }
+            }
+            return;
+        }
+
+        /// <summary>
         /// Called by the Application on every updated frame during the
         /// rendering phase. It will call Render() on every Component attached to this GameObject.
         /// </summary>

@@ -48,7 +48,7 @@ namespace Game.Components
             GameObject hud = GameObject.Instantiate("HUD");
             hud.AddComponent(new HUD(hudWidth, gameHeight));
             Model hudModel = (Model)hud.AddComponent(new Model());
-            hudModel.color.Set(180, 180, 180);
+            hudModel.color.Set(180, 0, 180);
             hud.transform.position.x = gameWidth - hudWidth;
             hud.transform.position.y = gameHeight - 1;
 
@@ -56,13 +56,10 @@ namespace Game.Components
             return;
         }
 
-        public void Resize(int width, int height)
+        public override void OnResize()
         {
-            gameWidth = width;
-            gameHeight = height;
-
-            GameObject mapObject = GameObject.FindWithTag("Map");
-            mapObject.transform.position.y = gameHeight - 1;
+            gameWidth = ConsoleUI.MaxWidth();
+            gameHeight = ConsoleUI.MaxHeight();
 
             Camera camera = (Camera)GameObject.FindWithTag("Player").GetComponent(typeof(Camera));
             camera.Resize(gameWidth - hudWidth, gameHeight);
@@ -70,6 +67,7 @@ namespace Game.Components
             GameObject hudObject = GameObject.FindWithTag("HUD");
             hudObject.transform.position.x = gameWidth - hudWidth;
             hudObject.transform.position.y = gameHeight - 1;
+
             HUD hud = (HUD)hudObject.GetComponent(typeof(HUD));
             hud.Resize(hudWidth, gameHeight);
 

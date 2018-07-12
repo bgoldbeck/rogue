@@ -76,6 +76,12 @@ namespace Game.Components
             return;
         }
 
+        public override void OnResize()
+        {
+            transform.position.y = ConsoleUI.MaxHeight() - 1;
+            return;
+        }
+
         /// <summary>
         /// Create a new generated map and fill it with enemies and other good stuff.
         /// </summary>

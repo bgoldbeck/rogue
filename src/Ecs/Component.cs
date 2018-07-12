@@ -45,6 +45,11 @@ namespace Ecs
             return;
         }
 
+        public virtual void OnResize()
+        {
+            return;
+        }
+
         public Component GetComponent(Type type)
         {
             return gameObject.GetComponent(type);

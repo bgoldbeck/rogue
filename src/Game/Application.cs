@@ -84,6 +84,7 @@ namespace Game
                 {
                     Update();
                     Render();
+                    GameObject.ClearDeadGameObjects();
                 }
 
                 Time.Update();
@@ -93,19 +94,36 @@ namespace Game
             return 0;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void CheckForResize()
         {
             int newWidth = Console.WindowWidth;
             int newHeight = Console.WindowHeight;
+
             if (newWidth != width || newHeight != height)
             {
-                GameManager gm = (GameManager)GameObject.FindWithTag("GameManager").GetComponent(typeof(GameManager));
-                gm.Resize(newWidth, newHeight);
                 ConsoleUI.Resize(newWidth, newHeight);
+                width = newWidth;
+                height = newHeight;
+
+                Dictionary<int, GameObject> map = GameObject.GetGameObjects();
+                foreach (KeyValuePair<int, GameObject> entry in map)
+                {
+                    if (entry.Value.IsActive())
+                    {
+                        entry.Value.OnResize();
+                    }
+                }
                 Render();
             }
+            return;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Update()
         {
 
@@ -143,7 +161,6 @@ namespace Game
             ConsoleUI.Render();
             ConsoleUI.ClearBuffer();
 
-            GameObject.ClearDeadGameObjects();
             return;
         }
     }
