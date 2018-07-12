@@ -38,6 +38,7 @@ namespace Game.Components
             player.AddComponent(new Player("Sneaky McDevious", "Thiefy rogue", 1, 10, 1, 1));
             player.AddComponent(new PlayerController());
             player.AddComponent(new Model());
+            player.AddComponent(new LightSource(10.0f));
             player.transform.position.x = map.startingX;
             player.transform.position.y = map.startingY;
             map.AddObject(map.startingX, map.startingY, player);

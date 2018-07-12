@@ -13,14 +13,10 @@ namespace Game.Components
 {
     class Camera : Component
     {
-        private int width;
-        private int height;
-        private const float lightRadius = 10.0f;
-        private const float totalLightIntensity = 10.0f;
-        private const int lightRays = 1000;
-        private const float lightSpeed = .5f;
-        private Map map = null;
-        private static Camera camera = null;
+        private int width;  // Width of camera drawing area
+        private int height; // Height of camera drawing area
+        private Map map = null; // Reference to map component
+        private static Camera camera = null;    // Reference to camera component
 
         public static Camera CacheInstance()
         {
@@ -69,8 +65,7 @@ namespace Game.Components
 
             int playerX = gameObject.transform.position.x;
             int playerY = gameObject.transform.position.y;
-            SpreadLight(map, playerX, playerY);
-
+        
             int halfWidth = width / 2;
             int halfHeight = height / 2;
             for (int x = 0; x < width; ++x)
@@ -102,73 +97,5 @@ namespace Game.Components
             this.height = height;
         }
 
-        private void SpreadLight(Map map, int x, int y)
-        {
-            float angleDiff = 2 * (float)Math.PI / lightRays;
-            float singleRayIntensity = totalLightIntensity / lightRays; 
-            for (int i = 0; i < lightRays; ++i)
-            {
-                float xSpeed = lightSpeed * (float)Math.Cos(i * angleDiff);
-                float ySpeed = lightSpeed * (float)Math.Sin(i * angleDiff);
-                Ray ray = new Ray(x + .5f, y + .5f, xSpeed, ySpeed, singleRayIntensity);
-                while (ray.IsWithinRadius())
-                {
-                    ray.Advance();
-                    GameObject go = ray.Collides(gameObject, map);
-                    if (go != null)
-                    {
-                        ray.Illuminate(go);
-                        break;
-                    }
-                }
-            }
-        }
-
-        public class Ray
-        {
-            public float x;
-            public float y;
-            public float initialX;
-            public float initialY;
-            public float dx;
-            public float dy;
-            public float intensity;
-
-            public Ray(float x, float y, float dx, float dy, float intensity)
-            {
-                this.x = this.initialX = x;
-                this.y = this.initialY = y;
-                this.dx = dx;
-                this.dy = dy;
-                this.intensity = intensity;
-            }
-
-            public void Advance()
-            {
-                x += dx;
-                y += dy;
-            }
-
-            public bool IsWithinRadius()
-            {
-                return Math.Sqrt(Math.Pow(x - initialX, 2) + Math.Pow(y - initialY, 2)) < lightRadius;
-            }
-
-            public GameObject Collides(GameObject player, Map map)
-            {
-                GameObject go = map.PeekObject((int)x, (int)y);
-                if (go == player || go == null)
-                    return null;
-                return go;
-            }
-
-            public void Illuminate(GameObject go)
-            {
-                MapTile mt = (MapTile)go.GetComponent(typeof(MapTile));
-                mt.lightLevel += intensity;
-                if (mt.lightLevel > 1.0f)
-                    mt.lightLevel = 1.0f;
-            }
-        }
     }
 }
