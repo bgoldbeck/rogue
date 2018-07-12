@@ -71,20 +71,8 @@ namespace Game.Components
                 Debug.LogWarning("Map not found.");
                 return false;
             }
-            if (targetLocation.x == targeterLocation.x)
-            {
-                int slopeY = (targeterLocation.y < targetLocation.y) ? 1 : -1;
-                int currentY = slopeY;
-                while (targeterLocation.y + currentY != targetLocation.y && !hitObject)
-                {
-                    if (map.PeekObject(targetLocation.x, targeterLocation.y + currentY) != null)
-                    {
-                        hitObject = true;
-                    }
-                    currentY += slopeY;
-                }
-            }
-            else
+
+            if(Math.Abs(targetLocation.x - targeterLocation.x) > Math.Abs(targetLocation.y - targeterLocation.y))
             {
                 double slopeY = (targetLocation.y - targeterLocation.y + 0.0) / (targetLocation.x - targeterLocation.x);
                 double currentY = slopeY;
@@ -94,6 +82,23 @@ namespace Game.Components
                 while (targeterLocation.x + currentX != targetLocation.x && !hitObject)
                 {
                     if (map.PeekObject(targeterLocation.x + currentX, targeterLocation.y + (int)Math.Round(currentY, 0)) != null)
+                    {
+                        hitObject = true;
+                    }
+                    currentY += slopeY;
+                    currentX += slopeX;
+                }
+            }
+            else
+            {
+                double slopeX = (targetLocation.x - targeterLocation.x + 0.0) / (targetLocation.y - targeterLocation.y);
+                double currentX = slopeX;
+                int slopeY = (targeterLocation.y < targetLocation.y) ? 1 : -1;
+                int currentY = slopeY;
+
+                while (targeterLocation.y + currentY != targetLocation.y && !hitObject)
+                {
+                    if (map.PeekObject(targeterLocation.x + (int)Math.Round(currentX,0), targeterLocation.y + currentY) != null)
                     {
                         hitObject = true;
                     }
