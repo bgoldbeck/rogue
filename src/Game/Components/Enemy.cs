@@ -48,20 +48,21 @@ namespace Game.Components
             if (lastMoved >= movementRate)
             {
                 Aggro search = (Aggro)GetComponent<Aggro>();
+                EnemyAI ai = (EnemyAI)GetComponent<EnemyAI>();
                 if(search == null)
                 {
                     Debug.LogError("Enemy didn't have an Aggro component.");
                     return;
                 }
+                if (ai == null)
+                {
+                    Debug.LogError("Enemy didn't have an Enemy AI component.");
+                    return;
+                }
+
                 search.TargetSearch(ref target);
-                if (target != null)
-                {
-                    SeekMove();
-                }
-                else
-                {
-                    RandomMove();
-                }
+                ai.MakeMove(target);
+
                 lastMoved = 0;
             }
             else
@@ -69,64 +70,6 @@ namespace Game.Components
                 ++lastMoved;
             }
             return;
-        }
-
-
-        /// <summary>
-        /// This method moves the enemy towards a known player.
-        /// </summary>
-        private void SeekMove()
-        {
-            if (target == null) return;
-
-            Random rand = new Random();
-
-            //Figures out which direction on the it has to move to head towards the player.
-            Vec2i deltaMove = target.position - transform.position;
-            if (deltaMove.x != 0)
-            { 
-                deltaMove.x = deltaMove.x / Math.Abs(deltaMove.x);
-            }
-            if (deltaMove.y != 0)
-            { 
-                deltaMove.y = deltaMove.y / Math.Abs(deltaMove.y);
-            }
-
-            //It randomly decides whether to try to move on the X-axis or Y-axis.
-            bool moveOnX = rand.Next() % 2 == 0 && deltaMove.x != 0;
-            deltaMove.x = moveOnX ? deltaMove.x : 0;
-            deltaMove.y = moveOnX ? 0 : deltaMove.y;
-            
-            Move(deltaMove.x, deltaMove.y);
-        }
-
-        /// <summary>
-        /// This method randomly move the enemy.
-        /// </summary>
-        private void RandomMove()
-        {
-            Random rand = new Random();
-            int dx = 0, dy = 0;
-
-            //The enemy can randomly move in 5 ways:left, up, right, down, and not move.
-            switch (rand.Next() % 5)
-            {
-                case 0:
-                    dx = 1;
-                    break;
-                case 1:
-                    dx = -1;
-                    break;
-                case 2:
-                    dy = 1;
-                    break;
-                case 3:
-                    dy = -1;
-                    break;
-                default:
-                    break;
-            }
-            Move(dx, dy);
         }
 
         public override void Render()
