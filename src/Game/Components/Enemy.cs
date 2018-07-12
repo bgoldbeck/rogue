@@ -14,8 +14,6 @@ namespace Game.Components
 {
     class Enemy : Actor, IDamageable, IMovable
     {
-        private int movementRate = 3;
-        private int lastMoved = 0;
         private Transform target = null;
 
         public Enemy():base()
@@ -23,10 +21,9 @@ namespace Game.Components
             
         }
 
-        public Enemy(string name, string description, int level, int hp, int armor, int attack, int rate)
+        public Enemy(string name, string description, int level, int hp, int armor, int attack)
             :base(name, description, level, hp, armor, attack)
         {
-            movementRate = rate;
         }
 
         public override void Start()
@@ -45,29 +42,22 @@ namespace Game.Components
             /*If enough time has passed since the enemy has moved, it checks if the enemy can
               see the player. If the enemy can see the player, it moves towards the play. Otherwise,
               it makes a random move.*/
-            if (lastMoved >= movementRate)
+            Aggro search = (Aggro)GetComponent<Aggro>();
+            EnemyAI ai = (EnemyAI)GetComponent<EnemyAI>();
+            if(search == null)
             {
-                Aggro search = (Aggro)GetComponent<Aggro>();
-                EnemyAI ai = (EnemyAI)GetComponent<EnemyAI>();
-                if(search == null)
-                {
-                    Debug.LogError("Enemy didn't have an Aggro component.");
-                    return;
-                }
-                if (ai == null)
-                {
-                    Debug.LogError("Enemy didn't have an Enemy AI component.");
-                    return;
-                }
+                Debug.LogError("Enemy didn't have an Aggro component.");
+                return;
+            }
+            if (ai == null)
+            {
+                Debug.LogError("Enemy didn't have an Enemy AI component.");
+                return;
+            }
 
-                search.TargetSearch(ref target);
-                ai.MakeMove(target);
-                lastMoved = 0;
-            }
-            else
-            {
-                ++lastMoved;
-            }
+            search.TargetSearch(ref target);
+            ai.MakeMove(target);
+
             return;
         }
 

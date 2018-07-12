@@ -9,7 +9,13 @@ namespace Game.Components
 {
     class EnemyAI : Component
     {
+        private int movementRate = 3;
+        private int lastMoved = 0;
 
+        public void setRate(int rate)
+        {
+            movementRate = rate;
+        }
         public override void Start()
         {
             base.Start();
@@ -22,19 +28,27 @@ namespace Game.Components
 
         public void MakeMove(Transform target)
         {
-            Enemy puppet = (Enemy)base.gameObject.GetComponent<Enemy>();
-            if(puppet == null)
+            if (lastMoved >= movementRate)
             {
-                Debug.LogError("EnemyAI isn't a component of an Enemy.");
-                return;
-            }
-            if (target != null)
-            {
-                SeekMove(target,puppet.Move);
+                Enemy puppet = (Enemy)base.gameObject.GetComponent<Enemy>();
+                if (puppet == null)
+                {
+                    Debug.LogError("EnemyAI isn't a component of an Enemy.");
+                    return;
+                }
+                if (target != null)
+                {
+                    SeekMove(target, puppet.Move);
+                }
+                else
+                {
+                    RandomMove(puppet.Move);
+                }
+                lastMoved = 0;
             }
             else
             {
-                RandomMove(puppet.Move);
+                ++lastMoved;
             }
         }
 

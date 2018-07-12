@@ -11,7 +11,7 @@ namespace Game.Data
     {    
         //This variable delegate were inspired by this discussion on Stack Overflow:
         //https://stackoverflow.com/questions/3767942/storing-a-list-of-methods-in-c-sharp
-        delegate Enemy spawnGenerator(int level, MapTile m);
+        delegate Enemy spawnGenerator(int level, MapTile m, EnemyAI a);
 
         /// <summary>
         /// This function generates an instance of Enemy using the level and fills it in for an enemy type snake. 
@@ -20,17 +20,17 @@ namespace Game.Data
         /// <param name="level"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        static private Enemy SnakeGenerator(int level, MapTile mapTile)
+        static private Enemy SnakeGenerator(int level, MapTile mapTile, EnemyAI ai)
         {
             mapTile.character = 's';                //Monster's model
             mapTile.color.Set(255, 80, 80);       //Color
+            ai.setRate(2);                           //Time between each move.
             return new Enemy("Snake",               //Monster's name
                              "Snake? SNAKE!!!!",    //Monster's description
                              level,                 //Level of the monster
                              2 + (3 * level),       //Equation for the monster's health.
                              level,                 //Equation for the monster's armor.
-                             level,                 //Equation for the monster's attack.
-                             2                      //Time between each move.
+                             level                 //Equation for the monster's attack.
                              );
         }
 
@@ -41,17 +41,17 @@ namespace Game.Data
         /// <param name="level"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        static private Enemy GoblinGenerator(int level, MapTile mapTile)
+        static private Enemy GoblinGenerator(int level, MapTile mapTile, EnemyAI ai)
         {
             mapTile.character = 'g';                    //Monster's model
             mapTile.color.Set(0, 180, 0);               //Color
+            ai.setRate(3);                           //Time between each move.
             return new Enemy("Goblin",                  //Monster name
                              "Just a normal Goblin",    //Monster description
                              level,                     //Level of the monster
                              5 * level,                 //Equation for the monster's health.
                              (level > 1)? level - 1 : 0,//Equation for the monster's armor.
-                             2 + level,                 //Equation for the monster's attack.
-                             3                          //Time between each move.                          
+                             2 + level                 //Equation for the monster's attack.                        
                              );
         }
 
@@ -67,19 +67,21 @@ namespace Game.Data
         {
             //Adds a Model component to the game object passed in.
             MapTile mapTile = (MapTile)slot.AddComponent(new MapTile());
+            EnemyAI ai = (EnemyAI)slot.AddComponent(new EnemyAI());
+
             mapTile.SetLightLevelAfterDiscovery(0.1f);
 
             //Generates an array of methods for each monster type.
             spawnGenerator[] generatorArr = new spawnGenerator[]
             {
-                (lvl, mt) => SnakeGenerator(lvl, mt),
-                (lvl, mt) => GoblinGenerator(lvl, mt),
+                (lvl, mt, a) => SnakeGenerator(lvl, mt, a),
+                (lvl, mt, a) => GoblinGenerator(lvl, mt, a),
             };
          
             //Using the passed in Random instance, a random monster is picked and the
             //information on the enemy is filled in.
             int value = rand.Next() % generatorArr.Length;
-            slot.AddComponent(generatorArr[value](level, mapTile));
+            slot.AddComponent(generatorArr[value](level, mapTile, ai));
             slot.AddComponent(new Aggro());
             slot.AddComponent(new EnemyAI());
         }
