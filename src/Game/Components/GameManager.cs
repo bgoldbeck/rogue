@@ -35,7 +35,7 @@ namespace Game.Components
 
 
             GameObject player = GameObject.Instantiate("MainPlayer");
-            player.AddComponent(new Player("Sneaky McDevious", "Thiefy rogue", 1, 10, 1, 1));
+            player.AddComponent(new Player("Sneaky McDevious", "Thiefy rogue", 1, 10, 1, 2));
             player.AddComponent(new PlayerController());
             player.AddComponent(new Model());
             player.AddComponent(new LightSource(10.0f));

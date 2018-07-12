@@ -23,14 +23,14 @@ namespace Game.Data
         static private Enemy SnakeGenerator(int level, MapTile mapTile, EnemyAI ai)
         {
             mapTile.character = 's';                //Monster's model
-            mapTile.color.Set(255, 80, 80);       //Color
-            ai.setRate(2);                           //Time between each move.
+            mapTile.color.Set(255, 80, 80);         //Color
+            ai.setRate(2);                          //Time between each move.
             return new Enemy("Snake",               //Monster's name
                              "Snake? SNAKE!!!!",    //Monster's description
                              level,                 //Level of the monster
                              2 + (3 * level),       //Equation for the monster's health.
                              level,                 //Equation for the monster's armor.
-                             level                 //Equation for the monster's attack.
+                             level + 1              //Equation for the monster's attack.
                              );
         }
 
@@ -45,13 +45,13 @@ namespace Game.Data
         {
             mapTile.character = 'g';                    //Monster's model
             mapTile.color.Set(0, 180, 0);               //Color
-            ai.setRate(3);                           //Time between each move.
+            ai.setRate(3);                              //Time between each move.
             return new Enemy("Goblin",                  //Monster name
                              "Just a normal Goblin",    //Monster description
                              level,                     //Level of the monster
                              5 * level,                 //Equation for the monster's health.
                              (level > 1)? level - 1 : 0,//Equation for the monster's armor.
-                             2 + level                 //Equation for the monster's attack.                        
+                             3 + level                  //Equation for the monster's attack.                        
                              );
         }
 

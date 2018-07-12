@@ -71,6 +71,9 @@ namespace Game.Components
             // We don't want enemies attacking other enemies.
             if (source == null || source.GetComponent<Enemy>() != null) { return; }
 
+            //Minuses the enemie's armor from the damage and makes sure it doesn't go less then 0.
+            damage = (damage < armor) ? 0 : damage - armor;
+
             this.hp -= damage;
             // Made it a little easier to add stuff to the log from anywhere in
             // the game.
