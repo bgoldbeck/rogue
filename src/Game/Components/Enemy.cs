@@ -14,7 +14,7 @@ namespace Game.Components
 {
     class Enemy : Actor, IDamageable, IMovable
     {
-        private Transform target = null;
+        public Transform target = null;
 
         public Enemy():base()
         {
@@ -55,8 +55,8 @@ namespace Game.Components
                 return;
             }
 
-            search.TargetSearch(ref target);
-            ai.MakeMove(target);
+            search.TargetSearch();
+            ai.MakeMove();
 
             return;
         }

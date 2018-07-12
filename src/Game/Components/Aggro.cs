@@ -26,8 +26,16 @@ namespace Game.Components
         }
 
 
-        public void TargetSearch(ref Transform target)
+        public void TargetSearch()
         {
+            Enemy searchee = (Enemy)base.gameObject.GetComponent<Enemy>();
+            bool targetUpdated = false;
+
+            if(searchee == null)
+            {
+                Debug.LogError("Aggo isn't a component of an enemy object.");
+                return;
+            }
             //If the enemy is close enough to the player, it saves the location it has seen the
             //player at and set the boolean that is has seen the player.
             Player player = Player.MainPlayer();
@@ -36,18 +44,18 @@ namespace Game.Components
             {
                 if (CheckLine(transform.position, player.transform.position))
                 {
-                    target = player.transform;
-                    return;
+                    searchee.target = player.transform;
+                    targetUpdated = true;
                 }
             }
             //If the enemy can't see the player but has seen the player before. It checks how long
             //since the last time it has seen the player. If it has been too long, it sets the boolean
             //to false.
-            else if (target != null)
+            if (searchee.target != null && !targetUpdated)
             {
                 if (++lastSeenPlayer > turnsTillEnemyGivesUp)
                 {
-                    target = null;
+                    searchee.target = null;
                 }
             }
             return;

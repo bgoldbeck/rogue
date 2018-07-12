@@ -26,19 +26,20 @@ namespace Game.Components
             base.Update();
         }
 
-        public void MakeMove(Transform target)
+        public void MakeMove()
         {
+            Enemy puppet = (Enemy)base.gameObject.GetComponent<Enemy>();
+            if (puppet == null)
+            {
+                Debug.LogError("EnemyAI isn't a component of an Enemy.");
+                return;
+            }
+
             if (lastMoved >= movementRate)
             {
-                Enemy puppet = (Enemy)base.gameObject.GetComponent<Enemy>();
-                if (puppet == null)
+                if (puppet.target != null)
                 {
-                    Debug.LogError("EnemyAI isn't a component of an Enemy.");
-                    return;
-                }
-                if (target != null)
-                {
-                    SeekMove(target, puppet.Move);
+                    SeekMove(puppet.target, puppet.Move);
                 }
                 else
                 {
