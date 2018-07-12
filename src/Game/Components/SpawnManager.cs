@@ -59,6 +59,17 @@ namespace Game.Components
             return go;
         }
 
+        public static GameObject CreateLockedDoor(int x, int y)
+        {
+            GameObject go = GameObject.Instantiate("Locked Door");
+            go.AddComponent(new Door(true));
+            go.transform.position.x = x;
+            go.transform.position.y = y;
+            go.AddComponent(new MapTile('l', new Color(210, 105, 30)));
+
+            return go;
+        }
+
         public static GameObject CreateWall(int x, int y)
         {
             GameObject go = GameObject.Instantiate("Wall");

@@ -103,7 +103,16 @@ namespace Game.Components
                         case "d":
                             objects[x][y] = SpawnManager.CreateDoor(x, y);
                             break;
+                        case "l":
+                            objects[x][y] = SpawnManager.CreateLockedDoor(x, y);
+                            break;
                         case "m":
+                            objects[x][y] = SpawnManager.CreateEnemy(x, y, level);
+                            break;
+                        case "k":
+                            objects[x][y] = SpawnManager.CreateEnemy(x, y, level);
+                            break;
+                        case "b":
                             objects[x][y] = SpawnManager.CreateEnemy(x, y, level);
                             break;
                         case "w":
