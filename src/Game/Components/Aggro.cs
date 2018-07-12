@@ -11,7 +11,7 @@ namespace Game.Components
     {
         private int aggroRange = 10;
         private int lastSeenPlayer = 0;
-        private int determination = 3;
+        private int turnsTillEnemyGivesUp = 3;
 
         public override void Start()
         {
@@ -45,7 +45,7 @@ namespace Game.Components
             //to false.
             else if (target != null)
             {
-                if (++lastSeenPlayer > determination)
+                if (++lastSeenPlayer > turnsTillEnemyGivesUp)
                 {
                     target = null;
                 }
