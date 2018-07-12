@@ -80,6 +80,7 @@ namespace Game.Data
             //information on the enemy is filled in.
             int value = rand.Next() % generatorArr.Length;
             slot.AddComponent(generatorArr[value](level, mapTile));
+            slot.AddComponent(new Aggro());
         }
     }
 }

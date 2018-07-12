@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 using Ecs;
 using Game.Interfaces;
+using IO;
 
 namespace Game.Components
 {
@@ -16,9 +17,6 @@ namespace Game.Components
         private int movementRate = 3;
         private int lastMoved = 0;
         private Transform target = null;
-        private int aggroRange = 10;
-        private int lastSeenPlayer = 0;
-        private int determination = 3;
 
         public Enemy():base()
         {
@@ -49,7 +47,13 @@ namespace Game.Components
               it makes a random move.*/
             if (lastMoved >= movementRate)
             {
-                PlayerSearch();
+                Aggro search = (Aggro)GetComponent<Aggro>();
+                if(search == null)
+                {
+                    Debug.LogError("Enemy didn't have an Aggro component.");
+                    return;
+                }
+                search.TargetSearch(ref target);
                 if (target != null)
                 {
                     SeekMove();
@@ -67,31 +71,6 @@ namespace Game.Components
             return;
         }
 
-        /// <summary>
-        /// This method checks the distance the player is away from this enemy.
-        /// </summary>
-        private void PlayerSearch()
-        {
-            //If the enemy is close enough to the player, it saves the location it has seen the
-            //player at and set the boolean that is has seen the player.
-            Player player = Player.MainPlayer();
-
-            if (Vec2i.Distance(player.transform.position, transform.position) < aggroRange)
-            {
-                target = player.transform;
-            }
-            //If the enemy can't see the player but has seen the player before. It checks how long
-            //since the last time it has seen the player. If it has been too long, it sets the boolean
-            //to false.
-            else if(target != null)
-            {
-                if(++lastSeenPlayer > determination)
-                {
-                    target = null;
-                }
-            }
-            return;
-        }
 
         /// <summary>
         /// This method moves the enemy towards a known player.
