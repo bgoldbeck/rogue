@@ -155,7 +155,10 @@ namespace IO
         public static void ToggleColor()
         {
             if (colorEnabled)
+            {
                 colorEnabled = false;
+                Console.Write(defaultColor);
+            }
             else
                 colorEnabled = true;
         }
