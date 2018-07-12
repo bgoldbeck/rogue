@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 using Ecs;
+using IO;
 
 namespace Game.Components
 {
@@ -33,7 +34,11 @@ namespace Game.Components
 
             if (Vec2i.Distance(player.transform.position, transform.position) < aggroRange)
             {
-                target = player.transform;
+                if (CheckLine(transform.position, player.transform.position))
+                {
+                    target = player.transform;
+                    return;
+                }
             }
             //If the enemy can't see the player but has seen the player before. It checks how long
             //since the last time it has seen the player. If it has been too long, it sets the boolean
@@ -46,6 +51,48 @@ namespace Game.Components
                 }
             }
             return;
+        }
+
+        private bool CheckLine(Vec2i playerLocation, Vec2i enemyLocation)
+        {
+            Map map = Map.CacheInstance();
+            if (map == null)
+            {
+                Debug.LogWarning("Map not found.");
+                return false;
+            }
+            if (enemyLocation.x == playerLocation.x)
+            {
+                int slopeY = (playerLocation.y < enemyLocation.y) ? 1 : -1;
+                int currentY = slopeY;
+                while (playerLocation.y + currentY != enemyLocation.y)
+                {
+                    if (map.PeekObject(enemyLocation.x, playerLocation.y + currentY) != null)
+                    {
+                        return false;
+                    }
+                    currentY += slopeY;
+                }
+                return true;
+            }
+            else
+            {
+                double slopeY = (enemyLocation.y - playerLocation.y + 0.0) / (enemyLocation.x - playerLocation.x);
+                double currentY = slopeY;
+                int slopeX = (playerLocation.x < enemyLocation.x) ? 1 : -1;
+                int currentX = slopeX;
+
+                while (playerLocation.x + currentX != enemyLocation.x)
+                {
+                    if (map.PeekObject(playerLocation.x + currentX, playerLocation.y + (int)Math.Round(currentY, 0)) != null)
+                    {
+                        return false;
+                    }
+                    currentY += slopeY;
+                    currentX += slopeX;
+                }
+                return true;
+            }
         }
     }
 }
