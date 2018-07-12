@@ -29,5 +29,31 @@ namespace Game.DungeonMaker
             this.x = x;
             this.y = y;
         }
+
+        /// <summary>
+        /// Checks whether a point is within a room or not.
+        /// </summary>
+        /// <param name="checkX">X coordinate to check.</param>
+        /// <param name="checkY">Y coordinate to check.</param>
+        /// <returns>Returns true if a point lies within the room.</returns>
+        public bool Contains(int checkX, int checkY)
+        {
+            if (checkX >= x && checkX < x + width && checkY >= y && checkY < y + height)
+                return true;
+            return false;
+        }
+
+        /// <summary>
+        /// Checks whether a cell is within one square of a room. Used for adding locked door.
+        /// </summary>
+        /// <param name="checkX">X coordinate to check.</param>
+        /// <param name="checkY">Y coordinate to check.</param>
+        /// <returns>Returns true if a point is within one square of the room.</returns>
+        public bool IsNextTo(int checkX, int checkY)
+        {
+            if (checkX >= x - 1 && checkX < x + width + 1 && checkY >= y - 1 && checkY < y + height + 1)
+                return true;
+            return false;
+        }
     }
 }

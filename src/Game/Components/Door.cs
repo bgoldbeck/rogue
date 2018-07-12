@@ -13,6 +13,12 @@ namespace Game.Components
 {
     class Door : Component, IInteractable
     {
+        private bool locked = false;
+
+        public Door(bool locked = false)
+        {
+            this.locked = locked;
+        }
 
         public override void Start()
         {
@@ -34,6 +40,9 @@ namespace Game.Components
             // This line makes only the player allowed to open doors.
             if (objectInteracting != null && objectInteracting.GetComponent<Player>() == null) { return; }
 
+            // if (locked)
+            // check if player has key before removing door.
+            // else
             Map.CacheInstance().PopObject(transform.position.x, transform.position.y);
 
             /*

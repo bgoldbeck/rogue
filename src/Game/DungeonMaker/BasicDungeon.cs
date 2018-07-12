@@ -20,6 +20,7 @@ namespace Game.DungeonMaker
 
         private List<List<Cell>> cells;
         private List<Room> roomList;
+        private Room lockedRoom;
         private int height;
         private int width;
         private Random rand;
@@ -38,6 +39,32 @@ namespace Game.DungeonMaker
             this.height = height;
             this.rand = new Random(seed);
             this.groupCounter = 0;
+        }
+
+        /// <summary>
+        /// Generates a dungeon based some ideas described by Bob Nystrom in his
+        /// wonderful article "Rooms and Mazes".
+        /// http://journal.stuffwithstuff.com/2014/12/21/rooms-and-mazes/with
+        /// </summary>
+        public void Generate()
+        {
+            do
+            {
+                Clear();
+                AddRooms();
+                AddPassages();
+                ConnectAreas();
+                FillInDeadEnds();
+                AddMonsters();
+                AddStartingPoint();
+            } while (CountLockedDoors() != 1);
+        }
+
+        /// <summary>
+        /// Initializes the cells to empty.
+        /// </summary>
+        private void Clear()
+        {
             this.cells = new List<List<Cell>>();
             for (int x = 0; x < width; ++x)
             {
@@ -49,21 +76,7 @@ namespace Game.DungeonMaker
                 this.cells.Add(row);
             }
             this.roomList = new List<Room>();
-        }
-
-        /// <summary>
-        /// Generates a dungeon based some ideas described by Bob Nystrom in his
-        /// wonderful article "Rooms and Mazes".
-        /// http://journal.stuffwithstuff.com/2014/12/21/rooms-and-mazes/with
-        /// </summary>
-        public void Generate()
-        {
-            AddRooms();
-            AddPassages();
-            ConnectAreas();
-            FillInDeadEnds();
-            AddMonsters();
-            AddStartingPoint();
+            lockedRoom = null;
         }
 
         /// <summary>
@@ -71,6 +84,9 @@ namespace Game.DungeonMaker
         /// </summary>
         private void AddRooms()
         {
+            // Add one locked room
+            AddLockedRoom();
+
             int attempts = 0;
             while(attempts < roomAddAttempts)
             {
@@ -79,6 +95,21 @@ namespace Game.DungeonMaker
                 else
                     attempts += 1;
             }
+        }
+
+        /// <summary>
+        /// Add one 'locked' room, containing a boss monster
+        /// </summary>
+        private void AddLockedRoom()
+        {
+            int roomWidth = rand.Next(minRoomDimension, maxRoomDimension + 1);
+            int roomHeight = rand.Next(minRoomDimension, maxRoomDimension + 1);
+            int x = rand.Next(1, this.width - roomWidth);
+            int y = rand.Next(1, this.height - roomHeight);
+            Room room = new Room(roomWidth, roomHeight, x, y);
+            Carve(room);
+            this.lockedRoom = room;
+            this.roomList.Add(room);
         }
 
         /// <summary>
@@ -358,7 +389,7 @@ namespace Game.DungeonMaker
             }
             return true;
         }
-         
+
         /// <summary>
         /// Creates a door at the given location.
         /// </summary>
@@ -366,7 +397,10 @@ namespace Game.DungeonMaker
         /// <param name="y">Y coordinate of cell to carve.</param>
         private void CarveDoor(int x, int y)
         {
-            cells[x][y].type = CellType.Door;
+            if (lockedRoom.IsNextTo(x, y))
+                 cells[x][y].type = CellType.LockedDoor;
+            else
+                cells[x][y].type = CellType.Door;
         }
 
         /// <summary>
@@ -558,6 +592,25 @@ namespace Game.DungeonMaker
             List<Coord> deadEnds = FindDeadEnds();
             Coord choice = deadEnds[rand.Next(0, deadEnds.Count)];
             cells[choice.x][choice.y].type = CellType.Start;
+        }
+
+        /// <summary>
+        /// Counts the number of locked doors on the map.
+        /// Used to determine if the 'boss' room has only one entrance.
+        /// </summary>
+        /// <returns>Returns the number of locked doors on the map.</returns>
+        private int CountLockedDoors()
+        {
+            int count = 0;
+            for (int x = 0; x < width; ++x)
+            {
+                for (int y = 0; y < height; ++y)
+                {
+                    if (cells[x][y].type == CellType.LockedDoor)
+                        ++count;
+                }
+            }
+            return count;
         }
 
         /// <summary>

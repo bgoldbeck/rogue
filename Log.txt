@@ -1,15 +1,14 @@
-7/12/2018 1:04:27 PM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/12/2018 1:04:27 PM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/12/2018 1:04:27 PM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/12/2018 1:04:27 PM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/12/2018 1:04:27 PM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/12/2018 1:04:27 PM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/12/2018 1:04:27 PM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/12/2018 1:04:27 PM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/12/2018 1:04:27 PM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/12/2018 1:04:27 PM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/12/2018 1:04:27 PM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/12/2018 1:04:27 PM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/12/2018 1:04:27 PM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/12/2018 1:04:27 PM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/12/2018 1:04:27 PM DEBUG: GameManager added all components on start.
+7/12/2018 2:30:18 PM Warning: Game object already has component of type: Game.Components.EnemyAI
+7/12/2018 2:30:18 PM Warning: Game object already has component of type: Game.Components.EnemyAI
+7/12/2018 2:30:18 PM Warning: Game object already has component of type: Game.Components.EnemyAI
+7/12/2018 2:30:18 PM Warning: Game object already has component of type: Game.Components.EnemyAI
+7/12/2018 2:30:18 PM Warning: Game object already has component of type: Game.Components.EnemyAI
+7/12/2018 2:30:18 PM Warning: Game object already has component of type: Game.Components.EnemyAI
+7/12/2018 2:30:18 PM Warning: Game object already has component of type: Game.Components.EnemyAI
+7/12/2018 2:30:18 PM Warning: Game object already has component of type: Game.Components.EnemyAI
+7/12/2018 2:30:18 PM Warning: Game object already has component of type: Game.Components.EnemyAI
+7/12/2018 2:30:18 PM Warning: Game object already has component of type: Game.Components.EnemyAI
+7/12/2018 2:30:18 PM Warning: Game object already has component of type: Game.Components.EnemyAI
+7/12/2018 2:30:18 PM Warning: Game object already has component of type: Game.Components.EnemyAI
+7/12/2018 2:30:18 PM Warning: Game object already has component of type: Game.Components.EnemyAI
+7/12/2018 2:30:18 PM DEBUG: GameManager added all components on start.
