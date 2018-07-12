@@ -62,7 +62,6 @@ namespace Game.Components
 
                 search.TargetSearch(ref target);
                 ai.MakeMove(target);
-
                 lastMoved = 0;
             }
             else

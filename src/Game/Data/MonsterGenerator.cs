@@ -30,7 +30,7 @@ namespace Game.Data
                              2 + (3 * level),       //Equation for the monster's health.
                              level,                 //Equation for the monster's armor.
                              level,                 //Equation for the monster's attack.
-                             3                      //Time between each move.
+                             2                      //Time between each move.
                              );
         }
 
