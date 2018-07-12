@@ -45,7 +45,7 @@ namespace Game.Components
             Enemy boop = (Enemy)source.GetComponent<Enemy>();
             if(boop != null)
             {
-                HUD.Append(boop.name + " attacked for " + damage + " damage.");
+                HUD.Append(boop.Name + " attacked for " + damage + " damage.");
             }
 
             hp -= damage;
@@ -58,7 +58,7 @@ namespace Game.Components
 
         public void OnDeath()
         {
-            HUD.Append(name + " has died.");
+            HUD.Append(Name + " has died.");
             return;
         }
 

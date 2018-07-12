@@ -23,6 +23,8 @@ namespace Ecs
         private String tag = "";
         private int id = -1;
 
+        public String Name { get; set; }
+
 
         public Transform transform;
         

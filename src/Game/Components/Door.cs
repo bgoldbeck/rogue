@@ -34,9 +34,24 @@ namespace Game.Components
             // This line makes only the player allowed to open doors.
             if (objectInteracting != null && objectInteracting.GetComponent<Player>() == null) { return; }
 
-            GameObject go = GameObject.FindWithTag("Map");
-            Map map = (Map)go.GetComponent(typeof(Map));
-            map.PopObject(transform.position.x, transform.position.y);
+            Map.CacheInstance().PopObject(transform.position.x, transform.position.y);
+
+            /*
+            if (locked && playerhasaccess)
+            {
+                HUD.Append(objectInteracting.Name + " unlocked and opened a door.");
+            }
+            else if (locked )
+            {
+                HUD.Append(objectInteracting.Name + " tried to open door, but is was locked.
+                
+            }
+            else
+            {
+            }
+            */
+
+            HUD.Append(objectInteracting.Name + " opened a door.");
             GameObject.Destroy(gameObject);
         }
     }

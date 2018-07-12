@@ -14,7 +14,18 @@ namespace Ecs
         public GameObject gameObject = null;
         public Transform transform = null;
 
-        
+        public String Name
+        {
+            get
+            {
+                return gameObject.Name;
+            }
+            set
+            {
+                gameObject.Name = value;
+                return;
+            }
+        }
 
         public virtual void Start()
         {

@@ -13,7 +13,7 @@ namespace Game.Components
 {
     public class Actor : Component, IMovable
     {
-        public String name = "";
+        //public String name = "";
         public String description = "";
         protected int hp = 0;
         protected int armor = 0;
@@ -21,6 +21,8 @@ namespace Game.Components
         protected int level = 0;
 
         protected Collider collider = null;
+
+        public new String Name { get; set; }
 
         public int HitPoints
         {
@@ -35,14 +37,6 @@ namespace Game.Components
             get
             {
                 return armor;
-            }
-        }
-
-        public String Name
-        {
-            get
-            {
-                return name;
             }
         }
 
@@ -68,7 +62,7 @@ namespace Game.Components
 
         public Actor(string name, string description, int level, int hp, int armor, int attack) :base()
         {
-            this.name = name;
+            this.Name = name;
             this.description = description;
             this.level = level;
             this.hp = hp;
@@ -78,6 +72,7 @@ namespace Game.Components
 
         public override void Start()
         {
+            this.gameObject.Name = this.Name;
             collider = (Collider)this.AddComponent(new Collider());
             return;
         }
@@ -95,20 +90,19 @@ namespace Game.Components
         public bool Move(int dx, int dy)
         {
             bool moved = false;
-            int newX = transform.position.x + dx;
-            int newY = transform.position.y + dy;
             Map map = (Map)GameObject.FindWithTag("Map").GetComponent(typeof(Map));
 
             // It checks the map to see if there is any collisions if the enemy moves to that square.
             if (collider.HandleCollision(dx, dy, out GameObject found) == Collider.CollisionTypes.None)
             {
                 //If there is none, it moves the actor into the new square and updates the map.
-                int oldX = transform.position.x;
-                int oldY = transform.position.y;
-                transform.Translate(dx, dy);
-                map.PopObject(oldX, oldY);
-                map.AddObject(newX, newY, gameObject);
-                moved = true;
+     
+                map.PopObject(transform.position.x, transform.position.y);
+                moved = map.AddObject(transform.position.x + dx, transform.position.y + dy, gameObject);
+                if (moved)
+                {
+                    transform.Translate(dx, dy);
+                }
             }
             else
             {

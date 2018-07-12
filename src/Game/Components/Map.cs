@@ -146,10 +146,16 @@ namespace Game.Components
             return result;
         }
 
-        public void AddObject(int x, int y, GameObject go)
+        public bool AddObject(int x, int y, GameObject go)
         {
-            //Debug.Log("AddObject called with x = " + x + ", y = " + y + ".");
+            if (objects[x][y] != null)
+            {
+                Debug.LogError("Cant add game object" + go.Name + " to map, location is already occupied.");
+                return false;
+            }
+            
             objects[x][y] = go;
+            return true;
         }
     }
 }

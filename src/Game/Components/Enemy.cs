@@ -163,7 +163,7 @@ namespace Game.Components
             this.hp -= damage;
             // Made it a little easier to add stuff to the log from anywhere in
             // the game.
-            HUD.Append("Attacked a " + name + " for " + damage + " damage.");
+            HUD.Append("Attacked a " + Name + " for " + damage + " damage.");
             if (hp <= 0)
             {
                 // Notify other components on this game object of my death.
@@ -189,7 +189,7 @@ namespace Game.Components
                     // player.IncreaseExperience(over 9000);
                 }
             }
-            HUD.Append("Killed a " + name);
+            HUD.Append("Killed a " + Name);
             // We need to remove this enemy for the map too, right?
             Map.CacheInstance().PopObject(transform.position.x, transform.position.y);
             GameObject.Destroy(this.gameObject);
