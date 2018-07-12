@@ -13,6 +13,13 @@ namespace Ecs
         public int x = 0;
         public int y = 0;
 
+        public Vec2i() { }
+        public Vec2i(Vec2i referenceToVector)
+        {
+            x = referenceToVector.x;
+            y = referenceToVector.y;
+        }
+
         /// <summary>
         /// </summary>
         /// <param name="a">The first vector</param>
