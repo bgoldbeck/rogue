@@ -14,9 +14,21 @@ namespace Game.Components
 {
     public class Player : Actor, IMovable, IDamageable
     {
+
         public Player(string name, string description, int level, int hp, int armor, int attack)
             : base(name, description, level, hp, armor, attack)
         {
+        }
+
+        public static Player MainPlayer()
+        {
+            Player player = null;
+            GameObject go = GameObject.FindWithTag("MainPlayer");
+            if (go != null)
+            {
+                player = (Player)go.GetComponent<Player>();
+            }
+            return player;
         }
 
         public override void Start()

@@ -74,7 +74,7 @@ namespace Game.Components
         {
             //If the enemy is close enough to the player, it saves the location it has seen the
             //player at and set the boolean that is has seen the player.
-            Player player = (Player)GameObject.FindWithTag("Player").GetComponent(typeof(Player));
+            Player player = Player.MainPlayer();
 
             if (Vec2i.Distance(player.transform.position, transform.position) < aggroRange)
             {
@@ -90,7 +90,7 @@ namespace Game.Components
                     target = null;
                 }
             }
-                
+            return;
         }
 
         /// <summary>

@@ -34,7 +34,7 @@ namespace Game.Components
             mapObject.transform.position.y = gameHeight - 1;
 
 
-            GameObject player = GameObject.Instantiate("Player");
+            GameObject player = GameObject.Instantiate("MainPlayer");
             player.AddComponent(new Player("Sneaky McDevious", "Thiefy rogue", 1, 10, 1, 1));
             player.AddComponent(new PlayerController());
             player.AddComponent(new Model());

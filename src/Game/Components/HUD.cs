@@ -83,7 +83,7 @@ namespace Game.Components
             Model model = (Model)gameObject.GetComponent(typeof(Model));
             model.model.Clear();
 
-            Actor player = (Actor)GameObject.FindWithTag("Player").GetComponent(typeof(Actor));
+            Actor player = Player.MainPlayer();
 
             AddTop(model);
             AddText(model, player.Name);
