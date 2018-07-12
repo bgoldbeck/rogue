@@ -61,7 +61,9 @@ namespace Game.Components
             gameWidth = ConsoleUI.MaxWidth();
             gameHeight = ConsoleUI.MaxHeight();
 
-            Camera camera = (Camera)GameObject.FindWithTag("Player").GetComponent(typeof(Camera));
+            //Camera camera = (Camera)GameObject.FindWithTag("Player").GetComponent(typeof(Camera));
+
+            Camera camera = Camera.CacheInstance();
             camera.Resize(gameWidth - hudWidth, gameHeight);
 
             GameObject hudObject = GameObject.FindWithTag("HUD");

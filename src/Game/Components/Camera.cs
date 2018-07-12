@@ -20,7 +20,12 @@ namespace Game.Components
         private const int lightRays = 1000;
         private const float lightSpeed = .5f;
         private Map map = null;
-        
+        private static Camera camera = null;
+
+        public static Camera CacheInstance()
+        {
+            return camera;
+        }
 
         public Camera(int width, int height)
         {
@@ -30,6 +35,14 @@ namespace Game.Components
 
         public override void Start()
         {
+            if (camera != null && camera != this)
+            {
+                GameObject.Destroy(this.gameObject);
+            }
+            else
+            {
+                camera = this;
+            }
             return;
         }
 
