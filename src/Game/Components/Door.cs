@@ -35,7 +35,7 @@ namespace Game.Components
             return;
         }
 
-        public void Interact(GameObject objectInteracting)
+        public void OnInteract(GameObject objectInteracting)
         {
             // This line makes only the player allowed to open doors.
             if (objectInteracting != null && objectInteracting.GetComponent<Player>() == null) { return; }
@@ -69,6 +69,16 @@ namespace Game.Components
                 GameObject.Destroy(gameObject);
                 Console.Beep(100, 100);
             }
+        }
+
+        public void OnOpened(GameObject interacter)
+        {
+            return;
+        }
+
+        public void OnLocked(GameObject interacter)
+        {
+            return;
         }
     }
 }

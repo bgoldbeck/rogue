@@ -83,7 +83,7 @@ namespace Game.Data
             int value = rand.Next() % generatorArr.Length;
             slot.AddComponent(generatorArr[value](level, mapTile, ai));
             slot.AddComponent(new Aggro());
-            slot.AddComponent(new EnemyAI());
+            slot.AddComponent(new Sound());
         }
     }
 }

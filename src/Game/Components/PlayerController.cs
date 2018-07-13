@@ -60,11 +60,9 @@ namespace Game.Components
            
             if (dx != 0 || dy != 0)
             {
-                List<IMovable> movables = gameObject.GetComponents<IMovable>();
-                foreach (IMovable movable in movables)
-                {
-                    movable.Move(dx, dy);
-                }
+                
+                gameObject.SendInterfaceMessage<IMovable>("OnMove", new object[] { dx, dy });
+
                 dx = dy = 0;
             }
            

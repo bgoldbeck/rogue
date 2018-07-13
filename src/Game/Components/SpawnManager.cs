@@ -76,7 +76,7 @@ namespace Game.Components
             go.transform.position.x = x;
             go.transform.position.y = y;
             go.AddComponent(new MapTile('d', new Color(210, 105, 30)));
-            
+            go.AddComponent(new Sound());
             return go;
         }
 

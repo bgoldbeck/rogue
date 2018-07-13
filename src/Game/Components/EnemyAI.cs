@@ -39,11 +39,11 @@ namespace Game.Components
             {
                 if (puppet.target != null)
                 {
-                    SeekMove(puppet.target, puppet.Move);
+                    SeekMove(puppet.target, puppet.OnMove);
                 }
                 else
                 {
-                    RandomMove(puppet.Move);
+                    RandomMove(puppet.OnMove);
                 }
                 lastMoved = 0;
             }

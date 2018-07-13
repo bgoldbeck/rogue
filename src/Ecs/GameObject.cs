@@ -35,6 +35,16 @@ namespace Ecs
         /// </summary>
         private GameObject() { }
 
+
+        public void SendInterfaceMessage<T>(string name, object[] parameters = null)
+        {
+            List<T> interfaceables = GetComponents<T>();
+            foreach (T interfaceable in interfaceables)
+            {
+                typeof(T).GetMethod(name).Invoke(interfaceable, parameters);
+            }
+        }
+
         /// <summary>
         /// Determines if this GameObject is active in the game.
         /// </summary>

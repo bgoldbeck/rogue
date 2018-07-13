@@ -43,11 +43,26 @@ namespace Game.Components
             return;
         }
 
-        public new void Move(int dx, int dy)
+        public void OnMove(int dx, int dy)
         {
-            if (base.Move(dx, dy))
+            if (!base.TryMove(dx, dy))
             {
-                //HUD.Append("You walked successfully.");
+                OnFailedMove();
+            }
+          
+            return;
+        }
+
+        public void OnFailedMove()
+        {
+            List<IMovable> movables = gameObject.GetComponents<IMovable>();
+            foreach (IMovable movable in movables)
+            {
+                if (movable != this)
+                { 
+                    movable.OnFailedMove();
+                }
+
             }
             return;
         }

@@ -50,6 +50,7 @@ namespace Game.Components
             player.AddComponent(new Camera(gameWidth - hudWidth, gameHeight));
             player.AddComponent(new MapTile('$', new Color(255, 255, 255), true));
             player.AddComponent(new Inventory());
+            player.AddComponent(new Sound());
             
             // Setup HUD for stats and info
             GameObject hud = GameObject.Instantiate("HUD");

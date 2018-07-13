@@ -12,7 +12,7 @@ using Game.Interfaces;
 
 namespace Game.Components
 {
-    public class Actor : Component, IMovable
+    public class Actor : Component
     {
         //public String name = "";
         public String description = "";
@@ -89,7 +89,7 @@ namespace Game.Components
             return 0;
         }
 
-        public bool Move(int dx, int dy)
+        public bool TryMove(int dx, int dy)
         {
             bool moved = false;
             Map map = (Map)GameObject.FindWithTag("Map").GetComponent(typeof(Map));
@@ -107,12 +107,6 @@ namespace Game.Components
                     transform.Translate(dx, dy);
                 }
             }
-            else if (type == Collider.CollisionTypes.Wall)
-            {
-                // Play a bump sound if it was the player hitting the wall
-                if (gameObject == Player.MainPlayer().gameObject)
-                    Console.Beep(50, 100);
-            }
             else
             {
                 // If there is a collision, the actor doesn't move. If this collision is with a damageable, a
@@ -123,7 +117,7 @@ namespace Game.Components
                     List<IInteractable> interactables = found.GetComponents<IInteractable>();
                     foreach (IInteractable interactable in interactables)
                     {
-                        interactable.Interact(this.gameObject);
+                        interactable.OnInteract(this.gameObject);
                     }
 
                     // It's also possible that we collided with something damageable.

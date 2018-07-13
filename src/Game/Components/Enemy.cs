@@ -80,7 +80,7 @@ namespace Game.Components
             HUD.Append("Attacked " + Name + " for " + damage + " damage.");
 
             // Play a rudimentary hit sound
-            Console.Beep(400, 100);
+            //Console.Beep(400, 100);
 
             if (hp <= 0)
             {
@@ -111,14 +111,14 @@ namespace Game.Components
             GameObject.Destroy(this.gameObject);
 
             // Play death sound
-            Console.Beep(200, 100);
+            //Console.Beep(200, 100);
 
             return;
         }
 
-        public new void Move(int dx, int dy)
+        public void OnMove(int dx, int dy)
         {
-            base.Move(dx, dy);
+            base.TryMove(dx, dy);
             return;
         }
 
@@ -130,5 +130,9 @@ namespace Game.Components
             return damage;
         }
 
+        public void OnFailedMove()
+        {
+            return;
+        }
     }
 }
