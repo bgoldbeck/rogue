@@ -54,10 +54,14 @@ namespace Game.Components
 
         public void ApplyDamage(GameObject source, int damage)
         {
-            Enemy boop = (Enemy)source.GetComponent<Enemy>();
-            if(boop != null)
+            Enemy attacker = (Enemy)source.GetComponent<Enemy>();
+
+            //Minuses the enemie's armor from the damage and makes sure it doesn't go less then 0.
+            damage = (damage < armor) ? 0 : damage - armor;
+
+            if (attacker != null)
             {
-                HUD.Append(boop.Name + " attacked for " + damage + " damage.");
+                HUD.Append(attacker.Name + " attacked for " + damage + " damage.");
             }
 
             hp -= damage;

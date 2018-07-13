@@ -61,46 +61,53 @@ namespace Game.Components
             return;
         }
 
-        private bool CheckLine(Vec2i playerLocation, Vec2i enemyLocation)
+        private bool CheckLine(Vec2i targeterLocation, Vec2i targetLocation)
         {
             Map map = Map.CacheInstance();
+            bool hitObject = false;
+
             if (map == null)
             {
                 Debug.LogWarning("Map not found.");
                 return false;
             }
-            if (enemyLocation.x == playerLocation.x)
+
+            if(Math.Abs(targetLocation.x - targeterLocation.x) > Math.Abs(targetLocation.y - targeterLocation.y))
             {
-                int slopeY = (playerLocation.y < enemyLocation.y) ? 1 : -1;
-                int currentY = slopeY;
-                while (playerLocation.y + currentY != enemyLocation.y)
-                {
-                    if (map.PeekObject(enemyLocation.x, playerLocation.y + currentY) != null)
-                    {
-                        return false;
-                    }
-                    currentY += slopeY;
-                }
-                return true;
-            }
-            else
-            {
-                double slopeY = (enemyLocation.y - playerLocation.y + 0.0) / (enemyLocation.x - playerLocation.x);
+                double slopeY = (targetLocation.y - targeterLocation.y + 0.0) / (targetLocation.x - targeterLocation.x);
                 double currentY = slopeY;
-                int slopeX = (playerLocation.x < enemyLocation.x) ? 1 : -1;
+                int slopeX = (targeterLocation.x < targetLocation.x) ? 1 : -1;
                 int currentX = slopeX;
 
-                while (playerLocation.x + currentX != enemyLocation.x)
+                while (targeterLocation.x + currentX != targetLocation.x && !hitObject)
                 {
-                    if (map.PeekObject(playerLocation.x + currentX, playerLocation.y + (int)Math.Round(currentY, 0)) != null)
+                    if (map.PeekObject(targeterLocation.x + currentX, targeterLocation.y + (int)Math.Round(currentY, 0)) != null)
                     {
-                        return false;
+                        hitObject = true;
                     }
                     currentY += slopeY;
                     currentX += slopeX;
                 }
-                return true;
             }
+            else
+            {
+                double slopeX = (targetLocation.x - targeterLocation.x + 0.0) / (targetLocation.y - targeterLocation.y);
+                double currentX = slopeX;
+                int slopeY = (targeterLocation.y < targetLocation.y) ? 1 : -1;
+                int currentY = slopeY;
+
+                while (targeterLocation.y + currentY != targetLocation.y && !hitObject)
+                {
+                    if (map.PeekObject(targeterLocation.x + (int)Math.Round(currentX,0), targeterLocation.y + currentY) != null)
+                    {
+                        hitObject = true;
+                    }
+                    currentY += slopeY;
+                    currentX += slopeX;
+                }
+            }
+
+            return !hitObject;
         }
     }
 }
