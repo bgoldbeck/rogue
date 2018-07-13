@@ -54,7 +54,9 @@ namespace Game.Components
 
         public void Log(String line)
         {
-            log.Add(line);
+            List<String> wrapped = WordWrap(line);
+            foreach (String str in wrapped)
+                log.Add(str);
         }
 
         public void Resize(int width, int height)
@@ -87,10 +89,10 @@ namespace Game.Components
 
             AddTop(model);
             AddText(model, player.Name);
-            AddText(model, "Level: " + player.Level);
-            AddText(model, "Health: " + player.HitPoints);
-            AddText(model, "Attack: " + player.Attack);
-            AddText(model, "Armor: " + player.Armor);
+            AddText(model, "  Level: " + player.Level);
+            AddText(model, "  Health: " + player.HitPoints);
+            AddText(model, "  Attack: " + player.Attack);
+            AddText(model, "  Armor: " + player.Armor);
             AddDivider(model);
 
             // Display inventory
@@ -102,37 +104,28 @@ namespace Game.Components
             }
 
             AddDivider(model);
-            AddLog(model);
+
+            // Displaya log. Must be the last item in the HUD for length to calculate correctly.
+            AddLog(model); 
+
             AddBottom(model);
 
             return;
         }
 
+        /// <summary>
+        /// Function to grab enough recent log lines to fill the space
+        /// </summary>
+        /// <param name="model">Model to add to</param>
         private void AddLog(Model model)
         {
-            log.Reverse();
             int linesToFill = height - model.model.Count - 1;
-            List<List<String>> logLines = new List<List<String>>();
-            for (int i = 0; i < linesToFill; ++i)
+            for (int i = log.Count - linesToFill; i < log.Count; ++i)
             {
-                if (i > log.Count - 1)
-                    break;
-                logLines.Add(WordWrap(log[i]));
+                if (i < 0)
+                    continue;
+                AddText(model, log[i]);
             }
-
-            int count = 0;
-            for (int i = logLines.Count - 1; i >= 0; --i)
-            {
-                for (int j = 0; j < logLines[i].Count; ++j)
-                {
-                    if (count < linesToFill)
-                    {
-                        AddText(model, logLines[i][j]);
-                        ++count;
-                    }
-                }
-            }
-            log.Reverse();
         }
 
         private void AddTop(Model model)

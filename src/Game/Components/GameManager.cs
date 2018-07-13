@@ -14,7 +14,7 @@ namespace Game.Components
 {
     class GameManager : Component
     {
-        private const int hudWidth = 35;
+        private const int hudWidth = 36;
         public int gameWidth;
         public int gameHeight;
 
