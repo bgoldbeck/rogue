@@ -41,7 +41,7 @@ namespace Game.Components
         public static GameObject CreateBoss(int x, int y, int level)
         {
             GameObject go = GameObject.Instantiate("Boss");
-            MonsterGenerator.Fill(rand, level + 2, go);
+            MonsterGenerator.Fill(rand, level, go);
             go.transform.position.x = x;
             go.transform.position.y = y;
             Inventory i = (Inventory)go.AddComponent(new Inventory());
