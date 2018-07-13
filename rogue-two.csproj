@@ -5,6 +5,10 @@
     <RootNamespace>rogue-two</RootNamespace>
     <ApplicationIcon>assets\rogue-two.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Remove="XUnitTest\**" />
     <EmbeddedResource Remove="XUnitTest\**" />

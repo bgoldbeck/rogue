@@ -84,7 +84,7 @@ namespace Game
                 {
                     Update();
                     Render();
-                    GameObject.ClearDeadGameObjects();
+                    GameObject.ForceFlush();
                 }
 
                 Time.Update();
@@ -108,14 +108,7 @@ namespace Game
                 width = newWidth;
                 height = newHeight;
 
-                Dictionary<int, GameObject> map = GameObject.GetGameObjects();
-                foreach (KeyValuePair<int, GameObject> entry in map)
-                {
-                    if (entry.Value.IsActive())
-                    {
-                        entry.Value.OnResize();
-                    }
-                }
+                GameObject.OnResize();
                 Render();
             }
             return;
@@ -126,37 +119,14 @@ namespace Game
         /// </summary>
         public void Update()
         {
-
-            Dictionary<int, GameObject> map = GameObject.GetGameObjects();
-            foreach (KeyValuePair<int, GameObject> entry in map)
-            {
-                if (entry.Value.IsActive())
-                {
-                    entry.Value.Update();
-                }
-            }
-
-            foreach (KeyValuePair<int, GameObject> entry in map)
-            {
-                if (entry.Value.IsActive())
-                {
-                    entry.Value.LateUpdate();
-                }
-            }
-
+            GameObject.Update();
+            GameObject.LateUpdate();
             return;
         }
 
         public void Render()
         {
-            Dictionary<int, GameObject> map = GameObject.GetGameObjects();
-            foreach (KeyValuePair<int, GameObject> entry in map)
-            {
-                if (entry.Value.IsActive())
-                {
-                    entry.Value.Render();
-                }
-            }
+            GameObject.Render();
 
             ConsoleUI.Render();
             ConsoleUI.ClearBuffer();
