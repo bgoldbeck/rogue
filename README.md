@@ -21,8 +21,6 @@ The software is set up as a Visual Studio 2017 solution.
 4. Open the solution `.sln` file in Visual Studio 2017.
 5. Run the project with `F5`.
 
-A "FluentFTP.dll" should be downloaded by VS for managing and providing the FTP protocol interface. [FluentFTP](https://github.com/robinrodricks/FluentFTP)
-
 ### Linux ###
 
 1. Clone the project. `git clone https://github.com/bgoldbeck/cs410-agile.git`
