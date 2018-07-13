@@ -13,6 +13,6 @@ namespace Game.Interfaces
     {
         void ApplyDamage(GameObject source, int damage);
 
-        void OnDeath();
+        void OnDeath(GameObject source);
     }
 }

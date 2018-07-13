@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Game.DungeonMaker
 {
-    public enum CellType { Wall, Room, Passage, Door, LockedDoor, Monster, Boss, Start }
+    public enum CellType { Wall, Room, Passage, Door, LockedDoor, KeyMonster, Monster, Boss, Start }
 
     public class Cell
     {
@@ -49,6 +49,8 @@ namespace Game.DungeonMaker
                     return "l";
                 case CellType.Wall:
                     return "w";
+                case CellType.KeyMonster:
+                    return "k";
                 case CellType.Monster:
                     return "m";
                 case CellType.Boss:

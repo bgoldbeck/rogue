@@ -14,7 +14,7 @@ namespace Game.Components
 {
     class GameManager : Component
     {
-        private const int hudWidth = 33;
+        private const int hudWidth = 35;
         public int gameWidth;
         public int gameHeight;
 
@@ -44,12 +44,13 @@ namespace Game.Components
             map.AddObject(map.startingX, map.startingY, player);
             player.AddComponent(new Camera(gameWidth - hudWidth, gameHeight));
             player.AddComponent(new MapTile('$', new Color(255, 255, 255), true));
+            player.AddComponent(new Inventory());
             
             // Setup HUD for stats and info
             GameObject hud = GameObject.Instantiate("HUD");
             hud.AddComponent(new HUD(hudWidth, gameHeight));
             Model hudModel = (Model)hud.AddComponent(new Model());
-            hudModel.color.Set(180, 0, 180);
+            hudModel.color.Set(180, 180, 180);
             hud.transform.position.x = gameWidth - hudWidth;
             hud.transform.position.y = gameHeight - 1;
 

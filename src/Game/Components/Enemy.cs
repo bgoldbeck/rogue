@@ -15,7 +15,7 @@ namespace Game.Components
     class Enemy : Actor, IDamageable, IMovable
     {
         public Transform target = null;
-
+        
         public Enemy():base()
         {
             
@@ -85,29 +85,27 @@ namespace Game.Components
                 List<IDamageable> damageables = gameObject.GetComponents<IDamageable>();
                 foreach (IDamageable damageable in damageables)
                 {
-                    damageable.OnDeath();
+                    damageable.OnDeath(source);
                 }
             }
             return;
         }
 
-        public void OnDeath()
+        public void OnDeath(GameObject source)
         {
-            // Players gains exp n stuff for killing, right?
-            GameObject go = GameObject.FindWithTag("Player");
-            if (go != null)
-            {
-                Player player = (Player)go.GetComponent<Player>();
-                if (player != null)
-                {
-                    // player.IncreaseExperience(over 9000);
-                }
-            }
-            HUD.Append("Killed a " + Name);
+            // Killer gains exp n stuff for killing, right?
+            
+            HUD.Append(source.Name + " killed " + Name);
+            
             // We need to remove this enemy for the map too, right?
             Map.CacheInstance().PopObject(transform.position.x, transform.position.y);
+
+            // Transfer inventory items from killed actor
+            Inventory killedInventory = (Inventory)gameObject.GetComponent<Inventory>();
+            killedInventory.MergeWith((Inventory)source.GetComponent<Inventory>());
+
             GameObject.Destroy(this.gameObject);
-            // Spawn items on death?, or maybe a blood splat?
+
             return;
         }
 
