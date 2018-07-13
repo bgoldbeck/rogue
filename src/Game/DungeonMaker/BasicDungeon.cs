@@ -56,6 +56,7 @@ namespace Game.DungeonMaker
                 ConnectAreas();
                 FillInDeadEnds();
                 AddMonsters();
+                GiveKeyToMonster();
                 AddStartingPoint();
             } while (CountLockedDoors() != 1);
         }
@@ -556,6 +557,11 @@ namespace Game.DungeonMaker
                 cells[x+1][y].type == CellType.Door ||
                 cells[x][y+1].type == CellType.Door)
                 return false;
+            if (cells[x - 1][y].type == CellType.LockedDoor ||
+                cells[x][y - 1].type == CellType.LockedDoor ||
+                cells[x + 1][y].type == CellType.LockedDoor ||
+                cells[x][y + 1].type == CellType.LockedDoor)
+                return false;
             int passageCount = 0;
             if (cells[x - 1][y].type == CellType.Passage)
                 ++passageCount;
@@ -573,18 +579,46 @@ namespace Game.DungeonMaker
             int blockCount = 0;
             foreach (Room room in roomList)
             {
-                for (int x = 0; x < room.width; ++x)
+                // If it's the locked room, add one boss in the center
+                if (room == lockedRoom)
                 {
-                    for (int y = 0; y < room.height; ++y)
+                    cells[room.x + room.width / 2][room.y + room.height / 2].type = CellType.Boss;
+                }
+                else // Otherwise add some monsters now and then
+                {
+                    for (int x = 0; x < room.width; ++x)
                     {
-                        if (1 / (float)blockCount++ < monstersPerBlock)
+                        for (int y = 0; y < room.height; ++y)
                         {
-                            cells[room.x + x][room.y + y].type = CellType.Monster;
-                            blockCount = 0;
+                            if (1 / (float)blockCount++ < monstersPerBlock)
+                            {
+                                cells[room.x + x][room.y + y].type = CellType.Monster;
+                                blockCount = 0;
+                            }
                         }
                     }
                 }
             }
+        }
+
+        private void GiveKeyToMonster()
+        {
+            // Make list of monster cells
+            List<Coord> monsters = new List<Coord>();
+            for (int x = 1; x < this.width - 1; ++x)
+            {
+                for (int y = 1; y < this.height - 1; ++y)
+                {
+                    if (cells[x][y].type == CellType.Monster)
+                    {
+                        monsters.Add(new Coord(x, y));
+                    }
+                }
+            }
+
+            // Give key to random monster
+            Coord choice = monsters[rand.Next(0, monsters.Count)];
+            cells[choice.x][choice.y].type = CellType.KeyMonster;
         }
 
         private void AddStartingPoint()

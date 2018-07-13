@@ -92,7 +92,15 @@ namespace Game.Components
             AddText(model, "Attack: " + player.Attack);
             AddText(model, "Armor: " + player.Armor);
             AddDivider(model);
-            AddText(model, "Inventory maybe ?");
+
+            // Display inventory
+            AddText(model, "Inventory:");
+            Inventory inv = (Inventory)player.GetComponent<Inventory>();
+            foreach (Item it in inv.inventory)
+            {
+                AddText(model, "  " + it.name);
+            }
+
             AddDivider(model);
             AddLog(model);
             AddBottom(model);

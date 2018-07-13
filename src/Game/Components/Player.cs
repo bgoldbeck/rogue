@@ -63,14 +63,14 @@ namespace Game.Components
             hp -= damage;
             if(hp <= 0)
             {
-                OnDeath();
+                OnDeath(source);
             }
             return;
         }
 
-        public void OnDeath()
+        public void OnDeath(GameObject source)
         {
-            HUD.Append(Name + " has died.");
+            HUD.Append(source.Name + " killed " + Name + " to death.");
             return;
         }
 

@@ -38,12 +38,33 @@ namespace Game.Components
             return;
         }
 
-        public static GameObject CreateEnemy(int x, int y, int level)
+        public static GameObject CreateBoss(int x, int y, int level)
+        {
+            GameObject go = GameObject.Instantiate("Boss");
+            MonsterGenerator.Fill(rand, level + 2, go);
+            go.transform.position.x = x;
+            go.transform.position.y = y;
+            Inventory i = (Inventory)go.AddComponent(new Inventory());
+            i.Add(new Item("The Ultimate Thing"));
+            MapTile mt = (MapTile)go.GetComponent<MapTile>();
+            mt.character = 'B';
+
+            return go;
+        }
+
+        public static GameObject CreateEnemy(int x, int y, int level, bool hasKey = false)
         {
             GameObject go = GameObject.Instantiate("Monster");
             MonsterGenerator.Fill(rand, level, go);
             go.transform.position.x = x;
             go.transform.position.y = y;
+            Inventory i = (Inventory)go.AddComponent(new Inventory());
+            if (hasKey)
+            {
+                i.Add(new Item("Key"));
+                MapTile m = (MapTile)go.GetComponent<MapTile>();
+                m.character = 'k';
+            }
 
             return go;
         }

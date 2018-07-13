@@ -110,10 +110,10 @@ namespace Game.Components
                             objects[x][y] = SpawnManager.CreateEnemy(x, y, level);
                             break;
                         case "k":
-                            objects[x][y] = SpawnManager.CreateEnemy(x, y, level);
+                            objects[x][y] = SpawnManager.CreateEnemy(x, y, level, true);
                             break;
                         case "b":
-                            objects[x][y] = SpawnManager.CreateEnemy(x, y, level);
+                            objects[x][y] = SpawnManager.CreateBoss(x, y, level);
                             break;
                         case "w":
                             objects[x][y] = SpawnManager.CreateWall(x, y);

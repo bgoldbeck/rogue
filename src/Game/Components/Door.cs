@@ -40,28 +40,31 @@ namespace Game.Components
             // This line makes only the player allowed to open doors.
             if (objectInteracting != null && objectInteracting.GetComponent<Player>() == null) { return; }
 
-            // if (locked)
-            // check if player has key before removing door.
-            // else
-            Map.CacheInstance().PopObject(transform.position.x, transform.position.y);
-
-            /*
-            if (locked && playerhasaccess)
+            bool destroyDoor = false;
+            if (locked)
             {
-                HUD.Append(objectInteracting.Name + " unlocked and opened a door.");
-            }
-            else if (locked )
-            {
-                HUD.Append(objectInteracting.Name + " tried to open door, but is was locked.
-                
+                Inventory inv = (Inventory)Player.MainPlayer().GetComponent<Inventory>();
+                if (inv.Find("Key") != null)
+                {
+                    inv.Remove("Key");
+                    Map.CacheInstance().PopObject(transform.position.x, transform.position.y);
+                    HUD.Append(objectInteracting.Name + " unlocked and opened a door.");
+                    destroyDoor = true;
+                }
+                else
+                {
+                    HUD.Append(objectInteracting.Name + " tried to open door, but is was locked.");
+                }
             }
             else
             {
+                Map.CacheInstance().PopObject(transform.position.x, transform.position.y);
+                HUD.Append(objectInteracting.Name + " opened a door.");
+                destroyDoor = true;
             }
-            */
 
-            HUD.Append(objectInteracting.Name + " opened a door.");
-            GameObject.Destroy(gameObject);
+            if (destroyDoor)
+                GameObject.Destroy(gameObject);
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Ecs;
+using Game;
 using Game.Interfaces;
 
 namespace Game.Components
@@ -19,6 +20,7 @@ namespace Game.Components
         protected int armor = 0;
         protected int attack = 0;
         protected int level = 0;
+        protected List<Item> inventory = new List<Item>();
 
         protected Collider collider = null;
 
