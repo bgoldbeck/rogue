@@ -32,8 +32,15 @@ namespace Game.Components
 
         public void MergeWith(Inventory inv)
         {
+
             foreach (Item i in inventory)
+            {
                 inv.Add(i);
+            }
+            if (inventory.Count > 0)
+            {
+                Console.Beep(3000, 100);
+            }
             inventory.Clear();
         }
 

@@ -67,7 +67,11 @@ namespace Game.Components
                 Debug.LogError("Map game object wasn't found.");
             }
             // Return either no collision or some active object.
-            return found == null ? CollisionTypes.None : CollisionTypes.ActiveObject;
+            if (found == null)
+                return CollisionTypes.None;
+            if (found.GetComponent<Wall>() != null)
+                return CollisionTypes.Wall;
+            return CollisionTypes.ActiveObject;
         }
     }
 }

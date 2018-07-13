@@ -78,6 +78,10 @@ namespace Game.Components
             // Made it a little easier to add stuff to the log from anywhere in
             // the game.
             HUD.Append("Attacked " + Name + " for " + damage + " damage.");
+
+            // Play a rudimentary hit sound
+            Console.Beep(400, 100);
+
             if (hp <= 0)
             {
                 // Notify other components on this game object of my death.
@@ -105,6 +109,9 @@ namespace Game.Components
             killedInventory.MergeWith((Inventory)source.GetComponent<Inventory>());
 
             GameObject.Destroy(this.gameObject);
+
+            // Play death sound
+            Console.Beep(200, 100);
 
             return;
         }

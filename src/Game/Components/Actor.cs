@@ -94,17 +94,24 @@ namespace Game.Components
             bool moved = false;
             Map map = (Map)GameObject.FindWithTag("Map").GetComponent(typeof(Map));
 
+            Collider.CollisionTypes type = collider.HandleCollision(dx, dy, out GameObject found);
             // It checks the map to see if there is any collisions if the enemy moves to that square.
-            if (collider.HandleCollision(dx, dy, out GameObject found) == Collider.CollisionTypes.None)
+            if (type == Collider.CollisionTypes.None)
             {
                 //If there is none, it moves the actor into the new square and updates the map.
-     
+
                 map.PopObject(transform.position.x, transform.position.y);
                 moved = map.AddObject(transform.position.x + dx, transform.position.y + dy, gameObject);
                 if (moved)
                 {
                     transform.Translate(dx, dy);
                 }
+            }
+            else if (type == Collider.CollisionTypes.Wall)
+            {
+                // Play a bump sound if it was the player hitting the wall
+                if (gameObject == Player.MainPlayer().gameObject)
+                    Console.Beep(50, 100);
             }
             else
             {

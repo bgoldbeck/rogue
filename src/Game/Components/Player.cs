@@ -65,6 +65,10 @@ namespace Game.Components
             }
 
             hp -= damage;
+
+            // Play damage sound for player
+            Console.Beep(375, 100);
+
             if(hp <= 0)
             {
                 OnDeath(source);
