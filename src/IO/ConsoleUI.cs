@@ -118,7 +118,7 @@ namespace IO
                 StringBuilder sb = new StringBuilder();
                 for (int x = 0; x < width; ++x)
                 {
-                    if (colorEnabled) { 
+                    if (colorEnabled && isANSISupported) { 
                         sb.Append(colorBuffer[x][y]);
                     }
                     sb.Append(buffer[x][y]);

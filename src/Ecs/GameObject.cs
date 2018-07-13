@@ -19,6 +19,8 @@ namespace Ecs
 
 
         private List<Component> components = new List<Component>();
+        private List<Component> componentsToRemove = new List<Component>();
+
         private bool isActive = true;
         private String tag = "";
         private int id = -1;
@@ -87,15 +89,19 @@ namespace Ecs
         /// It calls the Update() method on every Component attached to this
         /// GameObject.
         /// </summary>
-        public void Update()
+        public static void Update()
         {
-            foreach (Component component in components)
+            foreach (KeyValuePair<int, GameObject> entry in gameObjectsIdMap)
             {
-                if (component.IsActive())
+                foreach (Component component in entry.Value.GetComponents<Component>())
                 {
-                    component.Update();
+                    if (component.IsActive())
+                    {
+                        component.Update();
+                    }
                 }
             }
+
             return;
         }
 
@@ -104,28 +110,35 @@ namespace Ecs
         /// after Update() has been invoked on each GameObject. It will call LateUpdate()
         /// on every Component attached to this GameObject.
         /// </summary>
-        public void LateUpdate()
+        public static void LateUpdate()
         {
-            foreach (Component component in components)
+            foreach (KeyValuePair<int, GameObject> entry in gameObjectsIdMap)
             {
-                if (component.IsActive())
+                foreach (Component component in entry.Value.GetComponents<Component>())
                 {
-                    component.LateUpdate();
+                    if (component.IsActive())
+                    {
+                        component.LateUpdate();
+                    }
                 }
             }
+
             return;
         }
 
         /// <summary>
         /// This function is called by the Application if the window was resized.
         /// </summary>
-        public void OnResize()
+        public static void OnResize()
         {
-            foreach (Component component in components)
+            foreach (KeyValuePair<int, GameObject> entry in gameObjectsIdMap)
             {
-                if (component.IsActive())
+                foreach (Component component in entry.Value.GetComponents<Component>())
                 {
-                    component.OnResize();
+                    if (component.IsActive())
+                    {
+                        component.OnResize();
+                    }
                 }
             }
             return;
@@ -135,14 +148,30 @@ namespace Ecs
         /// Called by the Application on every updated frame during the
         /// rendering phase. It will call Render() on every Component attached to this GameObject.
         /// </summary>
-        public void Render()
+        public static void Render()
         {
-            foreach (Component component in components)
+            foreach (KeyValuePair<int, GameObject> entry in gameObjectsIdMap)
             {
-                if (component.IsActive())
+                foreach (Component component in entry.Value.GetComponents<Component>())
                 {
-                    component.Render();
+                    if (component.IsActive())
+                    {
+                        component.Render();
+                    }
                 }
+            }
+
+            return;
+        }
+
+        /// <summary>
+        /// Remove all components from this game object that are considered to be dead.
+        /// </summary>
+        private void RemoveDeadComponents()
+        {
+            foreach (Component component in componentsToRemove)
+            {
+                components.Remove(component);
             }
             return;
         }
@@ -188,8 +217,8 @@ namespace Ecs
                 component.transform = this.transform;
 
                 this.components.Add(component);
-                component.Start();
                 component.SetActive(true);
+                component.Start();
 
             }
             else
@@ -250,13 +279,7 @@ namespace Ecs
             return this.id;
         }
 
-        public void RemoveComponent(Type type)
-        {
-            // No idea if this works?
-            components.Remove((Component)Activator.CreateInstance(type));
-            return;
-        }
-
+       
         public static GameObject Instantiate()
         {
             GameObject go = new GameObject();
@@ -298,15 +321,23 @@ namespace Ecs
             return go;
         }
 
-
+        public void Destroy(Component component)
+        {
+            if (component != null)
+            { 
+                componentsToRemove.Add(component);
+            }
+            return;
+        }
+        
         public static void Destroy(GameObject go)
         {      
             if (go != null)
             { 
                 // Remove all the children game objects along with this game object.
-                foreach (Transform trans in go.transform.children)
+                foreach (Transform t in go.transform.children)
                 {
-                    Destroy(go);
+                    Destroy(t.gameObject);
                 }
                 if (go.tag != "")
                 {
@@ -325,13 +356,40 @@ namespace Ecs
         /// <summary>
         /// 
         /// </summary>
-        public static void ClearDeadGameObjects()
+        public static void ForceFlush()
+        {
+            ClearDeadGameObjects();
+
+            foreach (KeyValuePair<int, GameObject> entry in gameObjectsIdMap)
+            {
+                entry.Value.ClearDeadComponents();
+            }
+            return;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void ClearDeadComponents()
+        {
+            foreach (Component component in componentsToRemove)
+            {
+                components.Remove(component);
+            }
+            return;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private static void ClearDeadGameObjects()
         {
             foreach (int id in deadList)
             {
                 gameObjectsIdMap.Remove(id);
             }
             deadList.Clear();
+
             return;
         }
 
@@ -357,10 +415,6 @@ namespace Ecs
             return null;
         }
 
-        public static Dictionary<int, GameObject> GetGameObjects()
-        {
-            return gameObjectsIdMap;
-        }
     }
 
 
