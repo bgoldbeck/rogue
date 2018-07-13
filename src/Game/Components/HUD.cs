@@ -63,7 +63,7 @@ namespace Game.Components
         {
             this.width = width;
             this.height = height;
-            //Update();
+            Update();
             return;
         }
 

@@ -1,13 +1,63 @@
-7/12/2018 10:18:59 PM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/12/2018 10:18:59 PM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/12/2018 10:18:59 PM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/12/2018 10:18:59 PM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/12/2018 10:18:59 PM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/12/2018 10:18:59 PM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/12/2018 10:18:59 PM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/12/2018 10:18:59 PM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/12/2018 10:18:59 PM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/12/2018 10:18:59 PM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/12/2018 10:18:59 PM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/12/2018 10:18:59 PM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/12/2018 10:18:59 PM DEBUG: GameManager added all components on start.
+7/13/2018 6:39:43 AM Warning: Game object already has component of type: Game.Components.EnemyAI
+7/13/2018 6:39:43 AM Warning: Game object already has component of type: Game.Components.EnemyAI
+7/13/2018 6:39:43 AM Warning: Game object already has component of type: Game.Components.EnemyAI
+7/13/2018 6:39:43 AM Warning: Game object already has component of type: Game.Components.EnemyAI
+7/13/2018 6:39:43 AM Warning: Game object already has component of type: Game.Components.EnemyAI
+7/13/2018 6:39:43 AM Warning: Game object already has component of type: Game.Components.EnemyAI
+7/13/2018 6:39:43 AM Warning: Game object already has component of type: Game.Components.EnemyAI
+7/13/2018 6:39:43 AM Warning: Game object already has component of type: Game.Components.EnemyAI
+7/13/2018 6:39:43 AM Warning: Game object already has component of type: Game.Components.EnemyAI
+7/13/2018 6:39:43 AM Warning: Game object already has component of type: Game.Components.EnemyAI
+7/13/2018 6:39:43 AM Warning: Game object already has component of type: Game.Components.EnemyAI
+7/13/2018 6:39:43 AM Warning: Game object already has component of type: Game.Components.EnemyAI
+7/13/2018 6:39:43 AM DEBUG: GameManager added all components on start.
+7/13/2018 6:39:47 AM DEBUG: Resized game to 119 x 29.
+7/13/2018 6:39:48 AM DEBUG: Resized game to 110 x 23.
+7/13/2018 6:39:48 AM DEBUG: Resized game to 109 x 22.
+7/13/2018 6:39:48 AM DEBUG: Resized game to 108 x 22.
+7/13/2018 6:39:48 AM DEBUG: Resized game to 107 x 22.
+7/13/2018 6:39:48 AM DEBUG: Resized game to 107 x 21.
+7/13/2018 6:39:48 AM DEBUG: Resized game to 106 x 20.
+7/13/2018 6:40:19 AM DEBUG: Resized game to 107 x 20.
+7/13/2018 6:40:20 AM DEBUG: Resized game to 108 x 20.
+7/13/2018 6:40:22 AM DEBUG: Resized game to 108 x 21.
+7/13/2018 6:40:22 AM DEBUG: Resized game to 108 x 23.
+7/13/2018 6:40:22 AM DEBUG: Resized game to 108 x 25.
+7/13/2018 6:40:23 AM DEBUG: Resized game to 108 x 24.
+7/13/2018 6:40:23 AM DEBUG: Resized game to 108 x 23.
+7/13/2018 6:40:24 AM DEBUG: Resized game to 108 x 22.
+7/13/2018 6:40:24 AM DEBUG: Resized game to 108 x 21.
+7/13/2018 6:40:24 AM DEBUG: Resized game to 108 x 20.
+7/13/2018 6:40:24 AM DEBUG: Resized game to 108 x 19.
+7/13/2018 6:40:24 AM DEBUG: Resized game to 108 x 18.
+7/13/2018 6:40:24 AM DEBUG: Resized game to 108 x 17.
+7/13/2018 6:40:25 AM DEBUG: Resized game to 108 x 16.
+7/13/2018 6:40:25 AM DEBUG: Resized game to 108 x 15.
+7/13/2018 6:40:25 AM DEBUG: Resized game to 108 x 14.
+7/13/2018 6:40:25 AM DEBUG: Resized game to 108 x 13.
+7/13/2018 6:40:26 AM DEBUG: Resized game to 108 x 12.
+7/13/2018 6:40:26 AM DEBUG: Resized game to 108 x 11.
+7/13/2018 6:40:26 AM DEBUG: Resized game to 108 x 10.
+7/13/2018 6:40:27 AM DEBUG: Resized game to 108 x 9.
+7/13/2018 6:40:27 AM DEBUG: Resized game to 108 x 8.
+7/13/2018 6:40:27 AM DEBUG: Resized game to 108 x 7.
+7/13/2018 6:40:27 AM DEBUG: Resized game to 108 x 8.
+7/13/2018 6:40:28 AM DEBUG: Resized game to 108 x 9.
+7/13/2018 6:40:28 AM DEBUG: Resized game to 108 x 10.
+7/13/2018 6:40:28 AM DEBUG: Resized game to 108 x 11.
+7/13/2018 6:40:28 AM DEBUG: Resized game to 108 x 12.
+7/13/2018 6:40:28 AM DEBUG: Resized game to 108 x 13.
+7/13/2018 6:40:29 AM DEBUG: Resized game to 108 x 14.
+7/13/2018 6:40:29 AM DEBUG: Resized game to 108 x 15.
+7/13/2018 6:40:29 AM DEBUG: Resized game to 108 x 16.
+7/13/2018 6:40:29 AM DEBUG: Resized game to 108 x 17.
+7/13/2018 6:40:29 AM DEBUG: Resized game to 108 x 19.
+7/13/2018 6:40:29 AM DEBUG: Resized game to 108 x 22.
+7/13/2018 6:40:29 AM DEBUG: Resized game to 108 x 23.
+7/13/2018 6:40:29 AM DEBUG: Resized game to 108 x 24.
+7/13/2018 6:40:29 AM DEBUG: Resized game to 108 x 26.
+7/13/2018 6:40:29 AM DEBUG: Resized game to 108 x 27.
+7/13/2018 6:40:29 AM DEBUG: Resized game to 108 x 28.
+7/13/2018 6:40:30 AM DEBUG: Resized game to 108 x 27.
+7/13/2018 6:40:30 AM DEBUG: Resized game to 108 x 28.
+7/13/2018 6:40:30 AM DEBUG: Resized game to 108 x 27.
