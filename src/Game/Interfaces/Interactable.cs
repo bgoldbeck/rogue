@@ -12,8 +12,8 @@ namespace Game.Interfaces
 {
     public interface IInteractable
     {
+        bool IsInteractable { get; }
+
         void OnInteract(GameObject interacter);
-        void OnOpened(GameObject interacter);
-        void OnLocked(GameObject interacter);
     }
 }

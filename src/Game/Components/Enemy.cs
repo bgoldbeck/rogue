@@ -12,9 +12,13 @@ using IO;
 
 namespace Game.Components
 {
-    class Enemy : Actor, IDamageable, IMovable
+    class Enemy : Actor, IDamageable, IMovable, IAggressive
     {
-        public Transform target = null;
+        public Transform Target
+        {
+            get;
+            protected set;
+        }
         
         public Enemy():base()
         {
@@ -39,9 +43,11 @@ namespace Game.Components
         {
             base.Update();
 
-            /*If enough time has passed since the enemy has moved, it checks if the enemy can
-              see the player. If the enemy can see the player, it moves towards the play. Otherwise,
-              it makes a random move.*/
+            // If enough time has passed since the enemy has moved, it checks if the enemy can
+            //  see the player. If the enemy can see the player, it moves towards the play. Otherwise,
+            //  it makes a random move.
+            
+            /*
             Aggro search = (Aggro)GetComponent<Aggro>();
             EnemyAI ai = (EnemyAI)GetComponent<EnemyAI>();
             if(search == null)
@@ -55,8 +61,7 @@ namespace Game.Components
                 return;
             }
 
-            search.TargetSearch();
-            ai.MakeMove();
+            */
 
             return;
         }
@@ -132,6 +137,18 @@ namespace Game.Components
 
         public void OnFailedMove()
         {
+            return;
+        }
+
+        public void OnAggro(GameObject target)
+        {
+            Target = target.transform;
+            return;
+        }
+
+        public void OnDeaggro()
+        {
+            Target = null;
             return;
         }
     }

@@ -24,7 +24,7 @@ namespace Game.Data
         {
             mapTile.character = 's';                //Monster's model
             mapTile.color.Set(255, 80, 80);         //Color
-            ai.setRate(2);                          //Time between each move.
+            ai.SetRate(2);                          //Time between each move.
             return new Enemy("Snake",               //Monster's name
                              "Snake? SNAKE!!!!",    //Monster's description
                              level,                 //Level of the monster
@@ -45,7 +45,7 @@ namespace Game.Data
         {
             mapTile.character = 'g';                    //Monster's model
             mapTile.color.Set(0, 180, 0);               //Color
-            ai.setRate(3);                              //Time between each move.
+            ai.SetRate(3);                              //Time between each move.
             return new Enemy("Goblin",                  //Monster name
                              "Just a normal Goblin",    //Monster description
                              level,                     //Level of the monster

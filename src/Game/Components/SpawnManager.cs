@@ -47,7 +47,7 @@ namespace Game.Components
             Inventory i = (Inventory)go.AddComponent(new Inventory());
             i.Add(new Item("The Ultimate Thing"));
             MapTile mt = (MapTile)go.GetComponent<MapTile>();
-            mt.character = 'B';
+            mt.character = 'ß';
 
             return go;
         }

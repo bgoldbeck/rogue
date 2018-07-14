@@ -12,7 +12,7 @@ namespace Game.Components
         private int movementRate = 3;
         private int lastMoved = 0;
 
-        public void setRate(int rate)
+        public void SetRate(int rate)
         {
             movementRate = rate;
         }
@@ -24,22 +24,24 @@ namespace Game.Components
         public override void Update()
         {
             base.Update();
+
+            Think();
         }
 
-        public void MakeMove()
+        public void Think()
         {
             Enemy puppet = (Enemy)base.gameObject.GetComponent<Enemy>();
             if (puppet == null)
             {
-                Debug.LogError("EnemyAI isn't a component of an Enemy.");
+                Debug.LogError("EnemyAI component needs an enemy object");
                 return;
             }
 
             if (lastMoved >= movementRate)
             {
-                if (puppet.target != null)
+                if (puppet.Target != null)
                 {
-                    SeekMove(puppet.target, puppet.OnMove);
+                    SeekMove(puppet.Target, puppet.OnMove);
                 }
                 else
                 {
@@ -51,6 +53,7 @@ namespace Game.Components
             {
                 ++lastMoved;
             }
+            return;
         }
 
         /// <summary>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 using Ecs;
+using Game.Interfaces;
 using IO;
 
 namespace Game.Components
@@ -22,6 +23,8 @@ namespace Game.Components
         public override void Update()
         {
             base.Update();
+
+            TargetSearch();
             return;
         }
 
@@ -33,9 +36,10 @@ namespace Game.Components
 
             if(searchee == null)
             {
-                Debug.LogError("Aggo isn't a component of an enemy object.");
+                Debug.LogError("Aggro component needs an an enemy object.");
                 return;
             }
+
             //If the enemy is close enough to the player, it saves the location it has seen the
             //player at and set the boolean that is has seen the player.
             Player player = Player.MainPlayer();
@@ -44,18 +48,22 @@ namespace Game.Components
             {
                 if (CheckLine(transform.position, player.transform.position))
                 {
-                    searchee.target = player.transform;
+                    // OnAggro.
+                    gameObject.SendInterfaceMessage<IAggressive>("OnAggro", new object[] { player.gameObject });
+                    //searchee.target = player.transform;
                     targetUpdated = true;
                 }
             }
             //If the enemy can't see the player but has seen the player before. It checks how long
             //since the last time it has seen the player. If it has been too long, it sets the boolean
             //to false.
-            if (searchee.target != null && !targetUpdated)
+            if (searchee.Target != null && !targetUpdated)
             {
                 if (++lastSeenPlayer > turnsTillEnemyGivesUp)
                 {
-                    searchee.target = null;
+                    // OnDegggro
+                    //searchee.target = null;
+                    gameObject.SendInterfaceMessage<IAggressive>("OnDeaggro");
                 }
             }
             return;

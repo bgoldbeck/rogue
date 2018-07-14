@@ -47,7 +47,11 @@ namespace Game.Components
         {
             if (!base.TryMove(dx, dy))
             {
-                OnFailedMove();
+                List<IMovable> movables = gameObject.GetComponents<IMovable>();
+                foreach (IMovable movable in movables)
+                {
+                     movable.OnFailedMove();
+                }
             }
           
             return;
@@ -55,15 +59,7 @@ namespace Game.Components
 
         public void OnFailedMove()
         {
-            List<IMovable> movables = gameObject.GetComponents<IMovable>();
-            foreach (IMovable movable in movables)
-            {
-                if (movable != this)
-                { 
-                    movable.OnFailedMove();
-                }
-
-            }
+            //HUD.Append("You cant walk there.");
             return;
         }
 
@@ -76,7 +72,7 @@ namespace Game.Components
 
             if (attacker != null)
             {
-                HUD.Append(attacker.Name + " attacked for " + damage + " damage.");
+                HUD.Append(attacker.Name + " hit you for " + damage + " damage.");
             }
 
             hp -= damage;

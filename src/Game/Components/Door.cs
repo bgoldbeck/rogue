@@ -15,6 +15,14 @@ namespace Game.Components
     {
         private bool locked = false;
 
+        public bool IsInteractable
+        {
+            get
+            {
+                return !locked;
+            }
+        }
+
         public Door(bool locked = false)
         {
             this.locked = locked;
@@ -70,15 +78,6 @@ namespace Game.Components
                 Console.Beep(100, 100);
             }
         }
-
-        public void OnOpened(GameObject interacter)
-        {
-            return;
-        }
-
-        public void OnLocked(GameObject interacter)
-        {
-            return;
-        }
+        
     }
 }

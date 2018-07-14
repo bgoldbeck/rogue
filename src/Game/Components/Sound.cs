@@ -11,6 +11,8 @@ namespace Game.Components
 {
     public class Sound : Component, IDamageable, IMovable, IInteractable
     {
+        public bool IsInteractable { get { return true; } }
+
         public override void Start()
         {
             return;
@@ -64,16 +66,6 @@ namespace Game.Components
         public void OnInteract(GameObject objectInteracting)
         {
 
-            return;
-        }
-
-        public void OnOpened(GameObject interacter)
-        {
-            return;
-        }
-
-        public void OnLocked(GameObject interacter)
-        {
             return;
         }
     }
