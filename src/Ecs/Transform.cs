@@ -65,10 +65,22 @@ namespace Ecs
             }
         }  // end nested class
         
-        public void SetParent(Transform transform)
+        public void SetParent(Transform parent)
         {
-            this.Parent = transform;
-            this.Parent.children.Add(this);
+            // Make a child reference for easier readability.
+            Transform child = this;
+
+            // Don't allow parent and child to be the same reference.
+            if (parent == child) { return; }
+            
+
+            child.Parent = parent;
+
+            // Don't allow the parent to have multiple of the same child.
+            if (!parent.children.Contains(child))
+            {
+                parent.children.Add(child);
+            }
             return;
         }
 

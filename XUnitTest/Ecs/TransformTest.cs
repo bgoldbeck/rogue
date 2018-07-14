@@ -14,7 +14,7 @@ namespace XUnitTestProject
             Transform parent = new Transform();
             child.SetParent(parent);
             Assert.True(child.Parent == parent);
-            
+
         }
 
         [Fact]
@@ -58,6 +58,42 @@ namespace XUnitTestProject
                 ++i;
             }
             Assert.True(i == 3);
+        }
+
+        [Fact]
+        public void SetParentToParent()
+        {
+            Transform child1 = new Transform();
+            Transform child2 = new Transform();
+            Transform parent = new Transform();
+            child1.SetParent(parent);
+            child2.SetParent(parent);
+            parent.SetParent(parent);
+
+            int i = 0;
+            foreach (Transform transform in parent)
+            {
+                ++i;
+            }
+            Assert.True(i == 2);
+        }
+
+        [Fact]
+        public void SetParentMultipleChildrenOneIsSame()
+        {
+            Transform child1 = new Transform();
+            Transform child2 = new Transform();
+            Transform parent = new Transform();
+            child1.SetParent(parent);
+            child2.SetParent(parent);
+            child2.SetParent(parent);
+
+            int i = 0;
+            foreach (Transform transform in parent)
+            {
+                ++i;
+            }
+            Assert.True(i == 2);
         }
     }
 }
