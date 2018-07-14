@@ -26,6 +26,20 @@ namespace XUnitTestProject
             Assert.True(transform.position.x == 2 && transform.position.y == 2);
         }
 
+        [Fact]
+        public void TranslateByTwoAddsTwoToPositionAndChild()
+        {
+            Transform child = new Transform();
+            Transform parent = new Transform();
+            child.position = new Vec2i(2, 2);
+            parent.position = new Vec2i(4, 4);
+            child.SetParent(parent);
+
+            parent.Translate(2, 2);
+
+            Assert.True(child.position.x == 4 && child.position.y == 4);
+            Assert.True(parent.position.x == 6 && parent.position.y == 6);
+        }
 
     }
 }

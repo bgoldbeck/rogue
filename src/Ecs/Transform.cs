@@ -25,10 +25,22 @@ namespace Ecs
 
         public void Translate(int dx, int dy)
         {
-            this.position = new Vec2i(this.position.x + dx, this.position.y + dy);
+            TranslateOnChildren(this, dx, dy);
             return;
         }
 
+        private void TranslateOnChildren(Transform root, int dx, int dy)
+        {
+            if (root == null) { return; }
+
+            foreach (Transform transform in root.children)
+            {
+                TranslateOnChildren(transform, dx, dy);
+            }
+
+            root.position = new Vec2i(root.position.x + dx, root.position.y + dy);
+            return;
+        }
 
     }
     
