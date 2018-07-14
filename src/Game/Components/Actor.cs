@@ -58,11 +58,11 @@ namespace Game.Components
             }
         }
 
-        public Actor() :base()
+        public Actor() : base()
         {
         }
 
-        public Actor(string name, string description, int level, int hp, int armor, int attack) :base()
+        public Actor(string name, string description, int level, int hp, int armor, int attack) : base()
         {
             this.Name = name;
             this.description = description;

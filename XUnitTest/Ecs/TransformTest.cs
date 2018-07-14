@@ -13,8 +13,8 @@ namespace XUnitTestProject
             Transform child = new Transform();
             Transform parent = new Transform();
             child.SetParent(parent);
-            Assert.True(child.parent == parent);
-
+            Assert.True(child.Parent == parent);
+            
         }
 
         [Fact]
@@ -41,5 +41,24 @@ namespace XUnitTestProject
             Assert.True(parent.position.x == 6 && parent.position.y == 6);
         }
 
+
+        [Fact]
+        public void TransformIterateOverChildrenByEnumeratorIterator()
+        {
+            Transform child1 = new Transform();
+            Transform child2 = new Transform();
+            Transform child3 = new Transform();
+            Transform parent = new Transform();
+            child1.SetParent(parent);
+            child2.SetParent(parent);
+            child3.SetParent(parent);
+            int i = 0;
+            foreach (Transform transform in parent)
+            {
+                ++i;
+            }
+            Assert.True(i == 3);
+        }
     }
 }
+

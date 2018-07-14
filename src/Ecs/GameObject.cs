@@ -223,7 +223,7 @@ namespace Ecs
                     return transform.gameObject.GetComponent<T>();
                 }
 
-                foreach (Transform child in transform.children)
+                foreach (Transform child in transform)
                 {
                     return GetComponentInChildren<T>(child);
                 }
@@ -359,7 +359,7 @@ namespace Ecs
             if (go != null)
             { 
                 // Remove all the children game objects along with this game object.
-                foreach (Transform t in go.transform.children)
+                foreach (Transform t in go.transform)
                 {
                     Destroy(t.gameObject);
                 }
