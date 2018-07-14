@@ -61,6 +61,12 @@ namespace Ecs
             return;
         }
 
+        public void SendInterfaceMessage<T>(string name, object[] parameters = null)
+        {
+            this.gameObject.SendInterfaceMessage<T>(name, parameters);
+            return;
+        }
+
         public Component GetComponent(Type type)
         {
             return gameObject.GetComponent(type);
