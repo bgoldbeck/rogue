@@ -98,7 +98,7 @@ namespace Game.Components
             // Display inventory
             AddText(model, "Inventory:");
             Inventory inv = (Inventory)player.GetComponent<Inventory>();
-            foreach (Item it in inv.inventory)
+            foreach (Item it in inv.Bag)
             {
                 AddText(model, "  " + it.name);
             }

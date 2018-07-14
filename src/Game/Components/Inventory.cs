@@ -13,63 +13,68 @@ namespace Game.Components
 {
     class Inventory : Component
     {
-        public List<Item> inventory = new List<Item>();
+        public List<Item> Bag { get; private set; } = new List<Item>();
 
         public void Add(Item newItem)
         {
-            inventory.Add(newItem);
+            Bag.Add(newItem);
+        }
+
+        public bool Exists(Item item)
+        {
+            return Bag.Contains(item);
+        }
+
+        public bool Exists(String name)
+        {
+            return Find(name) != null;
         }
 
         public Item Find(String name)
         {
-            foreach (Item i in inventory)
+            foreach (Item item in Bag)
             {
-                if (i.name == name)
-                    return i;
+                if (item.name == name)
+                    return item;
             }
             return null;
         }
 
+
         public void MergeWith(Inventory inv)
         {
 
-            foreach (Item i in inventory)
+            foreach (Item item in Bag)
             {
-                inv.Add(i);
+                inv.Add(item);
             }
-            if (inventory.Count > 0)
+            if (Bag.Count > 0)
             {
                 Console.Beep(3000, 100);
             }
-            inventory.Clear();
+            Bag.Clear();
         }
 
-        public void Remove(String name)
+        public bool Remove(Item item)
         {
+            return Bag.Remove(item);
+        }
+
+        public bool Remove(String name)
+        {
+            return Bag.Remove(Find(name));
+            /*
             Item toRemove = null;
-            foreach (Item i in inventory)
+            foreach (Item item in Bag)
             {
-                if (i.name == name)
-                    toRemove = i;
+                if (item.name == name)
+                    toRemove = item;
             }
             if (toRemove != null)
-                inventory.Remove(toRemove);
+                Bag.Remove(toRemove);
+            */
         }
 
-        public override void Start()
-        {
-            return;
-        }
-
-        public override void Update()
-        {
-            return;
-        }
-
-        public override void Render()
-        {
-            return;
-        }
 
     }
 }
