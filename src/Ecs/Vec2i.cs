@@ -10,10 +10,19 @@ namespace Ecs
 {
     public class Vec2i
     {
-        public int x = 0;
-        public int y = 0;
+        public readonly int x = 0;
+        public readonly int y = 0;
 
-        public Vec2i() { }
+        public Vec2i()
+        {
+        }
+
+        public Vec2i(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+        
         public Vec2i(Vec2i referenceToVector)
         {
             x = referenceToVector.x;
@@ -27,12 +36,7 @@ namespace Ecs
         /// <returns>A new vector representing the sum of vectors (a+b)</returns>
         public static Vec2i operator +(Vec2i a, Vec2i b)
         {
-            Vec2i vec = new Vec2i
-            {
-                x = a.x + b.x,
-                y = a.y + b.y
-            };
-            return vec;
+            return new Vec2i(a.x + b.x, a.y + b.y);
         }
 
         /// <summary> 
@@ -42,12 +46,7 @@ namespace Ecs
         /// <returns>A new vector representing the difference of vectors (a-b)</returns>
         public static Vec2i operator -(Vec2i a, Vec2i b)
         {
-            Vec2i vec = new Vec2i
-            {
-                x = a.x - b.x,
-                y = a.y - b.y
-            };
-            return vec;
+            return new Vec2i(a.x - b.x, a.y - b.y);
         }
 
         /// <summary>

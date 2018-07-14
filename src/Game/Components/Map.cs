@@ -78,7 +78,8 @@ namespace Game.Components
 
         public override void OnResize()
         {
-            transform.position.y = ConsoleUI.MaxHeight() - 1;
+            //transform.position.y = ConsoleUI.MaxHeight() - 1;
+            transform.position = new Vec2i(transform.position.x, ConsoleUI.MaxHeight() - 1);
             return;
         }
 

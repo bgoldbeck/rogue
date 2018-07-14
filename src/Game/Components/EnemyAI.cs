@@ -67,21 +67,24 @@ namespace Game.Components
 
             //Figures out which direction on the it has to move to head towards the player.
             Vec2i deltaMove = target.position - transform.position;
+            int dx = deltaMove.x;
+            int dy = deltaMove.y;
+
             if (deltaMove.x != 0)
             {
-                deltaMove.x = deltaMove.x / Math.Abs(deltaMove.x);
+                dx = deltaMove.x / Math.Abs(deltaMove.x);
             }
             if (deltaMove.y != 0)
             {
-                deltaMove.y = deltaMove.y / Math.Abs(deltaMove.y);
+                dy = deltaMove.y / Math.Abs(deltaMove.y);
             }
 
             //It randomly decides whether to try to move on the X-axis or Y-axis.
             bool moveOnX = rand.Next() % 2 == 0 && deltaMove.x != 0;
-            deltaMove.x = moveOnX ? deltaMove.x : 0;
-            deltaMove.y = moveOnX ? 0 : deltaMove.y;
+            dx = moveOnX ? deltaMove.x : 0;
+            dy = moveOnX ? 0 : deltaMove.y;
 
-            Move(deltaMove.x, deltaMove.y);
+            Move(dx, dy);
         }
 
         /// <summary>

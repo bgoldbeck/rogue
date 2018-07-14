@@ -14,6 +14,8 @@ namespace Ecs
         public List<Transform> children = new List<Transform>();
         public Vec2i position = new Vec2i();
 
+
+
         public void SetParent(Transform transform)
         {
             this.parent = transform;
@@ -23,8 +25,7 @@ namespace Ecs
 
         public void Translate(int dx, int dy)
         {
-            this.position.x += dx;
-            this.position.y += dy;
+            this.position = new Vec2i(this.position.x + dx, this.position.y + dy);
             return;
         }
 

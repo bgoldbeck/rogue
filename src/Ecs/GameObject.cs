@@ -42,14 +42,19 @@ namespace Ecs
             List<T> interfaceables = GetComponents<T>();
             foreach (T interfaceable in interfaceables)
             {
+                bool called = false;
+             
                 MethodInfo methodInfo = typeof(T).GetMethod(name);
+
                 if (methodInfo != null)
-                { 
-                    methodInfo.Invoke(interfaceable, parameters);
-                }
-                else
                 {
-                    Debug.LogError("SendInterfaceMessage<T>() Could not find method named " + name);
+                    methodInfo.Invoke(interfaceable, parameters);
+                    called = true;
+                }
+                
+                if (!called)
+                {
+                    Debug.LogError("SendInterfaceMessage<T>() Could not call method named " + name);
                 }
             }
         }

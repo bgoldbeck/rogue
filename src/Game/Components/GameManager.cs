@@ -36,7 +36,7 @@ namespace Game.Components
             //Map map = new Map(gameWidth - hudWidth, gameHeight);
             Map map = new Map(60, 30);
             mapObject.AddComponent(map);
-            mapObject.transform.position.y = gameHeight - 1;
+            mapObject.transform.position = new Vec2i(mapObject.transform.position.x, gameHeight - 1);
 
 
             GameObject player = GameObject.Instantiate("MainPlayer");
@@ -44,8 +44,9 @@ namespace Game.Components
             player.AddComponent(new PlayerController());
             player.AddComponent(new Model());
             player.AddComponent(new LightSource(10.0f));
-            player.transform.position.x = map.startingX;
-            player.transform.position.y = map.startingY;
+            player.transform.position = new Vec2i(map.startingX, map.startingY);
+            //player.transform.position.x = map.startingX;
+            //player.transform.position.y = map.startingY;
             map.AddObject(map.startingX, map.startingY, player);
             player.AddComponent(new Camera(gameWidth - hudWidth, gameHeight));
             player.AddComponent(new MapTile('$', new Color(255, 255, 255), true));
@@ -57,8 +58,9 @@ namespace Game.Components
             hud.AddComponent(new HUD(hudWidth, gameHeight));
             Model hudModel = (Model)hud.AddComponent(new Model());
             hudModel.color.Set(180, 180, 180);
-            hud.transform.position.x = gameWidth - hudWidth;
-            hud.transform.position.y = gameHeight - 1;
+            hud.transform.position = new Vec2i(gameWidth - hudWidth, gameHeight - 1);
+            //hud.transform.position.x = gameWidth - hudWidth;
+            //hud.transform.position.y = gameHeight - 1;
 
             Debug.Log("GameManager added all components on start.");
             return;
@@ -75,8 +77,9 @@ namespace Game.Components
             camera.Resize(gameWidth - hudWidth, gameHeight);
 
             GameObject hudObject = GameObject.FindWithTag("HUD");
-            hudObject.transform.position.x = gameWidth - hudWidth;
-            hudObject.transform.position.y = gameHeight - 1;
+            hudObject.transform.position = new Vec2i(gameWidth - hudWidth, gameHeight - 1);
+            //hudObject.transform.position.x = gameWidth - hudWidth;
+            //hudObject.transform.position.y = gameHeight - 1;
 
             HUD hud = (HUD)hudObject.GetComponent(typeof(HUD));
             hud.Resize(hudWidth, gameHeight);

@@ -42,8 +42,9 @@ namespace Game.Components
         {
             GameObject go = GameObject.Instantiate("Boss");
             MonsterGenerator.Fill(rand, level, go);
-            go.transform.position.x = x;
-            go.transform.position.y = y;
+            go.transform.position = new Vec2i(x, y);
+            //go.transform.position.x = x;
+            //go.transform.position.y = y;
             Inventory i = (Inventory)go.AddComponent(new Inventory());
             i.Add(new Item("The Ultimate Thing"));
             MapTile mt = (MapTile)go.GetComponent<MapTile>();
@@ -56,8 +57,9 @@ namespace Game.Components
         {
             GameObject go = GameObject.Instantiate("Monster");
             MonsterGenerator.Fill(rand, level, go);
-            go.transform.position.x = x;
-            go.transform.position.y = y;
+            go.transform.position = new Vec2i(x, y);
+            //go.transform.position.x = x;
+            //go.transform.position.y = y;
             Inventory i = (Inventory)go.AddComponent(new Inventory());
             if (hasKey)
             {
@@ -73,8 +75,9 @@ namespace Game.Components
         {
             GameObject go = GameObject.Instantiate("Door");
             go.AddComponent(new Door());
-            go.transform.position.x = x;
-            go.transform.position.y = y;
+            go.transform.position = new Vec2i(x, y);
+            //go.transform.position.x = x;
+            //go.transform.position.y = y;
             go.AddComponent(new MapTile('d', new Color(210, 105, 30)));
             go.AddComponent(new Sound());
             return go;
@@ -84,8 +87,9 @@ namespace Game.Components
         {
             GameObject go = GameObject.Instantiate("Locked Door");
             go.AddComponent(new Door(true));
-            go.transform.position.x = x;
-            go.transform.position.y = y;
+            go.transform.position = new Vec2i(x, y);
+            //go.transform.position.x = x;
+            //go.transform.position.y = y;
             go.AddComponent(new MapTile('l', new Color(210, 105, 30)));
 
             return go;
@@ -95,8 +99,9 @@ namespace Game.Components
         {
             GameObject go = GameObject.Instantiate("Wall");
             go.AddComponent(new Wall());
-            go.transform.position.x = x;
-            go.transform.position.y = y;
+            go.transform.position = new Vec2i(x, y);
+            //go.transform.position.x = x;
+            //go.transform.position.y = y;
             int value = rand.Next(80, 180);
             go.AddComponent(new MapTile('█', new Color(value, value, value)));
 

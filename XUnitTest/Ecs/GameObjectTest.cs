@@ -171,7 +171,7 @@ namespace XUnitTestProject
         }
 
         [Fact]
-        public void TestSendInterfaceMessageCalledOnInvalidParametersNoExceptions()
+        public void TestSendInterfaceMessageCalledOnInvalidParameters()
         {
             try
             {
@@ -180,15 +180,17 @@ namespace XUnitTestProject
 
                 go.SendMessage<ITestInterface>("DoesNotExist", new object[] { true });
                 go.SendMessage<ITestInterface>("DoesNotExist", null);
-                go.SendMessage<ITestInterface>("DoesNotExist");
-                TestComponent component = (TestComponent)go.GetComponent<TestComponent>();
+                // Valid interface, invalid parameters. Throws parameter count mismatch.
+                go.SendMessage<ITestInterface>("OnAnything", new object[] { 1,2,3 });
             }
             catch (Exception e)
             {
-                Assert.Null(e.Message);
+                Assert.Equal("Parameter count mismatch.", e.Message);
             }
             
 
         }
+
+      
     }
 }
