@@ -124,5 +124,50 @@ namespace XUnitTestProject
             GameObject.ForceFlush();
             Assert.True(go.GetComponent<Component>() == null);
         }
+
+        public interface ITestInterface
+        {
+            void OnAnything();
+            void OnThisValue(bool value);
+        }
+
+        public class TestComponent : Component, ITestInterface
+        {
+            public bool something = false;
+            public void OnAnything()
+            {
+                something = true;
+            }
+            public void OnThisValue(bool value)
+            {
+                something = value;
+            }
+        }
+
+        [Fact]
+        public void TestSendInterfaceMessageCalledOnValidInterface()
+        {
+            GameObject go = GameObject.Instantiate();
+            go.AddComponent<TestComponent>();
+
+            go.SendInterfaceMessage<ITestInterface>("OnAnything");
+            TestComponent component = (TestComponent)go.GetComponent<TestComponent>();
+            
+            Assert.True(component.something == true);
+
+        }
+
+        [Fact]
+        public void TestSendInterfaceMessageCalledOnValidInterfaceWithParameter()
+        {
+            GameObject go = GameObject.Instantiate();
+            go.AddComponent<TestComponent>();
+
+            go.SendInterfaceMessage<ITestInterface>("OnThisValue", new object[] { true });
+            TestComponent component = (TestComponent)go.GetComponent<TestComponent>();
+
+            Assert.True(component.something == true);
+
+        }
     }
 }
