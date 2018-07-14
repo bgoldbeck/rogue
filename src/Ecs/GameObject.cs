@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,12 +37,20 @@ namespace Ecs
         private GameObject() { }
 
 
-        public void SendInterfaceMessage<T>(string name, object[] parameters = null)
+        public void SendMessage<T>(string name, object[] parameters = null)
         {
             List<T> interfaceables = GetComponents<T>();
             foreach (T interfaceable in interfaceables)
             {
-                typeof(T).GetMethod(name).Invoke(interfaceable, parameters);
+                MethodInfo methodInfo = typeof(T).GetMethod(name);
+                if (methodInfo != null)
+                { 
+                    methodInfo.Invoke(interfaceable, parameters);
+                }
+                else
+                {
+                    Debug.LogError("SendInterfaceMessage<T>() Could not find method named " + name);
+                }
             }
         }
 

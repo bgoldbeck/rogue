@@ -61,7 +61,7 @@ namespace Game.Components
             if (dx != 0 || dy != 0)
             {
                 
-                gameObject.SendInterfaceMessage<IMovable>("OnMove", new object[] { dx, dy });
+                gameObject.SendMessage<IMovable>("OnMove", new object[] { dx, dy });
 
                 dx = dy = 0;
             }

@@ -49,7 +49,7 @@ namespace Game.Components
                 if (CheckLine(transform.position, player.transform.position))
                 {
                     // OnAggro.
-                    gameObject.SendInterfaceMessage<IAggressive>("OnAggro", new object[] { player.gameObject });
+                    gameObject.SendMessage<IAggressive>("OnAggro", new object[] { player.gameObject });
                     //searchee.target = player.transform;
                     targetUpdated = true;
                 }
@@ -63,7 +63,7 @@ namespace Game.Components
                 {
                     // OnDegggro
                     //searchee.target = null;
-                    gameObject.SendInterfaceMessage<IAggressive>("OnDeaggro");
+                    gameObject.SendMessage<IAggressive>("OnDeaggro");
                 }
             }
             return;

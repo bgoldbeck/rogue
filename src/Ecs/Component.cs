@@ -61,9 +61,9 @@ namespace Ecs
             return;
         }
 
-        public void SendInterfaceMessage<T>(string name, object[] parameters = null)
+        public void SendMessage<T>(string name, object[] parameters = null)
         {
-            this.gameObject.SendInterfaceMessage<T>(name, parameters);
+            this.gameObject.SendMessage<T>(name, parameters);
             return;
         }
 

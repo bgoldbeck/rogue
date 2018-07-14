@@ -150,7 +150,7 @@ namespace XUnitTestProject
             GameObject go = GameObject.Instantiate();
             go.AddComponent<TestComponent>();
 
-            go.SendInterfaceMessage<ITestInterface>("OnAnything");
+            go.SendMessage<ITestInterface>("OnAnything");
             TestComponent component = (TestComponent)go.GetComponent<TestComponent>();
             
             Assert.True(component.something == true);
@@ -163,10 +163,31 @@ namespace XUnitTestProject
             GameObject go = GameObject.Instantiate();
             go.AddComponent<TestComponent>();
 
-            go.SendInterfaceMessage<ITestInterface>("OnThisValue", new object[] { true });
+            go.SendMessage<ITestInterface>("OnThisValue", new object[] { true });
             TestComponent component = (TestComponent)go.GetComponent<TestComponent>();
 
             Assert.True(component.something == true);
+
+        }
+
+        [Fact]
+        public void TestSendInterfaceMessageCalledOnInvalidParametersNoExceptions()
+        {
+            try
+            {
+                GameObject go = GameObject.Instantiate();
+                go.AddComponent<TestComponent>();
+
+                go.SendMessage<ITestInterface>("DoesNotExist", new object[] { true });
+                go.SendMessage<ITestInterface>("DoesNotExist", null);
+                go.SendMessage<ITestInterface>("DoesNotExist");
+                TestComponent component = (TestComponent)go.GetComponent<TestComponent>();
+            }
+            catch (Exception e)
+            {
+                Assert.Null(e.Message);
+            }
+            
 
         }
     }
