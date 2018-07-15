@@ -29,8 +29,8 @@ namespace XUnitTestProject
         {
             Vec2i a = new Vec2i(ax, ay);
             Vec2i b = new Vec2i(bx, by);
-            Vec2i sum = a - b;
-            Assert.True(sum.x == ax - bx && sum.y == ay - by);
+            Vec2i difference = a - b;
+            Assert.True(difference.x == ax - bx && difference.y == ay - by);
         }
 
     }
