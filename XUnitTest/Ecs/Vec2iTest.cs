@@ -7,23 +7,32 @@ namespace XUnitTestProject
 {
     public class Vec2iTest
     {
-        [Fact]
-        public void AddTwoVectors()
+        [Theory]
+        [InlineData(1, 2, 3, 4)]
+        [InlineData(4, 3, 2, 1)]
+        [InlineData(-4, -3, -2, -1)]
+        [InlineData(-1, -2, -3, -4)]
+        public void AddTwoVectors(int ax, int ay, int bx, int by)
         {
-            Vec2i v1 = new Vec2i(1, 2);
-            Vec2i v2 = new Vec2i(3, 4);
-            Vec2i sum = v1 + v2;
-            Assert.True(sum.x == 4 && sum.y == 6);
+            Vec2i a = new Vec2i(ax, ay);
+            Vec2i b = new Vec2i(bx, by);
+            Vec2i sum = a + b;
+            Assert.True(sum.x == ax + bx && sum.y == ay + by);
         }
 
-        [Fact]
-        public void SubtractTwoVectors()
+        [Theory]
+        [InlineData(1, 2, 3, 4)]
+        [InlineData(4, 3, 2, 1)]
+        [InlineData(-4, -3, -2, -1)]
+        [InlineData(-1, -2, -3, -4)]
+        public void SubtractTwoVectors(int ax, int ay, int bx, int by)
         {
-            Vec2i v1 = new Vec2i(6, 6);
-            Vec2i v2 = new Vec2i(4, 4);
-            Vec2i sum = v1 - v2;
-            Assert.True(sum.x == 2 && sum.y == 2);
+            Vec2i a = new Vec2i(ax, ay);
+            Vec2i b = new Vec2i(bx, by);
+            Vec2i sum = a - b;
+            Assert.True(sum.x == ax - bx && sum.y == ay - by);
         }
+
     }
 }
 
