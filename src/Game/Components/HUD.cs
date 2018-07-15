@@ -40,7 +40,7 @@ namespace Game.Components
             return hud;
         }
 
-        public static HUD Clear(String line)
+        public static HUD Clear()
         {
             hud = CacheInstance();
             if (hud != null)

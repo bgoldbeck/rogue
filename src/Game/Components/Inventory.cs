@@ -20,12 +20,12 @@ namespace Game.Components
             Bag.Add(newItem);
         }
 
-        public bool Exists(Item item)
+        public bool Contains(Item item)
         {
             return Bag.Contains(item);
         }
 
-        public bool Exists(String name)
+        public bool Contains(String name)
         {
             return Find(name) != null;
         }
@@ -63,16 +63,6 @@ namespace Game.Components
         public bool Remove(String name)
         {
             return Bag.Remove(Find(name));
-            /*
-            Item toRemove = null;
-            foreach (Item item in Bag)
-            {
-                if (item.name == name)
-                    toRemove = item;
-            }
-            if (toRemove != null)
-                Bag.Remove(toRemove);
-            */
         }
 
 
