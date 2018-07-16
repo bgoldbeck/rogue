@@ -42,6 +42,7 @@ namespace XUnitTests.DataStructures
             graph.RemoveEdge(a, c);
             graph.RemoveEdge(a, d);
             graph.Edges.TryGetValue(a, out List<Vec2i> neighbors);
+            
 
             // Also assert the last edge is 'b'.
             Assert.True(neighbors != null && neighbors.Count == 1 && 
