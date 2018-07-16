@@ -6,33 +6,50 @@ namespace DataStructures
 {
     public class Graph <T>
     {
-        public Dictionary<T, List<T>> Edges { get; private set; } = new Dictionary<T, List<T>>();
+        private Dictionary<T, List<T>> Data { get; set; } = new Dictionary<T, List<T>>();
 
         public void AddEdge(T from, T to)
         {
-            Edges.TryGetValue(from, out List<T> neighbors);
+            Data.TryGetValue(from, out List<T> neighbors);
             
             if (neighbors == null)
             {
                 neighbors = new List<T>();
             }
             neighbors.Add(to);
-            Edges[from] = neighbors;
+            Data[from] = neighbors;
             
             return;
         }
 
         public void RemoveEdge(T from, T remove)
         {
-            if (Edges.TryGetValue(from, out List<T> neighbors))
+            if (Data.TryGetValue(from, out List<T> neighbors))
             {
                 neighbors.Remove(remove);
 
-                Edges[from] = neighbors;
+                Data[from] = neighbors;
             }
             return;
         }
 
+        public List<T> GetEdges(T from)
+        {
+            Data.TryGetValue(from, out List<T> neighbors);
+            return neighbors;
+        }
+
+        public int GetEdgeCount(T from)
+        {
+            Data.TryGetValue(from, out List<T> neighbors);
+
+            return neighbors != null ? neighbors.Count : 0;
+        }
+
+        public int VertexCount()
+        {
+            return Data.Count;
+        }
 
     }
 }

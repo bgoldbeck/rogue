@@ -21,9 +21,11 @@ namespace XUnitTests.DataStructures
             graph.AddEdge(a, c);
             graph.AddEdge(a, d);
 
-            graph.Edges.TryGetValue(a, out List<Vec2i> neighbors);
+            List<Vec2i> neighbors = graph.GetEdges(a);
 
             Assert.True(neighbors != null && neighbors.Count == 3);
+            Assert.True(graph.VertexCount() == 1);
+            Assert.True(graph.GetEdgeCount(a) == 3);
         }
 
         [Fact]
@@ -41,13 +43,17 @@ namespace XUnitTests.DataStructures
 
             graph.RemoveEdge(a, c);
             graph.RemoveEdge(a, d);
-            graph.Edges.TryGetValue(a, out List<Vec2i> neighbors);
-            
+
+            List<Vec2i> neighbors = graph.GetEdges(a);
+
 
             // Also assert the last edge is 'b'.
             Assert.True(neighbors != null && neighbors.Count == 1 && 
                 neighbors[0] == b && 
                 neighbors[0] != c && neighbors[0] != d);
+
+            Assert.True(graph.VertexCount() == 1);
+            Assert.True(graph.GetEdgeCount(a) == 1);
         }
     }
 }
