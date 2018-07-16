@@ -65,7 +65,7 @@ namespace Ecs
         /// <param name="b">The second vector</param>
         /// <returns>The manhattan distance between to vectors, 
         /// see https://en.wikipedia.org/wiki/Taxicab_geometry</returns>
-        static public double Heuristic(Vec2i a, Vec2i b)
+        public static int Heuristic(Vec2i a, Vec2i b)
         {
             return Math.Abs(a.x - b.x) + Math.Abs(a.y - b.y);
         }
