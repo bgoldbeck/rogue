@@ -54,17 +54,17 @@ namespace Ecs
         /// <param name="a">The first vector</param>
         /// <param name="b">The second vector</param>
         /// <returns>The absolute distance between to vectors</returns>
-        public static int Distance(Vec2i a, Vec2i b)
+        public static double Distance(Vec2i a, Vec2i b)
         {
-            return (int)Math.Sqrt(Math.Pow((double)(b.x - a.x), 2.0) + Math.Pow((double)(b.y - a.y), 2.0));
+            return Math.Sqrt(Math.Pow((double)(b.x - a.x), 2.0) + Math.Pow((double)(b.y - a.y), 2.0));
         }
 
         /// <summary>
+        /// See https://en.wikipedia.org/wiki/Taxicab_geometry
         /// </summary>
         /// <param name="a">The first vector</param>
         /// <param name="b">The second vector</param>
-        /// <returns>The manhattan distance between to vectors, 
-        /// see https://en.wikipedia.org/wiki/Taxicab_geometry</returns>
+        /// <returns>The manhattan distance between two vectors</returns>
         public static int Heuristic(Vec2i a, Vec2i b)
         {
             return Math.Abs(a.x - b.x) + Math.Abs(a.y - b.y);
