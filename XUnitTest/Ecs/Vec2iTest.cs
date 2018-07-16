@@ -33,6 +33,23 @@ namespace XUnitTestProject
             Assert.True(difference.x == ax - bx && difference.y == ay - by);
         }
 
+        [Fact]
+        public void TwoEqualVectorsAreEqual()
+        {
+            Vec2i a = new Vec2i(-45, 40);
+            Vec2i b = new Vec2i(-45, 40);
+            Assert.True(a == b && b == a);
+            Assert.True(a.Equals(b) && b.Equals(a));
+        }
+
+
+        [Fact]
+        public void TwoNotEqualVectorsAreNotEqual()
+        {
+            Vec2i a = new Vec2i(-40, 40);
+            Vec2i b = new Vec2i(40, -40);
+            Assert.True(a != b && b != a);
+        }
     }
 }
 

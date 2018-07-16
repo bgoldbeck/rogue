@@ -51,6 +51,49 @@ namespace Ecs
 
         /// <summary>
         /// </summary>
+        /// <param name="obj">The object to compare to</param>
+        /// <returns>True, if this object equals obj</returns>
+        public override bool Equals(Object obj)
+        {
+            // Check for null values and compare run-time types.
+            if (obj == null || GetType() != obj.GetType())
+                return false;
+
+            Vec2i v = (Vec2i)obj;
+            return (x == v.x) && (y == v.y);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns>True, if a equal b</returns>
+        public static bool operator ==(Vec2i a, Vec2i b)
+        {
+            return a.Equals(b);
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns>True, if a does not equal b</returns>
+        public static bool operator !=(Vec2i a, Vec2i b)
+        {
+            return !(a == b);
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <returns>The hashcode for this object.</returns>
+        public override int GetHashCode()
+        {
+            return x ^ y;
+        }
+
+        /// <summary>
+        /// </summary>
         /// <param name="a">The first vector</param>
         /// <param name="b">The second vector</param>
         /// <returns>The absolute distance between to vectors</returns>
@@ -69,7 +112,7 @@ namespace Ecs
         {
             return Math.Abs(a.x - b.x) + Math.Abs(a.y - b.y);
         }
-
+      
     }
 
 }

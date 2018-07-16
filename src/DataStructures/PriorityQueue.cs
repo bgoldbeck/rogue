@@ -19,17 +19,23 @@ namespace DataStructures
 
         public T Peek()
         {
-            Tuple<double, T> min = data.Min;
-            return min.Item2;
+            T min = default(T);
+            if (data.Min != null)
+            {
+                min = data.Min.Item2;
+            }
+            return min;
         }
 
         public T Dequeue()
         {
-            Tuple<double, T> min = data.Min;
+            T min = Peek();
 
-            data.Remove(min);
-
-            return min.Item2;
+            if (min != null)
+            { 
+                data.Remove(data.Min);
+            }
+            return min;
         }
 
         public int Count()

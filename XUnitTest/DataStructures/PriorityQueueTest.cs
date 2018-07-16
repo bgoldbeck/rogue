@@ -13,8 +13,9 @@ namespace XUnitTests.DataStructures
         {
             PriorityQueue<string> queue = new PriorityQueue<string>();
 
-            queue.Enqueue("Hello", 0.0);
             queue.Enqueue("World", 1.0);
+            queue.Enqueue("Hello", -40.0);
+            queue.Enqueue("Hello", -40.0);
             queue.Enqueue("!", 2.0);
 
             Assert.True(queue.Dequeue() == "Hello" && queue.Count() == 2);
@@ -25,11 +26,21 @@ namespace XUnitTests.DataStructures
         {
             PriorityQueue<string> queue = new PriorityQueue<string>();
 
+            queue.Enqueue("!", 2.0);
             queue.Enqueue("Hello", 0.0);
             queue.Enqueue("World", 1.0);
-            queue.Enqueue("!", 2.0);
 
             Assert.True(queue.Peek() == "Hello" && queue.Count() == 3);
+        }
+
+        [Fact]
+        public void DequeueNoItemsReturnsNull()
+        {
+            PriorityQueue<string> queue = new PriorityQueue<string>();
+
+            queue.Dequeue();
+
+            Assert.True(queue.Peek() == null);
         }
     }
 }
