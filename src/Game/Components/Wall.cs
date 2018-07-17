@@ -8,11 +8,18 @@ using System.Threading.Tasks;
 
 using Ecs;
 using Game.Interfaces;
+using Game.Interfaces.Markers;
 
 namespace Game.Components
 {
-    class Wall : Component
+    class Wall : Component, IInteractable
     {
+        private bool bedRock = false;
+
+        public Wall(bool isBedRock)
+        {
+            bedRock = true; // isBedRock;
+        }
 
         public override void Start()
         {
@@ -28,5 +35,27 @@ namespace Game.Components
         {
             return;
         }
+
+        public void OnInteract(GameObject objectInteracting, object interactorType)
+        {
+            if(objectInteracting == null) { return; }
+            if(!(interactorType is IRage)) { return; }
+
+            IRage ragingEnemy = (IRage)interactorType;
+
+            if (ragingEnemy.isRaging())
+            {
+                Map.CacheInstance().PopObject(transform.position.x, transform.position.y);
+                GameObject.Destroy(gameObject);
+            }
+        }
+
+        public bool IsInteractable
+        {
+            get{
+                return bedRock;
+            }
+        }
+
     }
 }

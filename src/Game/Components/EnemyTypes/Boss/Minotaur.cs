@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
+using Game.Interfaces.Markers;
+
 namespace Game.Components.EnemyTypes
 {
-    class Minotaur : Enemy
+    class Minotaur : Enemy, IRage
     {
         private bool enraged = false;
         public Minotaur(Random rand, int level)
@@ -29,15 +31,22 @@ namespace Game.Components.EnemyTypes
         public override void Update()
         {
             base.Update();
-            enraged = enraged || hp < (maxHp / 2);
+            if (!enraged)
+            {
+                if(hp < (maxHp / 2))
+                {
+                    HUD.Append("The Minotaur has been enraged!");
+                    enraged = true;
+                    attack *= 2;
+                    ai.SetRate(2);
+                }
+            }
         }
 
-        protected override int CalculateDamage()
+        public bool isRaging()
         {
-            int damage = enraged? 2 * this.attack : 1 * this.attack;
-            // TODO: Get our damage, based on level of player,
-            // The player's attack power, any equipment bonuses, Etc..
-            return damage;
+            return enraged;
         }
+
     }
 }

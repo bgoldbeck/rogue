@@ -95,10 +95,10 @@ namespace Game.Components
             return go;
         }
 
-        public static GameObject CreateWall(int x, int y)
+        public static GameObject CreateWall(int x, int y, bool bedRock)
         {
             GameObject go = GameObject.Instantiate("Wall");
-            go.AddComponent(new Wall());
+            go.AddComponent(new Wall(bedRock));
             go.transform.position = new Vec2i(x, y);
             //go.transform.position.x = x;
             //go.transform.position.y = y;

@@ -20,7 +20,7 @@ namespace Game.Components
         {
             get
             {
-                return !locked;
+                return true;
             }
         }
 

@@ -142,7 +142,10 @@ namespace Game.Components
                     List<IInteractable> interactables = found.GetComponents<IInteractable>();
                     foreach (IInteractable interactable in interactables)
                     {
-                        interactable.OnInteract(this.gameObject,this);
+                        if (interactable.IsInteractable)
+                        {
+                            interactable.OnInteract(this.gameObject, this);
+                        }
                     }
 
                     // It's also possible that we collided with something damageable.
