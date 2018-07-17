@@ -43,9 +43,12 @@ namespace Game.Components.EnemyTypes
             }
         }
 
-        public bool isRaging()
+        public bool isRaging
         {
-            return enraged;
+            get
+            {
+                return enraged;
+            }
         }
 
     }

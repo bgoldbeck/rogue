@@ -18,7 +18,7 @@ namespace Game.Components
 
         public Wall(bool isBedRock)
         {
-            bedRock = true; // isBedRock;
+            bedRock = isBedRock;
         }
 
         public override void Start()
@@ -43,7 +43,7 @@ namespace Game.Components
 
             IRage ragingEnemy = (IRage)interactorType;
 
-            if (ragingEnemy.isRaging())
+            if (ragingEnemy.isRaging)
             {
                 Map.CacheInstance().PopObject(transform.position.x, transform.position.y);
                 GameObject.Destroy(gameObject);
@@ -53,7 +53,7 @@ namespace Game.Components
         public bool IsInteractable
         {
             get{
-                return bedRock;
+                return !bedRock;
             }
         }
 

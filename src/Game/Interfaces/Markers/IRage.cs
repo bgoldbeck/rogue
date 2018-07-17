@@ -6,6 +6,6 @@ namespace Game.Interfaces.Markers
 {
     public interface IRage
     {
-        bool isRaging();
+        bool isRaging { get; }
     }
 }
