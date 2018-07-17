@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-using Ecs;
 using Game.Interfaces;
-using Game.Components;
 
-namespace Game.Data.Monster
+namespace Game.Components.EnemyTypes
 {
     class Raptor : Enemy, IDoorOpener, IXRayVision
     {

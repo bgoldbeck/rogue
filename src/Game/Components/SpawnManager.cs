@@ -7,8 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Ecs;
-using Game.Interfaces;
-using Game.Data.Monster;
+using Game.Generators;
 using IO;
 
 namespace Game.Components

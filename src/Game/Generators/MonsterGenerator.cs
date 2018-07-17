@@ -1,11 +1,11 @@
 ﻿//Copyright(c) 2018 Daniel Bramblett, Daniel Dupriest, Brandon Goldbeck
 
 using System;
-using System.Collections.Generic;
-using Game.Components;
+
+using Game.Components.EnemyTypes;
 using Ecs;
 
-namespace Game.Data.Monster
+namespace Game.Generators
 {
     class MonsterGenerator
     {

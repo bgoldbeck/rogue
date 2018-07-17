@@ -4,7 +4,7 @@ using System.Text;
 
 using Ecs;
 using Game.Interfaces;
-using Game.Data.Monster;
+using Game.Components.EnemyTypes;
 using IO;
 
 namespace Game.Components
