@@ -81,7 +81,7 @@ namespace Game.Components
             }
 
             //It randomly decides whether to try to move on the X-axis or Y-axis.
-            bool moveOnX = rand.Next() % 2 == 0 && deltaMove.x != 0;
+            bool moveOnX = deltaMove.y == 0 ||(rand.Next() % 2 == 0 && deltaMove.x != 0);
             dx = moveOnX ? dx : 0;
             dy = moveOnX ? 0 : dy;
 
