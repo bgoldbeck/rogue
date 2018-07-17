@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
+using Game.Interfaces.Markers;
+
 namespace Game.Components.EnemyTypes
 {
-    class Minotaur : Enemy
+    class Minotaur : Enemy, IRage
     {
         private bool enraged = false;
         public Minotaur(Random rand, int level)
@@ -39,6 +41,11 @@ namespace Game.Components.EnemyTypes
                     ai.SetRate(2);
                 }
             }
+        }
+
+        public bool isRaging()
+        {
+            return enraged;
         }
 
     }

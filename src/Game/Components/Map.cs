@@ -117,7 +117,8 @@ namespace Game.Components
                             objects[x][y] = SpawnManager.CreateBoss(x, y, level);
                             break;
                         case "w":
-                            objects[x][y] = SpawnManager.CreateWall(x, y);
+                            objects[x][y] = SpawnManager.CreateWall(x, y,(x == 0) || (y == 0) 
+                                || (x + 1  == width) || (y + 1 == height));
                             break;
                         case "s":
                             this.startingX = x;
