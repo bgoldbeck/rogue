@@ -14,6 +14,8 @@ namespace Game.Components
 {
     class Enemy : Actor, IDamageable, IMovable, IAggressive
     {
+        protected MapTile mapTile;
+        protected EnemyAI ai;
         public Transform Target
         {
             get;
@@ -33,6 +35,12 @@ namespace Game.Components
         public override void Start()
         {
             base.Start();
+            //Adds a Model component to the game object passed in.
+            mapTile = (MapTile)this.gameObject.AddComponent(new MapTile());
+            ai = (EnemyAI)this.gameObject.AddComponent(new EnemyAI());
+            this.gameObject.AddComponent(new Aggro());
+            this.gameObject.AddComponent(new Sound());
+            mapTile.SetLightLevelAfterDiscovery(0.1f);
             return;
         }
 

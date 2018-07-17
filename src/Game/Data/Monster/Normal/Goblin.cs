@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 
 using Ecs;
+using Game.Components;
 
 namespace Game.Data.Monster
 {
-    class Goblin : Monster
+    class Goblin : Enemy
     {
         public Goblin(Random rand, int level)
             : base(

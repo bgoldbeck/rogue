@@ -7,7 +7,7 @@ using Game.Components;
 
 namespace Game.Data.Monster
 {
-    class Snake : Monster
+    class Snake : Enemy
     {
         public Snake(Random rand, int level) 
             :base(      

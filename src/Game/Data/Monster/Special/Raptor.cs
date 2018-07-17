@@ -4,10 +4,11 @@ using System.Text;
 
 using Ecs;
 using Game.Interfaces;
+using Game.Components;
 
 namespace Game.Data.Monster
 {
-    class Raptor : Monster, IDoorOpener, IXRayVision
+    class Raptor : Enemy, IDoorOpener, IXRayVision
     {
         public Raptor(Random rand, int level)
             : base(
