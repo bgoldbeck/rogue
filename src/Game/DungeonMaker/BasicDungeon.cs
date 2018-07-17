@@ -12,8 +12,10 @@ namespace Game.DungeonMaker
     public class BasicDungeon
     {
         const int roomAddAttempts = 200; // The higher this number the more packed rooms will be
-        const int minRoomDimension = 3;
-        const int maxRoomDimension = 12;
+        const int minRoomWidth = 6; // Smallest width of a room
+        const int minRoomHeight = 3;    // Smallest height of a room
+        const int maxRoomWidth = 24;    // Largest width of a room
+        const int maxRoomHeight = 12;   // Largest height of a room
         const int deadEndsToLeave = 8; // Should be at least '1', since the player starts in a dead end.
         const int chanceToCarveStraightPassage = 95; // Percentage chance for passage to go straight
         const float monstersPerBlock = .02f; // Determines how many monsters show up in room areas
@@ -103,8 +105,8 @@ namespace Game.DungeonMaker
         /// </summary>
         private void AddLockedRoom()
         {
-            int roomWidth = rand.Next(minRoomDimension, maxRoomDimension + 1);
-            int roomHeight = rand.Next(minRoomDimension, maxRoomDimension + 1);
+            int roomWidth = rand.Next(minRoomWidth, maxRoomWidth + 1);
+            int roomHeight = rand.Next(minRoomHeight, maxRoomHeight + 1);
             int x = rand.Next(1, this.width - roomWidth);
             int y = rand.Next(1, this.height - roomHeight);
             Room room = new Room(roomWidth, roomHeight, x, y);
@@ -120,8 +122,8 @@ namespace Game.DungeonMaker
         /// <returns>Returns true if room placement was successful.</returns>
         private bool TryAddingRoom()
         {
-            int roomWidth = rand.Next(minRoomDimension, maxRoomDimension + 1);
-            int roomHeight = rand.Next(minRoomDimension, maxRoomDimension + 1);
+            int roomWidth = rand.Next(minRoomWidth, maxRoomWidth + 1);
+            int roomHeight = rand.Next(minRoomHeight, maxRoomHeight + 1);
             int x = rand.Next(1, this.width - roomWidth);
             int y = rand.Next(1, this.height - roomHeight);
             Room room = new Room(roomWidth, roomHeight, x, y);
