@@ -111,7 +111,16 @@ namespace Game.Components
         public void OnDeath(GameObject source)
         {
             // Killer gains exp n stuff for killing, right?
-            
+            Actor killer = (Actor)source.GetComponent<Actor>();
+            if(killer == null)
+            {
+                Debug.LogError("Unknown killer.");
+            }
+            else
+            {
+                killer.GiveXp(Xp);
+            }
+
             HUD.Append(source.Name + " killed " + Name + ".");
             
             // We need to remove this enemy for the map too, right?

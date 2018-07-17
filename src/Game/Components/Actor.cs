@@ -59,6 +59,14 @@ namespace Game.Components
             }
         }
 
+        public int Xp
+        {
+            get
+            {
+                return xp;
+            }
+        }
+
         public Actor() : base()
         {
         }
@@ -89,6 +97,11 @@ namespace Game.Components
         protected virtual int CalculateDamage()
         {
             return 0;
+        }
+
+        public void GiveXp(int givenXp)
+        {
+            xp += givenXp;
         }
 
         public bool TryMove(int dx, int dy)
