@@ -88,9 +88,13 @@ namespace Game.Components
             damage = (damage < armor) ? 0 : damage - armor;
 
             this.hp -= damage;
+            
             // Made it a little easier to add stuff to the log from anywhere in
             // the game.
             HUD.Append("Attacked " + Name + " for " + damage + " damage.");
+
+            // Show target info in HUD
+            HUD.CacheInstance().Target(this);
 
             // Play a rudimentary hit sound
             //Console.Beep(400, 100);
@@ -121,6 +125,8 @@ namespace Game.Components
                 killer.GiveXp(Xp);
             }
 
+            // Update HUD
+            HUD.CacheInstance().Target(null);
             HUD.Append(source.Name + " killed " + Name + ".");
             
             // We need to remove this enemy for the map too, right?

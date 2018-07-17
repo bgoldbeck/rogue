@@ -17,6 +17,7 @@ namespace Game.Components
         private int height;
         private List<String> log;
         private static HUD hud = null;
+        private Enemy target = null;
 
         public HUD(int width, int height)
         {
@@ -67,6 +68,11 @@ namespace Game.Components
             return;
         }
 
+        public void Target(Enemy enemy)
+        {
+            hud.target = enemy;
+        }
+
         public override void Start()
         {
             if (hud != null && hud != this)
@@ -103,9 +109,13 @@ namespace Game.Components
                 AddText(model, "  " + it.name);
             }
 
+            // Show the last attacked enemy info
+            AddDivider(model);
+            AddTarget(model);
+
             AddDivider(model);
 
-            // Displaya log. Must be the last item in the HUD for length to calculate correctly.
+            // Display log. Must be the last item in the HUD for length to calculate correctly.
             AddLog(model); 
 
             AddBottom(model);
@@ -126,6 +136,42 @@ namespace Game.Components
                     continue;
                 AddText(model, log[i]);
             }
+        }
+
+        private void AddTarget(Model model)
+        {
+            if (target == null)
+            {
+                AddText(model, "Target:");
+                return;
+            }
+
+            AddText(model, "Target: " + target.Name);
+      
+            int displayMaxWidth = width - 6;
+            int currentHp = target.HitPoints;
+            int maxHp = target.MaxHitPoints;
+            int displayValue = currentHp;
+            int displayWidth = maxHp;
+
+            // Scale the hp to HUD width if necessary
+            if (maxHp > displayMaxWidth)
+            {
+                displayValue = currentHp / maxHp * displayMaxWidth;
+                displayWidth = displayMaxWidth;
+            }
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("[");
+            for(int i = 0; i < displayWidth; ++i)
+            {
+                if (i < displayValue)
+                    sb.Append("*");
+                else
+                    sb.Append(" ");
+            }
+            sb.Append("]");
+            AddText(model, sb.ToString());
         }
 
         private void AddTop(Model model)
