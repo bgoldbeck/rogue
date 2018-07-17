@@ -11,7 +11,7 @@ namespace Game.Data
     {    
         //This variable delegate were inspired by this discussion on Stack Overflow:
         //https://stackoverflow.com/questions/3767942/storing-a-list-of-methods-in-c-sharp
-        delegate Enemy spawnGenerator(int level, MapTile m, EnemyAI a);
+        delegate Enemy spawnGenerator(int level, MapTile m, EnemyAI a, GameObject s);
 
         /// <summary>
         /// This function generates an instance of Enemy using the level and fills it in for an enemy type snake. 
@@ -20,7 +20,7 @@ namespace Game.Data
         /// <param name="level"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        static private Enemy SnakeGenerator(int level, MapTile mapTile, EnemyAI ai)
+        static private Enemy SnakeGenerator(int level, MapTile mapTile, EnemyAI ai, GameObject slot)
         {
             mapTile.character = 's';                //Monster's model
             mapTile.color.Set(255, 80, 80);         //Color
@@ -41,7 +41,7 @@ namespace Game.Data
         /// <param name="level"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        static private Enemy GoblinGenerator(int level, MapTile mapTile, EnemyAI ai)
+        static private Enemy GoblinGenerator(int level, MapTile mapTile, EnemyAI ai, GameObject slot)
         {
             mapTile.character = 'g';                    //Monster's model
             mapTile.color.Set(0, 180, 0);               //Color
@@ -55,7 +55,25 @@ namespace Game.Data
                              );
         }
 
-    
+        static private Enemy RaptorGenerator(int level, MapTile mapTile, EnemyAI ai, GameObject slot)
+        {
+            mapTile.character = 'r';                    //Monster's model
+            mapTile.color.Set(180, 0, 0);               //Color
+            ai.SetRate(2);                              //Time between each move.
+            //------------------------
+            //Special characteristics:
+            slot.AddComponent(new DoorOpener());        //Can open doors! :D
+            slot.AddComponent(new XRayVision());        //Can see through walls! :D
+            //------------------------
+            return new Enemy("Raptor",                  //Monster name
+                             "Allen!",                  //Monster description
+                             level,                     //Level of the monster
+                             4 * level,                 //Equation for the monster's health.
+                            (level > 1) ? level - 1 : 0,//Equation for the monster's armor.
+                             2 + level                  //Equation for the monster's attack.                        
+                             );
+        }
+
         /// <summary>
         /// This function takes in a reference to the Random class, a level, and a GameObject
         /// and randomly selects a monster and generates the enemy.
@@ -74,14 +92,15 @@ namespace Game.Data
             //Generates an array of methods for each monster type.
             spawnGenerator[] generatorArr = new spawnGenerator[]
             {
-                (lvl, mt, a) => SnakeGenerator(lvl, mt, a),
-                (lvl, mt, a) => GoblinGenerator(lvl, mt, a),
+                (lvl, mt, a, s) => SnakeGenerator(lvl, mt, a, s),
+                (lvl, mt, a, s) => GoblinGenerator(lvl, mt, a, s),
+                (lvl, mt, a, s) => RaptorGenerator(lvl, mt, a, s),
             };
          
             //Using the passed in Random instance, a random monster is picked and the
             //information on the enemy is filled in.
             int value = rand.Next() % generatorArr.Length;
-            slot.AddComponent(generatorArr[value](level, mapTile, ai));
+            slot.AddComponent(generatorArr[value](level, mapTile, ai, slot));
             slot.AddComponent(new Aggro());
             slot.AddComponent(new Sound());
         }

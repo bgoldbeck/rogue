@@ -46,7 +46,7 @@ namespace Game.Components
 
             if (Vec2i.Distance(player.transform.position, transform.position) < aggroRange)
             {
-                if (CheckLine(transform.position, player.transform.position))
+                if ( this.gameObject.GetComponent<XRayVision>() != null || CheckLine(transform.position, player.transform.position))
                 {
                     // OnAggro.
                     gameObject.SendMessage<IAggressive>("OnAggro", new object[] { player.gameObject });

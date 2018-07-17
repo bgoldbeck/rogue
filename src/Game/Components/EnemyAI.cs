@@ -84,7 +84,7 @@ namespace Game.Components
             dx = moveOnX ? dx : 0;
             dy = moveOnX ? 0 : dy;
 
-            //HUD.Append(dx + " " + dy);
+            HUD.Append(dx + " " + dy);
             Move(dx, dy);
         }
 

@@ -45,11 +45,11 @@ namespace Game.Components
 
         public void OnInteract(GameObject objectInteracting)
         {
-            // This line makes only the player allowed to open doors.
-            if (objectInteracting != null && objectInteracting.GetComponent<Player>() == null) { return; }
+            // This line makes only actors with the DoorOpener component can open doors.
+            if (objectInteracting != null && objectInteracting.GetComponent<DoorOpener>() == null) { return; }
 
             bool destroyDoor = false;
-            if (locked)
+            if (locked && objectInteracting.GetComponent<Player>() != null)
             {
                 Inventory inv = (Inventory)Player.MainPlayer().GetComponent<Inventory>();
                 if (inv.Find("Key") != null)
@@ -68,8 +68,11 @@ namespace Game.Components
             else
             {
                 Map.CacheInstance().PopObject(transform.position.x, transform.position.y);
-                HUD.Append(objectInteracting.Name + " opened a door.");
-                destroyDoor = true;
+                if (objectInteracting.GetComponent<Player>() != null)
+                {
+                    HUD.Append(objectInteracting.Name + " opened a door.");
+                    destroyDoor = true;
+                }
             }
 
             if (destroyDoor)
