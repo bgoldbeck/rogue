@@ -16,6 +16,7 @@ namespace Game.Components
     {
         //public String name = "";
         public String description = "";
+        protected int maxHp = 0;
         protected int hp = 0;
         protected int armor = 0;
         protected int attack = 0;
@@ -32,6 +33,14 @@ namespace Game.Components
             get
             {
                 return hp;
+            }
+        }
+
+        public int MaxHitPoints
+        {
+            get
+            {
+                return maxHp;
             }
         }
 
@@ -77,6 +86,7 @@ namespace Game.Components
             this.description = description;
             this.level = level;
             this.hp = hp;
+            this.maxHp = hp;
             this.armor = armor;
             this.attack = attack;
             this.xp = xp;
