@@ -8,8 +8,8 @@ namespace Game.Data.Monster
 {
     class Goblin : Monster
     {
-        public Goblin(Random rand, int level, GameObject slot)
-            : base(slot,
+        public Goblin(Random rand, int level)
+            : base(
                   "Goblin",                  //Monster name
                   "Just a normal Goblin",    //Monster description
                   level,                     //Level of the monster
@@ -18,6 +18,11 @@ namespace Game.Data.Monster
                   3 + level                  //Equation for the monster's attack.                        
                   )
         {
+        }
+
+        public override void Start()
+        {
+            base.Start();
             mapTile.character = 'g';                //Monster's model
             mapTile.color.Set(0, 180, 0);         //Color
             ai.SetRate(3);                          //Time between each move.

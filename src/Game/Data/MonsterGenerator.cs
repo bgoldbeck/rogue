@@ -14,13 +14,13 @@ namespace Game.Data.Monster
             switch(rand.Next() % 3)
             {
                 case 0:
-                    slot.AddComponent(new Snake(rand, level, slot));
+                    slot.AddComponent(new Snake(rand, level));
                     break;
                 case 1:
-                    slot.AddComponent(new Goblin(rand, level, slot));
+                    slot.AddComponent(new Goblin(rand, level));
                     break;
                 case 2:
-                    slot.AddComponent(new Raptor(rand, level, slot));
+                    slot.AddComponent(new Raptor(rand, level));
                     break;
             }
         }
