@@ -40,14 +40,15 @@ namespace Game.Components
         public static GameObject CreateBoss(int x, int y, int level)
         {
             GameObject go = GameObject.Instantiate("Boss");
-            MonsterGenerator.Fill(rand, level, go);
+            //MonsterGenerator.Fill(rand, level, go);
+            BossGenerator.Fill(rand, level, go);
             go.transform.position = new Vec2i(x, y);
             //go.transform.position.x = x;
             //go.transform.position.y = y;
             Inventory i = (Inventory)go.AddComponent(new Inventory());
             i.Add(new Item("The Ultimate Thing"));
             MapTile mt = (MapTile)go.GetComponent<MapTile>();
-            mt.character = 'ß';
+            //mt.character = 'ß';
 
             return go;
         }
