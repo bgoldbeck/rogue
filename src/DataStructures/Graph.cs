@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Copyright(c) 2018 Daniel Bramblett, Daniel Dupriest, Brandon Goldbeck
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,33 +8,134 @@ namespace DataStructures
 {
     public class Graph <T>
     {
-        public Dictionary<T, List<T>> Edges { get; private set; } = new Dictionary<T, List<T>>();
+        private Dictionary<T, List<T>> Data { get; set; } = new Dictionary<T, List<T>>();
+
 
         public void AddEdge(T from, T to)
         {
-            Edges.TryGetValue(from, out List<T> neighbors);
+            AddUndirectedEdge(from, to);
+            AddUndirectedEdge(to, from);
+            return;
+        }
+
+        private void AddUndirectedEdge(T from, T to)
+        {
+            AddVertex(from);
+            Data.TryGetValue(from, out List<T> neighbors);
             
-            if (neighbors == null)
-            {
-                neighbors = new List<T>();
-            }
             neighbors.Add(to);
-            Edges[from] = neighbors;
+            Data[from] = neighbors;
             
             return;
         }
 
-        public void RemoveEdge(T from, T remove)
+        public void AddVertex(T vertex)
         {
-            if (Edges.TryGetValue(from, out List<T> neighbors))
+            if (!Data.ContainsKey(vertex))
+            { 
+                Data.Add(vertex, new List<T>());
+            }
+            return;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vertex"></param>
+        public void RemoveVertex(T vertex)
+        {
+            List<T> neighbors = GetEdges(vertex);
+
+            if (neighbors != null)
+            {
+                foreach (T neighbor in neighbors)
+                {
+                    RemoveEdge(vertex, neighbor);
+                }
+                Data.Remove(vertex);
+            }
+            return;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        public void RemoveEdge(T from, T to)
+        {
+            RemoveDirectedEdge(from, to);
+            RemoveDirectedEdge(to, from);
+            return;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="remove"></param>
+        public void RemoveDirectedEdge(T from, T remove)
+        {
+            if (Data.TryGetValue(from, out List<T> neighbors))
             {
                 neighbors.Remove(remove);
-
-                Edges[from] = neighbors;
+                
+                Data.Remove(from);
+                
+                Data[from] = neighbors;
+                
             }
             return;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="from"></param>
+        /// <returns></returns>
+        public List<T> GetEdges(T from)
+        {
+            Data.TryGetValue(from, out List<T> neighbors);
+            return neighbors;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vertex"></param>
+        /// <returns></returns>
+        public int Degree(T vertex)
+        {
+            Data.TryGetValue(vertex, out List<T> neighbors);
+
+            return neighbors != null ? neighbors.Count : 0;
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public int VertexCount()
+        {
+            return Data.Count;
+        }
+
+        public bool ContainsIsland()
+        {
+            bool found = false;
+            foreach (T vertex in Data.Keys)
+            {
+                if(Data.TryGetValue(vertex, out List<T> neighbors))
+                {
+                    if (neighbors != null && neighbors.Count == 0)
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+            }
+            return found;
+        }
 
     }
 }
