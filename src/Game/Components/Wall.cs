@@ -18,7 +18,7 @@ namespace Game.Components
 
         public Wall(bool isBedRock)
         {
-            bedRock = isBedRock;
+            bedRock = true; // isBedRock;
         }
 
         public override void Start()
