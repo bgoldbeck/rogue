@@ -11,12 +11,13 @@ namespace Game.Components.EnemyTypes
     {
         public Goblin(Random rand, int level)
             : base(
-                  "Goblin",                  //Monster name
-                  "Just a normal Goblin",    //Monster description
-                  level,                     //Level of the monster
-                  5 * level,                 //Equation for the monster's health.
-                  (level > 1) ? level - 1 : 0,//Equation for the monster's armor.
-                  3 + level                  //Equation for the monster's attack.                        
+                  "Goblin",                     //Enemy's name
+                  "Just a normal Goblin",       //Enemy's description
+                  level,                        //Level of the enemy
+                  5 * level,                    //Equation for the enemy's health.
+                  (level > 1) ? level - 1 : 0,  //Equation for the enemy's armor.
+                  3 + level,                    //Equation for the enemy's attack.  
+                  10 * level                    //xp given by beating this enemy.
                   )
         {
         }
@@ -24,8 +25,8 @@ namespace Game.Components.EnemyTypes
         public override void Start()
         {
             base.Start();
-            mapTile.character = 'g';                //Monster's model
-            mapTile.color.Set(0, 180, 0);         //Color
+            mapTile.character = 'g';                //enemy's model
+            mapTile.color.Set(0, 180, 0);           //Color
             ai.SetRate(3);                          //Time between each move.
         }
     }

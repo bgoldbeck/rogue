@@ -20,6 +20,7 @@ namespace Game.Components
         protected int armor = 0;
         protected int attack = 0;
         protected int level = 0;
+        protected int xp = 0;
         protected List<Item> inventory = new List<Item>();
 
         protected Collider collider = null;
@@ -62,7 +63,7 @@ namespace Game.Components
         {
         }
 
-        public Actor(string name, string description, int level, int hp, int armor, int attack) : base()
+        public Actor(string name, string description, int level, int hp, int armor, int attack, int xp) : base()
         {
             this.Name = name;
             this.description = description;
@@ -70,6 +71,7 @@ namespace Game.Components
             this.hp = hp;
             this.armor = armor;
             this.attack = attack;
+            this.xp = xp;
         }
 
         public override void Start()

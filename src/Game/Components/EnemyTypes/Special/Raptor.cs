@@ -12,19 +12,20 @@ namespace Game.Components.EnemyTypes
     {
         public Raptor(Random rand, int level)
             : base(
-                  "Raptor",                  //Monster name
-                  "Allen!",                  //Monster description
-                  level,                     //Level of the monster
-                  4 * level,                 //Equation for the monster's health.
-                 (level > 1) ? level - 1 : 0,//Equation for the monster's armor.
-                  2 + level                  //Equation for the monster's attack.                        
+                  "Raptor",                     //Enemy's name
+                  "Allen!",                     //Enemy's description
+                  level,                        //Level of the enemy
+                  4 * level,                    //Equation for the enemy's health.
+                  level ,                       //Equation for the enemy's armor.
+                  2 + level,                    //Equation for the enemy's attack. 
+                  15 * level                    //xp given by beating this enemy.
                   )
         {
         }
         public override void Start()
         {
             base.Start();
-            mapTile.character = 'r';                    //Monster's model
+            mapTile.character = 'r';                    //Enemy's model
             mapTile.color.Set(180, 0, 0);               //Color
             ai.SetRate(2);                              //Time between each move.
         }

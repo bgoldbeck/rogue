@@ -16,7 +16,7 @@ namespace Game.Components
     {
 
         public Player(string name, string description, int level, int hp, int armor, int attack)
-            : base(name, description, level, hp, armor, attack)
+            : base(name, description, level, hp, armor, attack,0)
         {
         }
 
