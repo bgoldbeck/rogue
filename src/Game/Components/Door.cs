@@ -49,20 +49,23 @@ namespace Game.Components
             if (objectInteracting != null && objectInteracting.GetComponent<DoorOpener>() == null) { return; }
 
             bool destroyDoor = false;
-            if (locked && objectInteracting.GetComponent<Player>() != null)
+            if (locked)
             {
-                Inventory inv = (Inventory)Player.MainPlayer().GetComponent<Inventory>();
-                if (inv.Find("Key") != null)
+                if (objectInteracting.GetComponent<Player>() != null)
                 {
-                    inv.Remove("Key");
-                    Map.CacheInstance().PopObject(transform.position.x, transform.position.y);
-                    HUD.Append(objectInteracting.Name + " unlocked and opened a door.");
-                    destroyDoor = true;
-                }
-                else
-                {
-                    HUD.Append(objectInteracting.Name + " tried to open door, but is was locked.");
-                    Console.Beep(80, 100);
+                    Inventory inv = (Inventory)Player.MainPlayer().GetComponent<Inventory>();
+                    if (inv.Find("Key") != null)
+                    {
+                        inv.Remove("Key");
+                        Map.CacheInstance().PopObject(transform.position.x, transform.position.y);
+                        HUD.Append(objectInteracting.Name + " unlocked and opened a door.");
+                        destroyDoor = true;
+                    }
+                    else
+                    {
+                        HUD.Append(objectInteracting.Name + " tried to open door, but is was locked.");
+                        Console.Beep(80, 100);
+                    }
                 }
             }
             else
