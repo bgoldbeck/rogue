@@ -31,7 +31,8 @@ namespace Game.Components
             // Play intro music in separate thread
             Thread music = new Thread(PlayIntroMusic);
             music.Start();
-            
+
+            GameObject player = GameObject.Instantiate("MainPlayer");
             GameObject mapObject = GameObject.Instantiate("Map");
             //Map map = new Map(gameWidth - hudWidth, gameHeight);
             Map map = new Map(60, 30);
@@ -39,7 +40,6 @@ namespace Game.Components
             mapObject.transform.position = new Vec2i(mapObject.transform.position.x, gameHeight - 1);
 
 
-            GameObject player = GameObject.Instantiate("MainPlayer");
             player.AddComponent(new Player("Sneaky McDevious", "Thiefy rogue", 1, 10, 1, 2));
             player.AddComponent(new PlayerController());
             player.AddComponent(new Model());
