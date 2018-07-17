@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-using Game.Interfaces;
+using Game.Interfaces.Markers;
 
 namespace Game.Components.EnemyTypes
 {

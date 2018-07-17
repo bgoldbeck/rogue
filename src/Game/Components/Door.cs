@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 using Ecs;
 using Game.Interfaces;
+using Game.Interfaces.Markers;
 
 namespace Game.Components
 {

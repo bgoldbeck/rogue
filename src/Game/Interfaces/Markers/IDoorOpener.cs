@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Game.Interfaces
+namespace Game.Interfaces.Markers
 {
     public interface IDoorOpener
     {
