@@ -19,8 +19,8 @@ namespace Game.Data.Monster
                   )
         {
             mapTile.character = 'g';                //Monster's model
-            mapTile.color.Set(255, 80, 80);         //Color
-            ai.SetRate(2);                          //Time between each move.
+            mapTile.color.Set(0, 180, 0);         //Color
+            ai.SetRate(3);                          //Time between each move.
         }
     }
 }
