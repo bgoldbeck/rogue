@@ -4,6 +4,7 @@ using System.Text;
 
 using Ecs;
 using Game.Interfaces;
+using Game.Data.Monster;
 using IO;
 
 namespace Game.Components
@@ -46,7 +47,7 @@ namespace Game.Components
 
             if (Vec2i.Distance(player.transform.position, transform.position) < aggroRange)
             {
-                if ( this.gameObject.GetComponent<XRayVision>() != null || CheckLine(transform.position, player.transform.position))
+                if ( this.gameObject.GetComponent<Raptor>() != null || CheckLine(transform.position, player.transform.position))
                 {
                     // OnAggro.
                     gameObject.SendMessage<IAggressive>("OnAggro", new object[] { player.gameObject });

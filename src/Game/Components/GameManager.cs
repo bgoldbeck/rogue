@@ -44,7 +44,6 @@ namespace Game.Components
             player.AddComponent(new PlayerController());
             player.AddComponent(new Model());
             player.AddComponent(new LightSource(10.0f));
-            player.AddComponent(new DoorOpener());
             player.transform.position = new Vec2i(map.startingX, map.startingY);
             //player.transform.position.x = map.startingX;
             //player.transform.position.y = map.startingY;

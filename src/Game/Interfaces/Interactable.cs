@@ -14,6 +14,6 @@ namespace Game.Interfaces
     {
         bool IsInteractable { get; }
 
-        void OnInteract(GameObject interacter);
+        void OnInteract(GameObject interacter,object interactorType);
     }
 }

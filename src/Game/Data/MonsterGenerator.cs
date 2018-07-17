@@ -5,10 +5,27 @@ using System.Collections.Generic;
 using Game.Components;
 using Ecs;
 
-namespace Game.Data
+namespace Game.Data.Monster
 {
     class MonsterGenerator
-    {    
+    {
+        static public void Fill(Random rand,int level, GameObject slot)
+        {
+            switch(rand.Next() % 3)
+            {
+                case 0:
+                    slot.AddComponent(new Snake(rand, level, slot));
+                    break;
+                case 1:
+                    slot.AddComponent(new Goblin(rand, level, slot));
+                    break;
+                case 2:
+                    slot.AddComponent(new Raptor(rand, level, slot));
+                    break;
+            }
+        }
+
+        /*
         //This variable delegate were inspired by this discussion on Stack Overflow:
         //https://stackoverflow.com/questions/3767942/storing-a-list-of-methods-in-c-sharp
         delegate Enemy spawnGenerator(int level, MapTile m, EnemyAI a, GameObject s);
@@ -104,5 +121,6 @@ namespace Game.Data
             slot.AddComponent(new Aggro());
             slot.AddComponent(new Sound());
         }
+        */
     }
 }

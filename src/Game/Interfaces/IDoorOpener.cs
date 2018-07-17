@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-using Ecs;
-
-namespace Game.Components
+namespace Game.Interfaces
 {
-    class DoorOpener : Component
+    public interface IDoorOpener
     {
     }
 }

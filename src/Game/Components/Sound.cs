@@ -63,7 +63,7 @@ namespace Game.Components
             return;
         }
 
-        public void OnInteract(GameObject objectInteracting)
+        public void OnInteract(GameObject objectInteracting, object interactorType)
         {
 
             return;

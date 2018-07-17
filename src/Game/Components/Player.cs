@@ -12,7 +12,7 @@ using IO;
 
 namespace Game.Components
 {
-    public class Player : Actor, IMovable, IDamageable
+    public class Player : Actor, IMovable, IDamageable, IDoorOpener
     {
 
         public Player(string name, string description, int level, int hp, int armor, int attack)
