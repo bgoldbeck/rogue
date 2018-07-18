@@ -71,7 +71,16 @@ namespace Ecs
         /// <returns>True, if a equal b</returns>
         public static bool operator ==(Vec2i a, Vec2i b)
         {
-            return a.Equals(b);
+            bool isEqual;
+            if ((object)a == null)
+            {
+                isEqual = ((object)b == null);
+            }
+            else
+            {
+                isEqual = a.Equals(b);
+            }
+            return isEqual;
         }
 
         /// <summary>
