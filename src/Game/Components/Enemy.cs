@@ -116,18 +116,14 @@ namespace Game.Components
         {
             // Killer gains exp n stuff for killing, right?
             Actor killer = (Actor)source.GetComponent<Actor>();
-            if(killer == null)
-            {
-                Debug.LogError("Unknown killer.");
-            }
-            else
+            if(killer != null)
             {
                 killer.GiveXp(Xp);
+                HUD.Append(source.Name + " killed " + Name + ".");
             }
 
             // Update HUD
             HUD.CacheInstance().Target(null);
-            HUD.Append(source.Name + " killed " + Name + ".");
             
             // We need to remove this enemy for the map too, right?
             Map.CacheInstance().PopObject(transform.position.x, transform.position.y);

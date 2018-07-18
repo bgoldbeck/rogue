@@ -66,15 +66,23 @@ namespace Game.Components
 
         public void ApplyDamage(GameObject source, int damage)
         {
-            Enemy attacker = (Enemy)source.GetComponent<Enemy>();
-
-            //Minuses the enemie's armor from the damage and makes sure it doesn't go less then 0.
+            //Minuses the  armor from the damage and makes sure it doesn't go less then 0.
             damage = (damage < armor) ? 0 : damage - armor;
 
+            Enemy attacker = (Enemy)source.GetComponent<Enemy>();
             if (attacker != null)
             {
                 HUD.Append(attacker.Name + " hit you for " + damage + " damage.");
             }
+            else
+            {
+                Trap trap = (Trap)source.GetComponent<Trap>();
+                if (trap != null)
+                {
+                    HUD.Append("You triggered at trap got hit for " + damage + " damage.");
+                }
+            }
+
 
             hp -= damage;
 
