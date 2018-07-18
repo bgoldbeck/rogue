@@ -33,7 +33,7 @@ namespace Game.Components
                 for (int y = 0; y < map.height; ++y)
                 {
                     // TODO. need to block going off the maps edges.
-
+                    //if (map.PeekObject(x,y) != null) { continue; }
                     Vec2i from = new Vec2i(x, y);
 
                     if (map.PeekObject(x + 1, y) == null)
@@ -67,21 +67,25 @@ namespace Game.Components
             //frontier.put(next)
             //visited[next] = True
             PriorityQueue<Vec2i> frontier = new PriorityQueue<Vec2i>();
-            frontier.Enqueue(this.transform.position, defaultPriority);
+            Vec2i start = this.transform.position;
+            frontier.Enqueue(start, defaultPriority);
             
             Dictionary<Vec2i, Vec2i> cameFrom = new Dictionary<Vec2i, Vec2i>();
 
             while (frontier.Count() != 0)
             {
                 current = frontier.Dequeue();
-                foreach (Vec2i next in graph.GetEdges(current))
+                if (graph.GetEdges(current) != null)
                 {
-                    if (next == null) { continue; }
-
-                    if (!cameFrom.ContainsValue(next))
+                    foreach (Vec2i next in graph.GetEdges(current))
                     {
-                        frontier.Enqueue(next, 1.0);
-                        cameFrom[next] = current;
+                        if (next == null) { continue; }
+
+                        if (!cameFrom.ContainsValue(next))
+                        {
+                            frontier.Enqueue(next, 1.0);
+                            cameFrom[next] = current;
+                        }
                     }
                 }
             }
@@ -95,7 +99,6 @@ namespace Game.Components
             //path.append(start) # optional
 
             bool isPathGood = true;
-            Vec2i start = this.transform.position;
             Vec2i goal = null;
 
             for (int x = 0; x < map.width; ++x)
@@ -104,7 +107,7 @@ namespace Game.Components
                 {
                     if (map.PeekObject(x, y) != null && map.PeekObject(x, y).GetComponent<Enemy>() != null)
                     {
-                        if (Vec2i.Distance(new Vec2i(x, y), this.transform.position) < 4)
+                        if (Vec2i.Distance(new Vec2i(x, y), start) < 7)
                         { 
                             goal = new Vec2i(x, y);
                             break;
@@ -121,13 +124,20 @@ namespace Game.Components
                 while (current != start)
                 {
                     path.Add(current);
+                    
                     if (!cameFrom.ContainsKey(current))
                     {
                         isPathGood = false;
+                        break;
                     }
                     else
                     { 
                         current = cameFrom[current];
+                    }
+                    if (current != start && map.PeekObject(current.x, current.y) != null)
+                    {
+                        isPathGood = false;
+                        break;
                     }
                 }
                 path.Add(start); //path.append(start) # optional
