@@ -144,22 +144,10 @@ namespace Game.Components
 
                     foreach (Vec2i v in path)
                     {
-                        // How the hell do you draw to the path from the player to enemy?
-                        //ConsoleUI.Write((map.width / 2) + v.x, (map.height / 2) + v.y, ".", new Color(255, 0, 255));
-                                                
-                        for (int x = 0; x < camera.width; ++x)
-                        {
-                            for (int y = 0; y < camera.height; ++y)
-                            {
-                                int xToCheck = playerX - halfWidth + x;
-                                int yToCheck = playerY - halfHeight + y;
-                                if (xToCheck == v.x && yToCheck == v.y)
-                                {
-                                    ConsoleUI.Write(x, y, ".", new Color(255, 0, 255));
-                                }
-                            }
-                        }
-
+                        int x = v.x - playerX + halfWidth;
+                        int y = v.y - playerY + halfHeight;
+                        if (x < camera.width && y < camera.height)
+                          ConsoleUI.Write(x, y, ".", new Color(255, 0, 255));
                     }
                 }
             }
