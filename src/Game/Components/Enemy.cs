@@ -116,11 +116,7 @@ namespace Game.Components
         {
             // Killer gains exp n stuff for killing, right?
             Actor killer = (Actor)source.GetComponent<Actor>();
-            if(killer == null)
-            {
-                Debug.LogError("Unknown killer.");
-            }
-            else
+            if(killer != null)
             {
                 killer.GiveXp(Xp);
             }
