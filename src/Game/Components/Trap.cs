@@ -20,12 +20,17 @@ namespace Game.Components
         }
         public override void Start()
         {
+            base.Start();
             mapTile = (MapTile)this.gameObject.AddComponent(new MapTile());
+
+            mapTile.character = 'M';                    //Enemy's model
+            mapTile.color.Set(110, 85, 20);             //Color
             return;
         }
 
         public override void Update()
         {
+            base.Update();
             //Can traps reset themself?
             return;
         }
@@ -47,7 +52,10 @@ namespace Game.Components
 
         public void Reveal()
         {
-            trapVisible = true;
+            if (!trapVisible)
+            {
+                trapVisible = true;
+            }
         }
 
         public bool IsInteractable
