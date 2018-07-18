@@ -134,11 +134,32 @@ namespace Game.Components
 
                 if (isPathGood)
                 {
+                    Camera camera = Camera.CacheInstance();
+                    int halfWidth = camera.width / 2;
+                    int halfHeight = camera.height / 2;
+
+                    Player player = Player.MainPlayer();
+                    int playerX = player.transform.position.x;
+                    int playerY = player.transform.position.y;
+
                     foreach (Vec2i v in path)
                     {
                         // How the hell do you draw to the path from the player to enemy?
                         //ConsoleUI.Write((map.width / 2) + v.x, (map.height / 2) + v.y, ".", new Color(255, 0, 255));
-                        ConsoleUI.Write(v.x, v.y, ".", new Color(255, 0, 255));
+                                                
+                        for (int x = 0; x < camera.width; ++x)
+                        {
+                            for (int y = 0; y < camera.height; ++y)
+                            {
+                                int xToCheck = playerX - halfWidth + x;
+                                int yToCheck = playerY - halfHeight + y;
+                                if (xToCheck == v.x && yToCheck == v.y)
+                                {
+                                    ConsoleUI.Write(x, y, ".", new Color(255, 0, 255));
+                                }
+                            }
+                        }
+
                     }
                 }
             }

@@ -13,8 +13,8 @@ namespace Game.Components
 {
     class Camera : Component
     {
-        private int width;  // Width of camera drawing area
-        private int height; // Height of camera drawing area
+        public int width;  // Width of camera drawing area
+        public int height; // Height of camera drawing area
         private Map map = null; // Reference to map component
         private static Camera camera = null;    // Reference to camera component
 
