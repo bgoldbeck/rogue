@@ -36,19 +36,19 @@ namespace Game.Components
                     //if (map.PeekObject(x,y) != null) { continue; }
                     Vec2i from = new Vec2i(x, y);
 
-                    if (map.PeekObject(x + 1, y) == null)
+                    if (map.PeekObject(x + 1, y) == null || map.PeekObject(x + 1, y).GetComponent<Door>() != null)
                     {
                         graph.AddEdge(from, new Vec2i(x + 1, y));
                     }
-                    if (map.PeekObject(x - 1, y) == null)
+                    if (map.PeekObject(x - 1, y) == null || map.PeekObject(x - 1, y).GetComponent<Door>() != null)
                     {
                         graph.AddEdge(from, new Vec2i(x - 1, y));
                     }
-                    if (map.PeekObject(x, y + 1) == null)
+                    if (map.PeekObject(x, y + 1) == null || map.PeekObject(x, y + 1).GetComponent<Door>() != null)
                     {
                         graph.AddEdge(from, new Vec2i(x, y + 1));
                     }
-                    if (map.PeekObject(x, y - 1) == null)
+                    if (map.PeekObject(x, y - 1) == null || map.PeekObject(x, y - 1).GetComponent<Door>() != null)
                     {
                         graph.AddEdge(from, new Vec2i(x, y - 1));
                     }
@@ -66,7 +66,7 @@ namespace Game.Components
                 {
                     if (map.PeekObject(x, y) != null && map.PeekObject(x, y).GetComponent<Enemy>() != null)
                     {
-                        if (Vec2i.Distance(new Vec2i(x, y), start) < 7)
+                        if (Vec2i.Distance(new Vec2i(x, y), start) < 10)
                         {
                             goal = new Vec2i(x, y);
                             break;
@@ -141,7 +141,7 @@ namespace Game.Components
                     { 
                         current = cameFrom[current];
                     }
-                    if (current != start && current != goal && map.PeekObject(current.x, current.y) != null)
+                    if (current != start && current != goal && (map.PeekObject(current.x, current.y) != null && map.PeekObject(current.x, current.y).GetComponent<Door>() == null))
                     {
                         isPathGood = false;
                         break;
