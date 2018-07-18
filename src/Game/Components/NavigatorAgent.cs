@@ -66,7 +66,7 @@ namespace Game.Components
                 {
                     if (map.PeekObject(x, y) != null && map.PeekObject(x, y).GetComponent<Enemy>() != null)
                     {
-                        if (Vec2i.Distance(new Vec2i(x, y), start) < 7)
+                        if (Vec2i.Heuristic(new Vec2i(x, y), start) < 15)
                         {
                             goal = new Vec2i(x, y);
                             break;
@@ -104,10 +104,13 @@ namespace Game.Components
                     {
                         if (next == null) { continue; }
 
-                        if (!cameFrom.ContainsValue(next))
+                        if (map.PeekObject(next.x, next.y) == null || next == goal)
                         {
-                            frontier.Enqueue(next, 1.0);
-                            cameFrom[next] = current;
+                            if (!cameFrom.ContainsValue(next))
+                            { 
+                                frontier.Enqueue(next, 1.0);
+                                cameFrom[next] = current;
+                            }
                         }
                     }
                 }
