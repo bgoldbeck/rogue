@@ -21,8 +21,8 @@ namespace Game.Components
         /// </summary>
         public enum CellState { Open, Blocked };
 
-        private int width;
-        private int height;
+        public int width;
+        public int height;
         private List<List<GameObject>> objects;
         public int startingX = 0;
         public int startingY = 0;

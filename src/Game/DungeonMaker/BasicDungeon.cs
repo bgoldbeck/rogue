@@ -18,7 +18,7 @@ namespace Game.DungeonMaker
         const int maxRoomHeight = 12;   // Largest height of a room
         const int deadEndsToLeave = 8; // Should be at least '1', since the player starts in a dead end.
         const int chanceToCarveStraightPassage = 95; // Percentage chance for passage to go straight
-        const float monstersPerBlock = .02f; // Determines how many monsters show up in room areas
+        const float monstersPerBlock = .01f; // Determines how many monsters show up in room areas
 
         private List<List<Cell>> cells;
         private List<Room> roomList;

@@ -44,5 +44,15 @@ namespace XUnitTests.DataStructures
 
             Assert.True(queue.Peek() == null);
         }
+
+        [Fact]
+        public void TestEcs()
+        {
+            PriorityQueue<Vec2i> queue = new PriorityQueue<Vec2i>();
+
+            queue.Enqueue(new Vec2i(), 0.0);
+
+            Assert.True(queue.Peek() != null);
+        }
     }
 }
