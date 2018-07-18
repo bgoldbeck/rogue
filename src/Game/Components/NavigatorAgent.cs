@@ -18,7 +18,7 @@ namespace Game.Components
 
 
 
-        public override void Update()
+        public override void LateUpdate()
         {
             Double defaultPriority = 0.0;
 
@@ -55,6 +55,27 @@ namespace Game.Components
                 }
             }
 
+            Vec2i goal = null;
+
+            Vec2i start = this.transform.position;
+
+            // Get the goal. For testing purposes. this navigator will set it's goal to a nearby enemy.
+            for (int x = 0; x < map.width; ++x)
+            {
+                for (int y = 0; y < map.height; ++y)
+                {
+                    if (map.PeekObject(x, y) != null && map.PeekObject(x, y).GetComponent<Enemy>() != null)
+                    {
+                        if (Vec2i.Distance(new Vec2i(x, y), start) < 7)
+                        {
+                            goal = new Vec2i(x, y);
+                            break;
+                        }
+                    }
+                }
+                if (goal != null) { break; }
+            }
+
             //frontier = Queue()
             //frontier.put(start)
             //visited = { }
@@ -67,7 +88,6 @@ namespace Game.Components
             //frontier.put(next)
             //visited[next] = True
             PriorityQueue<Vec2i> frontier = new PriorityQueue<Vec2i>();
-            Vec2i start = this.transform.position;
             frontier.Enqueue(start, defaultPriority);
             
             Dictionary<Vec2i, Vec2i> cameFrom = new Dictionary<Vec2i, Vec2i>();
@@ -75,6 +95,9 @@ namespace Game.Components
             while (frontier.Count() != 0)
             {
                 current = frontier.Dequeue();
+
+                if (current == goal) { break; }
+
                 if (graph.GetEdges(current) != null)
                 {
                     foreach (Vec2i next in graph.GetEdges(current))
@@ -99,23 +122,7 @@ namespace Game.Components
             //path.append(start) # optional
 
             bool isPathGood = true;
-            Vec2i goal = null;
-
-            for (int x = 0; x < map.width; ++x)
-            {
-                for (int y = 0; y < map.height; ++y)
-                {
-                    if (map.PeekObject(x, y) != null && map.PeekObject(x, y).GetComponent<Enemy>() != null)
-                    {
-                        if (Vec2i.Distance(new Vec2i(x, y), start) < 7)
-                        { 
-                            goal = new Vec2i(x, y);
-                            break;
-                        }
-                    }
-                }
-                if (goal != null) { break; }
-            }
+       
 
             if (goal != null)
             { 
@@ -134,7 +141,7 @@ namespace Game.Components
                     { 
                         current = cameFrom[current];
                     }
-                    if (current != start && map.PeekObject(current.x, current.y) != null)
+                    if (current != start && current != goal && map.PeekObject(current.x, current.y) != null)
                     {
                         isPathGood = false;
                         break;
