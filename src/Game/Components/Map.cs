@@ -147,6 +147,13 @@ namespace Game.Components
             return objects[x][y];
         }
 
+        public GameObject PeekObject(Vec2i location)
+        {
+            if (location == null)
+                return null;
+            return PeekObject(location.x, location.y);
+        }
+
         public GameObject PopObject(int x, int y)
         {
             //Debug.Log("PopObject called with x = " + x + ", y = " + y + ".");
