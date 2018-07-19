@@ -1,4 +1,9 @@
-﻿using System;
+﻿//Copyright(c) 2018 Daniel Bramblett, Daniel Dupriest, Brandon Goldbeck
+
+//The algorithm for A* pathfinding came from this website:
+//https://www.redblobgames.com/pathfinding/a-star/introduction.html
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 
