@@ -35,22 +35,16 @@ namespace Game.Components
                     // TODO. need to block going off the maps edges.
                     //if (map.PeekObject(x,y) != null) { continue; }
                     Vec2i from = new Vec2i(x, y);
-
-                    if (map.PeekObject(x + 1, y) == null || map.PeekObject(x + 1, y).GetComponent<Door>() != null)
+                    Vec2i[] neighbors = new Vec2i[]
                     {
-                        graph.AddEdge(from, new Vec2i(x + 1, y));
-                    }
-                    if (map.PeekObject(x - 1, y) == null || map.PeekObject(x - 1, y).GetComponent<Door>() != null)
+                        new Vec2i(x + 1, y), new Vec2i(x - 1, y), new Vec2i(x, y + 1), new Vec2i(x, y - 1)
+                    };
+                    foreach (Vec2i currentNeighbor in neighbors)
                     {
-                        graph.AddEdge(from, new Vec2i(x - 1, y));
-                    }
-                    if (map.PeekObject(x, y + 1) == null || map.PeekObject(x, y + 1).GetComponent<Door>() != null)
-                    {
-                        graph.AddEdge(from, new Vec2i(x, y + 1));
-                    }
-                    if (map.PeekObject(x, y - 1) == null || map.PeekObject(x, y - 1).GetComponent<Door>() != null)
-                    {
-                        graph.AddEdge(from, new Vec2i(x, y - 1));
+                        if (map.PeekObject(currentNeighbor) == null || map.PeekObject(currentNeighbor).GetComponent<Door>() != null)
+                        {
+                            graph.AddEdge(from, currentNeighbor);
+                        }
                     }
                 }
             }
@@ -104,7 +98,7 @@ namespace Game.Components
                     {
                         if (next == null) { continue; }
 
-                        if (map.PeekObject(next.x, next.y) == null || next == goal)
+                        if (map.PeekObject(next) == null || next == goal)
                         {
                             if (!cameFrom.ContainsValue(next))
                             { 
@@ -144,7 +138,7 @@ namespace Game.Components
                     { 
                         current = cameFrom[current];
                     }
-                    if (current != start && current != goal && (map.PeekObject(current.x, current.y) != null && map.PeekObject(current.x, current.y).GetComponent<Door>() == null))
+                    if (current != start && current != goal && (map.PeekObject(current) != null && map.PeekObject(current).GetComponent<Door>() == null))
                     {
                         isPathGood = false;
                         break;
