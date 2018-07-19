@@ -27,8 +27,8 @@ namespace Game.Components.EnemyTypes
         public override void Start()
         {
             base.Start();
-            mapTile.character = '█';                    //Enemy's model
-            mapTile.color.Set(1, 0, 0);                 //Color
+            mapTile.character = ' ';                    //Enemy's model
+            mapTile.color.Set(10, 10, 10);              //Color
             ai.SetRate(2);                              //Time between each move.
         }
 
@@ -36,8 +36,26 @@ namespace Game.Components.EnemyTypes
         {
             IsHidden = false;
             mapTile.character = 'n';
-            mapTile.color.Set(30, 30, 30);
+            mapTile.color.Set(60, 60, 60);
         }
 
+        public override void Update()
+        {
+            Player player = Player.MainPlayer();
+            if(IsHidden)
+            {
+                if(Vec2i.Heuristic(transform.position, player.transform.position) < 4)
+                    Reveal();
+            }
+            else
+            {
+                if (Vec2i.Heuristic(transform.position, player.transform.position) < 4)
+                {
+                    mapTile.character = ' ';                    
+                    mapTile.color.Set(10, 10, 10);
+                    IsHidden = true;
+                }
+            }
+        }
     }
 }
