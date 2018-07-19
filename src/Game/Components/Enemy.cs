@@ -45,6 +45,37 @@ namespace Game.Components
             return;
         }
 
+        public override void Update()
+        {
+            base.Update();
+            //Displays the path of the path finder. Future game options to toggle?
+            if (true)
+            {
+                NavigatorAgent navigator = (NavigatorAgent)this.gameObject.GetComponent<NavigatorAgent>();
+                if (navigator != null)
+                {
+                    List<Vec2i> path = navigator.targetPath;
+                    if (path != null)
+                    {
+                        Camera camera = Camera.CacheInstance();
+                        int halfWidth = camera.width / 2;
+                        int halfHeight = camera.height / 2;
+
+                        Player player = Player.MainPlayer();
+                        int playerX = player.transform.position.x;
+                        int playerY = player.transform.position.y;
+
+                        foreach (Vec2i v in path)
+                        {
+                            int x = v.x - playerX + halfWidth;
+                            int y = v.y - playerY + halfHeight;
+                            if (x < camera.width && y < camera.height)
+                                ConsoleUI.Write(x, y, ".", new Color(255, 0, 255));
+                        }
+                    }
+                }
+            }
+        }
         /// <summary>
         /// The update method handles the movement of the enemy.
         /// </summary>
@@ -52,7 +83,7 @@ namespace Game.Components
         {
             base.Update();
 
-            // If enough time has passed since the enemy has moved, it checks if the enemy can
+             // If enough time has passed since the enemy has moved, it checks if the enemy can
             //  see the player. If the enemy can see the player, it moves towards the play. Otherwise,
             //  it makes a random move.
             

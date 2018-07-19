@@ -10,16 +10,25 @@ namespace Game.Components
 {
     public class NavigatorAgent : Component
     {
+        private List<Vec2i> path = new List<Vec2i>();
         public override void Start()
         {
 
             return;
         }
 
-
+        public List<Vec2i> targetPath
+        {
+            get
+            {
+                return path;
+            }
+        }
 
         public override void LateUpdate()
         {
+            path.Clear();
+
             Enemy puppet = (Enemy)base.gameObject.GetComponent<Enemy>();
             if (puppet == null)
             {
@@ -113,7 +122,7 @@ namespace Game.Components
             if (goal != null)
             { 
                 current = goal;
-                List<Vec2i> path = new List<Vec2i>();
+                //List<Vec2i> path = new List<Vec2i>();
                 while (current != start)
                 {
                     path.Add(current);
@@ -133,9 +142,14 @@ namespace Game.Components
                         break;
                     }
                 }
-                path.Add(start); //path.append(start) # optional
 
-                if (isPathGood)
+                if(!isPathGood)
+                {
+                    path.Clear();
+                }
+                //path.Add(start); //path.append(start) # optional
+
+                /*if (isPathGood)
                 {
                     Camera camera = Camera.CacheInstance();
                     int halfWidth = camera.width / 2;
@@ -152,9 +166,10 @@ namespace Game.Components
                         if (x < camera.width && y < camera.height)
                           ConsoleUI.Write(x, y, ".", new Color(255, 0, 255));
                     }
-                }
+                }*/
             }
             return;
         }
+
     }
 }

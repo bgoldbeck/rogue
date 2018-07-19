@@ -23,37 +23,35 @@ namespace Game.Components
 
         public override void LateUpdate()
         {
-            base.Update();
-
-            Think();
-        }
-
-        public void Think()
-        {
-            Enemy puppet = (Enemy)base.gameObject.GetComponent<Enemy>();
-            if (puppet == null)
-            {
-                Debug.LogError("EnemyAI component needs an enemy object");
-                return;
-            }
-
             if (lastMoved >= movementRate)
             {
-                if (puppet.Target != null)
-                {
-                    SeekMove(puppet.Target, puppet.OnMove);
-                }
-                else
-                {
-                    RandomMove(puppet.OnMove);
-                }
+                base.LateUpdate();
+                Think();
                 lastMoved = 0;
             }
             else
             {
                 ++lastMoved;
             }
-            return;
+        }
+
+        public void Think()
+        {
+            Enemy puppet = (Enemy)base.gameObject.GetComponent<Enemy>();
+
+            if (puppet == null)
+            {
+                Debug.LogError("EnemyAI component needs an enemy object");
+                return;
+            }
+            if (puppet.Target != null)
+            {
+                SeekMove(puppet.Target, puppet.OnMove);
+            }
+            else
+            {
+                RandomMove(puppet.OnMove);
+            }
         }
 
         /// <summary>
@@ -62,8 +60,30 @@ namespace Game.Components
         private void SeekMove(Transform target, Action<int,int> Move)
         {
             if (target == null) return;
+            Vec2i deltaMove;
 
-            Random rand = new Random();
+            if (Vec2i.Heuristic(target.position, transform.position) == 1)
+            {
+                deltaMove = target.position - transform.position;
+                Move(deltaMove.x, deltaMove.y);
+            }
+            else
+            {
+                NavigatorAgent navigation = (NavigatorAgent)base.gameObject.GetComponent<NavigatorAgent>();
+                if (navigation == null)
+                {
+                    Debug.LogError("EnemyAI component needs an navigator agent object");
+                    return;
+                }
+
+                List<Vec2i> path = navigation.targetPath;
+                if (path != null && path.Count != 0)
+                {
+                    deltaMove = path[path.Count - 1] - transform.position;
+                    Move(deltaMove.x, deltaMove.y);
+                }
+            }
+            /*Random rand = new Random();
 
             //Figures out which direction on the it has to move to head towards the player.
             Vec2i deltaMove = target.position - transform.position;
@@ -85,7 +105,7 @@ namespace Game.Components
             dy = moveOnX ? 0 : dy;
 
             //HUD.Append(dx + " " + dy);
-            Move(dx, dy);
+            Move(dx, dy);*/
         }
 
         /// <summary>
