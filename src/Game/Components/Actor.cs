@@ -127,6 +127,8 @@ namespace Game.Components
 
                 map.PopObject(transform.position.x, transform.position.y);
                 moved = map.AddObject(transform.position.x + dx, transform.position.y + dy, gameObject);
+                NavigatorMap.MoveObject(transform.position, new Vec2i(transform.position.x + dx, transform.position.y + dy));
+
                 if (moved)
                 {
                     transform.Translate(dx, dy);

@@ -14,11 +14,6 @@ namespace Game.Components
         public override void Start()
         {
 
-            return;
-        }
-
-        public override void Update()
-        {
             graph = new Graph<Vec2i>();
             Map map = Map.CacheInstance();
             if (map != null)
@@ -33,6 +28,25 @@ namespace Game.Components
                     }
                 }
             }
+            return;
+        }
+
+        public override void Update()
+        {
+            /*graph = new Graph<Vec2i>();
+            Map map = Map.CacheInstance();
+            if (map != null)
+            {
+                // Building the graph from the map.
+                for (int x = 0; x < map.width; ++x)
+                {
+                    for (int y = 0; y < map.height; ++y)
+                    {
+                        Vec2i from = new Vec2i(x, y);
+                        AddNeighbors(from, map);
+                    }
+                }
+            }*/
         }
 
         public static Graph<Vec2i> CacheInstance()
@@ -43,16 +57,20 @@ namespace Game.Components
         public static bool MoveObject(Vec2i currentPosition, Vec2i newPosition)
         {
             Map map = Map.CacheInstance();
-            if (graph == null || map == null)
+            if (graph == null || map == null || currentPosition == null || newPosition == null)
             {
                 return false;
             }
 
+            RemoveNeighbors(currentPosition);
             AddNeighbors(currentPosition, map);
+
+            RemoveNeighbors(newPosition);
+            AddNeighbors(newPosition, map);
             return false;
         }
 
-        public static void AddNeighbors(Vec2i from, Map map)
+        private static void AddNeighbors(Vec2i from, Map map)
         {
             if (graph == null)
             {
@@ -72,17 +90,30 @@ namespace Game.Components
                 }
             }
         }
-        public static void RemoveNeighbors(Vec2i from)
+        private static void RemoveNeighbors(Vec2i from)
         {
             if (graph == null)
             {
                 return;
             }
+            List<Vec2i> neighbors = graph.GetEdges(from);
 
-            foreach(Vec2i neighbor in graph.GetEdges(from))
+            //if(neighbors.Count)
+            while(neighbors.Count > 0)
             {
-                graph.RemoveEdge(from, neighbor);
+                graph.RemoveEdge(from, neighbors[0]);
             }
+        }
+
+        public static void RemoveObject(Vec2i from)
+        {
+            Map map = Map.CacheInstance();
+            if (graph == null || map == null || from == null)
+            {
+                return;
+            }
+
+            AddNeighbors(from, map);
         }
     }
 }
