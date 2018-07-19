@@ -106,11 +106,15 @@ namespace Game.Components
             return;
         }
 
-        public void ApplyDamage(GameObject source, int damage)
+        public virtual void ApplyDamage(GameObject source, int damage)
         {
             // We don't want enemies attacking other enemies.
             if (source == null || source.GetComponent<Enemy>() != null) { return; }
 
+            if(this is IHidden)
+            {
+                ((IHidden)this).Reveal();
+            }
             //Minuses the enemie's armor from the damage and makes sure it doesn't go less then 0.
             damage = (damage < armor) ? 0 : damage - armor;
 
