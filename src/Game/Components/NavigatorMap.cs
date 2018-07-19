@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿//Copyright(c) 2018 Daniel Bramblett, Daniel Dupriest, Brandon Goldbeck
+
+using System.Collections.Generic;
 
 using DataStructures;
 using Ecs;
