@@ -54,20 +54,19 @@ namespace Game.Components
             return graph;
         }
 
-        public static bool MoveObject(Vec2i currentPosition, Vec2i newPosition)
+        public static void UpdatePositions(params Vec2i[] positionList)
         {
             Map map = Map.CacheInstance();
-            if (graph == null || map == null || currentPosition == null || newPosition == null)
+            if (graph == null || map == null)
             {
-                return false;
+                return;
             }
 
-            RemoveNeighbors(currentPosition);
-            AddNeighbors(currentPosition, map);
-
-            RemoveNeighbors(newPosition);
-            AddNeighbors(newPosition, map);
-            return false;
+            foreach (Vec2i current in positionList)
+            {
+                RemoveNeighbors(current);
+                AddNeighbors(current, map);
+            }
         }
 
         private static void AddNeighbors(Vec2i from, Map map)
