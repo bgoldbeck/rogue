@@ -11,10 +11,6 @@ namespace Game.Components
     {
         private static Graph<Vec2i> graph = null;
 
-        /*public NavigatorMap()
-        {
-            graph = new Graph<Vec2i>();
-        }*/
         public override void Start()
         {
 

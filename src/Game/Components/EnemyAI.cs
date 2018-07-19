@@ -12,7 +12,6 @@ namespace Game.Components
     {
         private int movementRate = 3;
         private int lastMoved = 0;
-
         public void SetRate(int rate)
         {
             movementRate = rate;
@@ -22,7 +21,7 @@ namespace Game.Components
             base.Start();
         }
 
-        public override void Update()
+        public override void LateUpdate()
         {
             base.Update();
 

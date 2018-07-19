@@ -54,7 +54,7 @@ namespace Game.Components
             player.AddComponent(new MapTile('$', new Color(255, 255, 255), true));
             player.AddComponent(new Inventory());
             player.AddComponent(new Sound());
-            player.AddComponent(new NavigatorAgent());
+            //player.AddComponent(new NavigatorAgent());
 
             // Setup HUD for stats and info
             GameObject hud = GameObject.Instantiate("HUD");

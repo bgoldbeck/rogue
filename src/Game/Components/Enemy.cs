@@ -40,6 +40,7 @@ namespace Game.Components
             ai = (EnemyAI)this.gameObject.AddComponent(new EnemyAI());
             this.gameObject.AddComponent(new Aggro());
             this.gameObject.AddComponent(new Sound());
+            this.gameObject.AddComponent(new NavigatorAgent());
             mapTile.SetLightLevelAfterDiscovery(0.1f);
             return;
         }
@@ -47,7 +48,7 @@ namespace Game.Components
         /// <summary>
         /// The update method handles the movement of the enemy.
         /// </summary>
-        public override void Update()
+        public override void LateUpdate()
         {
             base.Update();
 

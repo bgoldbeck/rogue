@@ -20,45 +20,28 @@ namespace Game.Components
 
         public override void LateUpdate()
         {
-            /*// Building the graph from the map.
-            for (int x = 0; x < map.width; ++x)
+            Enemy puppet = (Enemy)base.gameObject.GetComponent<Enemy>();
+            if (puppet == null)
             {
-                for (int y = 0; y < map.height; ++y)
-                {
-                    // TODO. need to block going off the maps edges.
-                    //if (map.PeekObject(x,y) != null) { continue; }
-                    Vec2i from = new Vec2i(x, y);
-                    Vec2i[] neighbors = new Vec2i[]
-                    {
-                        new Vec2i(x + 1, y), new Vec2i(x - 1, y), new Vec2i(x, y + 1), new Vec2i(x, y - 1)
-                    };
-                    foreach (Vec2i currentNeighbor in neighbors)
-                    {
-                        if (map.PeekObject(currentNeighbor) == null || map.PeekObject(currentNeighbor).GetComponent<Door>() != null)
-                        {
-                            graph.AddEdge(from, currentNeighbor);
-                        }
-                    }
-                }
-            }*/
-
-            Double defaultPriority = 0.0;
-            Graph<Vec2i> graph = NavigatorMap.CacheInstance();
-
-            if(graph == null)
-            {
-                HUD.Append("Map is null");
+                Debug.LogError("EnemyAI component needs an enemy object");
                 return;
             }
 
+            Graph<Vec2i> graph;
+            if ((graph = NavigatorMap.CacheInstance()) == null) { return; }
+
+            if(puppet.Target == null) { return; }
+
+            Vec2i goal = puppet.Target.position;
+
+            Double defaultPriority = 0.0;
             Map map = Map.CacheInstance();
 
             Vec2i current = null;
-            Vec2i goal = null;
 
             Vec2i start = this.transform.position;
 
-            // Get the goal. For testing purposes. this navigator will set it's goal to a nearby enemy.
+            /*// Get the goal. For testing purposes. this navigator will set it's goal to a nearby enemy.
             for (int x = 0; x < map.width; ++x)
             {
                 for (int y = 0; y < map.height; ++y)
@@ -73,7 +56,7 @@ namespace Game.Components
                     }
                 }
                 if (goal != null) { break; }
-            }
+            }*/
 
             //frontier = Queue()
             //frontier.put(start)
