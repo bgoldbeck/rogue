@@ -17,8 +17,7 @@ namespace Game.Components
         }
 
 
-
-        public override void LateUpdate()
+        public override void EarlyUpdate()
         {
             Double defaultPriority = 0.0;
 
@@ -162,7 +161,7 @@ namespace Game.Components
                         int x = v.x - playerX + halfWidth;
                         int y = v.y - playerY + halfHeight;
                         if (x < camera.width && y < camera.height)
-                          ConsoleUI.Write(x, y, ".", new Color(255, 0, 255));
+                          ConsoleUI.Write(x, y, ".", Color.Teal);
                     }
                 }
             }
