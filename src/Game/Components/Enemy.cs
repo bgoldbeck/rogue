@@ -111,10 +111,6 @@ namespace Game.Components
             // We don't want enemies attacking other enemies.
             if (source == null || source.GetComponent<Enemy>() != null) { return; }
 
-            if(this is IHidden)
-            {
-                ((IHidden)this).Reveal();
-            }
             //Minuses the enemie's armor from the damage and makes sure it doesn't go less then 0.
             damage = (damage < armor) ? 0 : damage - armor;
 
