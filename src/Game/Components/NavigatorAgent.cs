@@ -98,7 +98,8 @@ namespace Game.Components
                     {
                         if (next == null) { continue; }
 
-                        if (map.PeekObject(next) == null || next == goal)
+                        GameObject nextGo = map.PeekObject(next);
+                        if (nextGo == null || next == goal || nextGo.GetComponent<Door>() != null)
                         {
                             if (!cameFrom.ContainsValue(next))
                             { 
