@@ -72,8 +72,10 @@ namespace Game.Components
                             if (!cameFrom.ContainsValue(next) || newCost < costSoFar[next])
                             {
                                 costSoFar[next] = newCost;    // Movement Costs.
-                                
-                                frontier.Enqueue(next, newCost);
+
+                                double priority = newCost + Vec2i.Heuristic(goal, next);
+
+                                frontier.Enqueue(next, priority);
                                 cameFrom[next] = current;
                             }
                         }
