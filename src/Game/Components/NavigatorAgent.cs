@@ -10,26 +10,22 @@ namespace Game.Components
 {
     public class NavigatorAgent : Component
     {
-        private List<Vec2i> path = new List<Vec2i>();
+        public List<Vec2i> targetPath { get; } = new List<Vec2i>();
+        private Map map = null;
+
         public override void Start()
         {
-
+            map = Map.CacheInstance();
             return;
         }
 
-        public List<Vec2i> targetPath
-        {
-            get
-            {
-                return path;
-            }
-        }
 
         public override void LateUpdate()
         {
-            path.Clear();
+            targetPath.Clear();
 
             Enemy puppet = (Enemy)base.gameObject.GetComponent<Enemy>();
+
             if (puppet == null)
             {
                 Debug.LogError("EnemyAI component needs an enemy object");
@@ -43,45 +39,18 @@ namespace Game.Components
 
             Vec2i goal = puppet.Target.position;
 
-            Double defaultPriority = 0.0;
-            Map map = Map.CacheInstance();
 
             Vec2i current = null;
 
             Vec2i start = this.transform.position;
 
-            /*// Get the goal. For testing purposes. this navigator will set it's goal to a nearby enemy.
-            for (int x = 0; x < map.width; ++x)
-            {
-                for (int y = 0; y < map.height; ++y)
-                {
-                    if (map.PeekObject(x, y) != null && map.PeekObject(x, y).GetComponent<Enemy>() != null)
-                    {
-                        if (Vec2i.Heuristic(new Vec2i(x, y), start) < 15)
-                        {
-                            goal = new Vec2i(x, y);
-                            break;
-                        }
-                    }
-                }
-                if (goal != null) { break; }
-            }*/
-
-            //frontier = Queue()
-            //frontier.put(start)
-            //visited = { }
-            //visited[start] = True
-
-            //while not frontier.empty():
-            //current = frontier.get()
-            //for next in graph.neighbors(current):
-            //if next not in visited:
-            //frontier.put(next)
-            //visited[next] = True
             PriorityQueue<Vec2i> frontier = new PriorityQueue<Vec2i>();
-            frontier.Enqueue(start, defaultPriority);
+            frontier.Enqueue(start, 0.0);
             
             Dictionary<Vec2i, Vec2i> cameFrom = new Dictionary<Vec2i, Vec2i>();
+            Dictionary<Vec2i, double> costSoFar = new Dictionary<Vec2i, double>(); // Movement Costs.
+            cameFrom[start] = null;
+            costSoFar[start] = 0; // Movement Costs.
 
             while (frontier.Count() != 0)
             {
@@ -94,13 +63,16 @@ namespace Game.Components
                     foreach (Vec2i next in graph.GetEdges(current))
                     {
                         if (next == null) { continue; }
+                        double newCost = costSoFar[current] + 1; // Movement Costs.
 
                         GameObject nextGo = map.PeekObject(next);
                         if (nextGo == null || next == goal || nextGo.GetComponent<Door>() != null)
                         {
-                            if (!cameFrom.ContainsValue(next))
-                            { 
-                                frontier.Enqueue(next, 1.0);
+                            if (!cameFrom.ContainsValue(next) || newCost < costSoFar[next])
+                            {
+                                costSoFar[next] = newCost;    // Movement Costs.
+                                
+                                frontier.Enqueue(next, newCost);
                                 cameFrom[next] = current;
                             }
                         }
@@ -108,13 +80,6 @@ namespace Game.Components
                 }
             }
 
-            // To construct the path
-            //current = goal
-            //path = []
-            //while current != start: 
-            //path.append(current)
-            //current = came_from[current]
-            //path.append(start) # optional
 
             bool isPathGood = true;
        
@@ -125,7 +90,7 @@ namespace Game.Components
                 //List<Vec2i> path = new List<Vec2i>();
                 while (current != start)
                 {
-                    path.Add(current);
+                    targetPath.Add(current);
                     
                     if (!cameFrom.ContainsKey(current))
                     {
@@ -145,9 +110,8 @@ namespace Game.Components
 
                 if(!isPathGood)
                 {
-                    path.Clear();
+                    targetPath.Clear();
                 }
-                //path.Add(start); //path.append(start) # optional
 
                 /*if (isPathGood)
                 {

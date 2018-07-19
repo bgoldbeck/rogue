@@ -15,6 +15,7 @@ namespace Ecs
         private static Stopwatch stopwatch = new Stopwatch();
 
         public static long deltaTicks = 0;
+        public static double deltaMs = 0.0;
 
         public static void Initialize()
         {
@@ -26,7 +27,7 @@ namespace Ecs
         public static void Update()
         {
             deltaTicks = stopwatch.ElapsedTicks;
-            //Console.WriteLine(stopwatch.ElapsedTicks);
+            deltaMs = deltaTicks / TimeSpan.TicksPerMillisecond; 
             stopwatch.Reset();
             stopwatch.Start();
             return;

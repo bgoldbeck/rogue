@@ -22,12 +22,14 @@ namespace Game
 
         public void Initialize()
         {
-            SetupScreen();
 
-            Time.Initialize();
             width = Console.WindowWidth;
             height = Console.WindowHeight;
             ConsoleUI.Initialize(width, height);
+
+            Time.Initialize();
+            LoadScreen();
+
 
             GameObject gameManager = GameObject.Instantiate("GameManager");
             gameManager.AddComponent(new GameManager(width, height));
@@ -37,9 +39,16 @@ namespace Game
             return;
         }
 
-        private void SetupScreen()
+        private void LoadScreen()
         {
-            Console.WriteLine(@"
+            
+            //Console.ReadLine();
+            long dTicks = 0;
+            while (dTicks < 10000 * 1000)
+            {
+                
+                dTicks += Time.deltaTicks;
+                ConsoleUI.Write(0, Console.WindowHeight - 1, @"
     __________________________________________
    / ___   __   __       ___   ___        __  \
    │ │  │ │  │ │  │ │  │ │      │  │ │ │ │  │ │
@@ -50,45 +59,45 @@ namespace Game
    │ │  \ │__│ │__│ │__│ │__    │   │ │  │__│ │
    │                                          │
    `─────────── A PERMADEATH STORY ──────────'
-                                          v 0.1");
-            Console.WriteLine("\n   Please adjust your window to the desired play size,\n   then press [Enter] to begin the game.\n");
-            Console.ReadLine();
+                                          v 0.1", Color.Salmon);
+                //ConsoleUI.WriteLine("\n   Please adjust your window to the desired play size,\n   then press [Enter] to begin the game.\n");
+                ConsoleUI.Write(1, 1, dTicks.ToString() + " total ticks", Color.Gold);
+                ConsoleUI.Render();
+                Time.Update();
+            }
             Console.Clear();
             return;
         }
 
         public int Loop()
         {
-
+            double dt = 0.0;
             while (isRunning)
             {
 
-                /*dt += Time.deltaTicks;
-                Update();
-                if (dt >= 1600000)
-                {
-                    dt = 0;
-                    Render();
-                }*/
+                dt = Time.deltaMs;
 
-                CheckForResize();
-                
+                // Milliseconds per frame in the bottom left corner of screen. 
+                // (This is better than FPS), FPS is for noobs.
+                ConsoleUI.Write(0, 1, dt.ToString() + " ms/frame", Color.Gold);
+                ConsoleUI.Write(0, 0, (1.0/dt * 1000.0).ToString() + " fps", Color.Gold);
+
+
                 press = Input.ReadKey().Key;
-                
+
                 if (press == ConsoleKey.Escape)
                 { 
                     isRunning = false;
                 }
 
-                if (Input.AnyKey())
-                {
-                    Update();
-                    Render();
-                    GameObject.ForceFlush();
-                }
+                CheckForResize();
+                Update();
+                Render();
+                GameObject.ForceFlush();
 
-                Time.Update();
+
                 Input.Reset();
+                Time.Update();
             }
 
             return 0;
