@@ -54,6 +54,9 @@ namespace Game.Components
                 case ConsoleKey.C:
                     ConsoleUI.ToggleColor();
                     break;
+                case ConsoleKey.V:
+                    Enemy.TogglePathVisibility();
+                    break;
                 default:
                     break;
             }

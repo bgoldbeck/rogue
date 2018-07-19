@@ -14,6 +14,7 @@ namespace Game.Components
 {
     class Enemy : Actor, IDamageable, IMovable, IAggressive
     {
+        public static bool visiblePaths = false;
         protected MapTile mapTile;
         protected EnemyAI ai;
         
@@ -44,7 +45,7 @@ namespace Game.Components
         {
             base.Update();
             //Displays the path of the path finder. Future game options to toggle?
-            if (true)
+            if (visiblePaths)
             {
                 NavigatorAgent navigator = (NavigatorAgent)this.gameObject.GetComponent<NavigatorAgent>();
                 if (navigator != null)
@@ -201,6 +202,11 @@ namespace Game.Components
             if (navigator != null)
                 navigator.Target = null;
             return;
+        }
+
+        public static void TogglePathVisibility()
+        {
+            visiblePaths = !visiblePaths;
         }
     }
 }
