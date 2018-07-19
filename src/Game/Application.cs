@@ -119,6 +119,7 @@ namespace Game
         /// </summary>
         public void Update()
         {
+            GameObject.EarlyUpdate();
             GameObject.Update();
             GameObject.LateUpdate();
             return;

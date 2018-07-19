@@ -31,6 +31,10 @@ namespace Ecs
         {
             return;
         }
+        public virtual void EarlyUpdate()
+        {
+            return;
+        }
 
         public virtual void Update()
         {

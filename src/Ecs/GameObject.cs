@@ -110,6 +110,27 @@ namespace Ecs
 
         /// <summary>
         /// This function is called by the Application on every updated frame. 
+        /// It calls the EarlyUpdate() method on every Component attached to this
+        /// GameObject.
+        /// </summary>
+        public static void EarlyUpdate()
+        {
+            foreach (KeyValuePair<int, GameObject> entry in gameObjectsIdMap)
+            {
+                foreach (Component component in entry.Value.GetComponents<Component>())
+                {
+                    if (component.IsActive())
+                    {
+                        component.EarlyUpdate();
+                    }
+                }
+            }
+
+            return;
+        }
+
+        /// <summary>
+        /// This function is called by the Application on every updated frame. 
         /// It calls the Update() method on every Component attached to this
         /// GameObject.
         /// </summary>
