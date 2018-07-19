@@ -14,6 +14,7 @@ namespace Game.Components
 {
     class Aggro :Component
     {
+        private bool seenTarget = false;
         private int aggroRange = 10;
         private int lastSeenPlayer = 0;
         private int turnsTillEnemyGivesUp = 3;
@@ -56,18 +57,20 @@ namespace Game.Components
                     gameObject.SendMessage<IAggressive>("OnAggro", new object[] { player.gameObject });
                     //searchee.target = player.transform;
                     targetUpdated = true;
+                    seenTarget = true;
                 }
             }
             //If the enemy can't see the player but has seen the player before. It checks how long
             //since the last time it has seen the player. If it has been too long, it sets the boolean
             //to false.
-            if (searchee.Target != null && !targetUpdated)
+            if (seenTarget && !targetUpdated)
             {
                 if (++lastSeenPlayer > turnsTillEnemyGivesUp)
                 {
                     // OnDegggro
                     //searchee.target = null;
                     gameObject.SendMessage<IAggressive>("OnDeaggro");
+                    seenTarget = false;
                 }
             }
             return;

@@ -12,6 +12,11 @@ namespace Game.Components
     {
         public List<Vec2i> targetPath { get; } = new List<Vec2i>();
         private Map map = null;
+        public Transform Target
+        {
+            get;
+            set;
+        }
 
         public override void Start()
         {
@@ -23,22 +28,18 @@ namespace Game.Components
         public override void LateUpdate()
         {
             targetPath.Clear();
-
-            Enemy puppet = (Enemy)base.gameObject.GetComponent<Enemy>();
-
-            if (puppet == null)
-            {
-                Debug.LogError("EnemyAI component needs an enemy object");
-                return;
-            }
+            if (Target == null) { return; }
 
             Graph<Vec2i> graph;
             if ((graph = NavigatorMap.CacheInstance()) == null) { return; }
 
-            if(puppet.Target == null) { return; }
+            Vec2i goal = Target.position;
 
-            Vec2i goal = puppet.Target.position;
-
+            if (Vec2i.Heuristic(goal, transform.position) == 1)
+            {
+                targetPath.Add(goal);
+                return;
+            }
 
             Vec2i current = null;
 

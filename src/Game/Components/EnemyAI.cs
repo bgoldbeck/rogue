@@ -38,15 +38,21 @@ namespace Game.Components
         public void Think()
         {
             Enemy puppet = (Enemy)base.gameObject.GetComponent<Enemy>();
-
-            if (puppet == null)
+            NavigatorAgent navigation = (NavigatorAgent)base.gameObject.GetComponent<NavigatorAgent>();
+            if (navigation == null)
             {
-                Debug.LogError("EnemyAI component needs an enemy object");
+                Debug.LogError("EnemyAI component needs an navigator agent object");
                 return;
             }
-            if (puppet.Target != null)
+            if (puppet == null)
             {
-                SeekMove(puppet.Target, puppet.OnMove);
+                Debug.LogError("EnemyAI component needs to be a component of an enemy");
+                return;
+            }
+            List<Vec2i> path = navigation.targetPath;
+            if (path != null && path.Count != 0)
+            {
+                SeekMove(path, puppet.OnMove);
             }
             else
             {
@@ -57,32 +63,13 @@ namespace Game.Components
         /// <summary>
         /// This method moves the enemy towards a known player.
         /// </summary>
-        private void SeekMove(Transform target, Action<int,int> Move)
+        private void SeekMove(List<Vec2i> path, Action<int,int> Move)
         {
-            if (target == null) return;
-            Vec2i deltaMove;
-
-            if (Vec2i.Heuristic(target.position, transform.position) == 1)
-            {
-                deltaMove = target.position - transform.position;
-                Move(deltaMove.x, deltaMove.y);
-            }
-            else
-            {
-                NavigatorAgent navigation = (NavigatorAgent)base.gameObject.GetComponent<NavigatorAgent>();
-                if (navigation == null)
-                {
-                    Debug.LogError("EnemyAI component needs an navigator agent object");
-                    return;
-                }
-
-                List<Vec2i> path = navigation.targetPath;
                 if (path != null && path.Count != 0)
                 {
-                    deltaMove = path[path.Count - 1] - transform.position;
+                    Vec2i deltaMove = path[path.Count - 1] - transform.position;
                     Move(deltaMove.x, deltaMove.y);
                 }
-            }
             /*Random rand = new Random();
 
             //Figures out which direction on the it has to move to head towards the player.

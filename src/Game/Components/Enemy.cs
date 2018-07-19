@@ -16,11 +16,6 @@ namespace Game.Components
     {
         protected MapTile mapTile;
         protected EnemyAI ai;
-        public Transform Target
-        {
-            get;
-            protected set;
-        }
         
         public Enemy():base()
         {
@@ -194,13 +189,17 @@ namespace Game.Components
 
         public void OnAggro(GameObject target)
         {
-            Target = target.transform;
+            NavigatorAgent navigator = (NavigatorAgent)this.gameObject.GetComponent<NavigatorAgent>();
+            if(navigator != null)
+                navigator.Target = target.transform;
             return;
         }
 
         public void OnDeaggro()
         {
-            Target = null;
+            NavigatorAgent navigator = (NavigatorAgent)this.gameObject.GetComponent<NavigatorAgent>();
+            if (navigator != null)
+                navigator.Target = null;
             return;
         }
     }
