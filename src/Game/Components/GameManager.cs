@@ -39,6 +39,8 @@ namespace Game.Components
             mapObject.AddComponent(map);
             mapObject.transform.position = new Vec2i(mapObject.transform.position.x, gameHeight - 1);
 
+            GameObject navigatorMapObject = GameObject.Instantiate("NavigatorMap");
+            navigatorMapObject.AddComponent(new NavigatorMap());
 
             player.AddComponent(new Player("Sneaky McDevious", "Thiefy rogue", 1, 10, 1, 2));
             player.AddComponent(new PlayerController());

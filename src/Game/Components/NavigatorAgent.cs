@@ -20,14 +20,7 @@ namespace Game.Components
 
         public override void LateUpdate()
         {
-            Double defaultPriority = 0.0;
-
-            Graph<Vec2i> graph = new Graph<Vec2i>();
-
-            Map map = Map.CacheInstance();
-            Vec2i current = null;
-
-            // Building the graph from the map.
+            /*// Building the graph from the map.
             for (int x = 0; x < map.width; ++x)
             {
                 for (int y = 0; y < map.height; ++y)
@@ -47,8 +40,20 @@ namespace Game.Components
                         }
                     }
                 }
+            }*/
+
+            Double defaultPriority = 0.0;
+            Graph<Vec2i> graph = NavigatorMap.CacheInstance();
+
+            if(graph == null)
+            {
+                HUD.Append("Map is null");
+                return;
             }
 
+            Map map = Map.CacheInstance();
+
+            Vec2i current = null;
             Vec2i goal = null;
 
             Vec2i start = this.transform.position;
