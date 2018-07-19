@@ -1,19 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 using DataStructures;
 using Ecs;
 
 namespace Game.Components
 {
+    /// <summary>
+    /// This class initializes and updates a graph of edges between the open blocks in the
+    /// map.
+    /// </summary>
     class NavigatorMap : Component
     {
+        //The static graph of the current level.
         private static Graph<Vec2i> graph = null;
 
+        /// <summary>
+        /// When this component starts, it uses the map of the level to fill in all the
+        /// initial edges between the empty map squares.
+        /// </summary>
         public override void Start()
         {
-
             graph = new Graph<Vec2i>();
             Map map = Map.CacheInstance();
             if (map != null)
@@ -33,27 +39,22 @@ namespace Game.Components
 
         public override void Update()
         {
-            /*graph = new Graph<Vec2i>();
-            Map map = Map.CacheInstance();
-            if (map != null)
-            {
-                // Building the graph from the map.
-                for (int x = 0; x < map.width; ++x)
-                {
-                    for (int y = 0; y < map.height; ++y)
-                    {
-                        Vec2i from = new Vec2i(x, y);
-                        AddNeighbors(from, map);
-                    }
-                }
-            }*/
+            //The graph doesn't update itself.
         }
 
+        /// <summary>
+        /// Returns the static graph of the edges.
+        /// </summary>
+        /// <returns></returns>
         public static Graph<Vec2i> CacheInstance()
         {
             return graph;
         }
 
+        /// <summary>
+        /// Takes in an array of positions that needs to be updated and updates them.
+        /// </summary>
+        /// <param name="positionList"></param>
         public static void UpdatePositions(params Vec2i[] positionList)
         {
             Map map = Map.CacheInstance();
@@ -62,6 +63,8 @@ namespace Game.Components
                 return;
             }
 
+            //To each update each position, all the edges related to that position are removed
+            //and then readded back into the graph.
             foreach (Vec2i current in positionList)
             {
                 RemoveNeighbors(current);
@@ -69,6 +72,12 @@ namespace Game.Components
             }
         }
 
+        /// <summary>
+        /// Takes a position on the map and adds the edges the connect it to its neighbor
+        /// locations.
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="map"></param>
         private static void AddNeighbors(Vec2i from, Map map)
         {
             if (graph == null)
@@ -89,6 +98,12 @@ namespace Game.Components
                 }
             }
         }
+
+        /// <summary>
+        /// Takes a position on the map and removes the edges that connect it to its neighbor
+        /// locations.
+        /// </summary>
+        /// <param name="from"></param>
         private static void RemoveNeighbors(Vec2i from)
         {
             if (graph == null)
@@ -104,6 +119,10 @@ namespace Game.Components
             }
         }
 
+        /// <summary>
+        /// Takes a position and adds its neighbors to connect the now empty spot.
+        /// </summary>
+        /// <param name="from"></param>
         public static void RemoveObject(Vec2i from)
         {
             Map map = Map.CacheInstance();
