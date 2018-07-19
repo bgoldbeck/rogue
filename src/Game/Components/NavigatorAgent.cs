@@ -17,7 +17,6 @@ namespace Game.Components
             return;
         }
 
-<<<<<<< HEAD
         public List<Vec2i> targetPath
         {
             get
@@ -27,10 +26,6 @@ namespace Game.Components
         }
 
         public override void LateUpdate()
-=======
-
-        public override void EarlyUpdate()
->>>>>>> 82b69fac0fb567c910141f4a8984a9a8a961137c
         {
             path.Clear();
 
