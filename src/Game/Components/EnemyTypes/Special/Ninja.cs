@@ -49,7 +49,7 @@ namespace Game.Components.EnemyTypes
             }
             else
             {
-                if (Vec2i.Heuristic(transform.position, player.transform.position) < 4)
+                if (Vec2i.Heuristic(transform.position, player.transform.position) > 4)
                 {
                     mapTile.character = ' ';                    
                     mapTile.color.Set(10, 10, 10);
