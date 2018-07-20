@@ -1,13 +1,11 @@
-# Rogue Two
+# R.O.G.U.E
+## Real-time Open-source Game Using Entities
 
 Copyright (c) 2018 Daniel Bramblett, Daniel Dupriest, Brandon Goldbeck
-
-![Rogue Two](http://wiki.hypersweet.com/_media/public/title-safe.png)
 
 ## What is this repository for? ##
 
 * This repository contains the term project for CS461P Open Source Software development with professor Bart Massey.
-
 
 ## Setting up for Development ##
 
@@ -15,7 +13,7 @@ Copyright (c) 2018 Daniel Bramblett, Daniel Dupriest, Brandon Goldbeck
 
 The software is set up as a Visual Studio 2017 solution.
 
-1. Clone the project. `git clone https://github.com/bgoldbeck/cs410-agile.git`
+1. Clone the project. `git clone https://github.com/bgoldbeck/rogue.git`
 2. Download and install Visual Studio 2017. [Visual Studio 2017](https://visualstudio.microsoft.com/downloads/)
 3. Download and install .NET Core app SDK 2.1 from Microsoft. [.NET Core SDK 2.1](https://www.microsoft.com/net/download/dotnet-core/sdk-2.1.300)
 4. Open the solution `.sln` file in Visual Studio 2017.
@@ -23,7 +21,7 @@ The software is set up as a Visual Studio 2017 solution.
 
 ### Linux ###
 
-1. Clone the project. `git clone https://github.com/bgoldbeck/cs410-agile.git`
+1. Clone the project. `git clone https://github.com/bgoldbeck/rogue.git`
 2. Download and install Visual Studio Code. [Visual Studio Code](https://code.visualstudio.com/)
 3. Download and install .NET Core app SDK 2.1 from Microsoft. [.NET Core SDK 2.1](https://www.microsoft.com/net/download/dotnet-core/sdk-2.1.300) Instructions for your distribution may vary.
 4. Launch Visual Studio Code.
