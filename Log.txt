@@ -1,13 +1,1 @@
-7/13/2018 7:27:13 AM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/13/2018 7:27:13 AM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/13/2018 7:27:13 AM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/13/2018 7:27:13 AM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/13/2018 7:27:13 AM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/13/2018 7:27:13 AM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/13/2018 7:27:13 AM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/13/2018 7:27:13 AM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/13/2018 7:27:13 AM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/13/2018 7:27:13 AM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/13/2018 7:27:13 AM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/13/2018 7:27:13 AM Warning: Game object already has component of type: Game.Components.EnemyAI
-7/13/2018 7:27:13 AM DEBUG: GameManager added all components on start.
+7/20/2018 12:08:39 PM DEBUG: GameManager added all components on start.
