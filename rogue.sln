@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rogue-two", "rogue-two.csproj", "{EE406D13-04B8-4E50-8551-9FD58964CB45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rogue", "rogue.csproj", "{EE406D13-04B8-4E50-8551-9FD58964CB45}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUnitTests", "XUnitTest\XUnitTests.csproj", "{8ED21FF3-DD08-4D3E-9322-35D4A7BB71E9}"
 EndProject

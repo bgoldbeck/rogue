@@ -22,7 +22,7 @@ namespace Game
         private int height;
         private Random rand = new Random();
         private List<String> logo = new List<String>();
-
+        
         public void Initialize()
         {
 
@@ -47,17 +47,18 @@ namespace Game
             width = Console.WindowWidth;
             height = Console.WindowHeight;
             float[,] firePoints = new float[width, height];
-            logo.Add(@" __________________________________________");
-            logo.Add(@"/ ___   __   __       ___   ___        __  \");
-            logo.Add(@"│ │  │ │  │ │  │ │  │ │      │  │ │ │ │  │ │");
-            logo.Add(@"│ │ /  │  │ │  │ │  │ │      │  │ │ │ │  │ │");
-            logo.Add(@"│ │/   │  │ │ __ │  │ │__    │  │ │ │ │  │ │");
-            logo.Add(@"│ │\   │  │ │  │ │  │ │      │   V V  │  │ │");
-            logo.Add(@"│ │ \  │  │ │  │ │  │ │      │   │ │  │  │ │");
-            logo.Add(@"│ │  \ │__│ │__│ │__│ │__    │   │ │  │__│ │");
-            logo.Add(@"│                                          │");
-            logo.Add(@"`─────────── A PERMADEATH STORY ──────────'");
-            logo.Add(@"Press [enter] to begin.              v 0.1");
+            logo.Add(@" ___________________________________________ ");
+            logo.Add(@"/    ___      __      __             ___    \");
+            logo.Add(@"│    │  │    │  │    │  │    │  │    │      │");
+            logo.Add(@"│    │ /     │  │    │  │    │  │    │      │");
+            logo.Add(@"│    │/      │  │    │ __    │  │    │__    │");
+            logo.Add(@"│    │\      │  │    │  │    │  │    │      │");
+            logo.Add(@"│    │ \     │  │    │  │    │  │    │      │");
+            logo.Add(@"│    │  \ .  │__│.   │__│.   │__│.   │__.   │");
+            logo.Add(@"|                                           |");
+            logo.Add(@"| Real-time Open-source Game Using Entities |");
+            logo.Add(@"`──────────────────────────────────────────' ");
+            logo.Add(@"Press [enter] to begin. ───────────── v 0.1  ");
 
 
             do
@@ -138,21 +139,22 @@ namespace Game
 
         private char FloatToChar(float input)
         {
-            char result = ' ';
             if (input > .8)
-                result = '@';
+                return '#';
             else if (input > .6)
-                result = '&';
+                return '+';
             else if (input > .4)
-                result = '*';
+                return ':';
             else if (input > .2)
-                result = '-';
-            return result;
+                return '.';
+            else return ' ';
         }
 
         private void DrawLogo()
         {
-            ConsoleUI.Write(width / 2 - 23, height / 2 + 6, logo, Color.Salmon);
+            int halfLogoWidth = logo[0].Length / 2;
+            int halfLogoHeight = logo.Count() / 2;
+            ConsoleUI.Write(width / 2 - halfLogoWidth, height / 2 + halfLogoHeight, logo, Color.Salmon);
         }
 
         public int Loop()

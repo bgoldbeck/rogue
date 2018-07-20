@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\rogue-two.csproj" />
+    <ProjectReference Include="..\rogue.csproj" />
   </ItemGroup>
 
 </Project>
