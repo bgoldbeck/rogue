@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Ecs;
@@ -19,6 +20,8 @@ namespace Game
         private ConsoleKey press = Input.ReadKey().Key;
         private int width;
         private int height;
+        private Random rand = new Random();
+        private List<String> logo = new List<String>();
 
         public void Initialize()
         {
@@ -28,8 +31,8 @@ namespace Game
             ConsoleUI.Initialize(width, height);
 
             Time.Initialize();
-            LoadScreen();
 
+            LoadScreen();
 
             GameObject gameManager = GameObject.Instantiate("GameManager");
             gameManager.AddComponent(new GameManager(width, height));
@@ -41,32 +44,115 @@ namespace Game
 
         private void LoadScreen()
         {
-            
-            //Console.ReadLine();
-            long dTicks = 0;
-            while (dTicks < 10000 * 1000)
+            width = Console.WindowWidth;
+            height = Console.WindowHeight;
+            float[,] firePoints = new float[width, height];
+            logo.Add(@" __________________________________________");
+            logo.Add(@"/ ___   __   __       ___   ___        __  \");
+            logo.Add(@"│ │  │ │  │ │  │ │  │ │      │  │ │ │ │  │ │");
+            logo.Add(@"│ │ /  │  │ │  │ │  │ │      │  │ │ │ │  │ │");
+            logo.Add(@"│ │/   │  │ │ __ │  │ │__    │  │ │ │ │  │ │");
+            logo.Add(@"│ │\   │  │ │  │ │  │ │      │   V V  │  │ │");
+            logo.Add(@"│ │ \  │  │ │  │ │  │ │      │   │ │  │  │ │");
+            logo.Add(@"│ │  \ │__│ │__│ │__│ │__    │   │ │  │__│ │");
+            logo.Add(@"│                                          │");
+            logo.Add(@"`─────────── A PERMADEATH STORY ──────────'");
+            logo.Add(@"Press [enter] to begin.              v 0.1");
+
+
+            do
             {
-                
-                dTicks += Time.deltaTicks;
-                ConsoleUI.Write(0, Console.WindowHeight - 1, @"
-    __________________________________________
-   / ___   __   __       ___   ___        __  \
-   │ │  │ │  │ │  │ │  │ │      │  │ │ │ │  │ │
-   │ │ /  │  │ │  │ │  │ │      │  │ │ │ │  │ │
-   │ │/   │  │ │ __ │  │ │__    │  │ │ │ │  │ │
-   │ │\   │  │ │  │ │  │ │      │   V V  │  │ │
-   │ │ \  │  │ │  │ │  │ │      │   │ │  │  │ │
-   │ │  \ │__│ │__│ │__│ │__    │   │ │  │__│ │
-   │                                          │
-   `─────────── A PERMADEATH STORY ──────────'
-                                          v 0.1", Color.Salmon);
-                //ConsoleUI.WriteLine("\n   Please adjust your window to the desired play size,\n   then press [Enter] to begin the game.\n");
-                ConsoleUI.Write(1, 1, dTicks.ToString() + " total ticks", Color.Gold);
+                SeedBottomPoints(firePoints);
                 ConsoleUI.Render();
-                Time.Update();
-            }
-            Console.Clear();
+                float [,] next = SmoothPoints(firePoints);
+                DrawPoints(next);
+                DrawLogo();
+                ShiftPoints(next);
+                FadePoints(next);
+                firePoints = next;
+                ConsoleUI.Render();
+                press = Input.ReadKey().Key;
+            } while (press != ConsoleKey.Enter);
+
             return;
+        }
+
+        private void SeedBottomPoints(float[,] points)
+        {
+            for (int x = 0; x < width; ++x)
+            {
+                points[x, 0] = (float)rand.NextDouble();
+            }
+        }
+
+        private void DrawPoints(float[,] firePoints)
+        {
+            for (int x = 0; x < width; ++x)
+            {
+                for (int y = 0; y < height; ++y)
+                {
+                    ConsoleUI.Write(x, y, FloatToChar(firePoints[x, y]), new Color(255,255,255));
+                }
+            }
+        }
+
+        private float[,] SmoothPoints(float [,] firePoints)
+        {
+            float[,] nextPoints = new float[width, height];
+            for (int x = 1; x < width-1; ++x)
+            {
+                for (int y = 0; y < height; ++y)
+                {
+                    if (x == 0)
+                        nextPoints[x, y] = 0.0f;
+                    else if (x == width-1)
+                        nextPoints[x, y] = 0.0f;
+                    else
+                        nextPoints[x, y] = ( firePoints[x - 1,y] + firePoints[x, y] + firePoints[x + 1, y] ) / 3.0f;
+                }
+            }
+            return nextPoints;
+        }
+
+        private void ShiftPoints(float [,] firePoints)
+        {
+            for (int y = height-1; y >= 1; --y)
+            {
+                for (int x = 0; x < width; ++x)
+                {
+                    firePoints[x, y] = firePoints[x, y - 1];
+                }
+            }
+        }
+
+        private void FadePoints(float[,] points)
+        {
+            for (int x = 0; x < width; ++x)
+            {
+                for (int y = 0; y < height; ++y)
+                {
+                    points[x, y] = points[x, y] * 0.95f;
+                }
+            }
+        }
+
+        private char FloatToChar(float input)
+        {
+            char result = ' ';
+            if (input > .8)
+                result = '@';
+            else if (input > .6)
+                result = '&';
+            else if (input > .4)
+                result = '*';
+            else if (input > .2)
+                result = '-';
+            return result;
+        }
+
+        private void DrawLogo()
+        {
+            ConsoleUI.Write(width / 2 - 23, height / 2 + 6, logo, Color.Salmon);
         }
 
         public int Loop()

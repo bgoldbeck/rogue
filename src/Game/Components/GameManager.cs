@@ -28,9 +28,6 @@ namespace Game.Components
 
         public override void Start()
         {
-            // Play intro music in separate thread
-            Thread music = new Thread(PlayIntroMusic);
-            music.Start();
 
             GameObject player = GameObject.Instantiate("MainPlayer");
             GameObject mapObject = GameObject.Instantiate("Map");
@@ -88,22 +85,6 @@ namespace Game.Components
             hud.Resize(hudWidth, gameHeight);
 
             Debug.Log("Resized game to " + gameWidth + " x " + gameHeight + ".");
-        }
-
-        /// <summary>
-        /// This function plays a Castlevania-esque ditty.
-        /// </summary>
-        private void PlayIntroMusic()
-        {
-            Console.Beep(220, 150); //A3
-            Console.Beep(165, 150); //E3
-            Console.Beep(247, 150); //A3
-            Console.Beep(165, 150); //E3
-            Console.Beep(262, 150); //A3
-            Console.Beep(165, 150); //E3
-            Console.Beep(294, 150); //A3
-            Console.Beep(165, 150); //E3
-            Console.Beep(220, 500); //A3
         }
 
         public override void Update()
