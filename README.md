@@ -1,5 +1,5 @@
 # R.O.G.U.E
-## Real-time Open-source Game Using Entities
+**R**eal-time **O**pen-source **G**ame **U**sing **E**ntities
 
 Copyright (c) 2018 Daniel Bramblett, Daniel Dupriest, Brandon Goldbeck
 
