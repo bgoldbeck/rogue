@@ -12,20 +12,23 @@ namespace Game.Components
     {
         private int movementRate = 3;
         private int lastMoved = 0;
+
         public void SetRate(int rate)
         {
             movementRate = rate;
         }
-        public override void Start()
+      
+        public override void Update()
         {
-            base.Start();
+            DebugDrawPath();
+            return;
         }
+
 
         public override void LateUpdate()
         {
             if (lastMoved >= movementRate)
             {
-                base.LateUpdate();
                 Think();
                 lastMoved = 0;
             }
@@ -33,6 +36,40 @@ namespace Game.Components
             {
                 ++lastMoved;
             }
+            return;
+        }
+
+        private void DebugDrawPath()
+        {
+            //Displays the path of the path finder.
+#if DEBUG
+            NavigatorAgent navigator = (NavigatorAgent)this.gameObject.GetComponent<NavigatorAgent>();
+            if (navigator != null)
+            {
+                List<Vec2i> path = navigator.targetPath;
+                if (path != null)
+                {
+                    Camera camera = Camera.CacheInstance();
+                    int halfWidth = camera.width / 2;
+                    int halfHeight = camera.height / 2;
+
+                    Player player = Player.MainPlayer();
+                    int playerX = player.transform.position.x;
+                    int playerY = player.transform.position.y;
+
+                    foreach (Vec2i v in path)
+                    {
+                        int x = v.x - playerX + halfWidth;
+                        int y = v.y - playerY + halfHeight;
+                        if (x < camera.width && y < camera.height)
+                        {
+                            ConsoleUI.Write(x, y, ".", new Color(255, 0, 255));
+                        }
+                    }
+                }
+            }
+#endif
+            return;
         }
 
         public void Think()
