@@ -113,19 +113,34 @@ namespace IO
         {
             Console.CursorVisible = false;
 
-            for (int y = height - 1; y >= 0; --y)
+            // If color is turned on and supported, draw with color codes
+            if (colorEnabled && isANSISupported)
             {
-                StringBuilder sb = new StringBuilder();
-                for (int x = 0; x < width; ++x)
+                for (int y = height - 1; y >= 0; --y)
                 {
-                    if (colorEnabled && isANSISupported) { 
+                    StringBuilder sb = new StringBuilder();
+                    for (int x = 0; x < width; ++x)
+                    {
                         sb.Append(colorBuffer[x][y]);
+                        sb.Append(buffer[x][y]);
                     }
-                    sb.Append(buffer[x][y]);
+                    Console.Write(sb.ToString());
                 }
-                Console.Write(sb.ToString());
+                Console.SetCursorPosition(0, 0);
             }
-            Console.SetCursorPosition(0, 0);
+            else  //Otherwise draw plain
+            {
+                for (int y = height - 1; y >= 0; --y)
+                {
+                    StringBuilder sb = new StringBuilder();
+                    for (int x = 0; x < width; ++x)
+                    {
+                        sb.Append(buffer[x][y]);
+                    }
+                    Console.Write(sb.ToString());
+                }
+                Console.SetCursorPosition(0, 0);
+            }
         }
 
         public static void Resize(int newWidth, int newHeight)
