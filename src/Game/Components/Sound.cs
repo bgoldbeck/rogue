@@ -33,19 +33,19 @@ namespace Game.Components
         public void ApplyDamage(GameObject source, int damage)
         {
             // We only care about the player applying damage to other enemies.
-            if (source.GetComponent<Player>() == null) return;
+            //if (source.GetComponent<Player>() == null) return;
             // Play a rudimentary hit sound
-            Console.Beep(150, 100);
+            //Console.Beep(150, 100);
             return;
         }
 
         public void OnDeath(GameObject source)
         {
             // If the thing was killed by a player.
-            if (source.GetComponent<Player>() != null)
-            {
-                Console.Beep(75, 100);
-            }
+            //if (source.GetComponent<Player>() != null)
+            //{
+                //Console.Beep(75, 100);
+            //}
 
             return;
         }
@@ -58,9 +58,9 @@ namespace Game.Components
         public void OnFailedMove()
         {
             // If the thing that couldnt move is not the player, who cares.
-            if (GetComponent<Player>() == null) return;
+            //if (GetComponent<Player>() == null) return;
             
-            Console.Beep(37, 25);
+            //Console.Beep(37, 25);
             
             return;
         }
