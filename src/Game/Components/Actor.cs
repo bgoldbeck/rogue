@@ -96,6 +96,7 @@ namespace Game.Components
         {
             this.gameObject.Name = this.Name;
             collider = (Collider)this.AddComponent(new Collider());
+            this.AddComponent(new Health());
             return;
         }
 
@@ -112,6 +113,14 @@ namespace Game.Components
         public void GiveXp(int givenXp)
         {
             xp += givenXp;
+        }
+
+        public void RegenHP()
+        {
+            if(hp < maxHp)
+            {
+                ++hp;
+            }
         }
 
         public bool TryMove(int dx, int dy)
@@ -159,6 +168,11 @@ namespace Game.Components
                 }
             }
             return moved;
+        }
+
+        public void ApplyDamage()
+        {
+            gameObject.SendMessage<IRegen>("InBattle");
         }
 
     }

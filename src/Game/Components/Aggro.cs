@@ -92,6 +92,11 @@ namespace Game.Components
                 Debug.LogWarning("Map not found.");
                 return false;
             }
+            
+            if(targeterLocation == targetLocation)
+            {
+                return true;
+            }
 
             double slopeY = 0;
             double slopeX = 0;

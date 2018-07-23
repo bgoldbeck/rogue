@@ -66,6 +66,7 @@ namespace Game.Components
 
         public void ApplyDamage(GameObject source, int damage)
         {
+            base.ApplyDamage();
             //Minuses the  armor from the damage and makes sure it doesn't go less then 0.
             damage = (damage < armor) ? 0 : damage - armor;
 
