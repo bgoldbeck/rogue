@@ -65,7 +65,7 @@ namespace Game.Components
             {
                 i.Add(new Item("Key"));
                 MapTile m = (MapTile)go.GetComponent<MapTile>();
-                m.character = 'k';
+                //m.character = 'k';
             }
 
             return go;
