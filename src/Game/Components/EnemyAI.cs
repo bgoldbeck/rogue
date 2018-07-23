@@ -10,14 +10,20 @@ namespace Game.Components
 {
     class EnemyAI : Component
     {
-        private int movementRate = 3;
-        private int lastMoved = 0;
+        private long timeBetweenMoves = 5000;
+        private long timeTillNextMove = 0;
 
-        public void SetRate(int rate)
+        public void SetRate(long rate)
         {
-            movementRate = rate;
+            timeTillNextMove += (rate - timeBetweenMoves);
+            timeBetweenMoves = rate;
         }
-      
+
+        public override void Start()
+        {
+            timeTillNextMove = timeBetweenMoves + Time.GetCurrentTime();
+        }
+
         public override void Update()
         {
             DebugDrawPath();
@@ -27,14 +33,10 @@ namespace Game.Components
 
         public override void LateUpdate()
         {
-            if (lastMoved >= movementRate)
+            if (timeTillNextMove < Time.GetCurrentTime())
             {
                 Think();
-                lastMoved = 0;
-            }
-            else
-            {
-                ++lastMoved;
+                timeTillNextMove = timeBetweenMoves + Time.GetCurrentTime();
             }
             return;
         }
