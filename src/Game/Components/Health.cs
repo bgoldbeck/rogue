@@ -17,12 +17,12 @@ namespace Game.Components
 
         public override void Start()
         {
-            timeTillRegen = timeBetweenRegen + Time.getCurrentTime();
+            timeTillRegen = timeBetweenRegen + Time.GetCurrentTime();
         }
 
         public override void Update()
         {
-            if(timeTillRegen < Time.getCurrentTime())
+            if(timeTillRegen < Time.GetCurrentTime())
             {
                 if (inBattle)
                 {
@@ -32,7 +32,7 @@ namespace Game.Components
                 {
                     gameObject.SendMessage<Actor>("RegenHP");
                 }
-                timeTillRegen = timeBetweenRegen + Time.getCurrentTime();
+                timeTillRegen = timeBetweenRegen + Time.GetCurrentTime();
             }
         }
 

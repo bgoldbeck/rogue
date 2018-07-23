@@ -32,7 +32,7 @@ namespace Ecs
 
         public static double MillisecondsToSeconds(long ms) => (double)ms / 1000.0;
 
-        public static long getCurrentTime()
+        public static long GetCurrentTime()
         {
             return current;
         }
