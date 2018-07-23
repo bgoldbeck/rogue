@@ -92,45 +92,38 @@ namespace Game.Components
                 Debug.LogWarning("Map not found.");
                 return false;
             }
+
+            double slopeY = 0;
+            double slopeX = 0;
+            double currentX = 0;
+            double currentY = 0;
             /*If the distance from the target on the X-axis is larger then the Y-axis, is uses
             //the X-axis as the indepent variable and generates the slope of Y in terms of the
             //change in X. It then increments a block at a time towards the target checking at each increment
             //if there is an object blocking the line of sight.*/
-            if(Math.Abs(targetLocation.x - targeterLocation.x) > Math.Abs(targetLocation.y - targeterLocation.y))
+            if (Math.Abs(targetLocation.x - targeterLocation.x) > Math.Abs(targetLocation.y - targeterLocation.y))
             {
-                double slopeY = (targetLocation.y - targeterLocation.y + 0.0) / (targetLocation.x - targeterLocation.x);
-                int slopeX = (targeterLocation.x < targetLocation.x) ? 1 : -1;
-                slopeY *= slopeX;
-                int currentX = slopeX;
-                double currentY = slopeY;
-                while (targeterLocation.x + currentX != targetLocation.x && !hitObject)
-                {
-                    if (map.PeekObject(targeterLocation.x + currentX, targeterLocation.y + (int)Math.Round(currentY, 0)) != null)
-                    {
-                        hitObject = true;
-                    }
-                    currentY += slopeY;
-                    currentX += slopeX;
-                }
+                slopeX = (targeterLocation.x < targetLocation.x) ? 1 : -1;
+                slopeY = (targetLocation.y - targeterLocation.y + 0.0) / (targetLocation.x - targeterLocation.x) * slopeX;
             }
             //Does the same thing as above but the Y-Axis is the indepent variable.
             else
             {
-                double slopeX = (targetLocation.x - targeterLocation.x + 0.0) / (targetLocation.y - targeterLocation.y);
-                int slopeY = (targeterLocation.y < targetLocation.y) ? 1 : -1;
-                slopeX *= slopeY;
-                double currentX = slopeX;
-                int currentY = slopeY;
+                slopeY = (targeterLocation.y < targetLocation.y) ? 1 : -1;
+                slopeX = (targetLocation.x - targeterLocation.x + 0.0) / (targetLocation.y - targeterLocation.y) * slopeY;
+            }
+            currentX = slopeX;
+            currentY = slopeY;
 
-                while (targeterLocation.y + currentY != targetLocation.y && !hitObject)
+            while (((targeterLocation.x + (int)Math.Round(currentX, 0) != targetLocation.x)
+                || (targeterLocation.y + (int)Math.Round(currentY) != targetLocation.y)) && !hitObject)
+            {
+                if (map.PeekObject(targeterLocation.x + (int)Math.Round(currentX, 0), targeterLocation.y + (int)Math.Round(currentY, 0)) != null)
                 {
-                    if (map.PeekObject(targeterLocation.x + (int)Math.Round(currentX,0), targeterLocation.y + currentY) != null)
-                    {
-                        hitObject = true;
-                    }
-                    currentY += slopeY;
-                    currentX += slopeX;
+                    hitObject = true;
                 }
+                currentY += slopeY;
+                currentX += slopeX;
             }
             return !hitObject;
         }
