@@ -29,7 +29,7 @@ namespace Game.Components.EnemyTypes
             base.Start();
             mapTile.character = ' ';                    //Enemy's model
             mapTile.color.Set(10, 10, 10);              //Color
-            ai.SetRate(2);                              //Time between each move.
+            ai.SetRate(600);                              //Time between each move.
         }
 
         public void Reveal()
