@@ -92,7 +92,6 @@ namespace Game.Components
                 Debug.LogWarning("Map not found.");
                 return false;
             }
-
             /*If the distance from the target on the X-axis is larger then the Y-axis, is uses
             //the X-axis as the indepent variable and generates the slope of Y in terms of the
             //change in X. It then increments a block at a time towards the target checking at each increment
@@ -100,10 +99,10 @@ namespace Game.Components
             if(Math.Abs(targetLocation.x - targeterLocation.x) > Math.Abs(targetLocation.y - targeterLocation.y))
             {
                 double slopeY = (targetLocation.y - targeterLocation.y + 0.0) / (targetLocation.x - targeterLocation.x);
-                double currentY = slopeY;
                 int slopeX = (targeterLocation.x < targetLocation.x) ? 1 : -1;
+                slopeY *= slopeX;
                 int currentX = slopeX;
-
+                double currentY = slopeY;
                 while (targeterLocation.x + currentX != targetLocation.x && !hitObject)
                 {
                     if (map.PeekObject(targeterLocation.x + currentX, targeterLocation.y + (int)Math.Round(currentY, 0)) != null)
@@ -118,8 +117,9 @@ namespace Game.Components
             else
             {
                 double slopeX = (targetLocation.x - targeterLocation.x + 0.0) / (targetLocation.y - targeterLocation.y);
-                double currentX = slopeX;
                 int slopeY = (targeterLocation.y < targetLocation.y) ? 1 : -1;
+                slopeX *= slopeY;
+                double currentX = slopeX;
                 int currentY = slopeY;
 
                 while (targeterLocation.y + currentY != targetLocation.y && !hitObject)
@@ -132,7 +132,6 @@ namespace Game.Components
                     currentX += slopeX;
                 }
             }
-
             return !hitObject;
         }
     }
