@@ -28,8 +28,6 @@ namespace Game
             height = Console.WindowHeight;
             ConsoleUI.Initialize(width, height);
 
-            Time.Initialize();
-
             LoadScreen();
 
             GameObject gameManager = GameObject.Instantiate("GameManager");

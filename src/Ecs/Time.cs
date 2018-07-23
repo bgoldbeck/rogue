@@ -1,6 +1,4 @@
-﻿//Copyright(c) 2018 Daniel Bramblett, Daniel Dupriest, Brandon Goldbeck
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,27 +10,24 @@ namespace Ecs
 {
     class Time
     {
-        private static Stopwatch stopwatch = new Stopwatch();
+        public static long deltaMs = 0;
 
-        public static long deltaTicks = 0;
-        public static double deltaMs = 0.0;
-
-        public static void Initialize()
-        {
-            deltaTicks = 0;
-            stopwatch.Start();
-            return;
-        }
+        private static long current = 0;
+        private static long last = DateTimeOffset.Now.ToUnixTimeMilliseconds();
 
         public static void Update()
         {
-            deltaTicks = stopwatch.ElapsedTicks;
-            deltaMs = deltaTicks / TimeSpan.TicksPerMillisecond; 
-            stopwatch.Reset();
-            stopwatch.Start();
+            current = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+
+            deltaMs = current - last;
+
+            // Reset
+            last = current;
+
             return;
         }
 
+        public static double MillisecondsToSeconds(long ms) => (double)ms / 1000.0;
 
     }
 }
