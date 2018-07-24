@@ -24,7 +24,8 @@ namespace Game.Components
             return;
         }
 
-
+        //Comment this out to test the TimerTest.
+        //-------------------------------------
         public override void LateUpdate()
         {
             secondsSinceLastMove += ((float)Time.deltaMs / 1000.0f);
@@ -36,6 +37,19 @@ namespace Game.Components
             }
             return;
         }
+        //-------------------------------------
+
+        /*public override void Start()
+        {
+            TimerKeeper.AddTimer(secondsBetweenMoves, AfterTimer);
+        }
+
+        public void AfterTimer()
+        {
+            Think();
+            TimerKeeper.AddTimer(secondsBetweenMoves, AfterTimer);
+        }*/
+
 
         private void DebugDrawPath()
         {

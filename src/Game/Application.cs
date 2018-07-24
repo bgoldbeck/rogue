@@ -77,6 +77,7 @@ namespace Game
 
                 Input.Reset();
                 Time.Update();
+                TimerKeeper.Update();
             }
 
             return 0;
