@@ -65,6 +65,11 @@ namespace Ecs
             return;
         }
 
+        public virtual void OnDestroy()
+        {
+            return;
+        }
+
         public void SendMessage<T>(string name, object[] parameters = null)
         {
             this.gameObject.SendMessage<T>(name, parameters);

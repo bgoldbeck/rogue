@@ -209,6 +209,21 @@ namespace Ecs
             return;
         }
 
+
+        /// <summary>
+        /// Called by the Destroy method when called by some user. It will call OnDestroy()
+        /// for each component in this GameObject.
+        /// </summary>
+        private void OnDestroy()
+        {
+            foreach (Component component in this.components)
+            {
+                component.OnDestroy();
+            }
+
+            return;
+        }
+
         /// <summary>
         /// Remove all components from this game object that are considered to be dead.
         /// </summary>
@@ -378,7 +393,8 @@ namespace Ecs
         public static void Destroy(GameObject go)
         {      
             if (go != null)
-            { 
+            {
+                go.OnDestroy();
                 // Remove all the children game objects along with this game object.
                 foreach (Transform t in go.transform)
                 {
