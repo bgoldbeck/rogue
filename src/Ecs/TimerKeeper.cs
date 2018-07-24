@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Collections;
+using System.Linq;
 
 namespace Ecs
 {
@@ -30,7 +31,7 @@ namespace Ecs
                     timerCallbacks[i].Invoke();
                 }
             }
-
+            
             foreach (int index in removals)
             {
                 timers.RemoveAt(index);
