@@ -11,7 +11,7 @@ namespace Game.Generators
     {
         static public void Fill(Random rand,int level, GameObject slot)
         {
-            switch(rand.Next() % 4)
+            switch(rand.Next() % 5)
             {
                 case 0:
                     slot.AddComponent(new Snake(rand, level));
@@ -24,6 +24,9 @@ namespace Game.Generators
                     break;
                 case 3:
                     slot.AddComponent(new Ninja(rand, level));
+                    break;
+                case 4:
+                    slot.AddComponent(new Zombie(rand, level));
                     break;
             }
         }
