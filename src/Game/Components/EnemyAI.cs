@@ -17,6 +17,7 @@ namespace Game.Components
         {
             secondsBetweenMoves = rate;
         }
+        
 
         public override void Update()
         {
@@ -28,28 +29,31 @@ namespace Game.Components
         //-------------------------------------
         public override void LateUpdate()
         {
-            secondsSinceLastMove += ((float)Time.deltaMs / 1000.0f);
+            
 
-            if (secondsBetweenMoves < secondsSinceLastMove)
-            {
-                Think();
-                secondsSinceLastMove = 0;
-            }
+            //secondsSinceLastMove += ((float)Time.deltaMs / 1000.0f);
+
+            //if (secondsBetweenMoves < secondsSinceLastMove)
+            //{
+            //    Think();
+            //    secondsSinceLastMove = 0;
+            //}
             return;
         }
         //-------------------------------------
 
-        /*public override void Start()
+        public override void Start()
         {
-            TimerKeeper.AddTimer(secondsBetweenMoves, AfterTimer);
+            TimerKeeper.AddTimer(0f, TimerExpire);
+            return;
         }
 
-        public void AfterTimer()
+        public void TimerExpire()
         {
             Think();
-            TimerKeeper.AddTimer(secondsBetweenMoves, AfterTimer);
-        }*/
-
+            TimerKeeper.AddTimer(secondsBetweenMoves, TimerExpire);
+            return;
+        }
 
         private void DebugDrawPath()
         {
@@ -107,6 +111,8 @@ namespace Game.Components
             {
                 RandomMove(puppet.OnMove);
             }
+            
+            return;
         }
 
         /// <summary>

@@ -11,41 +11,43 @@ namespace Ecs
     public class TimerKeeper
     {
         
-        private static List<Action> timerCallbacks = new List<Action>();
-        private static List<long> timers = new List<long>();
+        private static Dictionary<Action, long> timers = new Dictionary<Action, long>();
 
         public static void Update()
         {
 
-            List<int> removals = new List<int>();
+            List<Action> removals = new List<Action>();
 
-            for (int i = 0; i < timers.Count; ++i)
+            foreach (Action key in timers.Keys.ToList())
             {
                 // Take a little off the duration.
-                timers[i] -= Time.deltaMs;
+                timers[key] -= Time.deltaMs;
 
                 // Duration of timer ran out.
-                if (timers[i] <= 0f)
+                if (timers[key] <= 0f)
                 {
-                    removals.Add(i);
-                    timerCallbacks[i].Invoke();
+                    removals.Add(key);
                 }
             }
             
-            foreach (int index in removals)
+            foreach (Action action in removals)
             {
-                timers.RemoveAt(index);
-                timerCallbacks.RemoveAt(index);
+                timers.Remove(action);
+                action.Invoke();
             }
             return;
         }
 
         public static void AddTimer(float lengthOfTimer, Action actionAtTime)
         {
+            if (timers.ContainsKey(actionAtTime)) { return;  }
+
             long timerDuration = (1000 * (long)lengthOfTimer);
-            
-            timers.Add(timerDuration);
-            timerCallbacks.Add(actionAtTime);
+
+            timers.Add(actionAtTime, timerDuration);
+
+            //timers.Add(timerDuration);
+            //timerCallbacks.Add(actionAtTime);
             return;
         }
     }
