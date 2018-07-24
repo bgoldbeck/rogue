@@ -62,9 +62,7 @@ namespace Game.Components
 
             //gameObject.Destroy(gameManager);
 
-            //gameManager = GameObject.Instantiate("GameManager");
-            //gameManager.AddComponent(new GameManager(width, height));
-            currentGameState = GameState.Running;
+            //Initialize();
             return;
         }
 
