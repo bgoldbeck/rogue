@@ -19,23 +19,7 @@ namespace Game
         private ConsoleKey press = Input.ReadKey().Key;
         private int width;
         private int height;
-        private double dt = 0.0;
-
-        public enum GameState
-        {
-            Initialize, LoadSecreen, Running, GameOver
-        }
-        private delegate bool UpdateDelegate();
-        private UpdateDelegate[] UpdateAction = null;
-        private GameState CurrentGameState = GameState.Initialize;
-
-        public Application()
-        {
-            UpdateAction = new UpdateDelegate[]
-            {
-                Initialize, LoadScreen, Running, GameOverScreen
-            };
-        }
+        private bool isRunning = true;
 
         public bool Initialize()
         {
@@ -45,62 +29,46 @@ namespace Game
             ConsoleUI.Initialize(width, height);
 
 
-            GameObject gameManager = GameObject.Instantiate("GameManager");
-            gameManager.AddComponent(new GameManager(width, height));
+            GameObject stateManager = GameObject.Instantiate("StateManager");
+            StateManager state = new StateManager(width, height);
+            state.Initialize();
+            stateManager.AddComponent(state);
+            
 
             Update();
             Render();
-            CurrentGameState = GameState.LoadSecreen;
             return true;
-        }
-
-        private bool LoadScreen()
-        {
-            width = Console.WindowWidth;
-            height = Console.WindowHeight;
-            FireLogo fl = new FireLogo(width, height);
-            fl.Run();
-            CurrentGameState = GameState.Running;
-            return true;
-        }
-
-        private bool Running()
-        {
-            dt = Time.deltaMs;
-
-            // Milliseconds per frame in the bottom left corner of screen. 
-            // (This is better than FPS), FPS is for noobs.
-            ConsoleUI.Write(0, 1, dt.ToString() + " ms/frame", Color.Gold);
-            ConsoleUI.Write(0, 0, (1.0 / dt * 1000.0).ToString() + " fps", Color.Gold);
-
-
-            press = Input.ReadKey().Key;
-
-            if (press == ConsoleKey.Escape)
-            {
-                return false;
-            }
-
-            CheckForResize();
-            Update();
-            Render();
-            GameObject.ForceFlush();
-
-
-            Input.Reset();
-            Time.Update();
-            return true;
-        }
-
-        private bool GameOverScreen()
-        {
-            return false;
         }
 
         public int Loop()
         {
-            while (UpdateAction[(int)CurrentGameState]())
-            { }
+            double dt = 0.0;
+            while (isRunning)
+            {
+                dt = Time.deltaMs;
+
+                // Milliseconds per frame in the bottom left corner of screen. 
+                // (This is better than FPS), FPS is for noobs.
+                ConsoleUI.Write(0, 1, dt.ToString() + " ms/frame", Color.Gold);
+                ConsoleUI.Write(0, 0, (1.0 / dt * 1000.0).ToString() + " fps", Color.Gold);
+
+
+                press = Input.ReadKey().Key;
+
+                if (press == ConsoleKey.Escape)
+                {
+                    isRunning = false;
+                }
+
+                CheckForResize();
+                Update();
+                Render();
+                GameObject.ForceFlush();
+
+
+                Input.Reset();
+                Time.Update();
+            }
             return 0;
         }
 
