@@ -71,6 +71,11 @@ namespace Game.Components
                         if (next == null) { continue; }
                         double newCost = costSoFar[current] + 1; // Movement Costs.
 
+                        if(newCost > 25)
+                        {
+                            continue;
+                        }
+
                         GameObject nextGo = map.PeekObject(next);
                         if (nextGo == null || next == goal || nextGo.GetComponent<Door>() != null)
                         {
