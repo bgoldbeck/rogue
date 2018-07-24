@@ -32,7 +32,7 @@ namespace Game.Components
             GameObject player = GameObject.Instantiate("MainPlayer");
             GameObject mapObject = GameObject.Instantiate("Map");
             //Map map = new Map(gameWidth - hudWidth, gameHeight);
-            Map map = new Map(120, 60);
+            Map map = new Map(80, 40);
 
             mapObject.AddComponent(map);
             mapObject.transform.position = new Vec2i(mapObject.transform.position.x, gameHeight - 1);
