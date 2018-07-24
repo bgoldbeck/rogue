@@ -9,12 +9,16 @@ using Game.Interfaces;
 
 namespace Game.Components
 {
-    class Health : Component, IRegen
+    public class Health : Component, IRegen
     {
         private bool inBattle = false;
         private float regenAfterSeconds = 10.0f;
         private float timeSinceLastRegen = 0.0f;
 
+        public void SetHealthRegen(float regenInSeconds)
+        {
+            regenAfterSeconds = regenInSeconds;
+        }
 
         public override void Update()
         {

@@ -28,6 +28,7 @@ namespace Game.Components.EnemyTypes
             mapTile.character = 'g';                //enemy's model
             mapTile.color.Set(0, 180, 0);           //Color
             ai.SetRate(1.5f);                       //Time between each move.
+            healthRegen.SetHealthRegen(12.0f);      //Health regen (seconds for 1 health regen).
         }
     }
 }
