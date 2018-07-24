@@ -43,7 +43,6 @@ namespace Game
                 if (WindowResized())
                     Reset(Console.WindowWidth, Console.WindowHeight);
                 ConsoleUI.Render();
-                ConsoleUI.Render();
                 press = Input.ReadKey().Key;
             } while (press != ConsoleKey.Enter);
         }
