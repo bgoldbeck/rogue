@@ -26,7 +26,7 @@ namespace Game.Components.EnemyTypes
             base.Start();
             mapTile.character = 'M';                    //Enemy's model
             mapTile.color.Set(110, 85, 20);             //Color
-            ai.SetRate(1500);                           //Time between each move.
+            ai.SetRate(1.5f);                           //Time between each move.
         }
         public override void Update()
         {
@@ -38,7 +38,7 @@ namespace Game.Components.EnemyTypes
                     HUD.Append("The Minotaur has been enraged!");
                     enraged = true;
                     attack *= 2;
-                    ai.SetRate(500);
+                    ai.SetRate(1f);
                 }
             }
         }

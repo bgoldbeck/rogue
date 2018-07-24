@@ -27,7 +27,7 @@ namespace Game.Components.EnemyTypes
             base.Start();
             mapTile.character = 'r';                    //Enemy's model
             mapTile.color.Set(180, 0, 0);               //Color
-            ai.SetRate(750);                           //Time between each move.
+            ai.SetRate(0.75f);                          //Time between each move.
         }
     }
 }

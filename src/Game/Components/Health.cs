@@ -12,7 +12,7 @@ namespace Game.Components
     class Health : Component, IRegen
     {
         private bool inBattle = false;
-        private float regenAfterSeconds = 8.0f;
+        private float regenAfterSeconds = 10.0f;
         private float timeSinceLastRegen = 0.0f;
 
 
