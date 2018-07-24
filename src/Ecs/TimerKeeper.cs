@@ -7,52 +7,45 @@ using System.Collections;
 
 namespace Ecs
 {
-    class TimerKeeper
+    public class TimerKeeper
     {
-        private static long currentTime;
-        private static List<Action> timerCallMethods = new List<Action>();
-        private static List<long> timerExpiration = new List<long>();
+        
+        private static List<Action> timerCallbacks = new List<Action>();
+        private static List<long> timers = new List<long>();
 
         public static void Update()
         {
-            currentTime += Time.deltaMs;
-            for (int i = 0; i < timerExpiration.Count; ++i)
+
+            List<int> removals = new List<int>();
+
+            for (int i = 0; i < timers.Count; ++i)
             {
-                if(timerExpiration[i] < currentTime)
+                // Take a little off the duration.
+                timers[i] -= Time.deltaMs;
+
+                // Duration of timer ran out.
+                if (timers[i] <= 0f)
                 {
-                    timerCallMethods[i]();
-                    timerCallMethods.RemoveAt(i);
-                    timerExpiration.RemoveAt(i);
-                    --i;
-                }
-                else
-                {
-                    break;
+                    removals.Add(i);
+                    timerCallbacks[i].Invoke();
                 }
             }
+
+            foreach (int index in removals)
+            {
+                timers.RemoveAt(index);
+                timerCallbacks.RemoveAt(index);
+            }
+            return;
         }
 
         public static void AddTimer(float lengthOfTimer, Action actionAtTime)
         {
-            long timeOfTimer = (1000 * (long)lengthOfTimer) + currentTime;
-            int i = 0;
-            for (; i < timerExpiration.Count; ++i)
-            {
-                if(timerExpiration[i] > timeOfTimer)
-                {
-                    break;
-                }
-            }
-            if(i >= timerExpiration.Count)
-            {
-                timerExpiration.Add(timeOfTimer);
-                timerCallMethods.Add(actionAtTime);
-            }
-            else
-            {
-                timerExpiration.Insert(i, timeOfTimer);
-                timerCallMethods.Insert(i, actionAtTime);
-            }
+            long timerDuration = (1000 * (long)lengthOfTimer);
+            
+            timers.Add(timerDuration);
+            timerCallbacks.Add(actionAtTime);
+            return;
         }
     }
 }
