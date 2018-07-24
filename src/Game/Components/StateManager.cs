@@ -31,7 +31,7 @@ namespace Game.Components
         }
         public void Initialize()
         {
-            GameObject newObject = GameObject.Instantiate("StateManager");
+            GameObject newObject = GameObject.Instantiate("GameManager");
             gameManager = new GameManager(width, height);
             newObject.AddComponent(gameManager);
             return;
@@ -60,9 +60,10 @@ namespace Game.Components
             GameOver screen = new GameOver(width, height);
             screen.Run();
 
-            //gameObject.Destroy(gameManager);
+            //GameObject.Destroy(GameObject.FindWithTag("GameManager"));
 
             //Initialize();
+            currentGameState = GameState.Running;
             return;
         }
 
