@@ -10,7 +10,7 @@ using System.Threading;
 
 namespace Ecs
 {
-    class Time
+    public class Time
     {
         public static long deltaMs = 0;
 

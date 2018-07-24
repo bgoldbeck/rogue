@@ -29,6 +29,5 @@ namespace Game.Components
             return;
         }
 
-
     }
 }
