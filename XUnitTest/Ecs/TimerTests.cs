@@ -12,7 +12,13 @@ namespace XUnitTests
     {
         public static bool calledBack = false;
 
-        internal void Callback()
+        internal void Callback1()
+        {
+            calledBack = true;
+            return;
+        }
+
+        internal void Callback2()
         {
             calledBack = true;
             return;
@@ -23,7 +29,7 @@ namespace XUnitTests
         {
             calledBack = false;
             Time.Update();
-            TimerKeeper.AddTimer(0.1f, Callback);
+            TimerKeeper.AddTimer(0.1f, Callback1);
             System.Threading.Thread.Sleep(500);
             Time.Update();
             TimerKeeper.Update();
@@ -36,7 +42,7 @@ namespace XUnitTests
         {
             calledBack = false;
             Time.Update();
-            TimerKeeper.AddTimer(1.0f, Callback);
+            TimerKeeper.AddTimer(1.0f, Callback2);
             System.Threading.Thread.Sleep(10);
             Time.Update();
             TimerKeeper.Update();
