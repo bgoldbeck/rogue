@@ -12,17 +12,15 @@ namespace Game.Components
     class Health : Component, IRegen
     {
         private bool inBattle = false;
-        long timeTillRegen = 0;
-        long timeBetweenRegen = 20000;
+        private float regenAfterSeconds = 8.0f;
+        private float timeSinceLastRegen = 0.0f;
 
-        public override void Start()
-        {
-            timeTillRegen = timeBetweenRegen + Time.GetCurrentTime();
-        }
 
         public override void Update()
         {
-            if(timeTillRegen < Time.GetCurrentTime())
+            timeSinceLastRegen += ((float)Time.deltaMs / 1000.0f);
+
+            if (regenAfterSeconds < timeSinceLastRegen)
             {
                 if (inBattle)
                 {
@@ -32,7 +30,7 @@ namespace Game.Components
                 {
                     gameObject.SendMessage<Actor>("RegenHP");
                 }
-                timeTillRegen = timeBetweenRegen + Time.GetCurrentTime();
+                timeSinceLastRegen = 0;
             }
         }
 
