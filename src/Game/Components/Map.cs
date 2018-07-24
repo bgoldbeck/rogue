@@ -103,6 +103,7 @@ namespace Game.Components
                     {
                         case "d":
                             objects[x][y] = SpawnManager.CreateDoor(x, y);
+                            
                             break;
                         case "l":
                             objects[x][y] = SpawnManager.CreateLockedDoor(x, y);
@@ -174,6 +175,21 @@ namespace Game.Components
             
             objects[x][y] = go;
             return true;
+        }
+
+        public override void OnDestroy()
+        {
+            for (int x = 0; x < width; ++x)
+            {
+                for (int y = 0; y < height; ++y)
+                {
+                    if(objects[x][y] != null)
+                    {
+                        GameObject.Destroy(objects[x][y]);
+                        //objects[x][y] = null;
+                    }
+                }
+            }
         }
     }
 }

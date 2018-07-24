@@ -33,6 +33,7 @@ namespace Game.Components
             GameObject mapObject = GameObject.Instantiate("Map");
             //Map map = new Map(gameWidth - hudWidth, gameHeight);
             Map map = new Map(60, 30);
+
             mapObject.AddComponent(map);
             mapObject.transform.position = new Vec2i(mapObject.transform.position.x, gameHeight - 1);
 
@@ -97,8 +98,9 @@ namespace Game.Components
             return;
         }
 
-        public override void Render()
+        public override void OnDestroy()
         {
+
             return;
         }
 

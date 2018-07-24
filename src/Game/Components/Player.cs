@@ -100,6 +100,15 @@ namespace Game.Components
         public void OnDeath(GameObject source)
         {
             HUD.Append(source.Name + " killed " + Name + " to death.");
+            GameObject foundStateManager = GameObject.FindWithTag("StateManager");
+            if(foundStateManager != null)
+            {
+                foundStateManager.SendMessage<StateManager>("PlayerIsDead");
+            }
+            else
+            {
+                Debug.LogError("State manager not found!");
+            }
             return;
         }
 

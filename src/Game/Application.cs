@@ -31,8 +31,8 @@ namespace Game
 
             GameObject stateManager = GameObject.Instantiate("StateManager");
             StateManager state = new StateManager(width, height);
-            state.Initialize();
             stateManager.AddComponent(state);
+            state.Initialize();
             
 
             Update();
