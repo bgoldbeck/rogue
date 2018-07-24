@@ -29,29 +29,13 @@ namespace Game.Components
         //-------------------------------------
         public override void LateUpdate()
         {
-            
+            secondsSinceLastMove += ((float)Time.deltaMs / 1000.0f);
 
-            //secondsSinceLastMove += ((float)Time.deltaMs / 1000.0f);
-
-            //if (secondsBetweenMoves < secondsSinceLastMove)
-            //{
-            //    Think();
-            //    secondsSinceLastMove = 0;
-            //}
-            return;
-        }
-        //-------------------------------------
-
-        public override void Start()
-        {
-            TimerKeeper.AddTimer(0f, TimerExpire);
-            return;
-        }
-
-        public void TimerExpire()
-        {
-            Think();
-            TimerKeeper.AddTimer(secondsBetweenMoves, TimerExpire);
+            if (secondsBetweenMoves < secondsSinceLastMove)
+            {
+                Think();
+               secondsSinceLastMove = 0;
+            }
             return;
         }
 

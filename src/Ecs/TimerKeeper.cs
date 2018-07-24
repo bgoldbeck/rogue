@@ -6,6 +6,8 @@ using System.Text;
 using System.Collections;
 using System.Linq;
 
+/*We decided not to use this keep track of the times because it intefered with the update()
+ * cycle causing each timer needing a work around*/
 namespace Ecs
 {
     public class TimerKeeper
