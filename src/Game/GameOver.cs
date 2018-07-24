@@ -42,6 +42,7 @@ namespace Game
             {
                 if (WindowResized())
                     Reset(Console.WindowWidth, Console.WindowHeight);
+                DrawLogo();
                 ConsoleUI.Render();
                 press = Input.ReadKey().Key;
             } while (press != ConsoleKey.Enter);
@@ -59,6 +60,13 @@ namespace Game
             this.width = width;
             this.height = height;
             ConsoleUI.Initialize(width, height);
+        }
+
+        private void DrawLogo()
+        {
+            int halfLogoWidth = logo[0].Length / 2;
+            int halfLogoHeight = logo.Count / 2;
+            ConsoleUI.Write(width / 2 - halfLogoWidth, height / 2 + halfLogoHeight, logo, Color.Salmon);
         }
     }
 }

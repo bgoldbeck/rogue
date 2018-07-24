@@ -57,8 +57,8 @@ namespace Game.Components
 
         private void GameOverScreen()
         {
-            //GameOver screen = new GameOver(width, height);
-            //screen.Run();
+            GameOver screen = new GameOver(width, height);
+            screen.Run();
 
             //gameObject.Destroy(gameManager);
 
