@@ -25,6 +25,7 @@ namespace Game.Components
         protected List<Item> inventory = new List<Item>();
 
         protected Collider collider = null;
+        protected Health healthRegen = null;
 
         public new String Name { get; set; }
 
@@ -96,7 +97,7 @@ namespace Game.Components
         {
             this.gameObject.Name = this.Name;
             collider = (Collider)this.AddComponent(new Collider());
-            this.AddComponent(new Health());
+            healthRegen = (Health)this.AddComponent(new Health());
             return;
         }
 

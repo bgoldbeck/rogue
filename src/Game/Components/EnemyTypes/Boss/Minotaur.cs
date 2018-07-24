@@ -27,6 +27,7 @@ namespace Game.Components.EnemyTypes
             mapTile.character = 'M';                    //Enemy's model
             mapTile.color.Set(110, 85, 20);             //Color
             ai.SetRate(1.5f);                           //Time between each move.
+            healthRegen.SetHealthRegen(10.0f);          //Health regen (seconds for 1 health regen).
         }
         public override void Update()
         {
@@ -39,6 +40,7 @@ namespace Game.Components.EnemyTypes
                     enraged = true;
                     attack *= 2;
                     ai.SetRate(1f);
+                    healthRegen.SetHealthRegen(7.0f); 
                 }
             }
         }
