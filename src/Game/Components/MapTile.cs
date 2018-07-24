@@ -16,7 +16,7 @@ namespace Game.Components
         public char character = '?';
         public Color color = new Color(255, 255, 255);
         public float lightLevel = 0.0f;
-        private static float lightLevelAfterDiscovery = .3f;
+        private float lightLevelAfterDiscovery = .4f;
         private static float amountToDimEachStep = .1f;
         public bool disableLighting = false;
 
