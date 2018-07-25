@@ -60,9 +60,11 @@ namespace Game.Components
             GameOver screen = new GameOver(width, height);
             screen.Run();
 
-            //GameObject.Destroy(GameObject.FindWithTag("GameManager"));
-
-            //Initialize();
+            /*GameObject found = GameObject.FindWithTag("GameManager");
+            if(found != null)
+            {
+                found.UpdateComponent(new GameManager(width,height));
+            }*/
             currentGameState = GameState.Running;
             return;
         }
