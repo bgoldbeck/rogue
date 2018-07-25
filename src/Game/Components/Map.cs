@@ -103,23 +103,28 @@ namespace Game.Components
                     {
                         case "d":
                             objects[x][y] = SpawnManager.CreateDoor(x, y);
-                            
+                            objects[x][y].transform.SetParent(map.gameObject.transform);
                             break;
                         case "l":
                             objects[x][y] = SpawnManager.CreateLockedDoor(x, y);
+                            objects[x][y].transform.SetParent(map.gameObject.transform);
                             break;
                         case "m":
                             objects[x][y] = SpawnManager.CreateEnemy(x, y, level);
+                            objects[x][y].transform.SetParent(map.gameObject.transform);
                             break;
                         case "k":
                             objects[x][y] = SpawnManager.CreateEnemy(x, y, level, true);
+                            objects[x][y].transform.SetParent(map.gameObject.transform);
                             break;
                         case "b":
                             objects[x][y] = SpawnManager.CreateBoss(x, y, level);
+                            objects[x][y].transform.SetParent(map.gameObject.transform);
                             break;
                         case "w":
                             objects[x][y] = SpawnManager.CreateWall(x, y,(x == 0) || (y == 0) 
                                 || (x + 1  == width) || (y + 1 == height));
+                            objects[x][y].transform.SetParent(map.gameObject.transform);
                             break;
                         case "s":
                             this.startingX = x;
