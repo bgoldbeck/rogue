@@ -476,6 +476,22 @@ namespace Ecs
             return null;
         }
 
+
+        public Component UpdateComponent(Component updatedComponent)
+        {
+            Type type = updatedComponent.GetType();
+            for(int i = 0; i < components.Count; ++i)
+            {
+                if (type.IsAssignableFrom(components[i].GetType()))
+                {
+                    components[i] = updatedComponent;
+                    return updatedComponent;
+                }
+            }
+
+            AddComponent(updatedComponent);
+            return updatedComponent;
+        }
     }
 
 
