@@ -3,16 +3,17 @@
 //The algorithm for A* pathfinding came from this website:
 //https://www.redblobgames.com/pathfinding/a-star/introduction.html
 
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 using Ecs;
 using DataStructures;
-using IO;
 
 namespace Game.Components
 {
+    /// <summary>
+    /// Uses the current map and navigator map to find a route between the current
+    /// location and the target using A* pathfinding.
+    /// </summary>
     public class NavigatorAgent : Component
     {
         public List<Vec2i> targetPath { get; } = new List<Vec2i>();
