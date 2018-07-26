@@ -47,6 +47,7 @@ namespace Game.Components
         private void SpreadLight(int x, int y)
         {
             Map map = MapManager.CurrentMap();
+            if (map == null) return;
             float angleDiff = 2 * (float)Math.PI / lightRays;
             float singleRayIntensity = totalLightIntensity / lightRays;
             for (int i = 0; i < lightRays; ++i)

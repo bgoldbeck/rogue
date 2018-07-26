@@ -127,7 +127,10 @@ namespace Ecs
             return;
         }
 
-
+        public Component UpdateComponent(Component component)
+        {
+            return gameObject.UpdateComponent(component);
+        }
     }
 
 }
