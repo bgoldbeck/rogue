@@ -526,11 +526,16 @@ namespace Ecs
         public Component UpdateComponent(Component updatedComponent)
         {
             Type type = updatedComponent.GetType();
-            for(int i = 0; i < components.Count; ++i)
+            for (int i = 0; i < components.Count; ++i)
             {
                 if (type.IsAssignableFrom(components[i].GetType()))
                 {
+                    //Console.Out.WriteLine("Found!");
+                    //Console.In.ReadLine();
                     components[i] = updatedComponent;
+                    updatedComponent.gameObject = this;
+                    updatedComponent.transform = this.transform;
+                    updatedComponent.SetActive(true);
                     updatedComponent.Start();
                     return updatedComponent;
                 }
