@@ -21,7 +21,7 @@ namespace Game.Components
         public static Camera MainCamera()
         {
             Camera camera = null;
-            GameObject player = GameObject.FindWithTag("Player");
+            GameObject player = GameObject.FindWithTag("MainPlayer");
             if (player != null)
             {
                 camera = (Camera)player.GetComponent<Camera>();
