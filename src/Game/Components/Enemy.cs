@@ -1,9 +1,11 @@
 ﻿//Copyright(c) 2018 Daniel Bramblett, Daniel Dupriest, Brandon Goldbeck
 
+using System;
 using System.Collections.Generic;
 
 using Ecs;
 using Game.Interfaces;
+using Game.Generators;
 
 namespace Game.Components
 {
@@ -12,15 +14,23 @@ namespace Game.Components
         public static bool visiblePaths = false;
         protected MapTile mapTile;
         protected EnemyAI ai;
+        protected bool isShiny = false;
         
         public Enemy():base()
         {
             
         }
 
-        public Enemy(string name, string description, int level, int hp, int armor, int attack, int xp)
-            :base(name, description, level, hp, armor, attack, xp)
+        public Enemy(string name, string description, int level, int hp, int armor, int attack, int xp, bool shiny, Random rand)
+            :base(((shiny)? NameGenerator.GetNameStartingWith(name[0],rand) + " the " : "") + name, 
+                 description, 
+                 level * ((shiny) ? 2 : 1), 
+                 hp * ((shiny) ? 2 : 1), 
+                 armor, 
+                 attack * ((shiny) ? 2 : 1), 
+                 xp * ((shiny) ? 2 : 1))
         {
+            isShiny = shiny;
         }
 
         public override void Start()

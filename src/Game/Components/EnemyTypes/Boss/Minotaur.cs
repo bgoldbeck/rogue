@@ -9,7 +9,7 @@ namespace Game.Components.EnemyTypes
     class Minotaur : Enemy, IRage
     {
         private bool enraged = false;
-        public Minotaur(Random rand, int level)
+        public Minotaur(Random rand, int level, bool isShiny)
             : base(
                   "Minotaur",                   //Enemy's name
                   "A mythical beast of fury.",  //Enemy's description
@@ -17,17 +17,30 @@ namespace Game.Components.EnemyTypes
                   10 * level,                   //Equation for the enemy's health.
                   level,                        //Equation for the enemy's armor.
                   2 * level,                    //Equation for the enemy's attack. 
-                  50 * level                    //xp given by beating this enemy.
+                  50 * level,                    //xp given by beating this enemy.
+                  isShiny,
+                  rand
                   )
         {
         }
         public override void Start()
         {
             base.Start();
+            if(isShiny)
+            {
+                enraged = true;
+            }
             mapTile.character = 'M';                    //Enemy's model
-            mapTile.color.Set(110, 85, 20);             //Color
-            ai.SetRate(1.5f);                           //Time between each move.
-            healthRegen.SetHealthRegen(10.0f);          //Health regen (seconds for 1 health regen).
+            if (isShiny)                            //Color
+            {
+                mapTile.color.Set(255, 215, 0);
+            }
+            else
+            {
+                mapTile.color.Set(110, 85, 20);
+            }
+            ai.SetRate(1.5f / ((isShiny) ? 2 : 1));                           //Time between each move.
+            healthRegen.SetHealthRegen(10.0f / ((isShiny) ? 2 : 1));          //Health regen (seconds for 1 health regen).
         }
         public override void Update()
         {

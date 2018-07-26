@@ -11,7 +11,7 @@ namespace Game.Components.EnemyTypes
     {
         public bool IsHidden { protected set; get; } = true;
 
-        public Ninja(Random rand, int level)
+        public Ninja(Random rand, int level, bool isShiny)
         : base(
               "Ninja",                      //Enemy's name
               "You see nothing...",         //Enemy's description
@@ -19,7 +19,9 @@ namespace Game.Components.EnemyTypes
               4 * level,                    //Equation for the enemy's health.
               (level > 1) ? level - 1 : 0,   //Equation for the enemy's armor.
               3 + level,                    //Equation for the enemy's attack. 
-              15 * level                    //xp given by beating this enemy.
+              15 * level,                   //xp given by beating this enemy.
+              isShiny,
+              rand
               )
         {
         }
@@ -28,16 +30,23 @@ namespace Game.Components.EnemyTypes
         {
             base.Start();
             mapTile.character = ' ';                    //Enemy's model
-            mapTile.color.Set(10, 10, 10);              //Color
-            ai.SetRate(0.7f);                           //Time between each move.
-            healthRegen.SetHealthRegen(15.0f);          //Health regen (seconds for 1 health regen).
+            mapTile.color.Set(10, 10, 10);
+            ai.SetRate(0.7f / ((isShiny) ? 2 : 1));                           //Time between each move.
+            healthRegen.SetHealthRegen(15.0f / ((isShiny) ? 2 : 1));          //Health regen (seconds for 1 health regen).
         }
 
         public void Reveal()
         {
             IsHidden = false;
             mapTile.character = 'n';
-            mapTile.color.Set(60, 60, 60);
+            if (isShiny)                          
+            {
+                mapTile.color.Set(255, 215, 0);
+            }
+            else
+            {
+                mapTile.color.Set(10, 10, 10);
+            }
         }
 
         public override void Update()

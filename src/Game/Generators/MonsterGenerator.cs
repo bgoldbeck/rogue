@@ -9,24 +9,25 @@ namespace Game.Generators
 {
     class MonsterGenerator
     {
-        static public void Fill(Random rand,int level, GameObject slot)
+        static public void Fill(Random rand,int level, GameObject slot, int oneInNShiny)
         {
-            switch(rand.Next() % 5)
+            bool isShiny = (rand.Next() % oneInNShiny == 0);
+            switch (rand.Next() % 5)
             {
                 case 0:
-                    slot.AddComponent(new Snake(rand, level));
+                    slot.AddComponent(new Snake(rand, level, isShiny));
                     break;
                 case 1:
-                    slot.AddComponent(new Goblin(rand, level));
+                    slot.AddComponent(new Goblin(rand, level, isShiny));
                     break;
                 case 2:
-                    slot.AddComponent(new Raptor(rand, level));
+                    slot.AddComponent(new Raptor(rand, level, isShiny));
                     break;
                 case 3:
-                    slot.AddComponent(new Ninja(rand, level));
+                    slot.AddComponent(new Ninja(rand, level, isShiny));
                     break;
                 case 4:
-                    slot.AddComponent(new Zombie(rand, level));
+                    slot.AddComponent(new Zombie(rand, level, isShiny));
                     break;
             }
         }

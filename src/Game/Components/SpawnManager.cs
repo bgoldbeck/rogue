@@ -13,6 +13,7 @@ namespace Game.Components
         //private Tuple<string, string, int, int>[] enemyData =
         //{ Tuple.Create<string, string, int, int>("s", "Snake", 2, 2 ) };
         private static Random rand = new Random();
+        private static int oneInNShiny = 100; //On average, in how many enemies a shiny is spawned.
 
         public SpawnManager()
         {
@@ -37,7 +38,7 @@ namespace Game.Components
         {
             GameObject go = GameObject.Instantiate("Boss");
             //MonsterGenerator.Fill(rand, level, go);
-            BossGenerator.Fill(rand, level, go);
+            BossGenerator.Fill(rand, level, go, oneInNShiny);
             go.transform.position = new Vec2i(x, y);
             //go.transform.position.x = x;
             //go.transform.position.y = y;
@@ -52,7 +53,7 @@ namespace Game.Components
         public static GameObject CreateEnemy(int x, int y, int level, bool hasKey = false)
         {
             GameObject go = GameObject.Instantiate("Monster");
-            MonsterGenerator.Fill(rand, level, go);
+            MonsterGenerator.Fill(rand, level, go, oneInNShiny);
             go.transform.position = new Vec2i(x, y);
             //go.transform.position.x = x;
             //go.transform.position.y = y;
