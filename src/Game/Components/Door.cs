@@ -41,7 +41,8 @@ namespace Game.Components
         public void OnInteract(GameObject objectInteracting, object interactorType)
         {
             // This line makes only actors with the DoorOpener component can open doors.
-            if (objectInteracting != null && !(interactorType is IDoorOpener)) {  return; }
+            if (objectInteracting != null && !(interactorType is IDoorOpener) 
+                && ! ((interactorType is IRage) && ((IRage)interactorType).isRaging)) {  return; }
 
             bool destroyDoor = false;
             if (locked)
