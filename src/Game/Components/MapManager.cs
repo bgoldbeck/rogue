@@ -72,8 +72,6 @@ namespace Game.Components
         {
             if (currentManager == null)
             {
-                Console.Out.WriteLine("Manager was null");
-                Console.In.ReadLine();
                 return null;
             }
             if (drawnMaps.Count > 0 && currentMap < drawnMaps.Count)
@@ -82,8 +80,6 @@ namespace Game.Components
             }
             else
             {
-                Console.Out.WriteLine("drawnMaps count is wrong");
-                Console.In.ReadLine();
                 return null;
             }
         }
