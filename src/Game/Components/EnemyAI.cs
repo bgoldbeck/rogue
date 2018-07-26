@@ -54,7 +54,7 @@ namespace Game.Components
                 List<Vec2i> path = navigator.targetPath;
                 if (path != null)
                 {
-                    Camera camera = Camera.CacheInstance();
+                    Camera camera = Camera.MainCamera();
                     if (camera == null)
                     {
                         return;

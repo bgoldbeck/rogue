@@ -18,13 +18,13 @@ namespace Game.Components
         private Map map = null; // Reference to map component
         //private static Camera camera = null;    // Reference to camera component
 
-        public static Camera CacheInstance()
+        public static Camera MainCamera()
         {
             Camera camera = null;
-            GameObject go = GameObject.FindWithTag("Camera");
-            if (go != null)
+            GameObject player = GameObject.FindWithTag("Player");
+            if (player != null)
             {
-                camera = (Camera)go.GetComponent<Camera>();
+                camera = (Camera)player.GetComponent<Camera>();
             }
             return camera;
         }

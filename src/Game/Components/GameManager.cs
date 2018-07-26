@@ -81,7 +81,7 @@ namespace Game.Components
 
             //Camera camera = (Camera)GameObject.FindWithTag("Player").GetComponent(typeof(Camera));
 
-            Camera camera = Camera.CacheInstance();
+            Camera camera = Camera.MainCamera();
             camera.Resize(gameWidth - hudWidth, gameHeight);
 
             GameObject hudObject = GameObject.FindWithTag("HUD");
