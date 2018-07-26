@@ -10,6 +10,7 @@ using System.Linq;
  * cycle causing each timer needing a work around*/
 namespace Ecs
 {
+    //This class keeps track of timers and actions it must do and invokes an action at the time.
     public class TimerKeeper
     {
         
