@@ -100,13 +100,18 @@ namespace Game.Components
 
             public GameObject Collides(GameObject player, Map map)
             {
-                if (map == null || player == null)
+                /*if (map == null || player == null)
                 {
                     return null;
                 }
                 GameObject go = map.PeekObject((int)x, (int)y);
                 
+                return go;*/
+                GameObject go = map?.PeekObject((int)x, (int)y);
+                if (go == player || go == null)
+                    return null;
                 return go;
+
             }
 
             public void Illuminate(GameObject go)
