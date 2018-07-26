@@ -51,7 +51,7 @@ namespace Game.Components
         public override void OnEnable()
         {
 
-            map = MapManager.CurrentMap();
+            //map = MapManager.CurrentMap();
             if (map == null)
             {
                 Debug.LogError("Camera could not find a map to render from!");
@@ -67,6 +67,7 @@ namespace Game.Components
 
         public override void Render()
         {
+            map = MapManager.CurrentMap();
             if (map == null) return;
 
             int playerX = gameObject.transform.position.x;
