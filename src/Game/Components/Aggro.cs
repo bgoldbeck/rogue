@@ -51,7 +51,7 @@ namespace Game.Components
 
             if (player != null && Vec2i.Distance(player.transform.position, transform.position) < aggroRange)
             {
-                if ( searchee is IXRayVision || CheckLine(transform.position, player.transform.position))
+                if ( (searchee is IXRayVision && ((IXRayVision)searchee).HasVision) || CheckLine(transform.position, player.transform.position))
                 {
                     // OnAggro.
                     gameObject.SendMessage<IAggressive>("OnAggro", new object[] { player.gameObject });

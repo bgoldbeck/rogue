@@ -4,5 +4,6 @@ namespace Game.Interfaces.Markers
 {
     public interface IXRayVision
     {
+        bool HasVision { get; }
     }
 }

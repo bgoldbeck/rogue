@@ -6,10 +6,11 @@ using Game.Interfaces.Markers;
 
 namespace Game.Components.EnemyTypes
 {
-    class Minotaur : Enemy, IRage
+    class Minotaur : Enemy, IRage, IXRayVision
     {
         private bool enraged = false;
-        public Minotaur(Random rand, int level, bool isShiny)
+        public bool HasVision { get; } = false;
+        public Minotaur(Random rand, int level, bool isShiny) 
             : base(
                   "Minotaur",                   //Enemy's name
                   "A mythical beast of fury.",  //Enemy's description
@@ -22,6 +23,7 @@ namespace Game.Components.EnemyTypes
                   rand
                   )
         {
+            HasVision = isShiny;
         }
         public override void Start()
         {

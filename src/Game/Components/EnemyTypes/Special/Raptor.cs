@@ -8,6 +8,7 @@ namespace Game.Components.EnemyTypes
 {
     class Raptor : Enemy, IDoorOpener, IXRayVision
     {
+        public bool HasVision { get; } = true;
         public Raptor(Random rand, int level, bool isShiny)
             : base(
                   "Raptor",                     //Enemy's name
@@ -22,6 +23,7 @@ namespace Game.Components.EnemyTypes
                   )
         {
         }
+
         public override void Start()
         {
             base.Start();
@@ -37,5 +39,6 @@ namespace Game.Components.EnemyTypes
             ai.SetRate(0.75f / ((isShiny) ? 2 : 1));                          //Time between each move.
             healthRegen.SetHealthRegen(12.0f / ((isShiny) ? 2 : 1));          //Health regen (seconds for 1 health regen).
         }
+
     }
 }
