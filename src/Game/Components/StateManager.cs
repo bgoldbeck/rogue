@@ -38,8 +38,8 @@ namespace Game.Components
         {
             //width = Console.WindowWidth;
             //height = Console.WindowHeight;
-            //FireLogo fl = new FireLogo(width, height);
-            //fl.Run();
+            FireLogo fl = new FireLogo(width, height);
+            fl.Run();
 
 
             currentGameState = GameState.Load;
