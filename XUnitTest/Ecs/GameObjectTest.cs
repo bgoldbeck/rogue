@@ -102,7 +102,7 @@ namespace XUnitTestProject
             Assert.True(preKill.Count == 5);
             GameObject.Destroy(parent);
             List<GameObject> postKill = GameObject.FindGameObjectsWithTag("destroychildtest");
-            Assert.True(postKill.Count == 0);
+            Assert.Null(postKill);
         }
 
 
