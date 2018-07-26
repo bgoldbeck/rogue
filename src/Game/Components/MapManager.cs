@@ -16,7 +16,7 @@ namespace Game.Components
         private static int mapHeight = 40;
         private static int mapLevel = 1;
 
-        private static MapManager currentManager;
+        private static MapManager currentManager = null;
 
         public MapManager()
         {
@@ -72,6 +72,8 @@ namespace Game.Components
         {
             if (currentManager == null)
             {
+                Console.Out.WriteLine("Manager was null");
+                Console.In.ReadLine();
                 return null;
             }
             if (drawnMaps.Count > 0 && currentMap < drawnMaps.Count)
@@ -80,6 +82,8 @@ namespace Game.Components
             }
             else
             {
+                Console.Out.WriteLine("drawnMaps count is wrong");
+                Console.In.ReadLine();
                 return null;
             }
         }
@@ -104,6 +108,7 @@ namespace Game.Components
             currentMap = 0;
             drawnMaps = new List<Map>();
             drawnGraphs = new List<NavigatorMap>();
+            currentManager = null;
             return;
         }
     }
