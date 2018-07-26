@@ -10,10 +10,13 @@ namespace Game.Components
     class MapManager : Component
     {
         private static List<Map> drawnMaps = new List<Map>();
+        private static List<NavigatorMap> drawnGraphs = new List<NavigatorMap>();
         private static int currentMap = 0;
-        private int mapWidth = 80;
-        private int mapHeight = 40;
-        private int mapLevel = 1;
+        private static int mapWidth = 80;
+        private static int mapHeight = 40;
+        private static int mapLevel = 1;
+
+        private static MapManager currentManager;
 
         public MapManager()
         {
@@ -26,23 +29,51 @@ namespace Game.Components
             mapHeight = newHeight;
             mapLevel = newLevel;
         }
-
         public override void Start()
         {
-            if (drawnMaps.Count == 0)
+            if (currentManager == null || currentManager == this)
             {
-                Map firstMap = new Map(mapWidth, mapHeight, mapLevel);
-                drawnMaps.Add(firstMap);
-                gameObject.UpdateComponent(firstMap);
+                currentManager = this;
+                if (drawnMaps.Count == 0)
+                {
+                    Map firstMap = new Map(mapWidth, mapHeight, mapLevel);
+                    drawnMaps.Add(firstMap);
+                    gameObject.UpdateComponent(firstMap);
+                    NavigatorMap firstGraph = new NavigatorMap();
+                    drawnGraphs.Add(firstGraph);
+                    gameObject.UpdateComponent(firstGraph);
+                }
+                else
+                {
+                    Debug.LogWarning("There should only be one instance of MapManager.");
+                }
             }
-            else
+        }
+        public static void SwitchToNextMap()
+        {
+            if (currentManager != null)
             {
-                Debug.LogWarning("There should only be one instance of MapManager.");
+                Map mapBeingDisabled = CurrentMap();
+                if (mapBeingDisabled != null)
+                {
+                    mapBeingDisabled.gameObject.ChangeHierarchyActive(false);
+                    ++currentMap;
+                }
+                Map mapBeingCreated = new Map(mapWidth, mapHeight, mapLevel);
+                drawnMaps.Add(mapBeingCreated);
+                currentManager.gameObject.UpdateComponent(mapBeingCreated);
+                NavigatorMap graphBeingCreated = new NavigatorMap();
+                drawnGraphs.Add(graphBeingCreated);
+                currentManager.gameObject.UpdateComponent(graphBeingCreated);
             }
         }
 
         public static Map CurrentMap()
         {
+            if (currentManager == null)
+            {
+                return null;
+            }
             if (drawnMaps.Count > 0 && currentMap < drawnMaps.Count)
             {
                 return drawnMaps[currentMap];
@@ -53,12 +84,29 @@ namespace Game.Components
             }
         }
 
+        public static NavigatorMap CurrentNavigationMap()
+        {
+            if (currentManager == null)
+            {
+                return null;
+            }
+            if (drawnGraphs.Count > 0 && currentMap < drawnGraphs.Count)
+            {
+                return drawnGraphs[currentMap];
+            }
+            else
+            {
+                return null;
+            }
+        }
         public override void OnDestroy()
         {
             currentMap = 0;
             drawnMaps = new List<Map>();
+            drawnGraphs = new List<NavigatorMap>();
             return;
         }
-
     }
 }
+
+

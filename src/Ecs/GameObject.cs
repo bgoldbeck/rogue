@@ -539,6 +539,10 @@ namespace Ecs
             AddComponent(updatedComponent);
             return updatedComponent;
         }
+        public void ChangeHierarchyActive(bool newActive)
+        {
+
+        }
     }
 
 

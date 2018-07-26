@@ -21,7 +21,6 @@ namespace Game.Components
 
         public Player player;
         public MapManager mapManager;
-        public NavigatorMap navigatorMap;
         public HUD hud;
         public Map currentMap;
 
@@ -41,8 +40,6 @@ namespace Game.Components
             mapManager = (MapManager)mapObject.AddComponent(new MapManager(80, 40, 1));
 
             mapObject.transform.position = new Vec2i(mapObject.transform.position.x, gameHeight - 1);
-
-            navigatorMap = (NavigatorMap)GameObject.Instantiate("NavigatorMap").AddComponent(new NavigatorMap());
 
             Map map = MapManager.CurrentMap();
             currentMap = map;
@@ -110,12 +107,10 @@ namespace Game.Components
             GameObject.Destroy(hud.gameObject);
             GameObject.Destroy(currentMap.gameObject);
             GameObject.Destroy(mapManager.gameObject);
-            GameObject.Destroy(navigatorMap.gameObject);
             GameObject.Destroy(player.gameObject);
 
             currentMap = null;
             mapManager = null;
-            navigatorMap = null;
             hud = null;
             player = null;
             return;
