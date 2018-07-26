@@ -46,7 +46,7 @@ namespace Game.Components
             if (ragingEnemy.isRaging)
             {
                 MapManager.CurrentMap().PopObject(transform.position.x, transform.position.y);
-                NavigatorMap.RemoveObject(transform.position);
+                MapManager.CurrentNavigationMap().RemoveObject(transform.position);
                 GameObject.Destroy(gameObject);
             }
         }

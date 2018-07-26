@@ -131,7 +131,7 @@ namespace Game.Components
             
             // We need to remove this enemy for the map too, right?
             MapManager.CurrentMap().PopObject(transform.position.x, transform.position.y);
-            NavigatorMap.RemoveObject(transform.position);
+            MapManager.CurrentNavigationMap().RemoveObject(transform.position);
 
             // Transfer inventory items from killed actor
             Inventory killedInventory = (Inventory)gameObject.GetComponent<Inventory>();

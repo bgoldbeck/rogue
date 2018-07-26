@@ -36,7 +36,7 @@ namespace Game.Components
             if (Target == null) { return; }
 
             Graph<Vec2i> graph;
-            if ((graph = NavigatorMap.CacheInstance()) == null) { return; }
+            if ((graph = MapManager.CurrentNavigationMap().CacheInstance()) == null) { return; }
 
             Vec2i goal = Target.position;
 

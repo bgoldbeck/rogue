@@ -541,8 +541,16 @@ namespace Ecs
         }
         public void ChangeHierarchyActive(bool newActive)
         {
-
+            SetActive(newActive);
+            if (transform != null)
+            {
+                foreach (Transform t in transform)
+                {
+                    t.gameObject.ChangeHierarchyActive(newActive);
+                }
+            }
         }
+
     }
 
 

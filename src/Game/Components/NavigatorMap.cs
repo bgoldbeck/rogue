@@ -16,12 +16,6 @@ namespace Game.Components
         //The static graph of the current level.
         private Graph<Vec2i> graph = null;
 
-        private static NavigatorMap currentNavigator = null;
-
-        public NavigatorMap()
-        {
-            currentNavigator = this;
-        }
         /// <summary>
         /// When this component starts, it uses the map of the level to fill in all the
         /// initial edges between the empty map squares.
@@ -54,19 +48,19 @@ namespace Game.Components
         /// Returns the static graph of the edges.
         /// </summary>
         /// <returns></returns>
-        public static Graph<Vec2i> CacheInstance()
+        public Graph<Vec2i> CacheInstance()
         {
-            return currentNavigator?.graph;
+            return graph;
         }
 
         /// <summary>
         /// Takes in an array of positions that needs to be updated and updates them.
         /// </summary>
         /// <param name="positionList"></param>
-        public static void UpdatePositions(params Vec2i[] positionList)
+        public void UpdatePositions(params Vec2i[] positionList)
         {
             Map map = MapManager.CurrentMap();
-            if (currentNavigator?.graph == null || map == null)
+            if (graph == null || map == null)
             {
                 return;
             }
@@ -86,9 +80,9 @@ namespace Game.Components
         /// </summary>
         /// <param name="from"></param>
         /// <param name="map"></param>
-        private static void AddNeighbors(Vec2i from, Map map)
+        private void AddNeighbors(Vec2i from, Map map)
         {
-            if (currentNavigator?.graph == null)
+            if (graph == null)
             {
                 return;
             }
@@ -102,7 +96,7 @@ namespace Game.Components
                 //if (map.PeekObject(x,y) != null) { continue; }
                 if (map.PeekObject(currentNeighbor) == null || map.PeekObject(currentNeighbor).GetComponent<Door>() != null)
                 {
-                    currentNavigator.graph.AddEdge(from, currentNeighbor);
+                    graph.AddEdge(from, currentNeighbor);
                 }
             }
         }
@@ -112,19 +106,19 @@ namespace Game.Components
         /// locations.
         /// </summary>
         /// <param name="from"></param>
-        private static void RemoveNeighbors(Vec2i from)
+        private void RemoveNeighbors(Vec2i from)
         {
-            if (currentNavigator?.graph == null)
+            if (graph == null)
             {
                 return;
             }
-            List<Vec2i> neighbors = currentNavigator.graph.GetEdges(from);
+            List<Vec2i> neighbors = graph.GetEdges(from);
 
             if (neighbors != null)
             {
                 while (neighbors.Count > 0)
                 {
-                    currentNavigator.graph.RemoveEdge(from, neighbors[0]);
+                    graph.RemoveEdge(from, neighbors[0]);
                 }
             }
         }
@@ -133,10 +127,10 @@ namespace Game.Components
         /// Takes a position and adds its neighbors to connect the now empty spot.
         /// </summary>
         /// <param name="from"></param>
-        public static void RemoveObject(Vec2i from)
+        public void RemoveObject(Vec2i from)
         {
             Map map = MapManager.CurrentMap();
-            if (currentNavigator?.graph == null || map == null || from == null)
+            if (graph == null || map == null || from == null)
             {
                 return;
             }
@@ -145,3 +139,4 @@ namespace Game.Components
         }
     }
 }
+
