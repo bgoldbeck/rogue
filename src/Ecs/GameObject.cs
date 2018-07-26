@@ -485,6 +485,7 @@ namespace Ecs
                 if (type.IsAssignableFrom(components[i].GetType()))
                 {
                     components[i] = updatedComponent;
+                    updatedComponent.Start();
                     return updatedComponent;
                 }
             }

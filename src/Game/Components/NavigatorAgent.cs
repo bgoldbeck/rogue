@@ -25,7 +25,7 @@ namespace Game.Components
 
         public override void Start()
         {
-            map = Map.CacheInstance();
+            map = MapManager.CurrentMap();
             return;
         }
 

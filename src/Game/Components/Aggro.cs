@@ -84,7 +84,7 @@ namespace Game.Components
         /// <returns></returns>
         private bool CheckLine(Vec2i targeterLocation, Vec2i targetLocation)
         {
-            Map map = Map.CacheInstance();
+            Map map = MapManager.CurrentMap();
             bool hitObject = false;
 
             if (map == null)

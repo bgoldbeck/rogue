@@ -30,11 +30,11 @@ namespace Game.Components
         {
 
             GameObject player = GameObject.Instantiate("MainPlayer");
-            GameObject mapObject = GameObject.Instantiate("Map");
+            GameObject mapObject = GameObject.Instantiate("MapManager");
             //Map map = new Map(gameWidth - hudWidth, gameHeight);
-            Map map = new Map(80, 40);
+            MapManager mapManager = new MapManager(80, 40, 1);
 
-            mapObject.AddComponent(map);
+            mapObject.AddComponent(mapManager);
             mapObject.transform.position = new Vec2i(mapObject.transform.position.x, gameHeight - 1);
 
             GameObject navigatorMapObject = GameObject.Instantiate("NavigatorMap");
@@ -44,6 +44,7 @@ namespace Game.Components
             player.AddComponent(new PlayerController());
             player.AddComponent(new Model());
             player.AddComponent(new LightSource(10.0f));
+            Map map = MapManager.CurrentMap();
             player.transform.position = new Vec2i(map.startingX, map.startingY);
             //player.transform.position.x = map.startingX;
             //player.transform.position.y = map.startingY;

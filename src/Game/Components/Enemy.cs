@@ -130,7 +130,7 @@ namespace Game.Components
             HUD.CacheInstance().Target(null);
             
             // We need to remove this enemy for the map too, right?
-            Map.CacheInstance().PopObject(transform.position.x, transform.position.y);
+            MapManager.CurrentMap().PopObject(transform.position.x, transform.position.y);
             NavigatorMap.RemoveObject(transform.position);
 
             // Transfer inventory items from killed actor

@@ -29,7 +29,7 @@ namespace Game.Components
         public override void Start()
         {
             graph = new Graph<Vec2i>();
-            Map map = Map.CacheInstance();
+            Map map = MapManager.CurrentMap();
             if (map != null)
             {
                 // Building the graph from the map.
@@ -65,7 +65,7 @@ namespace Game.Components
         /// <param name="positionList"></param>
         public static void UpdatePositions(params Vec2i[] positionList)
         {
-            Map map = Map.CacheInstance();
+            Map map = MapManager.CurrentMap();
             if (currentNavigator?.graph == null || map == null)
             {
                 return;
@@ -135,7 +135,7 @@ namespace Game.Components
         /// <param name="from"></param>
         public static void RemoveObject(Vec2i from)
         {
-            Map map = Map.CacheInstance();
+            Map map = MapManager.CurrentMap();
             if (currentNavigator?.graph == null || map == null || from == null)
             {
                 return;

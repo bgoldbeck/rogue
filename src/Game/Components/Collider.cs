@@ -49,7 +49,7 @@ namespace Game.Components
             found = null;
 
             // Finds the map that is stored in the global GameObject.
-            Map map = Map.CacheInstance();
+            Map map = MapManager.CurrentMap();
             if (map != null)
             {
                 if (this.transform != null)

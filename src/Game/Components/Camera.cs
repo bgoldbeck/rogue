@@ -44,8 +44,8 @@ namespace Game.Components
 
         public override void OnEnable()
         {
-            
-            map = Map.CacheInstance();
+
+            map = MapManager.CurrentMap();
             if (map == null)
             {
                 Debug.LogError("Camera could not find a map to render from!");

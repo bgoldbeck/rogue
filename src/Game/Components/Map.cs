@@ -26,9 +26,9 @@ namespace Game.Components
         private List<List<GameObject>> objects;
         public int startingX = 0;
         public int startingY = 0;
-        private static Map map = null;
+        //private static Map map = null;
 
-        public Map(int width, int height)
+        public Map(int width, int height, int level)
         {
             this.width = width;
             this.height = height;
@@ -44,17 +44,16 @@ namespace Game.Components
                 }
                 objects.Add(row);
             }
-
         }
 
-        public static Map CacheInstance()
+        /*public static Map CacheInstance()
         {
             return map;
-        }
+        }*/
 
         public override void Start()
         {
-            if (map != null && map != this)
+            /*if (map != null && map != this)
             {
                 GameObject.Destroy(this.gameObject);
             }
@@ -63,7 +62,8 @@ namespace Game.Components
                 map = this;
             }
             CreateLevel(1);
-            return;
+            return;*/
+            CreateLevel(1);
         }
 
         public override void Update()
@@ -103,28 +103,28 @@ namespace Game.Components
                     {
                         case "d":
                             objects[x][y] = SpawnManager.CreateDoor(x, y);
-                            objects[x][y].transform.SetParent(map.gameObject.transform);
+                            objects[x][y].transform.SetParent(this.gameObject.transform);
                             break;
                         case "l":
                             objects[x][y] = SpawnManager.CreateLockedDoor(x, y);
-                            objects[x][y].transform.SetParent(map.gameObject.transform);
+                            objects[x][y].transform.SetParent(this.gameObject.transform);
                             break;
                         case "m":
                             objects[x][y] = SpawnManager.CreateEnemy(x, y, level);
-                            objects[x][y].transform.SetParent(map.gameObject.transform);
+                            objects[x][y].transform.SetParent(this.gameObject.transform);
                             break;
                         case "k":
                             objects[x][y] = SpawnManager.CreateEnemy(x, y, level, true);
-                            objects[x][y].transform.SetParent(map.gameObject.transform);
+                            objects[x][y].transform.SetParent(this.gameObject.transform);
                             break;
                         case "b":
                             objects[x][y] = SpawnManager.CreateBoss(x, y, level);
-                            objects[x][y].transform.SetParent(map.gameObject.transform);
+                            objects[x][y].transform.SetParent(this.gameObject.transform);
                             break;
                         case "w":
                             objects[x][y] = SpawnManager.CreateWall(x, y,(x == 0) || (y == 0) 
                                 || (x + 1  == width) || (y + 1 == height));
-                            objects[x][y].transform.SetParent(map.gameObject.transform);
+                            objects[x][y].transform.SetParent(this.gameObject.transform);
                             break;
                         case "s":
                             this.startingX = x;

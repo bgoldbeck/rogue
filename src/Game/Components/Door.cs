@@ -58,7 +58,7 @@ namespace Game.Components
                     if (inv.Find("Key") != null)
                     {
                         inv.Remove("Key");
-                        Map.CacheInstance().PopObject(transform.position.x, transform.position.y);
+                        MapManager.CurrentMap().PopObject(transform.position.x, transform.position.y);
                         NavigatorMap.RemoveObject(transform.position);
 
                         HUD.Append(objectInteracting.Name + " unlocked and opened a door.");
@@ -73,7 +73,7 @@ namespace Game.Components
             }
             else
             {
-                Map.CacheInstance().PopObject(transform.position.x, transform.position.y);
+                MapManager.CurrentMap().PopObject(transform.position.x, transform.position.y);
                 NavigatorMap.RemoveObject(transform.position);
                 if (objectInteracting.GetComponent<Player>() != null)
                 {
