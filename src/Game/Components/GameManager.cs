@@ -34,9 +34,12 @@ namespace Game.Components
 
         public override void Start()
         {
+            player = (Player)GameObject.Instantiate("MainPlayer").AddComponent(new Player("Sneaky McDevious", "Thiefy rogue", 1, 10, 1, 2));
+
             GameObject mapObject = GameObject.Instantiate("MapManager");
 
             mapManager = (MapManager)mapObject.AddComponent(new MapManager(80, 40, 1));
+
             mapObject.transform.position = new Vec2i(mapObject.transform.position.x, gameHeight - 1);
 
             navigatorMap = (NavigatorMap)GameObject.Instantiate("NavigatorMap").AddComponent(new NavigatorMap());
@@ -44,7 +47,7 @@ namespace Game.Components
             Map map = MapManager.CurrentMap();
             currentMap = map;
 
-            player = (Player)GameObject.Instantiate("MainPlayer").AddComponent(new Player("Sneaky McDevious", "Thiefy rogue", 1, 10, 1, 2));
+            
 
             player.AddComponent(new PlayerController());
             player.AddComponent(new Model());
@@ -53,8 +56,6 @@ namespace Game.Components
             player.AddComponent(new MapTile('$', new Color(255, 255, 255), true));
             player.AddComponent(new Inventory());
             player.AddComponent(new Sound());
-
-            
 
             player.transform.position = new Vec2i(map.startingX, map.startingY);
     
@@ -106,11 +107,17 @@ namespace Game.Components
 
         public override void OnDestroy()
         {
-            GameObject.Destroy(player.gameObject);
-            GameObject.Destroy(mapManager.gameObject);
-            GameObject.Destroy(navigatorMap.gameObject);
             GameObject.Destroy(hud.gameObject);
             GameObject.Destroy(currentMap.gameObject);
+            GameObject.Destroy(mapManager.gameObject);
+            GameObject.Destroy(navigatorMap.gameObject);
+            GameObject.Destroy(player.gameObject);
+
+            currentMap = null;
+            mapManager = null;
+            navigatorMap = null;
+            hud = null;
+            player = null;
             return;
         }
 

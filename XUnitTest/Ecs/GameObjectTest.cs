@@ -36,6 +36,7 @@ namespace XUnitTestProject
         {
             GameObject go = GameObject.Instantiate("findme");
             GameObject found = GameObject.FindWithTag("findme");
+            //GameObject.ForceFlush();
             Assert.True(found != null);
         }
 
@@ -44,7 +45,7 @@ namespace XUnitTestProject
         {
             GameObject.Instantiate("findmemultiple");
             GameObject.Instantiate("findmemultiple");
-
+            //GameObject.ForceFlush();
             List<GameObject> found = GameObject.FindGameObjectsWithTag("findmemultiple");
 
             Assert.True(found != null && found.Count == 2);
@@ -96,6 +97,7 @@ namespace XUnitTestProject
                 GameObject child = GameObject.Instantiate("destroychildtest");
                 child.transform.SetParent(parent.transform);
             }
+            GameObject.ForceFlush();
             List<GameObject> preKill = GameObject.FindGameObjectsWithTag("destroychildtest");
             Assert.True(preKill.Count == 5);
             GameObject.Destroy(parent);

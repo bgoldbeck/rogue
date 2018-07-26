@@ -343,6 +343,11 @@ namespace Ecs
        
         public static GameObject Instantiate()
         {
+            return GameObject.Instantiate("");
+        }
+
+        public static GameObject Instantiate(String tag)
+        {
             GameObject go = new GameObject();
 
             // Every game object will have a transform component.
@@ -350,15 +355,23 @@ namespace Ecs
             go.AddComponent(transform);
             go.transform = transform;
             go.id = IDCounter++;
-            go.tag = "";
-            return go;
-        }
-
-        public static GameObject Instantiate(String tag)
-        {
-            GameObject go = GameObject.Instantiate();
             go.tag = tag;
             gameObjectsToAdd.Add(go);
+
+            if (tag != null && tag != "")
+            {
+                // Add the game object to the data structures.
+                if (!gameObjectsTagMap.ContainsKey(tag))
+                {
+                    gameObjectsTagMap.Add(tag, new List<GameObject>());
+                }
+
+                if (gameObjectsTagMap.TryGetValue(tag, out List<GameObject> goList))
+                {
+                    goList.Add(go);
+                }
+            }
+
             return go;
             /*
             GameObject go = new GameObject();
@@ -411,10 +424,16 @@ namespace Ecs
                     if (gameObjectsTagMap.TryGetValue(go.tag, out List<GameObject> goList))
                     {
                         goList.Remove(go);
+                        if (goList.Count == 0)
+                        {
+                            gameObjectsTagMap.Remove(go.tag);
+                        }
                     }
+                    
                 }
                 // Add the game object from the game objects to the dead list.
                 deadList.Add(go.id);
+                
             }
             return;
         }
@@ -424,8 +443,9 @@ namespace Ecs
         /// </summary>
         public static void ForceFlush()
         {
-            ClearDeadGameObjects();
             AddNewGameObjects();
+            ClearDeadGameObjects();
+
             foreach (KeyValuePair<int, GameObject> entry in gameObjectsIdMap)
             {
                 entry.Value.ClearDeadComponents();
@@ -452,7 +472,13 @@ namespace Ecs
         {
             foreach (int id in deadList)
             {
-                gameObjectsIdMap.Remove(id);
+                if (gameObjectsIdMap.TryGetValue(id, out GameObject go))
+                { 
+                    go.componentsToRemove.AddRange(go.components);
+                    go.ClearDeadComponents();
+                    gameObjectsIdMap.Remove(go.id);
+                }
+
             }
             deadList.Clear();
 
@@ -467,20 +493,7 @@ namespace Ecs
             foreach (GameObject go in gameObjectsToAdd)
             {
                 gameObjectsIdMap.Add(go.id, go);
-                String tag = go.tag;
-                if (tag != null && tag != "")
-                {
-                    // Add the game object to the data structures.
-                    if (!gameObjectsTagMap.ContainsKey(tag))
-                    {
-                        gameObjectsTagMap.Add(tag, new List<GameObject>());
-                    }
-
-                    if (gameObjectsTagMap.TryGetValue(tag, out List<GameObject> goList))
-                    {
-                        goList.Add(go);
-                    }
-                }
+                
             }
             gameObjectsToAdd.Clear();
 

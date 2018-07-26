@@ -50,7 +50,7 @@ namespace Game.Components
             }
             if (Bag.Count > 0)
             {
-                Console.Beep(3000, 100);
+                //Console.Beep(3000, 100);
             }
             Bag.Clear();
         }

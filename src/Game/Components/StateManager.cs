@@ -26,6 +26,7 @@ namespace Game.Components
         {
             width = newWidth;
             height = newHeight;
+
             updateAction = new Action[]
             {
                 LoadScreen, Load, Running, GameOverScreen
@@ -39,6 +40,8 @@ namespace Game.Components
             //height = Console.WindowHeight;
             //FireLogo fl = new FireLogo(width, height);
             //fl.Run();
+
+
             currentGameState = GameState.Load;
         }
 
@@ -49,7 +52,11 @@ namespace Game.Components
 
         private void Load()
         {
+
             GameObject.Instantiate("GameManager").AddComponent(new GameManager(width, height));
+            //GameObject go = GameObject.FindWithTag("GameManager");
+
+            //go.SetActive(true);
 
             currentGameState = GameState.Running;
             return;
@@ -67,8 +74,8 @@ namespace Game.Components
 
             GameObject go = GameObject.FindWithTag("GameManager");
 
+            //go.SetActive(false);
             GameObject.Destroy(go);
-            
                 
             
             currentGameState = GameState.Load;

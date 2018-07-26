@@ -16,10 +16,16 @@ namespace Game.Components
         public int width;  // Width of camera drawing area
         public int height; // Height of camera drawing area
         private Map map = null; // Reference to map component
-        private static Camera camera = null;    // Reference to camera component
+        //private static Camera camera = null;    // Reference to camera component
 
         public static Camera CacheInstance()
         {
+            Camera camera = null;
+            GameObject go = GameObject.FindWithTag("Camera");
+            if (go != null)
+            {
+                camera = (Camera)go.GetComponent<Camera>();
+            }
             return camera;
         }
 
@@ -31,14 +37,14 @@ namespace Game.Components
 
         public override void Start()
         {
-            if (camera != null && camera != this)
-            {
-                GameObject.Destroy(this.gameObject);
-            }
-            else
-            {
-                camera = this;
-            }
+            //if (camera != null && camera != this)
+            //{
+            //    GameObject.Destroy(this.gameObject);
+            //}
+            //else
+            //{
+            //    camera = this;
+            //}
             return;
         }
 
@@ -95,6 +101,12 @@ namespace Game.Components
         {
             this.width = width;
             this.height = height;
+        }
+
+        public override void OnDestroy()
+        {
+            
+            return;
         }
 
     }

@@ -55,6 +55,10 @@ namespace Game.Components
                 if (path != null)
                 {
                     Camera camera = Camera.CacheInstance();
+                    if (camera == null)
+                    {
+                        return;
+                    }
                     int halfWidth = camera.width / 2;
                     int halfHeight = camera.height / 2;
 
