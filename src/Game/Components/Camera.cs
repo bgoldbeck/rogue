@@ -52,12 +52,12 @@ namespace Game.Components
         {
 
             //map = MapManager.CurrentMap();
-            if (map == null)
+            /*if (map == null)
             {
                 Debug.LogError("Camera could not find a map to render from!");
             }
             
-            return;
+            return;*/
         }
 
         public override void Update()
