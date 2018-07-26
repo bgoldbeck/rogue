@@ -17,10 +17,11 @@ namespace Ecs
         private static Dictionary<int, GameObject> gameObjectsIdMap = new Dictionary<int, GameObject>();
         private static int IDCounter = 0;
         private static List<int> deadList = new List<int>();
-
+        private static List<GameObject> gameObjectsToAdd = new List<GameObject>();
 
         private List<Component> components = new List<Component>();
         private List<Component> componentsToRemove = new List<Component>();
+        
 
         private bool isActive = true;
         private String tag = "";
@@ -349,14 +350,17 @@ namespace Ecs
             go.AddComponent(transform);
             go.transform = transform;
             go.id = IDCounter++;
-
-            gameObjectsIdMap.Add(go.id, go);
-
+            go.tag = "";
             return go;
         }
 
         public static GameObject Instantiate(String tag)
         {
+            GameObject go = GameObject.Instantiate();
+            go.tag = tag;
+            gameObjectsToAdd.Add(go);
+            return go;
+            /*
             GameObject go = new GameObject();
 
             // Every game object will have a transform component.
@@ -379,6 +383,7 @@ namespace Ecs
             gameObjectsIdMap.Add(go.id, go);
 
             return go;
+            */
         }
 
         public void Destroy(Component component)
@@ -420,7 +425,7 @@ namespace Ecs
         public static void ForceFlush()
         {
             ClearDeadGameObjects();
-
+            AddNewGameObjects();
             foreach (KeyValuePair<int, GameObject> entry in gameObjectsIdMap)
             {
                 entry.Value.ClearDeadComponents();
@@ -454,6 +459,34 @@ namespace Ecs
             return;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        private static void AddNewGameObjects()
+        {
+            foreach (GameObject go in gameObjectsToAdd)
+            {
+                gameObjectsIdMap.Add(go.id, go);
+                String tag = go.tag;
+                if (tag != null && tag != "")
+                {
+                    // Add the game object to the data structures.
+                    if (!gameObjectsTagMap.ContainsKey(tag))
+                    {
+                        gameObjectsTagMap.Add(tag, new List<GameObject>());
+                    }
+
+                    if (gameObjectsTagMap.TryGetValue(tag, out List<GameObject> goList))
+                    {
+                        goList.Add(go);
+                    }
+                }
+            }
+            gameObjectsToAdd.Clear();
+
+            return;
+        }
+        
         public static GameObject FindWithTag(String tag)
         {
             GameObject go = null;

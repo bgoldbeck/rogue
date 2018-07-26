@@ -41,6 +41,11 @@ namespace Game.Components
 
         private void DebugDrawPath()
         {
+            Player player = Player.MainPlayer();
+            if (player == null)
+            {
+                return;
+            }
             //Displays the path of the path finder.
 #if DEBUG
             NavigatorAgent navigator = (NavigatorAgent)this.gameObject.GetComponent<NavigatorAgent>();
@@ -53,7 +58,6 @@ namespace Game.Components
                     int halfWidth = camera.width / 2;
                     int halfHeight = camera.height / 2;
 
-                    Player player = Player.MainPlayer();
                     int playerX = player.transform.position.x;
                     int playerY = player.transform.position.y;
 

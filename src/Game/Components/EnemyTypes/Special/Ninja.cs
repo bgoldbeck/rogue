@@ -43,20 +43,24 @@ namespace Game.Components.EnemyTypes
         public override void Update()
         {
             Player player = Player.MainPlayer();
-            if(IsHidden)
+            if (player != null)
             {
-                if(Vec2i.Heuristic(transform.position, player.transform.position) < 4)
-                    Reveal();
-            }
-            else
-            {
-                if (Vec2i.Heuristic(transform.position, player.transform.position) > 4)
+                if (IsHidden)
                 {
-                    mapTile.character = ' ';                    
-                    mapTile.color.Set(10, 10, 10);
-                    IsHidden = true;
+                    if (Vec2i.Heuristic(transform.position, player.transform.position) < 4)
+                        Reveal();
+                }
+                else
+                {
+                    if (Vec2i.Heuristic(transform.position, player.transform.position) > 4)
+                    {
+                        mapTile.character = ' ';
+                        mapTile.color.Set(10, 10, 10);
+                        IsHidden = true;
+                    }
                 }
             }
+            return;
         }
     }
 }

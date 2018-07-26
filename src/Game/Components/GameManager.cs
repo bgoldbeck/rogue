@@ -19,6 +19,12 @@ namespace Game.Components
         public int gameWidth;
         public int gameHeight;
 
+        public Player player;
+        public MapManager mapManager;
+        public NavigatorMap navigatorMap;
+        public HUD hud;
+        public Map currentMap;
+
         public GameManager(int width, int height)
         {
             this.gameWidth = width;
@@ -28,41 +34,40 @@ namespace Game.Components
 
         public override void Start()
         {
-
-            GameObject player = GameObject.Instantiate("MainPlayer");
             GameObject mapObject = GameObject.Instantiate("MapManager");
-            //Map map = new Map(gameWidth - hudWidth, gameHeight);
-            MapManager mapManager = new MapManager(80, 40, 1);
 
-            mapObject.AddComponent(mapManager);
+            mapManager = (MapManager)mapObject.AddComponent(new MapManager(80, 40, 1));
             mapObject.transform.position = new Vec2i(mapObject.transform.position.x, gameHeight - 1);
 
-            GameObject navigatorMapObject = GameObject.Instantiate("NavigatorMap");
-            navigatorMapObject.AddComponent(new NavigatorMap());
+            navigatorMap = (NavigatorMap)GameObject.Instantiate("NavigatorMap").AddComponent(new NavigatorMap());
 
-            player.AddComponent(new Player("Sneaky McDevious", "Thiefy rogue", 1, 10, 1, 2));
+            Map map = MapManager.CurrentMap();
+            currentMap = map;
+
+            player = (Player)GameObject.Instantiate("MainPlayer").AddComponent(new Player("Sneaky McDevious", "Thiefy rogue", 1, 10, 1, 2));
+
             player.AddComponent(new PlayerController());
             player.AddComponent(new Model());
             player.AddComponent(new LightSource(10.0f));
-            Map map = MapManager.CurrentMap();
-            player.transform.position = new Vec2i(map.startingX, map.startingY);
-            //player.transform.position.x = map.startingX;
-            //player.transform.position.y = map.startingY;
-            map.AddObject(map.startingX, map.startingY, player);
             player.AddComponent(new Camera(gameWidth - hudWidth, gameHeight));
             player.AddComponent(new MapTile('$', new Color(255, 255, 255), true));
             player.AddComponent(new Inventory());
             player.AddComponent(new Sound());
-            //player.AddComponent(new NavigatorAgent());
+
+            
+
+            player.transform.position = new Vec2i(map.startingX, map.startingY);
+    
+            map.AddObject(map.startingX, map.startingY, player.gameObject);
+  
 
             // Setup HUD for stats and info
-            GameObject hud = GameObject.Instantiate("HUD");
-            hud.AddComponent(new HUD(hudWidth, gameHeight));
+            hud = (HUD)GameObject.Instantiate("HUD").AddComponent(new HUD(hudWidth, gameHeight));
+            
             Model hudModel = (Model)hud.AddComponent(new Model());
             hudModel.color.Set(180, 180, 180);
             hud.transform.position = new Vec2i(gameWidth - hudWidth, gameHeight - 1);
-            //hud.transform.position.x = gameWidth - hudWidth;
-            //hud.transform.position.y = gameHeight - 1;
+        
 
             Debug.Log("GameManager added all components on start.");
             return;
@@ -101,7 +106,11 @@ namespace Game.Components
 
         public override void OnDestroy()
         {
-
+            GameObject.Destroy(player.gameObject);
+            GameObject.Destroy(mapManager.gameObject);
+            GameObject.Destroy(navigatorMap.gameObject);
+            GameObject.Destroy(hud.gameObject);
+            GameObject.Destroy(currentMap.gameObject);
             return;
         }
 

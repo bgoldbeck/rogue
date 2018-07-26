@@ -128,7 +128,10 @@ namespace Game.Components
         {
             bool moved = false;
             Map map = MapManager.CurrentMap();
-
+            if (map == null)
+            {
+                return false;
+            }
             Collider.CollisionTypes type = collider.HandleCollision(dx, dy, out GameObject found);
             // It checks the map to see if there is any collisions if the enemy moves to that square.
             if (type == Collider.CollisionTypes.None)

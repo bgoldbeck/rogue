@@ -12,13 +12,15 @@ namespace Game.Components
     {
         private int width;
         private int height;
+
         public enum GameState
         {
-            LoadSecreen, Running, GameOver
+            LoadSecreen, Load, Running, GameOver
         }
+
         private Action[] updateAction = null;
         private GameState currentGameState = GameState.LoadSecreen;
-        private GameManager gameManager = null;
+        //private GameManager gameManager = null;
 
         public StateManager(int newWidth, int newHeight)
         {
@@ -26,30 +28,33 @@ namespace Game.Components
             height = newHeight;
             updateAction = new Action[]
             {
-                LoadScreen, Running, GameOverScreen
+                LoadScreen, Load, Running, GameOverScreen
             };
         }
-        public void Initialize()
-        {
-            GameObject newObject = GameObject.Instantiate("GameManager");
-            gameManager = new GameManager(width, height);
-            newObject.AddComponent(gameManager);
-            return;
-        }
+
 
         private void LoadScreen()
         {
-            width = Console.WindowWidth;
-            height = Console.WindowHeight;
-            FireLogo fl = new FireLogo(width, height);
-            fl.Run();
-            currentGameState = GameState.Running;
+            //width = Console.WindowWidth;
+            //height = Console.WindowHeight;
+            //FireLogo fl = new FireLogo(width, height);
+            //fl.Run();
+            currentGameState = GameState.Load;
         }
 
         private void Running()
         {
             return;
         }
+
+        private void Load()
+        {
+            GameObject.Instantiate("GameManager").AddComponent(new GameManager(width, height));
+
+            currentGameState = GameState.Running;
+            return;
+        }
+
         public void PlayerIsDead()
         {
             currentGameState = GameState.GameOver;
@@ -60,12 +65,13 @@ namespace Game.Components
             GameOver screen = new GameOver(width, height);
             screen.Run();
 
-            /*GameObject found = GameObject.FindWithTag("GameManager");
-            if(found != null)
-            {
-                found.UpdateComponent(new GameManager(width,height));
-            }*/
-            currentGameState = GameState.Running;
+            GameObject go = GameObject.FindWithTag("GameManager");
+
+            GameObject.Destroy(go);
+            
+                
+            
+            currentGameState = GameState.Load;
             return;
         }
 

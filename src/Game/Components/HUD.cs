@@ -57,7 +57,10 @@ namespace Game.Components
         {
             List<String> wrapped = WordWrap(line);
             foreach (String str in wrapped)
+            { 
                 log.Add(str);
+            }
+            return;
         }
 
         public void Resize(int width, int height)
@@ -92,6 +95,10 @@ namespace Game.Components
             model.model.Clear();
 
             Actor player = Player.MainPlayer();
+            if (player == null)
+            {
+                return;
+            }
 
             AddTop(model);
             AddText(model, player.Name);
@@ -253,8 +260,9 @@ namespace Game.Components
             return sentence;
         }
 
-        public override void Render()
+        public override void OnDestroy()
         {
+            hud = null;
             return;
         }
     }

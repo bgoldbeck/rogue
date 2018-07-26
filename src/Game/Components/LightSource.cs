@@ -99,9 +99,12 @@ namespace Game.Components
 
             public GameObject Collides(GameObject player, Map map)
             {
-                GameObject go = map.PeekObject((int)x, (int)y);
-                if (go == player || go == null)
+                if (map == null || player == null)
+                {
                     return null;
+                }
+                GameObject go = map.PeekObject((int)x, (int)y);
+                
                 return go;
             }
 

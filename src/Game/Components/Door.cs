@@ -67,7 +67,7 @@ namespace Game.Components
                     else
                     {
                         HUD.Append(objectInteracting.Name + " tried to open door, but is was locked.");
-                        Console.Beep(80, 100);
+                        //Console.Beep(80, 100);
                     }
                 }
             }
@@ -85,7 +85,7 @@ namespace Game.Components
             if (destroyDoor)
             {
                 GameObject.Destroy(gameObject);
-                Console.Beep(100, 100);
+                //Console.Beep(100, 100);
             }
         }
         

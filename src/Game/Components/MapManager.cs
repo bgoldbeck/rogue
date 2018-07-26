@@ -26,6 +26,7 @@ namespace Game.Components
             mapHeight = newHeight;
             mapLevel = newLevel;
         }
+
         public override void Start()
         {
             if (drawnMaps.Count == 0)
@@ -52,6 +53,12 @@ namespace Game.Components
             }
         }
 
+        public override void OnDestroy()
+        {
+            currentMap = 0;
+            drawnMaps = new List<Map>();
+            return;
+        }
 
     }
 }

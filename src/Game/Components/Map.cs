@@ -190,11 +190,12 @@ namespace Game.Components
                 {
                     if(objects[x][y] != null)
                     {
-                        GameObject.Destroy(objects[x][y]);
-                        //objects[x][y] = null;
+                        //GameObject.Destroy(objects[x][y]);
+                        objects[x][y] = null;
                     }
                 }
             }
+            return;
         }
     }
 }

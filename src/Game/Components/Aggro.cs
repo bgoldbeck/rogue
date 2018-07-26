@@ -49,7 +49,7 @@ namespace Game.Components
             //player at and set the boolean that is has seen the player.
             Player player = Player.MainPlayer();
 
-            if (Vec2i.Distance(player.transform.position, transform.position) < aggroRange)
+            if (player != null && Vec2i.Distance(player.transform.position, transform.position) < aggroRange)
             {
                 if ( searchee is IXRayVision || CheckLine(transform.position, player.transform.position))
                 {
