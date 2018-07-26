@@ -72,8 +72,8 @@ namespace Game.Components
             go.SetActive(false);
             GameObject.Destroy(go);
 
-            GameOver screen = new GameOver(width, height);
-            screen.Run();
+            //GameOver screen = new GameOver(width, height);
+            //screen.Run();
 
             currentGameState = GameState.Load;
             return;
