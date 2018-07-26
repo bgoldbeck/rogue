@@ -67,15 +67,14 @@ namespace Game.Components
 
         private void GameOverScreen()
         {
-            //GameOver screen = new GameOver(width, height);
-            //screen.Run();
 
             GameObject go = GameObject.FindWithTag("GameManager");
-
-            //go.SetActive(false);
+            go.SetActive(false);
             GameObject.Destroy(go);
-                
-            
+
+            GameOver screen = new GameOver(width, height);
+            screen.Run();
+
             currentGameState = GameState.Load;
             return;
         }

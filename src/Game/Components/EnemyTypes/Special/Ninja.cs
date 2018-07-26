@@ -45,7 +45,7 @@ namespace Game.Components.EnemyTypes
             }
             else
             {
-                mapTile.color.Set(10, 10, 10);
+                mapTile.color.Set(70, 70, 70);
             }
         }
 
