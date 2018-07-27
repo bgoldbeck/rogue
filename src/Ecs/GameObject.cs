@@ -201,6 +201,8 @@ namespace Ecs
             return;
         }
 
+        private static bool drawDebug = false;
+
         /// <summary>
         /// This function is called by the Application on every updated frame, but only
         /// after Update() has been invoked on each GameObject. It will call LateUpdate()
@@ -223,7 +225,12 @@ namespace Ecs
                     }
                 }
             }
-
+#if DEBUG
+            if (Input.ReadKey().Key == ConsoleKey.D)
+            {
+                drawDebug = !drawDebug;
+            }
+#endif
             return;
         }
 
@@ -245,7 +252,6 @@ namespace Ecs
             return;
         }
 
-        private static bool drawDebug = false;
         /// <summary>
         /// Called by the Application on every updated frame during the
         /// rendering phase. It will call Render() on every Component attached to this GameObject.
@@ -255,10 +261,7 @@ namespace Ecs
             
             ForceFlush();
 #if DEBUG
-            if (Input.ReadKey().Key == ConsoleKey.D)
-            {
-                drawDebug = !drawDebug;
-            }
+            
             if (drawDebug)
             {
                 int line = 1;
