@@ -33,6 +33,8 @@ namespace Game.Components.EnemyTypes
             mapTile.color.Set(10, 10, 10);
             ai.SetRate(0.7f / ((isShiny) ? 2 : 1));                           //Time between each move.
             healthRegen.SetHealthRegen(15.0f / ((isShiny) ? 2 : 1));          //Health regen (seconds for 1 health regen).
+            aggro.SetAggroPatience(4.0f);                                //Seconds before it gives up.
+            aggro.SetAggroRange(14);                                     //Distance it can see the player at.
         }
 
         public void Reveal()

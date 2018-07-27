@@ -72,8 +72,8 @@ namespace Game.Components
                         if (next == null) { continue; }
                         double newCost = costSoFar[current] + 1; // Movement Costs.
 
-                        //If the cost is greater then 40, then the path is too long already and it continues.
-                        if(newCost > 40)
+                        //If the cost is greater then 50, then the path is too long already and it continues.
+                        if(newCost > 50)
                         {
                             continue;
                         }

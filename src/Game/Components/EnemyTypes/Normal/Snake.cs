@@ -35,6 +35,8 @@ namespace Game.Components.EnemyTypes
             }
             ai.SetRate(0.5f / ((isShiny)? 2 : 1));                        //Time between each move.
             healthRegen.SetHealthRegen(12.0f / ((isShiny) ? 2 : 1));      //Health regen (seconds for 1 health regen).
+            aggro.SetAggroPatience(5.0f);                                //Seconds before it gives up.
+            aggro.SetAggroRange(8);                                     //Distance it can see the player at.
         }                           
     }
 }
