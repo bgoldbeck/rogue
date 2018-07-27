@@ -13,9 +13,8 @@ namespace Game.Components
     {
         private bool seenTarget = false; //If a target has been seen.
         private int aggroRange = 10;     //The max range that is searched for a target.
-        private int lastSeenPlayer = 0;  //How many turns since the last time the player has been seen.
-        private int turnsTillEnemyGivesUp = 3; //How many turns before the target is forgotten.
-
+        private float secondsSinceLastSeen = 0;  //How many seconds since the aggro has seen the player
+        private float secondsBeforeGivesUp = 3.0f; //How many seconds before it forgets it has seen the player.
         public override void Start()
         {
             base.Start();
@@ -58,6 +57,7 @@ namespace Game.Components
                     //searchee.target = player.transform;
                     targetUpdated = true;
                     seenTarget = true;
+                    secondsSinceLastSeen = 0;
                 }
             }
             //If the enemy can't see the player but has seen the player before. It checks how long
@@ -65,7 +65,8 @@ namespace Game.Components
             //to false.
             if (seenTarget && !targetUpdated)
             {
-                if (++lastSeenPlayer > turnsTillEnemyGivesUp)
+                secondsSinceLastSeen += ((float)Time.deltaMs / 1000.0f);
+                if (secondsSinceLastSeen > secondsBeforeGivesUp)
                 {
                     // OnDegggro
                     //searchee.target = null;
@@ -131,6 +132,15 @@ namespace Game.Components
                 currentX += slopeX;
             }
             return !hitObject;
+        }
+
+        public void SetAggroRange(int newRange)
+        {
+            aggroRange = newRange;
+        }
+        public void SetAggroPatience(float newPatience)
+        {
+            secondsBeforeGivesUp = newPatience;
         }
     }
 }

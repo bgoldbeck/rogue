@@ -14,6 +14,7 @@ namespace Game.Components
         public static bool visiblePaths = false;
         protected MapTile mapTile;
         protected EnemyAI ai;
+        protected Aggro aggro;
         protected bool isShiny = false;
         
         public Enemy():base()
@@ -39,7 +40,7 @@ namespace Game.Components
             //Adds a Model component to the game object passed in.
             mapTile = (MapTile)this.gameObject.AddComponent(new MapTile());
             ai = (EnemyAI)this.gameObject.AddComponent(new EnemyAI());
-            this.gameObject.AddComponent(new Aggro());
+            aggro = (Aggro)this.gameObject.AddComponent(new Aggro());
             this.gameObject.AddComponent(new Sound());
             this.gameObject.AddComponent(new NavigatorAgent());
             mapTile.SetLightLevelAfterDiscovery(0.1f);
