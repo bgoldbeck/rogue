@@ -62,7 +62,6 @@ namespace Game.Components
             Model hudModel = (Model)hud.AddComponent(new Model());
             hudModel.color.Set(180, 180, 180);
             hud.transform.position = new Vec2i(gameWidth - hudWidth, gameHeight - 1);
-        
 
             Debug.Log("GameManager added all components on start.");
             return;
@@ -99,10 +98,8 @@ namespace Game.Components
 
         public override void OnDestroy()
         {
-            //GameObject.Destroy(hud.gameObject);
-            GameObject.Destroy(currentMap.gameObject);
+            //GameObject.Destroy(currentMap.gameObject);
             GameObject.Destroy(mapManager.gameObject);
-            //GameObject.Destroy(player.gameObject);
             
             return;
         }

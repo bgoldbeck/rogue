@@ -156,13 +156,18 @@ namespace Ecs
         /// </summary>
         public static void EarlyUpdate()
         {
+            // TODO: Can improve this loop performance by updating from the root game objects, recursively
+            // down the tree.
             foreach (KeyValuePair<int, GameObject> entry in gameObjectsIdMap)
             {
-                foreach (Component component in entry.Value.GetComponents<Component>())
-                {
-                    if (component.IsActive())
+                if (entry.Value.IsActiveInHierarchy())
+                { 
+                    foreach (Component component in entry.Value.GetComponents<Component>())
                     {
-                        component.EarlyUpdate();
+                        if (component.IsActive())
+                        {
+                            component.EarlyUpdate();
+                        }
                     }
                 }
             }
@@ -177,13 +182,18 @@ namespace Ecs
         /// </summary>
         public static void Update()
         {
+            // TODO: Can improve this loop performance by updating from the root game objects, recursively
+            // down the tree.
             foreach (KeyValuePair<int, GameObject> entry in gameObjectsIdMap)
             {
-                foreach (Component component in entry.Value.GetComponents<Component>())
+                if (entry.Value.IsActiveInHierarchy())
                 {
-                    if (component.IsActive())
+                    foreach (Component component in entry.Value.GetComponents<Component>())
                     {
-                        component.Update();
+                        if (component.IsActive())
+                        {
+                            component.Update();
+                        }
                     }
                 }
             }
@@ -198,13 +208,18 @@ namespace Ecs
         /// </summary>
         public static void LateUpdate()
         {
+            // TODO: Can improve this loop performance by updating from the root game objects, recursively
+            // down the tree.
             foreach (KeyValuePair<int, GameObject> entry in gameObjectsIdMap)
             {
-                foreach (Component component in entry.Value.GetComponents<Component>())
+                if (entry.Value.IsActiveInHierarchy())
                 {
-                    if (component.IsActive())
+                    foreach (Component component in entry.Value.GetComponents<Component>())
                     {
-                        component.LateUpdate();
+                        if (component.IsActive())
+                        {
+                            component.LateUpdate();
+                        }
                     }
                 }
             }
@@ -230,7 +245,7 @@ namespace Ecs
             return;
         }
 
-        private static bool drawDebug = true;
+        private static bool drawDebug = false;
         /// <summary>
         /// Called by the Application on every updated frame during the
         /// rendering phase. It will call Render() on every Component attached to this GameObject.
@@ -285,7 +300,10 @@ namespace Ecs
             {
                 sb.Append("(" + component.GetType().Name + ") ");
             }
-            ConsoleUI.Write(0, ConsoleUI.MaxHeight() - (line++), "-".PadRight(level, '-') + go.Name + sb, Color.Gold);
+
+            Color color = go.isActive ? Color.Gold : Color.Gray;
+
+            ConsoleUI.Write(0, ConsoleUI.MaxHeight() - (line++), "-".PadRight(level, '-') + go.Name + sb, color);
 
             if (go.transform.ChildCount() < 5)
             { 
@@ -296,7 +314,7 @@ namespace Ecs
             }
             else
             {
-                ConsoleUI.Write(0, ConsoleUI.MaxHeight() - (line++), "-".PadRight(level + 2, '-') + "Children Collapsed", Color.Olive);
+                ConsoleUI.Write(0, ConsoleUI.MaxHeight() - (line++), "-".PadRight(level + 2, '-') + "Children Collapsed", Color.Gold);
             }
             return;
         }

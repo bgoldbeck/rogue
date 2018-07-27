@@ -42,13 +42,7 @@ namespace Game
             {
                 dt = Time.deltaMs;
 
-                // Milliseconds per frame in the bottom left corner of screen. 
-                // (This is better than FPS), FPS is for noobs.
-#if DEBUG
-                ConsoleUI.Write(0, 0, "Hit the 'D' key to swap from debug view to game view", Color.Gold);
-                ConsoleUI.Write(0, 1, dt.ToString() + " ms/frame", Color.Gold);
-                ConsoleUI.Write(0, 2, (1.0 / dt * 1000.0).ToString() + " fps", Color.Gold);
-#endif
+
 
                 press = Input.ReadKey().Key;
 
@@ -59,6 +53,15 @@ namespace Game
 
                 CheckForResize();
                 Update();
+
+                // Milliseconds per frame in the bottom left corner of screen. 
+                // (This is better than FPS), FPS is for noobs.
+#if DEBUG
+                ConsoleUI.Write(0, 0, "Hit the 'D' key to swap from debug view to game view", Color.Gold);
+                ConsoleUI.Write(0, 1, dt.ToString() + " ms/frame", Color.Gold);
+                ConsoleUI.Write(0, 2, (1.0 / dt * 1000.0).ToString() + " fps", Color.Gold);
+#endif
+
                 Render();
 
 
