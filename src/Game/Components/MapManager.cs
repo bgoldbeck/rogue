@@ -68,6 +68,7 @@ namespace Game.Components
                     Debug.LogWarning("There should only be one instance of MapManager.");
                 }
             }
+            
         }
 
         /// <summary>
@@ -78,15 +79,15 @@ namespace Game.Components
             if (currentManager != null)
             {
                 // Destroy the current map, and graph components attached this game object.
-                currentManager.gameObject.Destroy(drawnMaps[currentMap]);
-                currentManager.gameObject.Destroy(drawnGraphs[currentMap]);
+                GameObject.Destroy(drawnMaps[currentMap]);
+                GameObject.Destroy(drawnGraphs[currentMap]);
 
                 //It first grabs the current map and disables it.
                 Map mapBeingDisabled = CurrentMap();
 
                 if (mapBeingDisabled != null)
                 {
-                    mapBeingDisabled.gameObject.ChangeHierarchyActive(false);
+                    mapBeingDisabled.gameObject.SetActiveRecursively(false);
                     ++currentMap;
                 }
                 

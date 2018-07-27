@@ -84,10 +84,9 @@ namespace Ecs
 
         public Component GetComponentInChildren<T>()
         {
-
-            return null;
+            return gameObject.GetComponentInChildren<T>();
         }
-
+        
         public Component AddComponent(Component component)
         {
             return gameObject.AddComponent(component);

@@ -9,19 +9,34 @@ namespace XUnitTestProject
 {
     public class GameObjectTest
     {
+        public class TestComponent : Component, ITestInterface
+        {
+            public bool something = false;
+            public int id = 0;
+
+            public void OnAnything()
+            {
+                something = true;
+            }
+            public void OnThisValue(bool value)
+            {
+                something = value;
+            }
+        }
+
         [Fact]
         public void InactiveGameObjectIsInactive()
         {
             GameObject go = GameObject.Instantiate();
             go.SetActive(false);
-            Assert.False(go.IsActive());
+            Assert.False(go.IsActiveSelf());
         }
 
         [Fact]
         public void NewGameObjectIsActive()
         {
             GameObject go = GameObject.Instantiate();
-            Assert.True(go.IsActive());
+            Assert.True(go.IsActiveSelf());
         }
 
         [Fact]
@@ -97,12 +112,14 @@ namespace XUnitTestProject
                 GameObject child = GameObject.Instantiate("destroychildtest");
                 child.transform.SetParent(parent.transform);
             }
-            GameObject.ForceFlush();
+
+            GameObject.Render();
             List<GameObject> preKill = GameObject.FindGameObjectsWithTag("destroychildtest");
             Assert.True(preKill.Count == 5);
             GameObject.Destroy(parent);
             List<GameObject> postKill = GameObject.FindGameObjectsWithTag("destroychildtest");
             Assert.Null(postKill);
+            return;
         }
 
 
@@ -110,23 +127,73 @@ namespace XUnitTestProject
         public void GameObjectWithComponentGetComponentsNotNull()
         {
             GameObject go = GameObject.Instantiate();
-            go.AddComponent<Component>();
+            go.AddComponent<TestComponent>();
 
-            List<Component> components = go.GetComponents<Component>();
+            List<TestComponent> components = go.GetComponents<TestComponent>();
 
             Assert.True(components != null && components.Count == 1);
+            return;
+        }
 
+        [Fact]
+        public void GameObjectWithIdenticalComponentsDestroyOneOfThemIsTheOneDestroyed()
+        {
+            GameObject go = GameObject.Instantiate();
+
+            TestComponent c1 = new TestComponent
+            {
+                id = 1
+            };
+
+            TestComponent c2 = new TestComponent
+            {
+                id = 2
+            };
+
+            TestComponent c3 = new TestComponent
+            {
+                id = 3
+            };
+
+            go.AddComponent(c1);
+            go.AddComponent(c2);
+            go.AddComponent(c3);
+
+            GameObject.Destroy(c2);
+
+            GameObject.Render();
+
+            List<TestComponent> components = go.GetComponents<TestComponent>();
+            Assert.Contains(c1, components);
+            Assert.Contains(c3, components);
+            Assert.DoesNotContain(c2, components);
+            return;
+        }
+
+        [Fact]
+        public void GameObjectWithIdenticalComponentGetComponentsEqualsCount()
+        {
+            GameObject go = GameObject.Instantiate();
+            go.AddComponent<TestComponent>();
+            go.AddComponent<TestComponent>();
+            go.AddComponent<TestComponent>();
+            go.AddComponent<TestComponent>();
+
+            List<TestComponent> components = go.GetComponents<TestComponent>();
+
+            Assert.True(components != null && components.Count == 4);
+            return;
         }
 
         [Fact]
         public void GameObjectDestroyComponent()
         {
             GameObject go = GameObject.Instantiate();
-            go.AddComponent<Component>();
-            Assert.True(go.GetComponent<Component>() != null);
-            go.Destroy(go.GetComponent<Component>());
-            GameObject.ForceFlush();
-            Assert.True(go.GetComponent<Component>() == null);
+            go.AddComponent<TestComponent>();
+            Assert.True(go.GetComponent<TestComponent>() != null);
+            GameObject.Destroy(go.GetComponent<TestComponent>());
+            GameObject.Render();
+            Assert.True(go.GetComponent<TestComponent>() == null);
         }
 
         public interface ITestInterface
@@ -135,18 +202,7 @@ namespace XUnitTestProject
             void OnThisValue(bool value);
         }
 
-        public class TestComponent : Component, ITestInterface
-        {
-            public bool something = false;
-            public void OnAnything()
-            {
-                something = true;
-            }
-            public void OnThisValue(bool value)
-            {
-                something = value;
-            }
-        }
+       
 
         [Fact]
         public void TestSendInterfaceMessageCalledOnValidInterface()
@@ -195,6 +251,33 @@ namespace XUnitTestProject
 
         }
 
-      
+        [Fact]
+        public void GameObjectWithInactiveAncestorIsNotActiveInHierarchy()
+        {
+            GameObject greatGrandpa = GameObject.Instantiate();
+
+            GameObject grandpa = GameObject.Instantiate();
+            grandpa.transform.SetParent(greatGrandpa.transform);
+
+            GameObject dad = GameObject.Instantiate();
+            dad.transform.SetParent(grandpa.transform);
+
+            GameObject child = GameObject.Instantiate();
+            child.transform.SetParent(dad.transform);
+
+            Assert.True(child.IsActiveInHierarchy() == true);
+
+            greatGrandpa.SetActive(false);
+
+            Assert.True(child.IsActiveInHierarchy() == false);
+
+            greatGrandpa.SetActive(true);
+            grandpa.SetActive(false);
+
+            Assert.True(child.IsActiveInHierarchy() == false);
+
+            return;
+        }
+
     }
 }

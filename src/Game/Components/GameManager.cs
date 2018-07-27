@@ -26,8 +26,10 @@ namespace Game.Components
         public override void Start()
         {
             player = (Player)GameObject.Instantiate("MainPlayer").AddComponent(new Player("Sneaky McDevious", "Thiefy rogue", 1, 10, 1, 2));
+            player.Name = "MainPlayer";
 
             GameObject mapObject = GameObject.Instantiate("MapManager");
+            mapObject.Name = "MapManager";
 
             mapManager = (MapManager)mapObject.AddComponent(new MapManager(80, 40, 1));
 
@@ -37,7 +39,6 @@ namespace Game.Components
             currentMap = map;
 
             
-
             player.AddComponent(new PlayerController());
             player.AddComponent(new Model());
             player.AddComponent(new LightSource(10.0f));
@@ -47,13 +48,17 @@ namespace Game.Components
             player.AddComponent(new Sound());
 
             player.transform.position = new Vec2i(map.startingX, map.startingY);
-    
+            player.transform.SetParent(this.transform);
+
             map.AddObject(map.startingX, map.startingY, player.gameObject);
   
 
             // Setup HUD for stats and info
             hud = (HUD)GameObject.Instantiate("HUD").AddComponent(new HUD(hudWidth, gameHeight));
-            
+            hud.Name = "HUD";
+
+            hud.transform.SetParent(this.transform);
+
             Model hudModel = (Model)hud.AddComponent(new Model());
             hudModel.color.Set(180, 180, 180);
             hud.transform.position = new Vec2i(gameWidth - hudWidth, gameHeight - 1);
@@ -75,8 +80,6 @@ namespace Game.Components
 
             GameObject hudObject = GameObject.FindWithTag("HUD");
             hudObject.transform.position = new Vec2i(gameWidth - hudWidth, gameHeight - 1);
-            //hudObject.transform.position.x = gameWidth - hudWidth;
-            //hudObject.transform.position.y = gameHeight - 1;
 
             HUD hud = (HUD)hudObject.GetComponent(typeof(HUD));
             hud.Resize(hudWidth, gameHeight);
@@ -96,15 +99,11 @@ namespace Game.Components
 
         public override void OnDestroy()
         {
-            GameObject.Destroy(hud.gameObject);
+            //GameObject.Destroy(hud.gameObject);
             GameObject.Destroy(currentMap.gameObject);
             GameObject.Destroy(mapManager.gameObject);
-            GameObject.Destroy(player.gameObject);
-
-            currentMap = null;
-            mapManager = null;
-            hud = null;
-            player = null;
+            //GameObject.Destroy(player.gameObject);
+            
             return;
         }
 

@@ -56,6 +56,7 @@ namespace Game
         {
             do
             {
+                Input.Reset();
                 if (WindowResized())
                     Reset(Console.WindowWidth, Console.WindowHeight);
                 SeedBottomPoints();
