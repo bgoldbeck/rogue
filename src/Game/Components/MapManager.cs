@@ -58,10 +58,10 @@ namespace Game.Components
                     //It then generates the first map and Nabigator
                     Map firstMap = new Map(mapWidth, mapHeight, mapLevel);
                     drawnMaps.Add(firstMap);
-                    gameObject.UpdateComponent(firstMap);
+                    gameObject.AddComponent(firstMap);
                     NavigatorMap firstGraph = new NavigatorMap();
                     drawnGraphs.Add(firstGraph);
-                    gameObject.UpdateComponent(firstGraph);
+                    gameObject.AddComponent(firstGraph);
                 }
                 else
                 {
@@ -77,20 +77,31 @@ namespace Game.Components
         {
             if (currentManager != null)
             {
+                // Destroy the current map, and graph components attached this game object.
+                currentManager.gameObject.Destroy(drawnMaps[currentMap]);
+                currentManager.gameObject.Destroy(drawnGraphs[currentMap]);
+
                 //It first grabs the current map and disables it.
                 Map mapBeingDisabled = CurrentMap();
+
                 if (mapBeingDisabled != null)
                 {
                     mapBeingDisabled.gameObject.ChangeHierarchyActive(false);
                     ++currentMap;
                 }
+                
                 //Then the next map and graph are created and the current map is set to it.
                 Map mapBeingCreated = new Map(mapWidth, mapHeight, mapLevel);
+                
                 drawnMaps.Add(mapBeingCreated);
-                currentManager.gameObject.UpdateComponent(mapBeingCreated);
+
+                currentManager.gameObject.AddComponent(mapBeingCreated);
+
                 NavigatorMap graphBeingCreated = new NavigatorMap();
+
                 drawnGraphs.Add(graphBeingCreated);
-                currentManager.gameObject.UpdateComponent(graphBeingCreated);
+
+                currentManager.gameObject.AddComponent(graphBeingCreated);
             }
         }
 
