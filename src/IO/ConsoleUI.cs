@@ -9,7 +9,7 @@ namespace IO
 {
     public class ConsoleUI
     {
-        private const String defaultColor = "\u001b[37m";
+        private const String defaultColor = "\u001b[38;2;128;128;128m";
         static private int width;
         static private int height;
         static private List<List<char>> buffer;
