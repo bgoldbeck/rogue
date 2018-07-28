@@ -118,7 +118,10 @@ namespace IO
                     StringBuilder sb = new StringBuilder();
                     for (int x = 0; x < width; ++x)
                     {
-                        sb.Append(colorBuffer[x][y]);
+                        if (!buffer[x][y].Equals(' '))
+                        {
+                            sb.Append(colorBuffer[x][y]);
+                        }
                         sb.Append(buffer[x][y]);
                     }
                     Console.Write(sb.ToString());
