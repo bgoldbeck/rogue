@@ -3,6 +3,7 @@
 using System;
 
 using Ecs;
+using IO;
 
 namespace Game.Components
 {
@@ -45,6 +46,13 @@ namespace Game.Components
 
         private void Running()
         {
+            return;
+        }
+
+        public override void OnResize()
+        {
+            height = ConsoleUI.MaxHeight();
+            width = ConsoleUI.MaxWidth();
             return;
         }
 
