@@ -29,7 +29,7 @@ namespace Game.Components
             }
         }
 
-        public override void Update()
+        public override void EarlyUpdate()
         {
 
             ConsoleKey press = Input.ReadKey().Key;
@@ -50,6 +50,11 @@ namespace Game.Components
                 case ConsoleKey.C:
                     ConsoleUI.ToggleColor();
                     break;
+#if DEBUG
+                case ConsoleKey.H:
+                    player.BoostHitPoints(10);
+                    break;
+#endif
                 //case ConsoleKey.V:
                 //    Enemy.TogglePathVisibility();
                 //    break;

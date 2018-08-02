@@ -67,6 +67,7 @@ namespace Game
                 ShiftPoints();
                 FadePoints();
                 ConsoleUI.Render();
+                Input.CheckForKeyPress();
                 press = Input.ReadKey().Key;
             } while (press != ConsoleKey.Enter);
         }

@@ -46,6 +46,7 @@ namespace Game
                 }
                 DrawLogo();
                 ConsoleUI.Render();
+                Input.CheckForKeyPress();
                 press = Input.ReadKey().Key;
             } while (press != ConsoleKey.Enter);
         }
