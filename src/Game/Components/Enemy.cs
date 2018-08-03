@@ -174,7 +174,7 @@ namespace Game.Components
         {
             NavigatorAgent navigator = (NavigatorAgent)this.gameObject.GetComponent<NavigatorAgent>();
             if(navigator != null)
-                navigator.Target = target.transform;
+                navigator.Target = target.Transform;
             return;
         }
 

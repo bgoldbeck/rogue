@@ -100,28 +100,28 @@ namespace Game.Components
                     {
                         case "d":
                             objects[x][y] = SpawnManager.CreateDoor(x, y);
-                            objects[x][y].transform.SetParent(this.gameObject.transform);
+                            objects[x][y].Transform.SetParent(this.gameObject.Transform);
                             break;
                         case "l":
                             objects[x][y] = SpawnManager.CreateLockedDoor(x, y);
-                            objects[x][y].transform.SetParent(this.gameObject.transform);
+                            objects[x][y].Transform.SetParent(this.gameObject.Transform);
                             break;
                         case "m":
                             objects[x][y] = SpawnManager.CreateEnemy(x, y, level);
-                            objects[x][y].transform.SetParent(this.gameObject.transform);
+                            objects[x][y].Transform.SetParent(this.gameObject.Transform);
                             break;
                         case "k":
                             objects[x][y] = SpawnManager.CreateEnemy(x, y, level, true);
-                            objects[x][y].transform.SetParent(this.gameObject.transform);
+                            objects[x][y].Transform.SetParent(this.gameObject.Transform);
                             break;
                         case "b":
                             objects[x][y] = SpawnManager.CreateBoss(x, y, level);
-                            objects[x][y].transform.SetParent(this.gameObject.transform);
+                            objects[x][y].Transform.SetParent(this.gameObject.Transform);
                             break;
                         case "w":
                             objects[x][y] = SpawnManager.CreateWall(x, y,(x == 0) || (y == 0) 
                                 || (x + 1  == width) || (y + 1 == height));
-                            objects[x][y].transform.SetParent(this.gameObject.transform);
+                            objects[x][y].Transform.SetParent(this.gameObject.Transform);
                             break;
                         case "s":
                             this.startingX = x;

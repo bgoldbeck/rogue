@@ -64,8 +64,8 @@ namespace Game.Components
             map = MapManager.CurrentMap();
             if (map == null) return;
 
-            int playerX = gameObject.transform.position.x;
-            int playerY = gameObject.transform.position.y;
+            int playerX = gameObject.Transform.position.x;
+            int playerY = gameObject.Transform.position.y;
         
             int halfWidth = width / 2;
             int halfHeight = height / 2;

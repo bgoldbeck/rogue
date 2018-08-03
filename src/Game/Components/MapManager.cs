@@ -79,8 +79,8 @@ namespace Game.Components
             if (currentManager != null)
             {
                 // Destroy the current map, and graph components attached this game object.
-                GameObject.Destroy(drawnMaps[currentMap]);
-                GameObject.Destroy(drawnGraphs[currentMap]);
+                currentManager.gameObject.Destroy(drawnMaps[currentMap]);
+                currentManager.gameObject.Destroy(drawnGraphs[currentMap]);
 
                 //It first grabs the current map and disables it.
                 Map mapBeingDisabled = CurrentMap();

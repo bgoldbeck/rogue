@@ -26,8 +26,8 @@ namespace Game.Components
 
         public override void Render()
         {
-            int x = this.gameObject.transform.position.x;
-            int y = this.gameObject.transform.position.y;
+            int x = this.gameObject.Transform.position.x;
+            int y = this.gameObject.Transform.position.y;
 
             ConsoleUI.Write(x, y, model, color);
             return;

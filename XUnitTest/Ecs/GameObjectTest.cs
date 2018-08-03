@@ -96,7 +96,7 @@ namespace XUnitTestProject
             GameObject parent = GameObject.Instantiate();
             GameObject child = GameObject.Instantiate();
             child.AddComponent<Component>();
-            child.transform.SetParent(parent.transform);
+            child.Transform.SetParent(parent.Transform);
             // Action.
             Component component = parent.GetComponentInChildren<Component>();
             // Expect.
@@ -110,7 +110,7 @@ namespace XUnitTestProject
             for (int i = 0; i < 5; ++i)
             {
                 GameObject child = GameObject.Instantiate("destroychildtest");
-                child.transform.SetParent(parent.transform);
+                child.Transform.SetParent(parent.Transform);
             }
 
             GameObject.Render();
@@ -159,7 +159,7 @@ namespace XUnitTestProject
             go.AddComponent(c2);
             go.AddComponent(c3);
 
-            GameObject.Destroy(c2);
+            go.Destroy(c2);
 
             GameObject.Render();
 
@@ -191,7 +191,7 @@ namespace XUnitTestProject
             GameObject go = GameObject.Instantiate();
             go.AddComponent<TestComponent>();
             Assert.True(go.GetComponent<TestComponent>() != null);
-            GameObject.Destroy(go.GetComponent<TestComponent>());
+            go.Destroy(go.GetComponent<TestComponent>());
             GameObject.Render();
             Assert.True(go.GetComponent<TestComponent>() == null);
         }
@@ -257,13 +257,13 @@ namespace XUnitTestProject
             GameObject greatGrandpa = GameObject.Instantiate();
 
             GameObject grandpa = GameObject.Instantiate();
-            grandpa.transform.SetParent(greatGrandpa.transform);
+            grandpa.Transform.SetParent(greatGrandpa.Transform);
 
             GameObject dad = GameObject.Instantiate();
-            dad.transform.SetParent(grandpa.transform);
+            dad.Transform.SetParent(grandpa.Transform);
 
             GameObject child = GameObject.Instantiate();
-            child.transform.SetParent(dad.transform);
+            child.Transform.SetParent(dad.Transform);
 
             Assert.True(child.IsActiveInHierarchy() == true);
 

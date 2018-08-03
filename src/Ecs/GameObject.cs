@@ -9,6 +9,10 @@ using IO;
 
 namespace Ecs
 {
+    /// <summary>
+    /// An Entity object intended for use with the Entity-Component-System architecture.
+    /// </summary>
+
     public class GameObject
     {
         private static Dictionary<String, List<GameObject>> gameObjectsTagMap = new Dictionary<String, List<GameObject>>();
@@ -25,17 +29,27 @@ namespace Ecs
         private String tag = "";
         private int id = -1;
 
+        /// <summary>
+        /// Auto property for the name of the GameObject.
+        /// </summary>
         public String Name { get; set; }
 
-
-        public Transform transform;
-
+        /// <summary>
+        /// Auto property for the transform of the GameObject.
+        /// </summary>
+        public Transform Transform { get; private set; }
+        
         /// <summary>
         /// GameObject private contructor meant to be private/hidden from outside eyes.
         /// </summary>
         private GameObject() { }
 
-
+        /// <summary>
+        /// Calls a method by a name on all components of type 'T'.
+        /// </summary>
+        /// <typeparam name="T">The type of component to find on this GameObject.</typeparam>
+        /// <param name="name">The name of the function to call.</param>
+        /// <param name="parameters">The parameters to use for the function call.</param>
         public void SendMessage<T>(string name, object[] parameters = null)
         {
             List<T> interfaceables = GetComponents<T>();
@@ -56,6 +70,7 @@ namespace Ecs
                     Debug.LogError("SendInterfaceMessage<T>() Could not call method named " + name);
                 }
             }
+            return;
         }
 
         /// <summary>
@@ -72,7 +87,7 @@ namespace Ecs
         /// <returns></returns>
         public bool IsActiveInHierarchy()
         {
-            return IsActiveInHierarchy(transform);
+            return IsActiveInHierarchy(Transform);
         }
 
         /// <summary>
@@ -122,24 +137,7 @@ namespace Ecs
             this.isActive = active;
             return;
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="state"></param>
-        public void SetActiveRecursively(bool state)
-        {
-            SetActive(state);
-            if (transform != null)
-            {
-                foreach (Transform child in transform)
-                {
-                    child.gameObject.SetActiveRecursively(state);
-                }
-            }
-            return;
-        }
-
+        
         /// <summary>
         /// Accessor method for retrieving the tag on this GameObject.
         /// </summary>
@@ -268,7 +266,7 @@ namespace Ecs
                 SortedSet<int> drawnObjects = new SortedSet<int>();
                 foreach (KeyValuePair<int, GameObject> entry in gameObjectsIdMap)
                 {
-                    if (entry.Value.transform.Parent == null)
+                    if (entry.Value.Transform.Parent == null)
                     {
                         DebugDrawRecursive(entry.Value, 0, ref line);
                     }
@@ -308,9 +306,9 @@ namespace Ecs
 
             ConsoleUI.Write(0, ConsoleUI.MaxHeight() - (line++), "-".PadRight(level, '-') + go.Name + sb, color);
 
-            if (go.transform.ChildCount() < 5)
+            if (go.Transform.ChildCount() < 5)
             { 
-                foreach (Transform child in go.transform)
+                foreach (Transform child in go.Transform)
                 {
                     DebugDrawRecursive(child.gameObject, level + 2, ref (line));
                 }
@@ -342,7 +340,7 @@ namespace Ecs
         /// <returns>Component The component found, if any.</returns>
         public Component GetComponentInChildren<T>()
         {
-            return GetComponentInChildren<T>(transform);
+            return GetComponentInChildren<T>(Transform);
         }
 
         /// <summary>
@@ -368,31 +366,33 @@ namespace Ecs
             return null;
         }
 
+        /// <summary>
+        /// Add a component to the System.
+        /// </summary>
+        /// <param name="component">The component to add</param>
+        /// <returns>
+        /// The component that was added.
+        /// </returns>
         public Component AddComponent(Component component)
         {
-            //if (GetComponent(component.GetType()) == null)
-            //{
             // We point the component's game object to point to this game object.
             component.gameObject = this;
-            component.transform = this.transform;
-
+            component.transform = this.Transform;
+            
             this.components.Add(component);
             component.SetActive(true);
             component.Start();
 
-            //}
-            //else
-            //{
-                //Debug.LogWarning("Game object already has component of type: " + component.GetType());
-            //}
             return component;
         }
 
         /// <summary>
-        /// 
+        /// Add a component to the System.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
+        /// <typeparam name="T">The type of component to add.</typeparam>
+        /// <returns>
+        /// The component that was added.
+        /// </returns>
         public Component AddComponent<T>()
         {
             if (typeof(Component).IsAssignableFrom(typeof(T)))
@@ -405,10 +405,12 @@ namespace Ecs
         }
 
         /// <summary>
-        /// 
+        /// Find and return a Component on this GameObject by a type.
         /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
+        /// <param name="type">The type of component to find.</param>
+        /// <returns>
+        /// The component, if it could be found. Otherwise, null.
+        /// </returns>
         public Component GetComponent(Type type)
         {
             Component retrieved = null;
@@ -426,20 +428,24 @@ namespace Ecs
         }
 
         /// <summary>
-        /// 
+        /// Find and return a Component on this GameObject by a type.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
+        /// <typeparam name="T">The type of component to find.</typeparam>
+        /// <returns>
+        /// The component, if it could be found. Otherwise, null.
+        /// </returns>
         public Component GetComponent<T>()
         {
             return GetComponent(typeof(T));
         }
 
         /// <summary>
-        /// 
+        /// Find and return a list of Components on this GameObject by a type.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
+        /// <typeparam name="T">The type of component to find.</typeparam>
+        /// <returns>
+        /// The components found, if any could be found. Otherwise, an empty list.
+        /// </returns>
         public List<T> GetComponents<T>()
         {
             List<T> retrieved = new List<T>();
@@ -455,28 +461,35 @@ namespace Ecs
         }
 
         /// <summary>
-        /// 
+        /// Retrieve the identifier of this GameObject.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// The unique identifier integer for this GameObject.
+        /// </returns>
         public int InstanceID()
         {
             return this.id;
         }
 
-       /// <summary>
-       /// 
-       /// </summary>
-       /// <returns></returns>
+
+        /// <summary>
+        /// Creates a new GameObject.
+        /// </summary>
+        /// <returns>
+        /// The new instance of a GameObject.
+        /// </returns>
         public static GameObject Instantiate()
         {
             return GameObject.Instantiate("");
         }
 
         /// <summary>
-        /// 
+        /// Creates a new GameObject with a given tag for easy access.
         /// </summary>
-        /// <param name="tag"></param>
-        /// <returns></returns>
+        /// <returns>
+        /// <param name="tag">The tag to store this GameObject.</param>
+        /// The new instance of a GameObject.
+        /// </returns>
         public static GameObject Instantiate(String tag)
         {
             GameObject go = new GameObject();
@@ -484,7 +497,7 @@ namespace Ecs
             // Every game object will have a transform component.
             Transform transform = new Transform();
             go.AddComponent(transform);
-            go.transform = transform;
+            go.Transform = transform;
             go.id = IDCounter++;
             go.tag = tag;
             gameObjectsToAdd.Add(go);
@@ -507,10 +520,10 @@ namespace Ecs
         }
 
         /// <summary>
-        /// 
+        /// Remove a Component from the System.
         /// </summary>
-        /// <param name="component"></param>
-        public static void Destroy(Component component)
+        /// <param name="component">The component to remove.</param>
+        public void Destroy(Component component)
         {
             if (component != null)
             {
@@ -525,16 +538,16 @@ namespace Ecs
         }
         
         /// <summary>
-        /// 
+        /// Remove a GameObject from the System.
         /// </summary>
-        /// <param name="go"></param>
+        /// <param name="go">The GameObject instance to remove.</param>
         public static void Destroy(GameObject go)
         {      
             if (go != null)
             {
                 go.OnDestroy();
                 // Remove all the children game objects along with this game object.
-                foreach (Transform t in go.transform)
+                foreach (Transform t in go.Transform)
                 {
                     Destroy(t.gameObject);
                 }
@@ -559,8 +572,8 @@ namespace Ecs
         }
 
         /// <summary>
-        /// This function is exposed for testing, do not try to use it, or the application will
-        /// crash.
+        /// Add new GameObjects that were added this frame. Remove dead GameObjects that
+        /// were destroyed this frame.
         /// This adds the newly created game objects for this frame as well ass clearing out the
         /// dead ones.
         /// </summary>
@@ -577,7 +590,7 @@ namespace Ecs
         }
 
         /// <summary>
-        /// 
+        /// Clear out the list of components that were removed.
         /// </summary>
         public void ClearDeadComponents()
         {
@@ -589,7 +602,7 @@ namespace Ecs
         }
 
         /// <summary>
-        /// 
+        /// Clear out the list of GameObjects that were removed.
         /// </summary>
         private static void ClearDeadGameObjects()
         {
@@ -609,7 +622,7 @@ namespace Ecs
         }
 
         /// <summary>
-        /// 
+        /// Add new GameObjects from the newly created GameObjects.
         /// </summary>
         private static void AddNewGameObjects()
         {
@@ -624,10 +637,12 @@ namespace Ecs
         }
         
         /// <summary>
-        /// 
+        /// Find the first GameObject that is returned by a particular tag.
         /// </summary>
-        /// <param name="tag"></param>
-        /// <returns></returns>
+        /// <param name="tag">The tag to search for a GameObject.</param>
+        /// <returns>
+        /// The GameObject that was found, or null if none was found.
+        /// </returns>
         public static GameObject FindWithTag(String tag)
         {
             GameObject go = null;
@@ -642,10 +657,12 @@ namespace Ecs
         }
 
         /// <summary>
-        /// 
+        /// Find a list of GameObjects with a particular tag.
         /// </summary>
-        /// <param name="tag"></param>
-        /// <returns></returns>
+        /// <param name="tag">The tag to use to search for GameObjects</param>
+        /// <returns>
+        /// The list of GameObjects that were found, or null if nothing was found.
+        /// </returns>
         public static List<GameObject> FindGameObjectsWithTag(String tag)
         {
             if (gameObjectsTagMap.TryGetValue(tag, out List<GameObject> goList))
@@ -655,7 +672,22 @@ namespace Ecs
             return null;
         }
 
-        
+        /// <summary>
+        /// Changes the active state of this GameObject and all it's children.
+        /// </summary>
+        /// <param name="state"></param>
+        public void SetActiveRecursively(bool state)
+        {
+            SetActive(state);
+            if (Transform != null)
+            {
+                foreach (Transform t in Transform)
+                {
+                    t.gameObject.SetActiveRecursively(state);
+                }
+            }
+            return;
+        }
 
     }
 
