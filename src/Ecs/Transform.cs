@@ -6,6 +6,11 @@ using System.Collections.Generic;
 
 namespace Ecs
 {
+    /// <summary>
+    /// A Transform is a Component that will attach to every GameObject. It stores
+    /// the location in the window and keeps track of children Transforms. This allows
+    /// for a hierarchy of GameObject's like a tree.
+    /// </summary>
     public class Transform : Component, IEnumerable
     {
 
@@ -62,6 +67,10 @@ namespace Ecs
             }
         }  // end nested class
         
+        /// <summary>
+        /// Set the parent of this Transform.
+        /// </summary>
+        /// <param name="parent">The parent to set this Transform to.</param>
         public void SetParent(Transform parent)
         {
             // Make a child reference for easier readability.
@@ -81,12 +90,23 @@ namespace Ecs
             return;
         }
 
+        /// <summary>
+        /// Move this Transform.
+        /// </summary>
+        /// <param name="dx">Amount to move in x.</param>
+        /// <param name="dy">Amount to move in y.</param>
         public void Translate(int dx, int dy)
         {
             TranslateOnChildren(this, dx, dy);
             return;
         }
 
+        /// <summary>
+        /// Move this Transform and all its children helper function.
+        /// </summary>
+        /// <param name="root">The root Transform to move.</param>
+        /// <param name="dx">Amount to move in x.</param>
+        /// <param name="dy">Amount to move in y.</param>
         private void TranslateOnChildren(Transform root, int dx, int dy)
         {
             if (root == null) { return; }
@@ -100,6 +120,12 @@ namespace Ecs
             return;
         }
 
+        /// <summary>
+        /// Count the number of children this Transform has.
+        /// </summary>
+        /// <returns>
+        /// The number of children on this Transform.
+        /// </returns>
         public int ChildCount()
         {
             return children.Count;

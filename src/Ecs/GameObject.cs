@@ -12,7 +12,6 @@ namespace Ecs
     /// <summary>
     /// An Entity object intended for use with the Entity-Component-System architecture.
     /// </summary>
-
     public class GameObject
     {
         private static Dictionary<String, List<GameObject>> gameObjectsTagMap = new Dictionary<String, List<GameObject>>();
@@ -369,7 +368,7 @@ namespace Ecs
         /// <summary>
         /// Add a component to the System.
         /// </summary>
-        /// <param name="component">The component to add</param>
+        /// <param name="component">The component to add.</param>
         /// <returns>
         /// The component that was added.
         /// </returns>

@@ -4,21 +4,36 @@ using System;
 
 namespace Ecs
 {
+    /// <summary>
+    /// Class for storing a location (x, y) coordinate.
+    /// </summary>
     public class Vec2i
     {
         public readonly int x = 0;
         public readonly int y = 0;
 
+        /// <summary>
+        /// Default Constructor.
+        /// </summary>
         public Vec2i()
         {
         }
 
+        /// <summary>
+        /// Constructor to create a new Vec2i(x, y)
+        /// </summary>
+        /// <param name="x">The x location.</param>
+        /// <param name="y">The y location</param>
         public Vec2i(int x, int y)
         {
             this.x = x;
             this.y = y;
         }
         
+        /// <summary>
+        /// Create a new Veci from another Vec2i instance.
+        /// </summary>
+        /// <param name="referenceToVector">The other Vec2i instance to copy.</param>
         public Vec2i(Vec2i referenceToVector)
         {
             if(referenceToVector == null)
@@ -30,6 +45,7 @@ namespace Ecs
         }
 
         /// <summary>
+        /// Add two Vec2i objects together using linear algebra.
         /// </summary>
         /// <param name="a">The first vector</param>
         /// <param name="b">The second vector</param>
@@ -44,6 +60,7 @@ namespace Ecs
         }
 
         /// <summary> 
+        /// Subtract two Vec2i objects together using linear algebra.
         /// </summary>
         /// <param name="a">The first vector</param>
         /// <param name="b">The second vector</param>
@@ -58,6 +75,7 @@ namespace Ecs
         }
 
         /// <summary>
+        /// Determine if two Vec2i objects are equivalent.
         /// </summary>
         /// <param name="obj">The object to compare to</param>
         /// <returns>True, if this object equals obj</returns>
@@ -72,10 +90,10 @@ namespace Ecs
         }
 
         /// <summary>
-        /// 
+        /// Determine if two Vec2i objects are equivalent.
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="a">The first Vec2i object.</param>
+        /// <param name="b">The second Vec2i object.</param>
         /// <returns>True, if a equal b</returns>
         public static bool operator ==(Vec2i a, Vec2i b)
         {
@@ -92,9 +110,10 @@ namespace Ecs
         }
 
         /// <summary>
+        /// Determine if two Vec2i objets are not equivalent.
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="a">The first Vec2i object.</param>
+        /// <param name="b">The second Vec2i object.</param>
         /// <returns>True, if a does not equal b</returns>
         public static bool operator !=(Vec2i a, Vec2i b)
         {
@@ -102,6 +121,7 @@ namespace Ecs
         }
 
         /// <summary>
+        /// The hash code for this object.
         /// </summary>
         /// <returns>The hashcode for this object.</returns>
         public override int GetHashCode()
@@ -110,6 +130,7 @@ namespace Ecs
         }
 
         /// <summary>
+        /// Determine the distance between two Vec2i objects.
         /// </summary>
         /// <param name="a">The first vector</param>
         /// <param name="b">The second vector</param>
