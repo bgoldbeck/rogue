@@ -43,7 +43,9 @@ namespace Game
                 dt = Time.deltaMs;
 
                 Input.CheckForKeyPress();
-                
+
+                press = Input.ReadKey().Key;
+
                 if (press == ConsoleKey.Escape)
                 {
                     isRunning = false;
