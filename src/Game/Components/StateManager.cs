@@ -83,7 +83,7 @@ namespace Game.Components
             //go.SetActive(false);
             GameObject.Destroy(go);
 
-            GameOver screen = new GameOver(width, height);
+            GameOver screen = new GameOver("Sneaky McDevious");
             screen.Run();
 
             currentGameState = GameState.Load;
