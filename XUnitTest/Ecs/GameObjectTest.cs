@@ -81,7 +81,7 @@ namespace XUnitTestProject
             GameObject parent = GameObject.Instantiate();
             GameObject child = GameObject.Instantiate();
             child.AddComponent<Component>();
-            child.transform.SetParent(parent.transform);
+            child.Transform.SetParent(parent.Transform);
             // Action.
             Component component = parent.GetComponentInChildren<Component>();
             // Expect.
@@ -95,7 +95,7 @@ namespace XUnitTestProject
             for (int i = 0; i < 5; ++i)
             {
                 GameObject child = GameObject.Instantiate("destroychildtest");
-                child.transform.SetParent(parent.transform);
+                child.Transform.SetParent(parent.Transform);
             }
             GameObject.ForceFlush();
             List<GameObject> preKill = GameObject.FindGameObjectsWithTag("destroychildtest");

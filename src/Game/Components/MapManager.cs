@@ -86,7 +86,7 @@ namespace Game.Components
 
                 if (mapBeingDisabled != null)
                 {
-                    mapBeingDisabled.gameObject.ChangeHierarchyActive(false);
+                    mapBeingDisabled.gameObject.SetActiveRecursively(false);
                     ++currentMap;
                 }
                 

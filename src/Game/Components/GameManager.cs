@@ -31,7 +31,7 @@ namespace Game.Components
 
             mapManager = (MapManager)mapObject.AddComponent(new MapManager(80, 40, 1));
 
-            mapObject.transform.position = new Vec2i(mapObject.transform.position.x, gameHeight - 1);
+            mapObject.Transform.position = new Vec2i(mapObject.Transform.position.x, gameHeight - 1);
 
             Map map = MapManager.CurrentMap();
             currentMap = map;
@@ -74,7 +74,7 @@ namespace Game.Components
             camera.Resize(gameWidth - hudWidth, gameHeight);
 
             GameObject hudObject = GameObject.FindWithTag("HUD");
-            hudObject.transform.position = new Vec2i(gameWidth - hudWidth, gameHeight - 1);
+            hudObject.Transform.position = new Vec2i(gameWidth - hudWidth, gameHeight - 1);
             //hudObject.transform.position.x = gameWidth - hudWidth;
             //hudObject.transform.position.y = gameHeight - 1;
 
