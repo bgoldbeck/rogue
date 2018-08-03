@@ -84,10 +84,9 @@ namespace Ecs
 
         public Component GetComponentInChildren<T>()
         {
-
-            return null;
+            return gameObject.GetComponentInChildren<T>();
         }
-
+        
         public Component AddComponent(Component component)
         {
             return gameObject.AddComponent(component);
@@ -103,9 +102,9 @@ namespace Ecs
             return this.isActive;
         }
 
-        public void SetActive(bool active)
+        public void SetActive(bool state)
         {
-            if (this.isActive == active)
+            if (this.isActive == state)
             {
                 return;
             }
@@ -119,7 +118,7 @@ namespace Ecs
                 OnDisable();
             }
 
-            this.isActive = active;
+            this.isActive = state;
             return;
         }
 

@@ -25,6 +25,11 @@ namespace Game.Components
 
         public new String Name { get; set; }
 
+        public void BoostHitPoints(int amount)
+        {
+            hp += amount;
+        }
+
         public int HitPoints
         {
             get

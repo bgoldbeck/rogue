@@ -4,17 +4,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-
+using System.Text;
 using IO;
 
 namespace Ecs
-{    
+{
     /// <summary>
     /// An Entity object intended for use with the Entity-Component-System architecture.
     /// </summary>
+
     public class GameObject
     {
-        private static Dictionary<String, List<GameObject>> gameObjectsTagMap= new Dictionary<String, List<GameObject>>();
+        private static Dictionary<String, List<GameObject>> gameObjectsTagMap = new Dictionary<String, List<GameObject>>();
         private static Dictionary<int, GameObject> gameObjectsIdMap = new Dictionary<int, GameObject>();
         private static int IDCounter = 0;
         private static List<int> deadList = new List<int>();
@@ -22,7 +23,7 @@ namespace Ecs
 
         private List<Component> components = new List<Component>();
         private List<Component> componentsToRemove = new List<Component>();
-        
+
 
         private bool isActive = true;
         private String tag = "";
@@ -55,7 +56,7 @@ namespace Ecs
             foreach (T interfaceable in interfaceables)
             {
                 bool called = false;
-             
+
                 MethodInfo methodInfo = typeof(T).GetMethod(name);
 
                 if (methodInfo != null)
@@ -63,7 +64,7 @@ namespace Ecs
                     methodInfo.Invoke(interfaceable, parameters);
                     called = true;
                 }
-                
+
                 if (!called)
                 {
                     Debug.LogError("SendInterfaceMessage<T>() Could not call method named " + name);
@@ -75,9 +76,34 @@ namespace Ecs
         /// <summary>
         /// Determines if this GameObject is active in the game.
         /// </summary>
-        public bool IsActive()
+        public bool IsActiveSelf()
         {
             return this.isActive;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool IsActiveInHierarchy()
+        {
+            return IsActiveInHierarchy(Transform);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="current"></param>
+        /// <returns></returns>
+        private bool IsActiveInHierarchy(Transform current)
+        {
+            if (current == null || !current.gameObject.IsActiveSelf())
+            {
+                return false;
+            }
+
+            // We made it to the root parent if the current.Parent is null.
+            return current.Parent == null ? true : IsActiveInHierarchy(current.Parent);
         }
 
         /// <summary>
@@ -111,7 +137,7 @@ namespace Ecs
             this.isActive = active;
             return;
         }
-
+        
         /// <summary>
         /// Accessor method for retrieving the tag on this GameObject.
         /// </summary>
@@ -128,13 +154,18 @@ namespace Ecs
         /// </summary>
         public static void EarlyUpdate()
         {
+            // TODO: Can improve this loop performance by updating from the root game objects, recursively
+            // down the tree.
             foreach (KeyValuePair<int, GameObject> entry in gameObjectsIdMap)
             {
-                foreach (Component component in entry.Value.GetComponents<Component>())
-                {
-                    if (component.IsActive())
+                if (entry.Value.IsActiveInHierarchy())
+                { 
+                    foreach (Component component in entry.Value.GetComponents<Component>())
                     {
-                        component.EarlyUpdate();
+                        if (component.IsActive())
+                        {
+                            component.EarlyUpdate();
+                        }
                     }
                 }
             }
@@ -149,19 +180,26 @@ namespace Ecs
         /// </summary>
         public static void Update()
         {
+            // TODO: Can improve this loop performance by updating from the root game objects, recursively
+            // down the tree.
             foreach (KeyValuePair<int, GameObject> entry in gameObjectsIdMap)
             {
-                foreach (Component component in entry.Value.GetComponents<Component>())
+                if (entry.Value.IsActiveInHierarchy())
                 {
-                    if (component.IsActive())
+                    foreach (Component component in entry.Value.GetComponents<Component>())
                     {
-                        component.Update();
+                        if (component.IsActive())
+                        {
+                            component.Update();
+                        }
                     }
                 }
             }
 
             return;
         }
+
+        private static bool drawDebug = false;
 
         /// <summary>
         /// This function is called by the Application on every updated frame, but only
@@ -170,17 +208,27 @@ namespace Ecs
         /// </summary>
         public static void LateUpdate()
         {
+            // TODO: Can improve this loop performance by updating from the root game objects, recursively
+            // down the tree.
             foreach (KeyValuePair<int, GameObject> entry in gameObjectsIdMap)
             {
-                foreach (Component component in entry.Value.GetComponents<Component>())
+                if (entry.Value.IsActiveInHierarchy())
                 {
-                    if (component.IsActive())
+                    foreach (Component component in entry.Value.GetComponents<Component>())
                     {
-                        component.LateUpdate();
+                        if (component.IsActive())
+                        {
+                            component.LateUpdate();
+                        }
                     }
                 }
             }
-
+#if DEBUG
+            if (Input.ReadKey().Key == ConsoleKey.D)
+            {
+                drawDebug = !drawDebug;
+            }
+#endif
             return;
         }
 
@@ -208,6 +256,24 @@ namespace Ecs
         /// </summary>
         public static void Render()
         {
+            
+            ForceFlush();
+#if DEBUG
+            
+            if (drawDebug)
+            {
+                int line = 1;
+                SortedSet<int> drawnObjects = new SortedSet<int>();
+                foreach (KeyValuePair<int, GameObject> entry in gameObjectsIdMap)
+                {
+                    if (entry.Value.Transform.Parent == null)
+                    {
+                        DebugDrawRecursive(entry.Value, 0, ref line);
+                    }
+                }
+                return;
+            }
+#endif
             foreach (KeyValuePair<int, GameObject> entry in gameObjectsIdMap)
             {
                 foreach (Component component in entry.Value.GetComponents<Component>())
@@ -222,6 +288,37 @@ namespace Ecs
             return;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="go"></param>
+        /// <param name="level"></param>
+        /// <param name="line"></param>
+        private static void DebugDrawRecursive(GameObject go, int level, ref int line)
+        {
+            StringBuilder sb = new StringBuilder(" ");
+            foreach (Component component in go.components)
+            {
+                sb.Append("(" + component.GetType().Name + ") ");
+            }
+
+            Color color = go.isActive ? Color.Gold : Color.Gray;
+
+            ConsoleUI.Write(0, ConsoleUI.MaxHeight() - (line++), "-".PadRight(level, '-') + go.Name + sb, color);
+
+            if (go.Transform.ChildCount() < 5)
+            { 
+                foreach (Transform child in go.Transform)
+                {
+                    DebugDrawRecursive(child.gameObject, level + 2, ref (line));
+                }
+            }
+            else
+            {
+                ConsoleUI.Write(0, ConsoleUI.MaxHeight() - (line++), "-".PadRight(level + 2, '-') + "Children Collapsed", Color.Gold);
+            }
+            return;
+        }
 
         /// <summary>
         /// Called by the Destroy method when called by some user. It will call OnDestroy()
@@ -234,18 +331,6 @@ namespace Ecs
                 component.OnDestroy();
             }
 
-            return;
-        }
-
-        /// <summary>
-        /// Remove all components from this game object that are considered to be dead.
-        /// </summary>
-        private void RemoveDeadComponents()
-        {
-            foreach (Component component in componentsToRemove)
-            {
-                components.Remove(component);
-            }
             return;
         }
 
@@ -293,7 +378,7 @@ namespace Ecs
             // We point the component's game object to point to this game object.
             component.gameObject = this;
             component.transform = this.Transform;
-
+            
             this.components.Add(component);
             component.SetActive(true);
             component.Start();
@@ -386,6 +471,7 @@ namespace Ecs
             return this.id;
         }
 
+
         /// <summary>
         /// Creates a new GameObject.
         /// </summary>
@@ -440,8 +526,13 @@ namespace Ecs
         public void Destroy(Component component)
         {
             if (component != null)
-            { 
-                componentsToRemove.Add(component);
+            {
+                // OnDestroy? Probably
+                if (component.gameObject != null)
+                {
+                    component.OnDestroy();
+                }
+                component.gameObject.componentsToRemove.Add(component);
             }
             return;
         }
@@ -483,8 +574,10 @@ namespace Ecs
         /// <summary>
         /// Add new GameObjects that were added this frame. Remove dead GameObjects that
         /// were destroyed this frame.
+        /// This adds the newly created game objects for this frame as well ass clearing out the
+        /// dead ones.
         /// </summary>
-        public static void ForceFlush()
+        private static void ForceFlush()
         {
             AddNewGameObjects();
             ClearDeadGameObjects();

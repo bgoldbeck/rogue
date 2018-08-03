@@ -53,10 +53,10 @@ namespace Game.Components
         public static GameObject CreateEnemy(int x, int y, int level, bool hasKey = false)
         {
             GameObject go = GameObject.Instantiate("Monster");
-            MonsterGenerator.Fill(rand, level, go, oneInNShiny);
+
+            EnemyGenerator.Fill(rand, level, go, oneInNShiny);
             go.Transform.position = new Vec2i(x, y);
-            //go.transform.position.x = x;
-            //go.transform.position.y = y;
+            
             Inventory i = (Inventory)go.AddComponent(new Inventory());
             if (hasKey)
             {

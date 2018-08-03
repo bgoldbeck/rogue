@@ -68,6 +68,7 @@ namespace Game.Components
                     Debug.LogWarning("There should only be one instance of MapManager.");
                 }
             }
+            
         }
 
         /// <summary>

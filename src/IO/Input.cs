@@ -13,19 +13,19 @@ namespace IO
 
         private static ConsoleKeyWrapper currentKey = null;
 
-        public static ConsoleKeyInfo ReadKey()
+        public static void CheckForKeyPress()
         {
-            if (currentKey == null && Console.KeyAvailable == true)
+            if (Console.KeyAvailable)
             {
                 currentKey = new ConsoleKeyWrapper
                 {
                     key = Console.ReadKey(true)
                 };
-                while (Console.KeyAvailable)
-                {
-                    Console.ReadKey(true);
-                }
             }
+        }
+
+        public static ConsoleKeyInfo ReadKey()
+        {
             return currentKey != null ? currentKey.key : new ConsoleKeyInfo();
         }
 

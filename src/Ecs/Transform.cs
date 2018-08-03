@@ -100,6 +100,11 @@ namespace Ecs
             return;
         }
 
+        public int ChildCount()
+        {
+            return children.Count;
+        }
+
         public IEnumerator GetEnumerator()
         {
             return new InnerEnumerator(children.ToArray());

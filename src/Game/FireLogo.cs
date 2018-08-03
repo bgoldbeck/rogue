@@ -56,6 +56,7 @@ namespace Game
         {
             do
             {
+                Input.Reset();
                 if (WindowResized())
                     Reset(Console.WindowWidth, Console.WindowHeight);
                 SeedBottomPoints();
@@ -66,6 +67,7 @@ namespace Game
                 ShiftPoints();
                 FadePoints();
                 ConsoleUI.Render();
+                Input.CheckForKeyPress();
                 press = Input.ReadKey().Key;
             } while (press != ConsoleKey.Enter);
         }

@@ -39,10 +39,14 @@ namespace Game
         {
             do
             {
+                Input.Reset();
                 if (WindowResized())
+                { 
                     Reset(Console.WindowWidth, Console.WindowHeight);
+                }
                 DrawLogo();
                 ConsoleUI.Render();
+                Input.CheckForKeyPress();
                 press = Input.ReadKey().Key;
             } while (press != ConsoleKey.Enter);
         }

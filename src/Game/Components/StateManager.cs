@@ -3,6 +3,7 @@
 using System;
 
 using Ecs;
+using IO;
 
 namespace Game.Components
 {
@@ -13,11 +14,11 @@ namespace Game.Components
 
         public enum GameState
         {
-            LoadSecreen, Load, Running, GameOver
+            LoadScreen, Load, Running, GameOver
         }
 
         private Action[] updateAction = null;
-        private GameState currentGameState = GameState.LoadSecreen;
+        private GameState currentGameState = GameState.LoadScreen;
         //private GameManager gameManager = null;
 
         public StateManager(int newWidth, int newHeight)
@@ -31,7 +32,6 @@ namespace Game.Components
             };
         }
 
-
         private void LoadScreen()
         {
             //width = Console.WindowWidth;
@@ -41,6 +41,7 @@ namespace Game.Components
 
 
             currentGameState = GameState.Load;
+            return;
         }
 
         private void Running()
@@ -48,10 +49,19 @@ namespace Game.Components
             return;
         }
 
+        public override void OnResize()
+        {
+            height = ConsoleUI.MaxHeight();
+            width = ConsoleUI.MaxWidth();
+            return;
+        }
+
         private void Load()
         {
 
-            GameObject.Instantiate("GameManager").AddComponent(new GameManager(width, height));
+            GameManager gm = (GameManager)GameObject.Instantiate("GameManager").AddComponent(new GameManager(width, height));
+            gm.Name = "GameManager";
+
             //GameObject go = GameObject.FindWithTag("GameManager");
 
             //go.SetActive(true);
@@ -63,17 +73,18 @@ namespace Game.Components
         public void PlayerIsDead()
         {
             currentGameState = GameState.GameOver;
+            return;
         }
 
         private void GameOverScreen()
         {
 
             GameObject go = GameObject.FindWithTag("GameManager");
-            go.SetActive(false);
+            //go.SetActive(false);
             GameObject.Destroy(go);
 
-            //GameOver screen = new GameOver(width, height);
-            //screen.Run();
+            GameOver screen = new GameOver(width, height);
+            screen.Run();
 
             currentGameState = GameState.Load;
             return;

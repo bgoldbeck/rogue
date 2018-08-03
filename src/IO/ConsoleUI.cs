@@ -9,7 +9,7 @@ namespace IO
 {
     public class ConsoleUI
     {
-        private const String defaultColor = "\u001b[37m";
+        private const String defaultColor = "\u001b[38;2;128;128;128m";
         static private int width;
         static private int height;
         static private List<List<char>> buffer;
@@ -118,7 +118,10 @@ namespace IO
                     StringBuilder sb = new StringBuilder();
                     for (int x = 0; x < width; ++x)
                     {
-                        sb.Append(colorBuffer[x][y]);
+                        if (!buffer[x][y].Equals(' '))
+                        {
+                            sb.Append(colorBuffer[x][y]);
+                        }
                         sb.Append(buffer[x][y]);
                     }
                     Console.Write(sb.ToString());
