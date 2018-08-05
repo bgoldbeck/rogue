@@ -5,18 +5,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.14"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Rogue Two: Ecs.GameObject Class Reference</title>
+<title>R.O.G.U.E: Ecs.GameObject Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtreedata.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(initResizable);
-/* @license-end */</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -28,12 +20,10 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="687474703a2f2f77696b692e687970657273776565742e636f6d2f5f6d656469612f7075626c69632f7469746c652d736166652e706e67.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="Title.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Rogue Two
-   &#160;<span id="projectnumber">0.1</span>
+   <div id="projectname">R.O.G.U.E
    </div>
-   <div id="projectbrief">A text based roguelike game.</div>
   </td>
  </tr>
  </tbody>
@@ -56,23 +46,6 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('class_ecs_1_1_game_object.html','');});
-/* @license-end */
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -87,95 +60,455 @@ $(document).ready(function(){initNavTree('class_ecs_1_1_game_object.html','');})
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_ecs.html">Ecs</a></li><li class="navelem"><a class="el" href="class_ecs_1_1_game_object.html">GameObject</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#properties">Properties</a> &#124;
 <a href="class_ecs_1_1_game_object-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Ecs.GameObject Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>An Entity object intended for use with the Entity-Component-System architecture.  
+ <a href="class_ecs_1_1_game_object.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa6bc70dfeda488ed71b536346d29881b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_game_object.html#aa6bc70dfeda488ed71b536346d29881b">IsActive</a> ()</td></tr>
-<tr class="memdesc:aa6bc70dfeda488ed71b536346d29881b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines if this <a class="el" href="class_ecs_1_1_game_object.html">GameObject</a> is active in the game.  <a href="#aa6bc70dfeda488ed71b536346d29881b">More...</a><br /></td></tr>
-<tr class="separator:aa6bc70dfeda488ed71b536346d29881b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabe77409014b5c2a5a06d977b9556951"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_game_object.html#aabe77409014b5c2a5a06d977b9556951">SendMessage&lt; T &gt;</a> (string name, object[] parameters=null)</td></tr>
+<tr class="memdesc:aabe77409014b5c2a5a06d977b9556951"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls a method by a name on all components of type 'T'.  <a href="#aabe77409014b5c2a5a06d977b9556951">More...</a><br /></td></tr>
+<tr class="separator:aabe77409014b5c2a5a06d977b9556951"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58f9e99bfc05bee4ba204c6217be1674"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_game_object.html#a58f9e99bfc05bee4ba204c6217be1674">IsActiveSelf</a> ()</td></tr>
+<tr class="memdesc:a58f9e99bfc05bee4ba204c6217be1674"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines if this <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a> is active in the game.  <a href="#a58f9e99bfc05bee4ba204c6217be1674">More...</a><br /></td></tr>
+<tr class="separator:a58f9e99bfc05bee4ba204c6217be1674"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13f98297024014fd12bfcc6e17a54324"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_game_object.html#a13f98297024014fd12bfcc6e17a54324">IsActiveInHierarchy</a> ()</td></tr>
+<tr class="separator:a13f98297024014fd12bfcc6e17a54324"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4211e4cb1df45aa6692a5c2de79ef53"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_game_object.html#af4211e4cb1df45aa6692a5c2de79ef53">SetActive</a> (bool active)</td></tr>
-<tr class="memdesc:af4211e4cb1df45aa6692a5c2de79ef53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes this <a class="el" href="class_ecs_1_1_game_object.html">GameObject</a>'s active state.  <a href="#af4211e4cb1df45aa6692a5c2de79ef53">More...</a><br /></td></tr>
+<tr class="memdesc:af4211e4cb1df45aa6692a5c2de79ef53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes this <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a>'s active state.  <a href="#af4211e4cb1df45aa6692a5c2de79ef53">More...</a><br /></td></tr>
 <tr class="separator:af4211e4cb1df45aa6692a5c2de79ef53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57d652307d98be5d8f4eb4c16822eed1"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_game_object.html#a57d652307d98be5d8f4eb4c16822eed1">Tag</a> ()</td></tr>
-<tr class="memdesc:a57d652307d98be5d8f4eb4c16822eed1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accessor method for retrieving the tag on this <a class="el" href="class_ecs_1_1_game_object.html">GameObject</a>.  <a href="#a57d652307d98be5d8f4eb4c16822eed1">More...</a><br /></td></tr>
+<tr class="memdesc:a57d652307d98be5d8f4eb4c16822eed1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accessor method for retrieving the tag on this <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a>.  <a href="#a57d652307d98be5d8f4eb4c16822eed1">More...</a><br /></td></tr>
 <tr class="separator:a57d652307d98be5d8f4eb4c16822eed1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafeda353872b30727e1394075481beff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_game_object.html#aafeda353872b30727e1394075481beff">Update</a> ()</td></tr>
-<tr class="memdesc:aafeda353872b30727e1394075481beff"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is called by the Application on every updated frame. It calls the <a class="el" href="class_ecs_1_1_game_object.html#aafeda353872b30727e1394075481beff" title="This function is called by the Application on every updated frame. It calls the Update() method on ev...">Update()</a> method on every <a class="el" href="class_ecs_1_1_component.html">Component</a> attached to this <a class="el" href="class_ecs_1_1_game_object.html">GameObject</a>.  <a href="#aafeda353872b30727e1394075481beff">More...</a><br /></td></tr>
-<tr class="separator:aafeda353872b30727e1394075481beff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad707ec0ef27791d2049a0125407539b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_game_object.html#ad707ec0ef27791d2049a0125407539b0">LateUpdate</a> ()</td></tr>
-<tr class="memdesc:ad707ec0ef27791d2049a0125407539b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is called by the Application on every updated frame, but only after <a class="el" href="class_ecs_1_1_game_object.html#aafeda353872b30727e1394075481beff" title="This function is called by the Application on every updated frame. It calls the Update() method on ev...">Update()</a> has been invoked on each <a class="el" href="class_ecs_1_1_game_object.html">GameObject</a>. It will call <a class="el" href="class_ecs_1_1_game_object.html#ad707ec0ef27791d2049a0125407539b0" title="This function is called by the Application on every updated frame, but only after Update() has been i...">LateUpdate()</a> on every <a class="el" href="class_ecs_1_1_component.html">Component</a> attached to this <a class="el" href="class_ecs_1_1_game_object.html">GameObject</a>.  <a href="#ad707ec0ef27791d2049a0125407539b0">More...</a><br /></td></tr>
-<tr class="separator:ad707ec0ef27791d2049a0125407539b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aebb472921ec1b79b8dce1a5481861746"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_game_object.html#aebb472921ec1b79b8dce1a5481861746">Render</a> ()</td></tr>
-<tr class="memdesc:aebb472921ec1b79b8dce1a5481861746"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called by the Application on every updated frame during the rendering phase. It will call <a class="el" href="class_ecs_1_1_game_object.html#aebb472921ec1b79b8dce1a5481861746" title="Called by the Application on every updated frame during the rendering phase. It will call Render() on...">Render()</a> on every <a class="el" href="class_ecs_1_1_component.html">Component</a> attached to this <a class="el" href="class_ecs_1_1_game_object.html">GameObject</a>.  <a href="#aebb472921ec1b79b8dce1a5481861746">More...</a><br /></td></tr>
-<tr class="separator:aebb472921ec1b79b8dce1a5481861746"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3961ec9815e23fc328c762e0f332394"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_ecs_1_1_component.html">Component</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_game_object.html#ab3961ec9815e23fc328c762e0f332394">GetComponentInChildren&lt; T &gt;</a> ()</td></tr>
-<tr class="memdesc:ab3961ec9815e23fc328c762e0f332394"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a single component of type T on this <a class="el" href="class_ecs_1_1_game_object.html">GameObject</a> or any of its children.  <a href="#ab3961ec9815e23fc328c762e0f332394">More...</a><br /></td></tr>
+<tr class="memdesc:ab3961ec9815e23fc328c762e0f332394"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a single component of type T on this <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a> or any of its children.  <a href="#ab3961ec9815e23fc328c762e0f332394">More...</a><br /></td></tr>
 <tr class="separator:ab3961ec9815e23fc328c762e0f332394"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd178dde2e08b0f148ea06907a0b1302"><td class="memItemLeft" align="right" valign="top"><a id="abd178dde2e08b0f148ea06907a0b1302"></a>
-<a class="el" href="class_ecs_1_1_component.html">Component</a>&#160;</td><td class="memItemRight" valign="bottom"><b>AddComponent</b> (<a class="el" href="class_ecs_1_1_component.html">Component</a> component)</td></tr>
+<tr class="memitem:abd178dde2e08b0f148ea06907a0b1302"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_ecs_1_1_component.html">Component</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_game_object.html#abd178dde2e08b0f148ea06907a0b1302">AddComponent</a> (<a class="el" href="class_ecs_1_1_component.html">Component</a> component)</td></tr>
+<tr class="memdesc:abd178dde2e08b0f148ea06907a0b1302"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a component to the System.  <a href="#abd178dde2e08b0f148ea06907a0b1302">More...</a><br /></td></tr>
 <tr class="separator:abd178dde2e08b0f148ea06907a0b1302"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d12d7a0f391cb4aa44626df35e9882f"><td class="memItemLeft" align="right" valign="top"><a id="a4d12d7a0f391cb4aa44626df35e9882f"></a>
-<a class="el" href="class_ecs_1_1_component.html">Component</a>&#160;</td><td class="memItemRight" valign="bottom"><b>AddComponent&lt; T &gt;</b> ()</td></tr>
+<tr class="memitem:a4d12d7a0f391cb4aa44626df35e9882f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_ecs_1_1_component.html">Component</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_game_object.html#a4d12d7a0f391cb4aa44626df35e9882f">AddComponent&lt; T &gt;</a> ()</td></tr>
+<tr class="memdesc:a4d12d7a0f391cb4aa44626df35e9882f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a component to the System.  <a href="#a4d12d7a0f391cb4aa44626df35e9882f">More...</a><br /></td></tr>
 <tr class="separator:a4d12d7a0f391cb4aa44626df35e9882f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4263f0a68ee23088b4a7f90a7c24a22a"><td class="memItemLeft" align="right" valign="top"><a id="a4263f0a68ee23088b4a7f90a7c24a22a"></a>
-<a class="el" href="class_ecs_1_1_component.html">Component</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetComponent</b> (Type type)</td></tr>
+<tr class="memitem:a4263f0a68ee23088b4a7f90a7c24a22a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_ecs_1_1_component.html">Component</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_game_object.html#a4263f0a68ee23088b4a7f90a7c24a22a">GetComponent</a> (Type type)</td></tr>
+<tr class="memdesc:a4263f0a68ee23088b4a7f90a7c24a22a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find and return a <a class="el" href="class_ecs_1_1_component.html" title="A base class for Components in the Entity Component System. ">Component</a> on this <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a> by a type.  <a href="#a4263f0a68ee23088b4a7f90a7c24a22a">More...</a><br /></td></tr>
 <tr class="separator:a4263f0a68ee23088b4a7f90a7c24a22a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46994a68c1d374811e04fa655b004102"><td class="memItemLeft" align="right" valign="top"><a id="a46994a68c1d374811e04fa655b004102"></a>
-<a class="el" href="class_ecs_1_1_component.html">Component</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetComponent&lt; T &gt;</b> ()</td></tr>
+<tr class="memitem:a46994a68c1d374811e04fa655b004102"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_ecs_1_1_component.html">Component</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_game_object.html#a46994a68c1d374811e04fa655b004102">GetComponent&lt; T &gt;</a> ()</td></tr>
+<tr class="memdesc:a46994a68c1d374811e04fa655b004102"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find and return a <a class="el" href="class_ecs_1_1_component.html" title="A base class for Components in the Entity Component System. ">Component</a> on this <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a> by a type.  <a href="#a46994a68c1d374811e04fa655b004102">More...</a><br /></td></tr>
 <tr class="separator:a46994a68c1d374811e04fa655b004102"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7387d9144b92e309ea77f56760bfb31c"><td class="memItemLeft" align="right" valign="top"><a id="a7387d9144b92e309ea77f56760bfb31c"></a>
-List&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetComponents&lt; T &gt;</b> ()</td></tr>
+<tr class="memitem:a7387d9144b92e309ea77f56760bfb31c"><td class="memItemLeft" align="right" valign="top">List&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_game_object.html#a7387d9144b92e309ea77f56760bfb31c">GetComponents&lt; T &gt;</a> ()</td></tr>
+<tr class="memdesc:a7387d9144b92e309ea77f56760bfb31c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find and return a list of Components on this <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a> by a type.  <a href="#a7387d9144b92e309ea77f56760bfb31c">More...</a><br /></td></tr>
 <tr class="separator:a7387d9144b92e309ea77f56760bfb31c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15d93c3cdc874773daf66282c6e55f8c"><td class="memItemLeft" align="right" valign="top"><a id="a15d93c3cdc874773daf66282c6e55f8c"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>InstanceID</b> ()</td></tr>
+<tr class="memitem:a15d93c3cdc874773daf66282c6e55f8c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_game_object.html#a15d93c3cdc874773daf66282c6e55f8c">InstanceID</a> ()</td></tr>
+<tr class="memdesc:a15d93c3cdc874773daf66282c6e55f8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the identifier of this <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a>.  <a href="#a15d93c3cdc874773daf66282c6e55f8c">More...</a><br /></td></tr>
 <tr class="separator:a15d93c3cdc874773daf66282c6e55f8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79994c0a1e6d1b03f9ef48eeb1803385"><td class="memItemLeft" align="right" valign="top"><a id="a79994c0a1e6d1b03f9ef48eeb1803385"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>RemoveComponent</b> (Type type)</td></tr>
-<tr class="separator:a79994c0a1e6d1b03f9ef48eeb1803385"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78ef8b6e716ed23e9699343f94d9fe1b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_game_object.html#a78ef8b6e716ed23e9699343f94d9fe1b">Destroy</a> (<a class="el" href="class_ecs_1_1_component.html">Component</a> component)</td></tr>
+<tr class="memdesc:a78ef8b6e716ed23e9699343f94d9fe1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a <a class="el" href="class_ecs_1_1_component.html" title="A base class for Components in the Entity Component System. ">Component</a> from the System.  <a href="#a78ef8b6e716ed23e9699343f94d9fe1b">More...</a><br /></td></tr>
+<tr class="separator:a78ef8b6e716ed23e9699343f94d9fe1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abab7c2acdfd31567e9d4809cbead5063"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_game_object.html#abab7c2acdfd31567e9d4809cbead5063">ClearDeadComponents</a> ()</td></tr>
+<tr class="memdesc:abab7c2acdfd31567e9d4809cbead5063"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear out the list of components that were removed.  <a href="#abab7c2acdfd31567e9d4809cbead5063">More...</a><br /></td></tr>
+<tr class="separator:abab7c2acdfd31567e9d4809cbead5063"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03e5173b3ce636e7675716a2bdf1b449"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_game_object.html#a03e5173b3ce636e7675716a2bdf1b449">SetActiveRecursively</a> (bool state)</td></tr>
+<tr class="memdesc:a03e5173b3ce636e7675716a2bdf1b449"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the active state of this <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a> and all it's children.  <a href="#a03e5173b3ce636e7675716a2bdf1b449">More...</a><br /></td></tr>
+<tr class="separator:a03e5173b3ce636e7675716a2bdf1b449"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:ae4dc7a9531fd8fa3d087b26042866fa5"><td class="memItemLeft" align="right" valign="top"><a id="ae4dc7a9531fd8fa3d087b26042866fa5"></a>
-static <a class="el" href="class_ecs_1_1_game_object.html">GameObject</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Instantiate</b> ()</td></tr>
+<tr class="memitem:a451cc58c74c898745d8185b2e0ece484"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_game_object.html#a451cc58c74c898745d8185b2e0ece484">EarlyUpdate</a> ()</td></tr>
+<tr class="memdesc:a451cc58c74c898745d8185b2e0ece484"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is called by the Application on every updated frame. It calls the <a class="el" href="class_ecs_1_1_game_object.html#a451cc58c74c898745d8185b2e0ece484" title="This function is called by the Application on every updated frame. It calls the EarlyUpdate() method ...">EarlyUpdate()</a> method on every <a class="el" href="class_ecs_1_1_component.html" title="A base class for Components in the Entity Component System. ">Component</a> attached to this <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a>.  <a href="#a451cc58c74c898745d8185b2e0ece484">More...</a><br /></td></tr>
+<tr class="separator:a451cc58c74c898745d8185b2e0ece484"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa725908f6d9844cab080278129d71fe"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_game_object.html#aaa725908f6d9844cab080278129d71fe">Update</a> ()</td></tr>
+<tr class="memdesc:aaa725908f6d9844cab080278129d71fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is called by the Application on every updated frame. It calls the <a class="el" href="class_ecs_1_1_game_object.html#aaa725908f6d9844cab080278129d71fe" title="This function is called by the Application on every updated frame. It calls the Update() method on ev...">Update()</a> method on every <a class="el" href="class_ecs_1_1_component.html" title="A base class for Components in the Entity Component System. ">Component</a> attached to this <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a>.  <a href="#aaa725908f6d9844cab080278129d71fe">More...</a><br /></td></tr>
+<tr class="separator:aaa725908f6d9844cab080278129d71fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16961a604fc5127e074a3b977751a85f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_game_object.html#a16961a604fc5127e074a3b977751a85f">LateUpdate</a> ()</td></tr>
+<tr class="memdesc:a16961a604fc5127e074a3b977751a85f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is called by the Application on every updated frame, but only after <a class="el" href="class_ecs_1_1_game_object.html#aaa725908f6d9844cab080278129d71fe" title="This function is called by the Application on every updated frame. It calls the Update() method on ev...">Update()</a> has been invoked on each <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a>. It will call <a class="el" href="class_ecs_1_1_game_object.html#a16961a604fc5127e074a3b977751a85f" title="This function is called by the Application on every updated frame, but only after Update() has been i...">LateUpdate()</a> on every <a class="el" href="class_ecs_1_1_component.html" title="A base class for Components in the Entity Component System. ">Component</a> attached to this <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a>.  <a href="#a16961a604fc5127e074a3b977751a85f">More...</a><br /></td></tr>
+<tr class="separator:a16961a604fc5127e074a3b977751a85f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae119413ce10d30a5ee1e3f32abceecaa"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_game_object.html#ae119413ce10d30a5ee1e3f32abceecaa">OnResize</a> ()</td></tr>
+<tr class="memdesc:ae119413ce10d30a5ee1e3f32abceecaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is called by the Application if the window was resized.  <a href="#ae119413ce10d30a5ee1e3f32abceecaa">More...</a><br /></td></tr>
+<tr class="separator:ae119413ce10d30a5ee1e3f32abceecaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8340011e5d216a412dcae87a24dc83bd"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_game_object.html#a8340011e5d216a412dcae87a24dc83bd">Render</a> ()</td></tr>
+<tr class="memdesc:a8340011e5d216a412dcae87a24dc83bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called by the Application on every updated frame during the rendering phase. It will call <a class="el" href="class_ecs_1_1_game_object.html#a8340011e5d216a412dcae87a24dc83bd" title="Called by the Application on every updated frame during the rendering phase. It will call Render() on...">Render()</a> on every <a class="el" href="class_ecs_1_1_component.html" title="A base class for Components in the Entity Component System. ">Component</a> attached to this <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a>.  <a href="#a8340011e5d216a412dcae87a24dc83bd">More...</a><br /></td></tr>
+<tr class="separator:a8340011e5d216a412dcae87a24dc83bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4dc7a9531fd8fa3d087b26042866fa5"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_ecs_1_1_game_object.html">GameObject</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_game_object.html#ae4dc7a9531fd8fa3d087b26042866fa5">Instantiate</a> ()</td></tr>
+<tr class="memdesc:ae4dc7a9531fd8fa3d087b26042866fa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a>.  <a href="#ae4dc7a9531fd8fa3d087b26042866fa5">More...</a><br /></td></tr>
 <tr class="separator:ae4dc7a9531fd8fa3d087b26042866fa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88f74329a483cac3ed276a3d6f896256"><td class="memItemLeft" align="right" valign="top"><a id="a88f74329a483cac3ed276a3d6f896256"></a>
-static <a class="el" href="class_ecs_1_1_game_object.html">GameObject</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Instantiate</b> (String tag)</td></tr>
+<tr class="memitem:a88f74329a483cac3ed276a3d6f896256"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_ecs_1_1_game_object.html">GameObject</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_game_object.html#a88f74329a483cac3ed276a3d6f896256">Instantiate</a> (String tag)</td></tr>
+<tr class="memdesc:a88f74329a483cac3ed276a3d6f896256"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a> with a given tag for easy access.  <a href="#a88f74329a483cac3ed276a3d6f896256">More...</a><br /></td></tr>
 <tr class="separator:a88f74329a483cac3ed276a3d6f896256"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a81390ec2e672a710e43116eb3d41df7b"><td class="memItemLeft" align="right" valign="top"><a id="a81390ec2e672a710e43116eb3d41df7b"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>Destroy</b> (<a class="el" href="class_ecs_1_1_game_object.html">GameObject</a> go)</td></tr>
+<tr class="memitem:a81390ec2e672a710e43116eb3d41df7b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_game_object.html#a81390ec2e672a710e43116eb3d41df7b">Destroy</a> (<a class="el" href="class_ecs_1_1_game_object.html">GameObject</a> go)</td></tr>
+<tr class="memdesc:a81390ec2e672a710e43116eb3d41df7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a> from the System.  <a href="#a81390ec2e672a710e43116eb3d41df7b">More...</a><br /></td></tr>
 <tr class="separator:a81390ec2e672a710e43116eb3d41df7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afdc4e1a061dc8dfbaa7399a86532a0da"><td class="memItemLeft" align="right" valign="top"><a id="afdc4e1a061dc8dfbaa7399a86532a0da"></a>
-static <a class="el" href="class_ecs_1_1_game_object.html">GameObject</a>&#160;</td><td class="memItemRight" valign="bottom"><b>FindWithTag</b> (String tag)</td></tr>
+<tr class="memitem:afdc4e1a061dc8dfbaa7399a86532a0da"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_ecs_1_1_game_object.html">GameObject</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_game_object.html#afdc4e1a061dc8dfbaa7399a86532a0da">FindWithTag</a> (String tag)</td></tr>
+<tr class="memdesc:afdc4e1a061dc8dfbaa7399a86532a0da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the first <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a> that is returned by a particular tag.  <a href="#afdc4e1a061dc8dfbaa7399a86532a0da">More...</a><br /></td></tr>
 <tr class="separator:afdc4e1a061dc8dfbaa7399a86532a0da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1eb8dc519b642587b6517cb4ad569fc1"><td class="memItemLeft" align="right" valign="top"><a id="a1eb8dc519b642587b6517cb4ad569fc1"></a>
-static List&lt; <a class="el" href="class_ecs_1_1_game_object.html">GameObject</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>FindGameObjectsWithTag</b> (String tag)</td></tr>
+<tr class="memitem:a1eb8dc519b642587b6517cb4ad569fc1"><td class="memItemLeft" align="right" valign="top">static List&lt; <a class="el" href="class_ecs_1_1_game_object.html">GameObject</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_game_object.html#a1eb8dc519b642587b6517cb4ad569fc1">FindGameObjectsWithTag</a> (String tag)</td></tr>
+<tr class="memdesc:a1eb8dc519b642587b6517cb4ad569fc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find a list of GameObjects with a particular tag.  <a href="#a1eb8dc519b642587b6517cb4ad569fc1">More...</a><br /></td></tr>
 <tr class="separator:a1eb8dc519b642587b6517cb4ad569fc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f4b7b28652651d02135919e75c5ad0d"><td class="memItemLeft" align="right" valign="top"><a id="a2f4b7b28652651d02135919e75c5ad0d"></a>
-static Dictionary&lt; int, <a class="el" href="class_ecs_1_1_game_object.html">GameObject</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetGameObjects</b> ()</td></tr>
-<tr class="separator:a2f4b7b28652651d02135919e75c5ad0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a0e1caafb0f43cf8d35d10e7e3b82cbb7"><td class="memItemLeft" align="right" valign="top"><a id="a0e1caafb0f43cf8d35d10e7e3b82cbb7"></a>
-<a class="el" href="class_ecs_1_1_transform.html">Transform</a>&#160;</td><td class="memItemRight" valign="bottom"><b>transform</b></td></tr>
-<tr class="separator:a0e1caafb0f43cf8d35d10e7e3b82cbb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
+Properties</h2></td></tr>
+<tr class="memitem:ab619847f74ca6451f0d46084f883821a"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_game_object.html#ab619847f74ca6451f0d46084f883821a">Name</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:ab619847f74ca6451f0d46084f883821a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Auto property for the name of the <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a>.  <a href="#ab619847f74ca6451f0d46084f883821a">More...</a><br /></td></tr>
+<tr class="separator:ab619847f74ca6451f0d46084f883821a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cbd526cbaddeb5e7fe48d400efba3c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_ecs_1_1_transform.html">Transform</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_game_object.html#a6cbd526cbaddeb5e7fe48d400efba3c9">Transform</a><code> [get]</code></td></tr>
+<tr class="memdesc:a6cbd526cbaddeb5e7fe48d400efba3c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Auto property for the transform of the <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a>.  <a href="#a6cbd526cbaddeb5e7fe48d400efba3c9">More...</a><br /></td></tr>
+<tr class="separator:a6cbd526cbaddeb5e7fe48d400efba3c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>An Entity object intended for use with the Entity-Component-System architecture. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="abd178dde2e08b0f148ea06907a0b1302"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd178dde2e08b0f148ea06907a0b1302">&#9670;&nbsp;</a></span>AddComponent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_ecs_1_1_component.html">Component</a> Ecs.GameObject.AddComponent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_ecs_1_1_component.html">Component</a>&#160;</td>
+          <td class="paramname"><em>component</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add a component to the System. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">component</td><td>The component to add.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The component that was added. </dd></dl>
+
+</div>
+</div>
+<a id="a4d12d7a0f391cb4aa44626df35e9882f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d12d7a0f391cb4aa44626df35e9882f">&#9670;&nbsp;</a></span>AddComponent&lt; T &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_ecs_1_1_component.html">Component</a> <a class="el" href="class_ecs_1_1_game_object.html#abd178dde2e08b0f148ea06907a0b1302">Ecs.GameObject.AddComponent</a>&lt; T &gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add a component to the System. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The type of component to add.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The component that was added. </dd></dl>
+
+</div>
+</div>
+<a id="abab7c2acdfd31567e9d4809cbead5063"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abab7c2acdfd31567e9d4809cbead5063">&#9670;&nbsp;</a></span>ClearDeadComponents()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Ecs.GameObject.ClearDeadComponents </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Clear out the list of components that were removed. </p>
+
+</div>
+</div>
+<a id="a78ef8b6e716ed23e9699343f94d9fe1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78ef8b6e716ed23e9699343f94d9fe1b">&#9670;&nbsp;</a></span>Destroy() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Ecs.GameObject.Destroy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_ecs_1_1_component.html">Component</a>&#160;</td>
+          <td class="paramname"><em>component</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Remove a <a class="el" href="class_ecs_1_1_component.html" title="A base class for Components in the Entity Component System. ">Component</a> from the System. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">component</td><td>The component to remove.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a81390ec2e672a710e43116eb3d41df7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81390ec2e672a710e43116eb3d41df7b">&#9670;&nbsp;</a></span>Destroy() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Ecs.GameObject.Destroy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_ecs_1_1_game_object.html">GameObject</a>&#160;</td>
+          <td class="paramname"><em>go</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Remove a <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a> from the System. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">go</td><td>The <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a> instance to remove.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a451cc58c74c898745d8185b2e0ece484"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a451cc58c74c898745d8185b2e0ece484">&#9670;&nbsp;</a></span>EarlyUpdate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Ecs.GameObject.EarlyUpdate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This function is called by the Application on every updated frame. It calls the <a class="el" href="class_ecs_1_1_game_object.html#a451cc58c74c898745d8185b2e0ece484" title="This function is called by the Application on every updated frame. It calls the EarlyUpdate() method ...">EarlyUpdate()</a> method on every <a class="el" href="class_ecs_1_1_component.html" title="A base class for Components in the Entity Component System. ">Component</a> attached to this <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a>. </p>
+
+</div>
+</div>
+<a id="a1eb8dc519b642587b6517cb4ad569fc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1eb8dc519b642587b6517cb4ad569fc1">&#9670;&nbsp;</a></span>FindGameObjectsWithTag()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static List&lt;<a class="el" href="class_ecs_1_1_game_object.html">GameObject</a>&gt; Ecs.GameObject.FindGameObjectsWithTag </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>tag</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Find a list of GameObjects with a particular tag. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tag</td><td>The tag to use to search for GameObjects</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The list of GameObjects that were found, or null if nothing was found. </dd></dl>
+
+</div>
+</div>
+<a id="afdc4e1a061dc8dfbaa7399a86532a0da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afdc4e1a061dc8dfbaa7399a86532a0da">&#9670;&nbsp;</a></span>FindWithTag()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_ecs_1_1_game_object.html">GameObject</a> Ecs.GameObject.FindWithTag </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>tag</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Find the first <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a> that is returned by a particular tag. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tag</td><td>The tag to search for a <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a>.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a> that was found, or null if none was found. </dd></dl>
+
+</div>
+</div>
+<a id="a4263f0a68ee23088b4a7f90a7c24a22a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4263f0a68ee23088b4a7f90a7c24a22a">&#9670;&nbsp;</a></span>GetComponent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_ecs_1_1_component.html">Component</a> Ecs.GameObject.GetComponent </td>
+          <td>(</td>
+          <td class="paramtype">Type&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Find and return a <a class="el" href="class_ecs_1_1_component.html" title="A base class for Components in the Entity Component System. ">Component</a> on this <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a> by a type. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>The type of component to find.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The component, if it could be found. Otherwise, null. </dd></dl>
+
+</div>
+</div>
+<a id="a46994a68c1d374811e04fa655b004102"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46994a68c1d374811e04fa655b004102">&#9670;&nbsp;</a></span>GetComponent&lt; T &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_ecs_1_1_component.html">Component</a> <a class="el" href="class_ecs_1_1_game_object.html#a4263f0a68ee23088b4a7f90a7c24a22a">Ecs.GameObject.GetComponent</a>&lt; T &gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Find and return a <a class="el" href="class_ecs_1_1_component.html" title="A base class for Components in the Entity Component System. ">Component</a> on this <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a> by a type. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The type of component to find.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The component, if it could be found. Otherwise, null. </dd></dl>
+
+</div>
+</div>
 <a id="ab3961ec9815e23fc328c762e0f332394"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab3961ec9815e23fc328c762e0f332394">&#9670;&nbsp;</a></span>GetComponentInChildren&lt; T &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="class_ecs_1_1_component.html">Component</a> Ecs.GameObject.GetComponentInChildren&lt; T &gt; </td>
@@ -184,67 +517,327 @@ Public Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Returns a single component of type T on this <a class="el" href="class_ecs_1_1_game_object.html">GameObject</a> or any of its children. </p>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_ecs_1_1_component.html">Component</a> The component found, if any.</dd></dl>
+<p>Returns a single component of type T on this <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a> or any of its children. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_ecs_1_1_component.html" title="A base class for Components in the Entity Component System. ">Component</a> The component found, if any.</dd></dl>
 
 </div>
 </div>
-<a id="aa6bc70dfeda488ed71b536346d29881b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa6bc70dfeda488ed71b536346d29881b">&#9670;&nbsp;</a></span>IsActive()</h2>
+<a id="a7387d9144b92e309ea77f56760bfb31c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7387d9144b92e309ea77f56760bfb31c">&#9670;&nbsp;</a></span>GetComponents&lt; T &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool Ecs.GameObject.IsActive </td>
+          <td class="memname">List&lt;T&gt; Ecs.GameObject.GetComponents&lt; T &gt; </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Determines if this <a class="el" href="class_ecs_1_1_game_object.html">GameObject</a> is active in the game. </p>
+<p>Find and return a list of Components on this <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a> by a type. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The type of component to find.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The components found, if any could be found. Otherwise, an empty list. </dd></dl>
 
 </div>
 </div>
-<a id="ad707ec0ef27791d2049a0125407539b0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad707ec0ef27791d2049a0125407539b0">&#9670;&nbsp;</a></span>LateUpdate()</h2>
+<a id="a15d93c3cdc874773daf66282c6e55f8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15d93c3cdc874773daf66282c6e55f8c">&#9670;&nbsp;</a></span>InstanceID()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void Ecs.GameObject.LateUpdate </td>
+          <td class="memname">int Ecs.GameObject.InstanceID </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>This function is called by the Application on every updated frame, but only after <a class="el" href="class_ecs_1_1_game_object.html#aafeda353872b30727e1394075481beff" title="This function is called by the Application on every updated frame. It calls the Update() method on ev...">Update()</a> has been invoked on each <a class="el" href="class_ecs_1_1_game_object.html">GameObject</a>. It will call <a class="el" href="class_ecs_1_1_game_object.html#ad707ec0ef27791d2049a0125407539b0" title="This function is called by the Application on every updated frame, but only after Update() has been i...">LateUpdate()</a> on every <a class="el" href="class_ecs_1_1_component.html">Component</a> attached to this <a class="el" href="class_ecs_1_1_game_object.html">GameObject</a>. </p>
+<p>Retrieve the identifier of this <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd>The unique identifier integer for this <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a>. </dd></dl>
 
 </div>
 </div>
-<a id="aebb472921ec1b79b8dce1a5481861746"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aebb472921ec1b79b8dce1a5481861746">&#9670;&nbsp;</a></span>Render()</h2>
+<a id="ae4dc7a9531fd8fa3d087b26042866fa5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4dc7a9531fd8fa3d087b26042866fa5">&#9670;&nbsp;</a></span>Instantiate() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void Ecs.GameObject.Render </td>
+          <td class="memname">static <a class="el" href="class_ecs_1_1_game_object.html">GameObject</a> Ecs.GameObject.Instantiate </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Called by the Application on every updated frame during the rendering phase. It will call <a class="el" href="class_ecs_1_1_game_object.html#aebb472921ec1b79b8dce1a5481861746" title="Called by the Application on every updated frame during the rendering phase. It will call Render() on...">Render()</a> on every <a class="el" href="class_ecs_1_1_component.html">Component</a> attached to this <a class="el" href="class_ecs_1_1_game_object.html">GameObject</a>. </p>
+<p>Creates a new <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd>The new instance of a <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a>. </dd></dl>
+
+</div>
+</div>
+<a id="a88f74329a483cac3ed276a3d6f896256"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88f74329a483cac3ed276a3d6f896256">&#9670;&nbsp;</a></span>Instantiate() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_ecs_1_1_game_object.html">GameObject</a> Ecs.GameObject.Instantiate </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>tag</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a new <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a> with a given tag for easy access. </p>
+<dl class="section return"><dt>Returns</dt><dd><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tag</td><td>The tag to store this <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a>.</td></tr>
+  </table>
+  </dd>
+</dl>
+The new instance of a <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a>. </dd></dl>
+
+</div>
+</div>
+<a id="a13f98297024014fd12bfcc6e17a54324"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13f98297024014fd12bfcc6e17a54324">&#9670;&nbsp;</a></span>IsActiveInHierarchy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Ecs.GameObject.IsActiveInHierarchy </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p></p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a id="a58f9e99bfc05bee4ba204c6217be1674"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58f9e99bfc05bee4ba204c6217be1674">&#9670;&nbsp;</a></span>IsActiveSelf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Ecs.GameObject.IsActiveSelf </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Determines if this <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a> is active in the game. </p>
+
+</div>
+</div>
+<a id="a16961a604fc5127e074a3b977751a85f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16961a604fc5127e074a3b977751a85f">&#9670;&nbsp;</a></span>LateUpdate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Ecs.GameObject.LateUpdate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This function is called by the Application on every updated frame, but only after <a class="el" href="class_ecs_1_1_game_object.html#aaa725908f6d9844cab080278129d71fe" title="This function is called by the Application on every updated frame. It calls the Update() method on ev...">Update()</a> has been invoked on each <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a>. It will call <a class="el" href="class_ecs_1_1_game_object.html#a16961a604fc5127e074a3b977751a85f" title="This function is called by the Application on every updated frame, but only after Update() has been i...">LateUpdate()</a> on every <a class="el" href="class_ecs_1_1_component.html" title="A base class for Components in the Entity Component System. ">Component</a> attached to this <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a>. </p>
+
+</div>
+</div>
+<a id="ae119413ce10d30a5ee1e3f32abceecaa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae119413ce10d30a5ee1e3f32abceecaa">&#9670;&nbsp;</a></span>OnResize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Ecs.GameObject.OnResize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This function is called by the Application if the window was resized. </p>
+
+</div>
+</div>
+<a id="a8340011e5d216a412dcae87a24dc83bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8340011e5d216a412dcae87a24dc83bd">&#9670;&nbsp;</a></span>Render()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Ecs.GameObject.Render </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Called by the Application on every updated frame during the rendering phase. It will call <a class="el" href="class_ecs_1_1_game_object.html#a8340011e5d216a412dcae87a24dc83bd" title="Called by the Application on every updated frame during the rendering phase. It will call Render() on...">Render()</a> on every <a class="el" href="class_ecs_1_1_component.html" title="A base class for Components in the Entity Component System. ">Component</a> attached to this <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a>. </p>
+
+</div>
+</div>
+<a id="aabe77409014b5c2a5a06d977b9556951"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabe77409014b5c2a5a06d977b9556951">&#9670;&nbsp;</a></span>SendMessage&lt; T &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Ecs.GameObject.SendMessage&lt; T &gt; </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">object []&#160;</td>
+          <td class="paramname"><em>parameters</em> = <code>null</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calls a method by a name on all components of type 'T'. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The type of component to find on this <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a>.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The name of the function to call.</td></tr>
+    <tr><td class="paramname">parameters</td><td>The parameters to use for the function call.</td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -253,6 +846,9 @@ Public Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void Ecs.GameObject.SetActive </td>
@@ -262,16 +858,55 @@ Public Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Changes this <a class="el" href="class_ecs_1_1_game_object.html">GameObject</a>'s active state. </p>
+<p>Changes this <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a>'s active state. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">active</td><td>The true/false state to modify this <a class="el" href="class_ecs_1_1_game_object.html">GameObject</a> as.</td></tr>
+    <tr><td class="paramname">active</td><td>The true/false state to modify this <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a> as.</td></tr>
   </table>
   </dd>
 </dl>
 <div class="fragment"><div class="line">GameObject go = GameObject.Instantiate();</div><div class="line">go.SetActive(<span class="keyword">false</span>)</div></div><!-- fragment --> 
+</div>
+</div>
+<a id="a03e5173b3ce636e7675716a2bdf1b449"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03e5173b3ce636e7675716a2bdf1b449">&#9670;&nbsp;</a></span>SetActiveRecursively()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Ecs.GameObject.SetActiveRecursively </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Changes the active state of this <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a> and all it's children. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a57d652307d98be5d8f4eb4c16822eed1"></a>
@@ -279,6 +914,9 @@ Public Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">String Ecs.GameObject.Tag </td>
@@ -287,29 +925,91 @@ Public Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Accessor method for retrieving the tag on this <a class="el" href="class_ecs_1_1_game_object.html">GameObject</a>. </p>
-<dl class="section return"><dt>Returns</dt><dd>The string representing the tag on this <a class="el" href="class_ecs_1_1_game_object.html">GameObject</a></dd></dl>
+<p>Accessor method for retrieving the tag on this <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd>The string representing the tag on this <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a></dd></dl>
 
 </div>
 </div>
-<a id="aafeda353872b30727e1394075481beff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aafeda353872b30727e1394075481beff">&#9670;&nbsp;</a></span>Update()</h2>
+<a id="aaa725908f6d9844cab080278129d71fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa725908f6d9844cab080278129d71fe">&#9670;&nbsp;</a></span>Update()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void Ecs.GameObject.Update </td>
+          <td class="memname">static void Ecs.GameObject.Update </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>This function is called by the Application on every updated frame. It calls the <a class="el" href="class_ecs_1_1_game_object.html#aafeda353872b30727e1394075481beff" title="This function is called by the Application on every updated frame. It calls the Update() method on ev...">Update()</a> method on every <a class="el" href="class_ecs_1_1_component.html">Component</a> attached to this <a class="el" href="class_ecs_1_1_game_object.html">GameObject</a>. </p>
+<p>This function is called by the Application on every updated frame. It calls the <a class="el" href="class_ecs_1_1_game_object.html#aaa725908f6d9844cab080278129d71fe" title="This function is called by the Application on every updated frame. It calls the Update() method on ev...">Update()</a> method on every <a class="el" href="class_ecs_1_1_component.html" title="A base class for Components in the Entity Component System. ">Component</a> attached to this <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a>. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Property Documentation</h2>
+<a id="ab619847f74ca6451f0d46084f883821a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab619847f74ca6451f0d46084f883821a">&#9670;&nbsp;</a></span>Name</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">String Ecs.GameObject.Name</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Auto property for the name of the <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a>. </p>
+
+</div>
+</div>
+<a id="a6cbd526cbaddeb5e7fe48d400efba3c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cbd526cbaddeb5e7fe48d400efba3c9">&#9670;&nbsp;</a></span>Transform</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_ecs_1_1_transform.html">Transform</a> Ecs.GameObject.Transform</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Auto property for the transform of the <a class="el" href="class_ecs_1_1_game_object.html" title="An Entity object intended for use with the Entity-Component-System architecture. ">GameObject</a>. </p>
 
 </div>
 </div>
@@ -317,15 +1017,11 @@ Public Attributes</h2></td></tr>
 <li>src/Ecs/GameObject.cs</li>
 </ul>
 </div><!-- contents -->
-</div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="namespace_ecs.html">Ecs</a></li><li class="navelem"><a class="el" href="class_ecs_1_1_game_object.html">GameObject</a></li>
-    <li class="footer">Generated by
-    <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
 </body>
 </html>

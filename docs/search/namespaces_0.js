@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ecs',['Ecs',['../namespace_ecs.html',1,'']]]
+  ['datastructures',['DataStructures',['../namespace_data_structures.html',1,'']]]
 ];

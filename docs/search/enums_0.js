@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['cellstate',['CellState',['../namespace_game_1_1_data_structures.html#a24fec17346a5ad535ffe81e59a617f57',1,'Game::DataStructures']]],
-  ['collisiontypes',['CollisionTypes',['../namespace_game_1_1_data_structures.html#ada1f9e4784b55145987867a5daf71d4d',1,'Game::DataStructures']]]
+  ['cellstate',['CellState',['../class_game_1_1_components_1_1_map.html#a95686b38701b9dbabbbdac6c6dec73fd',1,'Game::Components::Map']]],
+  ['collisiontypes',['CollisionTypes',['../class_game_1_1_components_1_1_collider.html#afaaa87399f662d263617dcac30068ddd',1,'Game::Components::Collider']]]
 ];

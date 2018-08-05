@@ -1,5 +1,10 @@
 var searchData=
 [
-  ['render',['Render',['../class_ecs_1_1_game_object.html#aebb472921ec1b79b8dce1a5481861746',1,'Ecs.GameObject.Render()'],['../class_i_o_1_1_console_u_i.html#a8fe3234db68da3a6b652446f317f92cd',1,'IO.ConsoleUI.Render()']]],
-  ['room',['Room',['../class_game_1_1_dungeon_maker_1_1_room.html#abbd9573ede25a9fce7675034863542d9',1,'Game::DungeonMaker::Room']]]
+  ['instanceid',['InstanceID',['../class_ecs_1_1_game_object.html#a15d93c3cdc874773daf66282c6e55f8c',1,'Ecs::GameObject']]],
+  ['instantiate',['Instantiate',['../class_ecs_1_1_game_object.html#ae4dc7a9531fd8fa3d087b26042866fa5',1,'Ecs.GameObject.Instantiate()'],['../class_ecs_1_1_game_object.html#a88f74329a483cac3ed276a3d6f896256',1,'Ecs.GameObject.Instantiate(String tag)']]],
+  ['isactive',['IsActive',['../class_ecs_1_1_component.html#ab9256d060b3c50c44b53d1b37c27eeac',1,'Ecs::Component']]],
+  ['isactiveinhierarchy',['IsActiveInHierarchy',['../class_ecs_1_1_game_object.html#a13f98297024014fd12bfcc6e17a54324',1,'Ecs::GameObject']]],
+  ['isactiveself',['IsActiveSelf',['../class_ecs_1_1_game_object.html#a58f9e99bfc05bee4ba204c6217be1674',1,'Ecs::GameObject']]],
+  ['isnextto',['IsNextTo',['../class_game_1_1_dungeon_maker_1_1_room.html#a7d7b6b2eff68d52fb499ac8175490037',1,'Game::DungeonMaker::Room']]],
+  ['isopen',['IsOpen',['../class_game_1_1_dungeon_maker_1_1_cell.html#aef83c7358aea7dfc626b2375de6848d1',1,'Game::DungeonMaker::Cell']]]
 ];
