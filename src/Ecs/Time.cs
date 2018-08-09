@@ -13,7 +13,10 @@ using System.Threading;
 
 namespace Ecs
 {
-    // A class for managing the time as the application runs.
+
+    /// <summary>
+    /// A class for managing the amount of time passing as the application runs.
+    /// </summary>
     public class Time
     {
         public static long deltaMs = 0;

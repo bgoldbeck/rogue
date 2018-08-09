@@ -10,6 +10,11 @@ using System.Runtime.InteropServices;
 
 namespace IO
 {
+    /// <summary>
+    /// This class wraps the c# console for additionally functionality, such as 
+    /// buffering input before drawing it to the screen. This is much more akin
+    /// to how games are rendered in graphics engines.
+    /// </summary>
     public class ConsoleUI
     {
         private const String defaultColor = "\u001b[38;2;128;128;128m";
