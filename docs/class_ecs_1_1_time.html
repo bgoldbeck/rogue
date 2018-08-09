@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.14"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>R.O.G.U.E: Ecs.Time Class Reference</title>
+<title>Ecs.Time Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,10 +21,6 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="Title.png"/></td>
-  <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">R.O.G.U.E
-   </div>
-  </td>
  </tr>
  </tbody>
 </table>
@@ -77,14 +73,14 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a7d98fab0c7c708ea1f1adab0af3a7a7f"><td class="memItemLeft" align="right" valign="top"><a id="a7d98fab0c7c708ea1f1adab0af3a7a7f"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>Update</b> ()</td></tr>
+<tr class="memitem:a7d98fab0c7c708ea1f1adab0af3a7a7f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_time.html#a7d98fab0c7c708ea1f1adab0af3a7a7f">Update</a> ()</td></tr>
+<tr class="memdesc:a7d98fab0c7c708ea1f1adab0af3a7a7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increment the delta time since the last time update was called.  <a href="#a7d98fab0c7c708ea1f1adab0af3a7a7f">More...</a><br /></td></tr>
 <tr class="separator:a7d98fab0c7c708ea1f1adab0af3a7a7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a351b0978a1802f4bdead765238091ee0"><td class="memItemLeft" align="right" valign="top"><a id="a351b0978a1802f4bdead765238091ee0"></a>
-static double&#160;</td><td class="memItemRight" valign="bottom"><b>MillisecondsToSeconds</b> (long ms)</td></tr>
+<tr class="memitem:a351b0978a1802f4bdead765238091ee0"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_time.html#a351b0978a1802f4bdead765238091ee0">MillisecondsToSeconds</a> (long ms)</td></tr>
+<tr class="memdesc:a351b0978a1802f4bdead765238091ee0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a value in milliseconds to seconds.  <a href="#a351b0978a1802f4bdead765238091ee0">More...</a><br /></td></tr>
 <tr class="separator:a351b0978a1802f4bdead765238091ee0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f76dc2b3d43b886e3916bfaa9284300"><td class="memItemLeft" align="right" valign="top"><a id="a8f76dc2b3d43b886e3916bfaa9284300"></a>
-static long&#160;</td><td class="memItemRight" valign="bottom"><b>GetCurrentTime</b> ()</td></tr>
+<tr class="memitem:a8f76dc2b3d43b886e3916bfaa9284300"><td class="memItemLeft" align="right" valign="top">static long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ecs_1_1_time.html#a8f76dc2b3d43b886e3916bfaa9284300">GetCurrentTime</a> ()</td></tr>
+<tr class="memdesc:a8f76dc2b3d43b886e3916bfaa9284300"><td class="mdescLeft">&#160;</td><td class="mdescRight">The current time in milliseconds.  <a href="#a8f76dc2b3d43b886e3916bfaa9284300">More...</a><br /></td></tr>
 <tr class="separator:a8f76dc2b3d43b886e3916bfaa9284300"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
@@ -93,6 +89,97 @@ Static Public Attributes</h2></td></tr>
 static long&#160;</td><td class="memItemRight" valign="bottom"><b>deltaMs</b> = 0</td></tr>
 <tr class="separator:ab82ff2c0227f47b05fe8c8b264986bfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a8f76dc2b3d43b886e3916bfaa9284300"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f76dc2b3d43b886e3916bfaa9284300">&#9670;&nbsp;</a></span>GetCurrentTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static long Ecs.Time.GetCurrentTime </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The current time in milliseconds. </p>
+<dl class="section return"><dt>Returns</dt><dd>The current time in milliseconds. </dd></dl>
+
+</div>
+</div>
+<a id="a351b0978a1802f4bdead765238091ee0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a351b0978a1802f4bdead765238091ee0">&#9670;&nbsp;</a></span>MillisecondsToSeconds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static double Ecs.Time.MillisecondsToSeconds </td>
+          <td>(</td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>ms</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert a value in milliseconds to seconds. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ms</td><td>The milliseconds value to convert.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The amount of seconds that were converted from milliseconds. </dd></dl>
+
+</div>
+</div>
+<a id="a7d98fab0c7c708ea1f1adab0af3a7a7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d98fab0c7c708ea1f1adab0af3a7a7f">&#9670;&nbsp;</a></span>Update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Ecs.Time.Update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Increment the delta time since the last time update was called. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/Ecs/Time.cs</li>
 </ul>
