@@ -2,8 +2,8 @@
 **R**eal-time **O**pen-source **G**ame **U**sing **E**ntities
 
 ## Copyright ##
-Copyright (C) 2018 "Daniel Bramblett" <bram4@pdx.edu>, "Daniel Dupriest" <kououken@gmail.com>, "Brandon Goldbeck" <bpg@pdx.edu>
-
+Copyright (C) 2018 "Daniel Bramblett" <code>&lt;bram4@pdx.edu&gt;</code>, "Daniel Dupriest" <code>&lt;kououken@gmail.com&gt;</code>, "Brandon Goldbeck" <code>&lt;bpg@pdx.edu&gt;</code>
+  
 ## Contact Us ##
 Daniel Bramblett: daniel.r.bramblett@gmail.com or bram4@pdx.edu <br />
 Daniel Dupriest: kououken@gmail.com <br />
