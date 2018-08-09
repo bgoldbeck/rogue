@@ -4,11 +4,10 @@
 ## Copyright ##
 Copyright (C) 2018 "Daniel Bramblett" <bram4@pdx.edu>, "Daniel Dupriest" <kououken@gmail.com>, "Brandon Goldbeck" <bpg@pdx.edu>
 
-## Contact Information ##
-daniel.r.bramblett@gmail.com <br />
-bram4@pdx.edu <br />
-kououken@gmail.com <br />
-bpg@pdx.edu
+## Contact Us ##
+Daniel Bramblett: daniel.r.bramblett@gmail.com or bram4@pdx.edu <br />
+Daniel Dupriest: kououken@gmail.com <br />
+Brandon Goldbeck: bpg@pdx.edu
 
 ## Bug Tracker ##
 https://github.com/bgoldbeck/rogue/issues
