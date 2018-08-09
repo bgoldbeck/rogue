@@ -13,6 +13,7 @@ using System.Threading;
 
 namespace Ecs
 {
+    // A class for managing the time as the application runs.
     public class Time
     {
         public static long deltaMs = 0;
@@ -21,6 +22,9 @@ namespace Ecs
 
         private static long last = DateTimeOffset.Now.ToUnixTimeMilliseconds();
 
+        /// <summary>
+        /// Increment the delta time since the last time update was called.
+        /// </summary>
         public static void Update()
         {
             current = DateTimeOffset.Now.ToUnixTimeMilliseconds();
@@ -33,8 +37,21 @@ namespace Ecs
             return;
         }
 
+        /// <summary>
+        /// Convert a value in milliseconds to seconds.
+        /// </summary>
+        /// <param name="ms">The milliseconds value to convert.</param>
+        /// <returns>
+        /// The amount of seconds that were converted from milliseconds.
+        /// </returns>
         public static double MillisecondsToSeconds(long ms) => (double)ms / 1000.0;
 
+        /// <summary>
+        /// The current time in milliseconds.
+        /// </summary>
+        /// <returns>
+        /// The current time in milliseconds.
+        /// </returns>
         public static long GetCurrentTime()
         {
             return current;
