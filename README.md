@@ -5,9 +5,9 @@
 Copyright (C) 2018 "Daniel Bramblett" <bram4@pdx.edu>, "Daniel Dupriest" <kououken@gmail.com>, "Brandon Goldbeck" <bpg@pdx.edu>
 
 ## Contact Information ##
-daniel.r.bramblett@gmail.com
-bram4@pdx.edu
-kououken@gmail.com
+daniel.r.bramblett@gmail.com <br />
+bram4@pdx.edu <br />
+kououken@gmail.com <br />
 bpg@pdx.edu
 
 ## Bug Tracker ##
