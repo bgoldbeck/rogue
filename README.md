@@ -1,7 +1,17 @@
 # R.O.G.U.E
 **R**eal-time **O**pen-source **G**ame **U**sing **E**ntities
 
-Copyright (c) 2018 Daniel Bramblett, Daniel Dupriest, Brandon Goldbeck
+## Copyright ##
+Copyright (C) 2018 "Daniel Bramblett" <bram4@pdx.edu>, "Daniel Dupriest" <kououken@gmail.com>, "Brandon Goldbeck" <bpg@pdx.edu>
+
+## Contact Information ##
+daniel.r.bramblett@gmail.com
+bram4@pdx.edu
+kououken@gmail.com
+bpg@pdx.edu
+
+## Bug Tracker ##
+https://github.com/bgoldbeck/rogue/issues
 
 ## What is this repository for? ##
 
