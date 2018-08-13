@@ -1,6 +1,8 @@
 # R.O.G.U.E
 **R**eal-time **O**pen-source **G**ame **U**sing **E**ntities
 
+Descend into a dark dungeon filled with fearsome foes. Your torch reveals the twisting passageways and rooms of the procedurally generated map. Battle gruesome goblins, pathfinding raptors with x-ray vision, and invisible ninjas as you search for the key to unlock the door to the ultimate boss. Only the most fleet-fingered will live to tell the tale!
+
 Travis CI [![Build Status](https://travis-ci.org/bgoldbeck/rogue.svg?branch=master)](https://travis-ci.org/bgoldbeck/rogue)
 
 ## Copyright ##
