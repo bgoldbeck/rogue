@@ -1,6 +1,8 @@
 # R.O.G.U.E
 **R**eal-time **O**pen-source **G**ame **U**sing **E**ntities
 
+Travis CI [![Build Status](https://travis-ci.org/bgoldbeck/rogue.svg?branch=master)](https://travis-ci.org/bgoldbeck/rogue)
+
 ## Copyright ##
 Copyright (C) 2018 "Daniel Bramblett" <code>&lt;bram4@pdx.edu&gt;</code>, "Daniel Dupriest" <code>&lt;kououken@gmail.com&gt;</code>, "Brandon Goldbeck" <code>&lt;bpg@pdx.edu&gt;</code>
   
