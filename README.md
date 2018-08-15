@@ -34,6 +34,12 @@ The software is set up as a Visual Studio 2017 solution.
 4. Open the solution `.sln` file in Visual Studio 2017.
 5. Run the project with `F5`.
 
+To build an executable for 64bit Windows 10:
+
+1. In a terminal, navigate to the project folder then run `dotnet publish -c Release -r win10-x64`.
+2. The release files will be generated in `..\rogue\bin\Release\netcoreapp2.1\win10-x64`.
+3. The `publish` directory contents are not needed.
+
 ### Linux ###
 
 1. Clone the project. `git clone https://github.com/bgoldbeck/rogue.git`
