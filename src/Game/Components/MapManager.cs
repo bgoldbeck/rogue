@@ -15,8 +15,8 @@ namespace Game.Components
     /// </summary>
     class MapManager : Component
     {
-        private static List<Map> drawnMaps = new List<Map>();   //The list of maps drawn.
-        private static List<NavigatorMap> drawnGraphs = new List<NavigatorMap>(); //Ths list of graphs drawn.
+        private static List<GameObject> drawnMaps = new List<GameObject>();   //The list of maps drawn.
+        private static List<GameObject> drawnGraphs = new List<GameObject>(); //Ths list of graphs drawn.
         private static int currentMap = 0;  //The current map and graph being used.
         private static int mapWidth = 80;   //The default width of the maps.
         private static int mapHeight = 40;  //The default height of the maps.
@@ -60,11 +60,14 @@ namespace Game.Components
                 {
                     //It then generates the first map and Nabigator
                     Map firstMap = new Map(mapWidth, mapHeight, mapLevel);
-                    drawnMaps.Add(firstMap);
-                    gameObject.AddComponent(firstMap);
+                    GameObject mapObject = GameObject.Instantiate();
+                    mapObject.AddComponent(firstMap);
+                    drawnMaps.Add(mapObject);
+
                     NavigatorMap firstGraph = new NavigatorMap();
-                    drawnGraphs.Add(firstGraph);
-                    gameObject.AddComponent(firstGraph);
+                    GameObject graphObject = GameObject.Instantiate();
+                    graphObject.AddComponent(firstGraph);
+                    drawnGraphs.Add(graphObject);
                 }
                 else
                 {
@@ -76,14 +79,15 @@ namespace Game.Components
 
         /// <summary>
         /// This method disables the current map and creates the next map and graph and sets it as the current.
+        /// This won't work right now. <----
         /// </summary>
-        public static void SwitchToNextMap()
+        /*public static void SwitchToNextMap()
         {
             if (currentManager != null)
             {
                 // Destroy the current map, and graph components attached this game object.
-                currentManager.gameObject.Destroy(drawnMaps[currentMap]);
-                currentManager.gameObject.Destroy(drawnGraphs[currentMap]);
+                //currentManager.gameObject.Destroy(drawnMaps[currentMap]);
+                //currentManager.gameObject.Destroy(drawnGraphs[currentMap]);
 
                 //It first grabs the current map and disables it.
                 Map mapBeingDisabled = CurrentMap();
@@ -97,17 +101,17 @@ namespace Game.Components
                 //Then the next map and graph are created and the current map is set to it.
                 Map mapBeingCreated = new Map(mapWidth, mapHeight, mapLevel);
                 
-                drawnMaps.Add(mapBeingCreated);
+                //drawnMaps.Add(mapBeingCreated);
 
                 currentManager.gameObject.AddComponent(mapBeingCreated);
 
                 NavigatorMap graphBeingCreated = new NavigatorMap();
 
-                drawnGraphs.Add(graphBeingCreated);
+                //drawnGraphs.Add(graphBeingCreated);
 
                 currentManager.gameObject.AddComponent(graphBeingCreated);
             }
-        }
+        }*/
 
         /// <summary>
         /// Returns the current map being used.
@@ -124,7 +128,7 @@ namespace Game.Components
             //the current map.
             if (drawnMaps.Count > 0 && currentMap < drawnMaps.Count)
             {
-                return drawnMaps[currentMap];
+                return (Map)drawnMaps[currentMap]?.GetComponent(typeof(Map));
             }
             //If the currentMap is outside the range, it returns null.
             else
@@ -148,7 +152,7 @@ namespace Game.Components
             //the current map.
             if (drawnGraphs.Count > 0 && currentMap < drawnGraphs.Count)
             {
-                return drawnGraphs[currentMap];
+                return (NavigatorMap)drawnGraphs[currentMap].GetComponent(typeof(NavigatorMap));
             }
             //If the currentMap is outside the range, it returns null.
             else
@@ -163,8 +167,8 @@ namespace Game.Components
         public override void OnDestroy()
         {
             currentMap = 0;
-            drawnMaps = new List<Map>();
-            drawnGraphs = new List<NavigatorMap>();
+            drawnMaps = new List<GameObject>();
+            drawnGraphs = new List<GameObject>();
             currentManager = null;
             return;
         }
