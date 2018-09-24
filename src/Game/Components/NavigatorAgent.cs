@@ -39,6 +39,14 @@ namespace Game.Components
             targetPath.Clear();
             if (Target == null) { return; }
 
+            if(map == null)
+            {
+                if((map = MapManager.CurrentMap()) == null)
+                {
+                    return;
+                }
+            }
+
             Graph<Vec2i> graph;
             if ((graph = MapManager.CurrentNavigationMap()?.CacheInstance()) == null) { return; }
 
