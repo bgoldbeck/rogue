@@ -62,6 +62,7 @@ namespace Game.Components
                     Map firstMap = new Map(mapWidth, mapHeight, mapLevel);
                     GameObject mapObject = GameObject.Instantiate();
                     mapObject.AddComponent(firstMap);
+                    firstMap.CreateLevel(1);
                     drawnMaps.Add(mapObject);
 
                     NavigatorMap firstGraph = new NavigatorMap();

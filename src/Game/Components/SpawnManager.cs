@@ -37,7 +37,7 @@ namespace Game.Components
             return;
         }
 
-        public static GameObject CreateBoss(int x, int y, int level)
+        public static GameObject CreateBoss(GameObject parent, int x, int y, int level)
         {
             GameObject go = GameObject.Instantiate("Boss");
             //MonsterGenerator.Fill(rand, level, go);
@@ -53,9 +53,9 @@ namespace Game.Components
             return go;
         }
 
-        public static GameObject CreateEnemy(int x, int y, int level, bool hasKey = false)
+        public static GameObject CreateEnemy(GameObject parent, int x, int y, int level, bool hasKey = false)
         {
-            GameObject go = GameObject.Instantiate("Monster");
+            GameObject go = GameObject.Instantiate(parent);
 
             EnemyGenerator.Fill(rand, level, go, oneInNShiny);
             go.Transform.position = new Vec2i(x, y);
@@ -71,9 +71,9 @@ namespace Game.Components
             return go;
         }
 
-        public static GameObject CreateDoor(int x, int y)
+        public static GameObject CreateDoor(GameObject parent, int x, int y)
         {
-            GameObject go = GameObject.Instantiate("Door");
+            GameObject go = GameObject.Instantiate(parent);
             go.AddComponent(new Door());
             go.Transform.position = new Vec2i(x, y);
             //go.transform.position.x = x;
@@ -83,9 +83,9 @@ namespace Game.Components
             return go;
         }
 
-        public static GameObject CreateLockedDoor(int x, int y)
+        public static GameObject CreateLockedDoor(GameObject parent, int x, int y)
         {
-            GameObject go = GameObject.Instantiate("Locked Door");
+            GameObject go = GameObject.Instantiate(parent);
             go.AddComponent(new Door(true));
             go.Transform.position = new Vec2i(x, y);
             //go.transform.position.x = x;
@@ -95,9 +95,9 @@ namespace Game.Components
             return go;
         }
 
-        public static GameObject CreateWall(int x, int y, bool bedRock)
+        public static GameObject CreateWall(GameObject parent, int x, int y, bool bedRock)
         {
-            GameObject go = GameObject.Instantiate("Wall");
+            GameObject go = GameObject.Instantiate(parent);
             go.AddComponent(new Wall(bedRock));
             go.Transform.position = new Vec2i(x, y);
             //go.transform.position.x = x;

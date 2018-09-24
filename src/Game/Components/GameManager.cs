@@ -28,7 +28,7 @@ namespace Game.Components
 
         public override void Start()
         {
-            player = (Player)GameObject.Instantiate("MainPlayer").AddComponent(new Player("Sneaky McDevious", "Thiefy rogue", 1, 10, 1, 2));
+            player = (Player)GameObject.Instantiate(this.gameObject,"MainPlayer").AddComponent(new Player("Sneaky McDevious", "Thiefy rogue", 1, 10, 1, 2));
             player.Name = "MainPlayer";
 
             GameObject mapObject = GameObject.Instantiate("MapManager");
@@ -40,7 +40,7 @@ namespace Game.Components
 
             Map map = MapManager.CurrentMap();
             currentMap = map;
-
+           
             
             player.AddComponent(new PlayerController());
             player.AddComponent(new Model());
@@ -51,7 +51,7 @@ namespace Game.Components
             player.AddComponent(new Sound());
 
             player.transform.position = new Vec2i(map.startingX, map.startingY);
-            player.transform.SetParent(this.transform);
+            //player.transform.SetParent(this.transform);
 
             map.AddObject(map.startingX, map.startingY, player.gameObject);
   

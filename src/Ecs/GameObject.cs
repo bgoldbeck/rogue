@@ -169,6 +169,7 @@ namespace Ecs
                             component.EarlyUpdate();
                         }
                     }
+                    entry.Value.EarlyUpdateChildren();
                 }
             }
 
@@ -195,6 +196,7 @@ namespace Ecs
                             component.Update();
                         }
                     }
+                    entry.Value.UpdateChildren();
                 }
             }
 
@@ -223,6 +225,7 @@ namespace Ecs
                             component.LateUpdate();
                         }
                     }
+                    entry.Value.LateUpdateChildren();
                 }
             }
 #if DEBUG
@@ -247,7 +250,9 @@ namespace Ecs
                     {
                         component.OnResize();
                     }
+                    
                 }
+                entry.Value.OnResizeChildren();
             }
             return;
         }
@@ -272,6 +277,7 @@ namespace Ecs
                     {
                         DebugDrawRecursive(entry.Value, 0, ref line);
                     }
+                    entry.Value.RenderChildren();
                 }
                 return;
             }
@@ -285,6 +291,7 @@ namespace Ecs
                         component.Render();
                     }
                 }
+                entry.Value.RenderChildren();
             }
 
             return;
@@ -332,6 +339,7 @@ namespace Ecs
             {
                 component.OnDestroy();
             }
+            this.Transform.DestroyParentReference();
 
             return;
         }
@@ -691,6 +699,153 @@ namespace Ecs
             return;
         }
 
+        public static GameObject Instantiate(GameObject parent)
+        {
+            GameObject go = new GameObject();
+
+            Transform transform = new Transform();
+            go.AddComponent(transform);
+            go.Transform = transform;
+            go.id = IDCounter++;
+            go.tag = "";
+
+            transform.SetParent(parent.Transform);
+            return go;
+        }
+
+        public void EarlyUpdateChildren()
+        {
+            foreach(Transform child in this.Transform)
+            {
+                if(child?.gameObject != null)
+                {
+                    if(child.gameObject.IsActiveInHierarchy())
+                    {
+                        foreach(Component component in child.gameObject.GetComponents<Component>())
+                        {
+                            if(component.IsActive())
+                            {
+                                component.EarlyUpdate();
+                            }
+                        }
+                        child.gameObject.EarlyUpdateChildren();
+                    }
+                }
+            }
+        }
+
+        public void UpdateChildren()
+        {
+            foreach (Transform child in this.Transform)
+            {
+                if (child?.gameObject != null)
+                {
+                    if (child.gameObject.IsActiveInHierarchy())
+                    {
+                        foreach (Component component in child.gameObject.GetComponents<Component>())
+                        {
+                            if (component.IsActive())
+                            {
+                                component.Update();
+                            }
+                        }
+                        child.gameObject.UpdateChildren();
+                    }
+                }
+            }
+        }
+
+        public void LateUpdateChildren()
+        {
+            foreach (Transform child in this.Transform)
+            {
+                if (child?.gameObject != null)
+                {
+                    if (child.gameObject.IsActiveInHierarchy())
+                    {
+                        foreach (Component component in child.gameObject.GetComponents<Component>())
+                        {
+                            if (component.IsActive())
+                            {
+                                component.LateUpdate();
+                            }
+                        }
+                        child.gameObject.LateUpdateChildren();
+                    }
+                }
+            }
+        }
+
+        public void OnResizeChildren()
+        {
+            foreach (Transform child in this.Transform)
+            {
+                if (child?.gameObject != null)
+                {
+                    if (child.gameObject.IsActiveInHierarchy())
+                    {
+                        foreach (Component component in child.gameObject.GetComponents<Component>())
+                        {
+                            if (component.IsActive())
+                            {
+                                component.OnResize();
+                            }
+                        }
+                        child.gameObject.OnResizeChildren();
+                    }
+                }
+            }
+        }
+
+        public void RenderChildren()
+        {
+            foreach (Transform child in this.Transform)
+            {
+                if (child?.gameObject != null)
+                {
+                    if (child.gameObject.IsActiveInHierarchy())
+                    {
+                        foreach (Component component in child.gameObject.GetComponents<Component>())
+                        {
+                            if (component.IsActive())
+                            {
+                                component.Render();
+                            }
+                        }
+                        child.gameObject.RenderChildren();
+                    }
+                }
+            }
+        }
+
+        public static GameObject Instantiate(GameObject parent, String tag)
+        {
+            GameObject go = new GameObject();
+
+            // Every game object will have a transform component.
+            Transform transform = new Transform();
+            go.AddComponent(transform);
+            go.Transform = transform;
+            go.id = IDCounter++;
+            go.tag = tag;
+            transform.SetParent(parent.Transform);
+
+            if (tag != null && tag != "")
+            {
+                // Add the game object to the data structures.
+                if (!gameObjectsTagMap.ContainsKey(tag))
+                {
+                    gameObjectsTagMap.Add(tag, new List<GameObject>());
+                }
+
+                if (gameObjectsTagMap.TryGetValue(tag, out List<GameObject> goList))
+                {
+                    goList.Add(go);
+                }
+            }
+
+            return go;
+        }
     }
 
 

@@ -138,6 +138,13 @@ namespace Ecs
         {
             return new InnerEnumerator(children.ToArray());
         }
+        public void DestroyParentReference()
+        {
+            if (this.Parent != null)
+            {
+                this.Parent.children.Remove(this);
+            }
+        }
     }
     
 }
